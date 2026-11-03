@@ -1,0 +1,14 @@
+field,code,english_text,rows,percent_of_rows
+crossway,9,Unknown,4,0.0
+built_up_area,9,Unknown,12070,4.17
+road_type,9,Unknown,1502,0.52
+weather,9,"Unknown, undetermined",27763,9.59
+road_condition,9,"Unknown, undetermined",24236,8.37
+light_condition,9,"Unknown, undetermined",9918,3.43
+road_user_type1,99,Unknown,28502,9.84
+road_user_type2,99,Unknown,28311,9.78
+collision_type,0,Collision type not specified,14528,5.02
+collision_type,9,Other or unknown,11140,3.85
+obstacle,99,Unknown,342,0.12
+obstacle,-1,Collision type not specified,14528,5.02
+obstacle,-3,Presence of obstacle not specified,11538,3.99

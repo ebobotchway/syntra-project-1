@@ -1,0 +1,4 @@
+definition,columns_compared,rows_in_a_duplicate_group,percent_in_group,extra_copies,percent_extra,number_of_groups,largest_group
+1_all_31_columns,31,129,0.04,66,0.02,63,3
+2_all_except_coordinates,29,1981,0.68,1010,0.35,971,5
+3_year_month_hour_municipality,4,137416,47.46,92639,32.0,44777,41
