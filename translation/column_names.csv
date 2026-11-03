@@ -1,0 +1,32 @@
+new_column,source_column,how
+collision_year,DT_YEAR_COLLISION,renamed
+collision_month,DT_MONTH_COLLISION,renamed
+collision_hour,DT_TIME,renamed; value 99 becomes empty (decision #11)
+municipality_nis_code,CD_NIS,renamed
+region,TX_RGN_COLLISION_FR/NL,FR+NL pair -> English name
+province,TX_PROV_COLLISION_FR/NL,FR+NL pair -> English name; stays empty where missing
+municipality,TX_MUNTY_COLLISION_NL,Dutch name kept (decision #8); French column dropped
+x_coord,MS_X_COORD,renamed; stays empty where missing
+y_coord,MS_Y_COORD,renamed; stays empty where missing
+crossway_code,CD_CROSSWAY,renamed code column
+crossway,TX_CROSSWAY_FR/NL,FR+NL pair -> English text
+weather_code,CD_WEATHER,renamed code column
+weather,TX_WEATHER_FR/NL,FR+NL pair -> English text
+road_condition_code,CD_ROAD_CONDITION,renamed code column
+road_condition,TX_ROAD_CONDITION_FR/NL,FR+NL pair -> English text
+built_up_area_code,CD_BUILD_UP_AREA,renamed code column
+built_up_area,TX_BUILD_UP_AREA_FR/NL,FR+NL pair -> English text
+light_condition_code,CD_LIGHT_CONDITION,renamed code column
+light_condition,TX_LIGHT_CONDITION_FR/NL,FR+NL pair -> English text
+road_type_code,CD_ROAD_TYPE,renamed code column
+road_type,CD_ROAD_TYPE_FR/NL,FR+NL pair -> English text
+accident_class_code,CD_CLASS_ACCIDENTS,renamed code column
+accident_class,TX_CLASS_ACCIDENTS_FR/NL,FR+NL pair -> English text
+road_user_type1_code,CD_ROAD_USR_TYPE1,renamed code column
+road_user_type1,TX_ROAD_USR_TYPE1_FR/NL,FR+NL pair -> English text
+road_user_type2_code,CD_ROAD_USR_TYPE2,renamed code column
+road_user_type2,TX_ROAD_USR_TYPE2_FR/NL,FR+NL pair -> English text
+collision_type_code,CD_COLLISION_TYPE,renamed code column
+collision_type,TX_COLLISON_TYPE_FR/NL,FR+NL pair -> English text
+obstacle_code,CD_OBSTACLES,renamed code column
+obstacle,TX_OBSTACLES_FR/NL,FR+NL pair -> English text

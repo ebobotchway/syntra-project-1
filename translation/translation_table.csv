@@ -1,0 +1,121 @@
+field,code,french,dutch,english
+crossway,1,Carrefour,Op Kruispunt,At intersection
+crossway,2,Hors carrefour,Buiten Kruispunt,Not at intersection
+crossway,9,inconnu,onbekend,Unknown
+weather,1,Normales,Normaal,Normal
+weather,2,Pluie,Regenval,Rain
+weather,2/3,Pluie+Brouillard (visibilité de moins de 100m),Regenval+Mist (zichtbaarheid minder dan 100m),Rain + Fog (visibility under 100 m)
+weather,2/4,"Pluie+Vent violent, rafales","Regenval+Sterke wind, rukwind","Rain + Strong wind, gusts"
+weather,2/5,Pluie+Chutes de neige,Regenval+Sneeuwval,Rain + Snowfall
+weather,2/6,Pluie+Grêle,Regenval+Hagelbui,Rain + Hail
+weather,2/7,"Pluie+Autre (fumée épaisse,...)","Regenval+Andere (dikke rook,...)","Rain + Other (thick smoke, ...)"
+weather,3,Brouillard (visibilité de moins de 100m),Mist (zichtbaarheid minder dan 100m),Fog (visibility under 100 m)
+weather,4,"Vent violent, rafales","Sterke wind, rukwind","Strong wind, gusts"
+weather,4/5,"Vent violent, rafales+Chutes de neige","Sterke wind, rukwind+Sneeuwval","Strong wind, gusts + Snowfall"
+weather,4/6,"Vent violent, rafales+Grêle","Sterke wind, rukwind+Hagelbui","Strong wind, gusts + Hail"
+weather,5,Chutes de neige,Sneeuwval,Snowfall
+weather,5/6,Chutes de neige+Grêle,Sneeuwval+Hagelbui,Snowfall + Hail
+weather,6,Grêle,Hagelbui,Hail
+weather,7,"Autre (fumée épaisse,...)","Andere (dikke rook,...)","Other (thick smoke, ...)"
+weather,9,"Inconnues, indéterminées",Onbekend,"Unknown, undetermined"
+road_condition,1,Sec,Droog,Dry
+road_condition,1/4,Sec+Propre,Droog+Proper,Dry + Clean
+road_condition,1/5,"Sec+Sale (sable, gravier, feuilles,...)","Droog+Vuil (zand, grint, bladeren,...)","Dry + Dirty (sand, gravel, leaves, ...)"
+road_condition,2,"Humide, mouillé, flaques","Nat, plassen","Wet, puddles"
+road_condition,2/3,"Humide, mouillé, flaques+Verglas ou neige","Nat, plassen+Ijzel of sneeuw","Wet, puddles + Ice or snow"
+road_condition,2/4,"Humide, mouillé, flaques+Propre","Nat, plassen+Proper","Wet, puddles + Clean"
+road_condition,2/5,"Humide, mouillé, flaques+Sale (sable, gravier, feuilles,...)","Nat, plassen+Vuil (zand, grint, bladeren,...)","Wet, puddles + Dirty (sand, gravel, leaves, ...)"
+road_condition,3,"Verglas, neige","Ijzel, sneeuw","Ice, snow"
+road_condition,3/4,"Verglas, neige+Propre","Ijzel, sneeuw+ roper","Ice, snow + Clean"
+road_condition,3/5,"Verglas, neige+Sale (sable, gravier, feuilles,...)","Ijzel, sneeuw+Vuil (zand, grint, bladeren,...)","Ice, snow + Dirty (sand, gravel, leaves, ...)"
+road_condition,4,Propre,Proper,Clean
+road_condition,5,"Sale (sable, gravier, feuilles,...)","Vuil (zand, grint, bladeren,...)","Dirty (sand, gravel, leaves, ...)"
+road_condition,9,"Inconnu, indéterminé",Onbekend,"Unknown, undetermined"
+built_up_area,1,En agglomération,binnen bebouwde kom,Inside built-up area
+built_up_area,2,Hors agglomération,buiten bebouwde kom,Outside built-up area
+built_up_area,9,inconnu,onbekend,Unknown
+light_condition,1,Jour,Dag,Daylight
+light_condition,2,"Aube, crépuscule",Dageraad - schemering,"Dawn, dusk"
+light_condition,3,"Nuit, éclairage public présent et allumé","Nacht, openbare verlichting aanwezig en ontstoken","Night, public lighting present and lit"
+light_condition,4,"Nuit, pas d'éclairage public présent","Nacht, geen openbare verlichting aanwezig","Night, no public lighting"
+light_condition,5,"Nuit, éclairage public présent, mais pas allumé","Nacht, openb. verlicht. aanw., maar niet ontstoken","Night, public lighting present but not lit"
+light_condition,9,"Inconnu, indéterminé",Onbekend,"Unknown, undetermined"
+road_type,1,Autoroute,Autosnelweg,Motorway
+road_type,2,Route communale,Gemeenteweg,Municipal road
+road_type,3,Route régionale,Gewestweg,Regional road
+road_type,9,inconnu,onbekend,Unknown
+accident_class,1,Avec tué(s),Met doden,With fatalities
+accident_class,2,Mortellement blessé(s),dodelijk gewonden,Fatally injured
+accident_class,3,Avec blessé(s) grave(s),met zwaargewonden,With seriously injured
+accident_class,4,Avec blessé(s) leger(s),met lichtgewonden,With slightly injured
+road_user_type1,01,Autobus,Autobus,Bus
+road_user_type1,02,Autres,Andere weggebruiker,Other road user
+road_user_type1,03,Bicyclette,Fiets,Bicycle
+road_user_type1,04,Camion,Vrachtwagen,Truck
+road_user_type1,05,Camionnette,Lichte vrachtauto,Van / light truck
+road_user_type1,06,Cyclomoteur,Bromfiets,Moped
+road_user_type1,07,Motocyclette,Motorfiets,Motorcycle
+road_user_type1,08,Piéton,Voetganger,Pedestrian
+road_user_type1,09,Voiture,personenauto,Passenger car
+road_user_type1,99,inconnu,onbekend,Unknown
+road_user_type2,01,Autobus,Autobus,Bus
+road_user_type2,02,Autres,Andere weggebruiker,Other road user
+road_user_type2,03,Bicyclette,Fiets,Bicycle
+road_user_type2,04,Camion,Vrachtwagen,Truck
+road_user_type2,05,Camionnette,Lichte vrachtauto,Van / light truck
+road_user_type2,06,Cyclomoteur,Bromfiets,Moped
+road_user_type2,07,Motocyclette,Motorfiets,Motorcycle
+road_user_type2,08,Piéton,Voetganger,Pedestrian
+road_user_type2,09,Voiture,personenauto,Passenger car
+road_user_type2,10,usager seul,"één bestuurder, geen hindernis","Single road user, no obstacle"
+road_user_type2,11,usager/obstacle,een weggebruiker tegen een hindernis,Single road user against an obstacle
+road_user_type2,99,inconnu,onbekend,Unknown
+collision_type,0,Type de collision non mentionné,Geen vermelding van de type aanrijding,Collision type not specified
+collision_type,1,Collision en chaîne (3 conducteurs ou plus),Kettingbotsing (3 bestuurders of meer),Chain collision (3 or more drivers)
+collision_type,2,Entre 2 conducteurs: Collision frontale,Tussen 2 bestuurders: Frontale botsing,Between 2 drivers: Head-on collision
+collision_type,3,Entre 2 conducteurs: Par l'arrière,Tussen 2 bestuurders: Langs achteren,Between 2 drivers: Rear-end collision
+collision_type,4,Entre 2 conducteurs: Par le côté (avant/derrière-flanc),Tss. 2 best.: langs opzij (voor-/achterkant-flank),Between 2 drivers: Side collision (front/rear against flank)
+collision_type,5,Avec un piéton,Met een voetganger,With a pedestrian
+collision_type,6,Usager contre obstacle situé sur la chaussée,Weggebruiker tegen hindernis op de rijbaan,Road user against obstacle on the roadway
+collision_type,7,Usager contre obstacle situé hors chaussée,Weggebruiker tegen hindernis buiten rijbaan,Road user against obstacle outside the roadway
+collision_type,8,"Un seul usager, pas d'obstacle (chute incl.)","Eén bestuurder, geen hindernis (incl. val)","Single road user, no obstacle (incl. fall)"
+collision_type,9,Autre ou inconnu,Andere of onbekend,Other or unknown
+collision_type,A,Entre 2 conducteurs: Flanc contre flanc,Tussen 2 bestuurders: Flank tegen flank,Between 2 drivers: Flank against flank
+obstacle,-1,Type de collision non mentionné,Geen vermelding van de type aanrijding,Collision type not specified
+obstacle,-3,Présence d'obstacle non mentionnée,Geen vermelding van de aanwezigheid van een hindernis,Presence of obstacle not specified
+obstacle,0,Pas d’obstacle,Geen hindernis,No obstacle
+obstacle,50,Sur la chaussée: Animal (animal domestique),Op de rijbaan: Dier (huisdier),On the roadway: Animal (pet)
+obstacle,51,Train,Trein,Train
+obstacle,53,Sur la chaussée: Chargement,Op de rijbaan: Lading,On the roadway: Load
+obstacle,54,Sur la chaussée: Conteneur,Op de rijbaan: Container,On the roadway: Container
+obstacle,55,"Sur la chaussée: Travaux (signal., terre, app.,…)","Op de rijbaan: Werken (signal., aarde, toestel,…)","On the roadway: Roadworks (signs, soil, equipment, ...)"
+obstacle,56,"Hors chaussée: Ilot directionnel, berme centrale","Buiten de rijbaan: Verkeerseiland, middenberm","Off the roadway: Traffic island, central reservation"
+obstacle,57,"Ralentisseur de trafic,dos d'âne,trou,caniveau,...","Verkeersdrempel,ezelsrug,put,uitholling,straatgoot","Speed bump, hump, hole, gutter, ..."
+obstacle,58,Rail de tram,Tramspoor,Tram rail
+obstacle,59,Hors chaussée: Arbre,Buiten de rijbaan: Boom,Off the roadway: Tree
+obstacle,60,Hors chaussée: Poteau d'éclairage,Buiten de rijbaan: Verlichtingspaal,Off the roadway: Lighting pole
+obstacle,61,Hors chaussée: Autre poteau,Buiten de rijbaan: Andere paal,Off the roadway: Other pole
+obstacle,62,Hors chaussée: Barrière sécurité franchie,Buiten de rijbaan: Vangrails overschreden,Off the roadway: Crash barrier breached
+obstacle,63,Hors chaussée: Barrière sécurité non franchie,Buiten de rijbaan: Vangrails niet overgestoken,Off the roadway: Crash barrier not breached
+obstacle,64,Hors chaussée: Mur - construction,Buiten de rijbaan: Muur gebouw,"Off the roadway: Wall, building"
+obstacle,65,Hors chaussée: Clôture,Buiten de rijbaan: Omheining,Off the roadway: Fence
+obstacle,66,Hors chaussée: Fossé,Buiten de rijbaan: Gracht,Off the roadway: Ditch
+obstacle,67,Autre obstacle,Andere hindernis,Other obstacle
+obstacle,68,Sur la chaussée: Animal (animal sauvage),Op de rijbaan: Dier (wild dier),On the roadway: Animal (wild animal)
+obstacle,69,Hors chaussée: Animal,Buiten de rijbaan: Dier,Off the roadway: Animal
+obstacle,70,"Sur la chaussée: Ralentisseur de trafic, dos d'âne","Op de rijbaan: Verkeersdrempel, ezelsrug","On the roadway: Speed bump, hump"
+obstacle,71,"Sur la chaussée: Trou, caniveau, rail de tram","Op de rijbaan: Put, straatgoot, tramspoor","On the roadway: Hole, gutter, tram rail"
+obstacle,99,Inconnu,Onbekend,Unknown
+region,,Région de Bruxelles-Capitale,Brussels Hoofdstedelijk Gewest,Brussels-Capital Region
+region,,Région flamande,Vlaams Gewest,Flemish Region
+region,,Région wallonne,Waals Gewest,Walloon Region
+province,,Province d’Anvers,Provincie Antwerpen,Antwerp
+province,,Province de Limbourg,Provincie Limburg,Limburg
+province,,Province de Flandre orientale,Provincie Oost-Vlaanderen,East Flanders
+province,,Province de Flandre occidentale,Provincie West-Vlaanderen,West Flanders
+province,,Province du Brabant flamand,Provincie Vlaams-Brabant,Flemish Brabant
+province,,Province du Brabant wallon,Provincie Waals-Brabant,Walloon Brabant
+province,,Province de Hainaut,Provincie Henegouwen,Hainaut
+province,,Province de Namur,Provincie Namen,Namur
+province,,Province de Luxembourg,Provincie Luxemburg,Luxembourg
+province,,Province de Liège,Provincie Luik,Liège
