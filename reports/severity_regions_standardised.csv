@@ -1,0 +1,21 @@
+group,outcome,strata,strata_used,flanders_accidents_covered_pct,flanders_share_pct,wallonia_crude_share_pct,wallonia_standardised_share_pct,gap_crude_points,gap_standardised_points,gap_standardised_ci_low,gap_standardised_ci_high,ratio_crude,ratio_standardised,ratio_standardised_ci_low,ratio_standardised_ci_high
+All accidents,fatal,density_class,5,100.000,1.225,2.256,1.707,1.031,0.482,0.370,0.594,1.841,1.393,1.297,1.497
+All accidents,fatal,density_class+road_type,15,100.000,1.223,2.252,1.659,1.028,0.436,0.323,0.548,1.840,1.356,1.260,1.459
+All accidents,serious,density_class,5,100.000,9.668,7.162,6.061,-2.505,-3.606,-3.839,-3.373,0.741,0.627,0.606,0.649
+All accidents,serious,density_class+road_type,15,100.000,9.673,7.147,6.002,-2.526,-3.671,-3.905,-3.437,0.739,0.620,0.599,0.642
+Bicycle,fatal,density_class,5,100.000,0.927,1.537,0.613,0.611,-0.313,-0.741,0.115,1.659,0.662,0.331,1.322
+Bicycle,fatal,density_class+road_type,12,99.980,0.925,1.534,0.630,0.609,-0.295,-0.820,0.230,1.658,0.681,0.297,1.560
+Bicycle,serious,density_class,5,100.000,10.821,8.622,4.981,-2.199,-5.839,-6.928,-4.750,0.797,0.460,0.372,0.570
+Bicycle,serious,density_class+road_type,12,99.980,10.816,8.544,4.868,-2.272,-5.949,-7.065,-4.832,0.790,0.450,0.359,0.563
+Pedestrian,fatal,density_class,5,100.000,2.013,2.805,2.528,0.792,0.514,0.105,0.924,1.393,1.255,1.053,1.497
+Pedestrian,fatal,density_class+road_type,15,100.000,2.013,2.801,2.440,0.788,0.427,0.029,0.826,1.392,1.212,1.018,1.444
+Pedestrian,serious,density_class,5,100.000,13.552,9.619,9.404,-3.933,-4.148,-4.988,-3.308,0.710,0.694,0.641,0.751
+Pedestrian,serious,density_class+road_type,15,100.000,13.549,9.626,9.306,-3.922,-4.242,-5.084,-3.401,0.711,0.687,0.634,0.744
+Motorcycle,fatal,density_class,5,100.000,2.757,3.866,3.345,1.109,0.589,0.024,1.153,1.402,1.214,1.012,1.455
+Motorcycle,fatal,density_class+road_type,15,100.000,2.755,3.827,3.517,1.071,0.762,0.087,1.436,1.389,1.276,1.039,1.568
+Motorcycle,serious,density_class,5,100.000,20.349,14.855,13.778,-5.494,-6.571,-7.766,-5.376,0.730,0.677,0.628,0.730
+Motorcycle,serious,density_class+road_type,15,100.000,20.354,14.830,13.889,-5.524,-6.466,-7.744,-5.187,0.729,0.682,0.629,0.741
+Moped,fatal,density_class,5,100.000,0.462,1.088,0.841,0.626,0.379,0.069,0.689,2.356,1.821,1.203,2.757
+Moped,fatal,density_class+road_type,13,99.988,0.463,1.092,0.860,0.629,0.397,0.030,0.763,2.359,1.857,1.161,2.972
+Moped,serious,density_class,5,100.000,8.429,7.803,7.064,-0.626,-1.365,-2.281,-0.450,0.926,0.838,0.739,0.950
+Moped,serious,density_class+road_type,13,99.988,8.434,7.728,7.109,-0.706,-1.326,-2.282,-0.369,0.916,0.843,0.740,0.961

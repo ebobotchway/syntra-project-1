@@ -1,0 +1,161 @@
+group,density_class,road_type,region,accidents,fatal,serious,fatal_share_pct,fatal_ci_low,fatal_ci_high,serious_share_pct,serious_ci_low,serious_ci_high,few_accidents
+All accidents,1,Motorway,Flemish Region,39,0,3,0.000,0.000,8.967,7.692,2.651,20.321,True
+All accidents,1,Motorway,Walloon Region,741,40,72,5.398,3.989,7.267,9.717,7.787,12.062,False
+All accidents,1,Municipal road,Flemish Region,797,17,113,2.133,1.336,3.389,14.178,11.928,16.772,False
+All accidents,1,Municipal road,Walloon Region,4128,117,469,2.834,2.370,3.386,11.361,10.429,12.366,False
+All accidents,1,Regional road,Flemish Region,801,25,126,3.121,2.123,4.567,15.730,13.373,18.415,False
+All accidents,1,Regional road,Walloon Region,8500,351,876,4.129,3.727,4.574,10.306,9.677,10.970,False
+All accidents,2,Motorway,Flemish Region,320,21,31,6.562,4.332,9.824,9.688,6.909,13.423,False
+All accidents,2,Motorway,Walloon Region,911,37,67,4.061,2.961,5.548,7.355,5.833,9.235,False
+All accidents,2,Municipal road,Flemish Region,4745,80,656,1.686,1.357,2.093,13.825,12.872,14.836,False
+All accidents,2,Municipal road,Walloon Region,4385,81,315,1.847,1.489,2.290,7.184,6.456,7.986,False
+All accidents,2,Regional road,Flemish Region,5246,115,636,2.192,1.829,2.625,12.124,11.268,13.035,False
+All accidents,2,Regional road,Walloon Region,8555,276,732,3.226,2.872,3.622,8.556,7.982,9.168,False
+All accidents,3,Motorway,Flemish Region,1689,60,223,3.552,2.770,4.546,13.203,11.672,14.901,False
+All accidents,3,Motorway,Walloon Region,1218,50,122,4.105,3.128,5.371,10.016,8.454,11.830,False
+All accidents,3,Municipal road,Flemish Region,11507,171,1462,1.486,1.281,1.724,12.705,12.109,13.326,False
+All accidents,3,Municipal road,Walloon Region,4137,86,283,2.079,1.686,2.560,6.841,6.111,7.651,False
+All accidents,3,Regional road,Flemish Region,12263,232,1390,1.892,1.665,2.149,11.335,10.786,11.908,False
+All accidents,3,Regional road,Walloon Region,5971,141,434,2.361,2.006,2.778,7.268,6.637,7.955,False
+All accidents,4,Motorway,Flemish Region,3650,105,343,2.877,2.382,3.471,9.397,8.493,10.387,False
+All accidents,4,Motorway,Walloon Region,1733,80,127,4.616,3.725,5.709,7.328,6.193,8.652,False
+All accidents,4,Municipal road,Flemish Region,20906,280,2340,1.339,1.192,1.504,11.193,10.773,11.627,False
+All accidents,4,Municipal road,Walloon Region,6424,88,373,1.370,1.113,1.685,5.806,5.260,6.405,False
+All accidents,4,Regional road,Flemish Region,19509,284,1942,1.456,1.297,1.634,9.954,9.542,10.382,False
+All accidents,4,Regional road,Walloon Region,7666,158,530,2.061,1.766,2.404,6.914,6.367,7.503,False
+All accidents,5,Motorway,Brussels-Capital Region,449,10,21,2.227,1.214,4.051,4.677,3.079,7.044,False
+All accidents,5,Motorway,Flemish Region,8951,164,704,1.832,1.574,2.131,7.865,7.325,8.441,False
+All accidents,5,Motorway,Walloon Region,2159,64,115,2.964,2.328,3.768,5.327,4.456,6.356,False
+All accidents,5,Municipal road,Brussels-Capital Region,16899,51,756,0.302,0.230,0.397,4.474,4.172,4.796,False
+All accidents,5,Municipal road,Flemish Region,45359,300,3858,0.661,0.591,0.740,8.505,8.252,8.766,False
+All accidents,5,Municipal road,Walloon Region,13430,122,688,0.908,0.761,1.084,5.123,4.763,5.509,False
+All accidents,5,Regional road,Brussels-Capital Region,12380,62,550,0.501,0.391,0.641,4.443,4.094,4.820,False
+All accidents,5,Regional road,Flemish Region,41913,320,3361,0.763,0.685,0.851,8.019,7.763,8.283,False
+All accidents,5,Regional road,Walloon Region,10649,124,558,1.164,0.978,1.387,5.240,4.833,5.680,False
+Bicycle,1,Motorway,Walloon Region,2,0,0,0.000,0.000,65.763,0.000,0.000,65.763,True
+Bicycle,1,Municipal road,Flemish Region,14,1,1,7.143,1.272,31.469,7.143,1.272,31.469,True
+Bicycle,1,Municipal road,Walloon Region,462,9,69,1.948,1.028,3.660,14.935,11.975,18.474,False
+Bicycle,1,Regional road,Flemish Region,5,0,2,0.000,-0.000,43.449,40.000,11.762,76.928,True
+Bicycle,1,Regional road,Walloon Region,423,16,60,3.783,2.341,6.055,14.184,11.181,17.832,False
+Bicycle,2,Municipal road,Flemish Region,210,5,35,2.381,1.021,5.452,16.667,12.235,22.296,False
+Bicycle,2,Municipal road,Walloon Region,928,16,96,1.724,1.064,2.782,10.345,8.546,12.471,False
+Bicycle,2,Regional road,Flemish Region,152,2,34,1.316,0.362,4.670,22.368,16.472,29.628,False
+Bicycle,2,Regional road,Walloon Region,752,19,60,2.527,1.623,3.912,7.979,6.249,10.136,False
+Bicycle,3,Motorway,Flemish Region,7,0,1,0.000,0.000,35.434,14.286,2.568,51.313,True
+Bicycle,3,Motorway,Walloon Region,3,0,1,0.000,0.000,56.151,33.333,6.149,79.235,True
+Bicycle,3,Municipal road,Flemish Region,2903,49,480,1.688,1.279,2.224,16.535,15.228,17.930,False
+Bicycle,3,Municipal road,Walloon Region,1014,14,74,1.381,0.824,2.304,7.298,5.853,9.065,False
+Bicycle,3,Regional road,Flemish Region,2224,38,299,1.709,1.247,2.336,13.444,12.089,14.925,False
+Bicycle,3,Regional road,Walloon Region,654,5,53,0.765,0.327,1.777,8.104,6.249,10.448,False
+Bicycle,4,Motorway,Flemish Region,12,1,4,8.333,1.486,35.389,33.333,13.812,60.938,True
+Bicycle,4,Municipal road,Flemish Region,8874,118,1201,1.330,1.112,1.590,13.534,12.838,14.261,False
+Bicycle,4,Municipal road,Walloon Region,335,2,19,0.597,0.164,2.150,5.672,3.661,8.688,False
+Bicycle,4,Regional road,Flemish Region,6058,96,705,1.585,1.299,1.931,11.638,10.854,12.469,False
+Bicycle,4,Regional road,Walloon Region,243,0,13,0.000,0.000,1.556,5.350,3.153,8.937,False
+Bicycle,5,Motorway,Brussels-Capital Region,4,0,0,0.000,0.000,48.990,0.000,0.000,48.990,True
+Bicycle,5,Motorway,Flemish Region,103,2,14,1.942,0.534,6.805,13.592,8.272,21.530,False
+Bicycle,5,Motorway,Walloon Region,1,0,0,0.000,0.000,79.346,0.000,0.000,79.346,True
+Bicycle,5,Municipal road,Brussels-Capital Region,3789,5,154,0.132,0.056,0.309,4.064,3.481,4.741,False
+Bicycle,5,Municipal road,Flemish Region,22794,130,2203,0.570,0.481,0.677,9.665,9.288,10.055,False
+Bicycle,5,Municipal road,Walloon Region,546,3,25,0.549,0.187,1.603,4.579,3.120,6.672,False
+Bicycle,5,Regional road,Brussels-Capital Region,2719,5,101,0.184,0.079,0.430,3.715,3.067,4.493,False
+Bicycle,5,Regional road,Flemish Region,16104,109,1455,0.677,0.561,0.816,9.035,8.602,9.488,False
+Bicycle,5,Regional road,Walloon Region,245,2,9,0.816,0.224,2.927,3.673,1.944,6.833,False
+Moped,1,Municipal road,Flemish Region,10,1,2,10.000,1.788,40.416,20.000,5.668,50.984,True
+Moped,1,Municipal road,Walloon Region,147,1,22,0.680,0.120,3.752,14.966,10.096,21.621,False
+Moped,1,Regional road,Flemish Region,5,0,1,0.000,-0.000,43.449,20.000,3.622,62.447,True
+Moped,1,Regional road,Walloon Region,200,3,22,1.500,0.511,4.317,11.000,7.377,16.093,False
+Moped,2,Motorway,Flemish Region,2,0,1,0.000,0.000,65.763,50.000,9.453,90.547,True
+Moped,2,Municipal road,Flemish Region,205,3,27,1.463,0.499,4.214,13.171,9.212,18.485,False
+Moped,2,Municipal road,Walloon Region,294,6,22,2.041,0.939,4.380,7.483,4.993,11.070,False
+Moped,2,Regional road,Flemish Region,204,2,21,0.980,0.269,3.504,10.294,6.832,15.224,False
+Moped,2,Regional road,Walloon Region,358,10,27,2.793,1.524,5.065,7.542,5.235,10.751,False
+Moped,3,Motorway,Flemish Region,3,1,0,33.333,6.149,79.235,0.000,0.000,56.151,True
+Moped,3,Motorway,Walloon Region,1,0,1,0.000,0.000,79.346,100.000,20.654,100.000,True
+Moped,3,Municipal road,Flemish Region,688,9,81,1.308,0.690,2.467,11.773,9.575,14.396,False
+Moped,3,Municipal road,Walloon Region,386,3,34,0.777,0.265,2.260,8.808,6.372,12.057,False
+Moped,3,Regional road,Flemish Region,1040,11,85,1.058,0.592,1.884,8.173,6.658,9.996,False
+Moped,3,Regional road,Walloon Region,332,5,35,1.506,0.645,3.477,10.542,7.678,14.309,False
+Moped,4,Motorway,Flemish Region,5,0,1,0.000,-0.000,43.449,20.000,3.622,62.447,True
+Moped,4,Motorway,Walloon Region,2,1,0,50.000,9.453,90.547,0.000,0.000,65.763,True
+Moped,4,Municipal road,Brussels-Capital Region,8,0,1,0.000,0.000,32.442,12.500,2.242,47.089,True
+Moped,4,Municipal road,Flemish Region,1794,12,197,0.669,0.383,1.166,10.981,9.617,12.512,False
+Moped,4,Municipal road,Walloon Region,482,5,33,1.037,0.444,2.405,6.846,4.916,9.459,False
+Moped,4,Regional road,Brussels-Capital Region,3,0,0,0.000,0.000,56.151,0.000,0.000,56.151,True
+Moped,4,Regional road,Flemish Region,1923,11,165,0.572,0.320,1.021,8.580,7.410,9.916,False
+Moped,4,Regional road,Walloon Region,458,4,34,0.873,0.340,2.224,7.424,5.361,10.195,False
+Moped,5,Motorway,Brussels-Capital Region,2,0,0,0.000,0.000,65.763,0.000,0.000,65.763,True
+Moped,5,Motorway,Flemish Region,41,1,3,2.439,0.432,12.595,7.317,2.520,19.428,True
+Moped,5,Motorway,Walloon Region,2,0,0,0.000,0.000,65.763,0.000,0.000,65.763,True
+Moped,5,Municipal road,Brussels-Capital Region,905,2,30,0.221,0.061,0.802,3.315,2.332,4.693,False
+Moped,5,Municipal road,Flemish Region,4880,14,384,0.287,0.171,0.481,7.869,7.146,8.658,False
+Moped,5,Municipal road,Walloon Region,1214,7,77,0.577,0.280,1.185,6.343,5.105,7.856,False
+Moped,5,Regional road,Brussels-Capital Region,658,1,24,0.152,0.027,0.856,3.647,2.463,5.370,False
+Moped,5,Regional road,Flemish Region,6050,13,454,0.215,0.126,0.367,7.504,6.867,8.195,False
+Moped,5,Regional road,Walloon Region,886,7,61,0.790,0.383,1.622,6.885,5.397,8.745,False
+Motorcycle,1,Motorway,Flemish Region,6,2,0,33.333,9.677,70.001,0.000,0.000,39.034,True
+Motorcycle,1,Motorway,Walloon Region,24,2,7,8.333,2.316,25.849,29.167,14.914,49.168,True
+Motorcycle,1,Municipal road,Flemish Region,147,3,42,2.041,0.696,5.828,28.571,21.887,36.347,False
+Motorcycle,1,Municipal road,Walloon Region,265,12,54,4.528,2.609,7.747,20.377,15.967,25.634,False
+Motorcycle,1,Regional road,Flemish Region,133,9,24,6.767,3.601,12.361,18.045,12.437,25.448,False
+Motorcycle,1,Regional road,Walloon Region,546,38,89,6.960,5.112,9.409,16.300,13.439,19.632,False
+Motorcycle,2,Motorway,Flemish Region,24,0,4,0.000,0.000,13.798,16.667,6.679,35.853,True
+Motorcycle,2,Motorway,Walloon Region,23,2,5,8.696,2.418,26.796,21.739,9.664,41.904,True
+Motorcycle,2,Municipal road,Flemish Region,367,14,100,3.815,2.286,6.301,27.248,22.946,32.021,False
+Motorcycle,2,Municipal road,Walloon Region,301,14,47,4.651,2.790,7.655,15.615,11.950,20.146,False
+Motorcycle,2,Regional road,Flemish Region,449,18,117,4.009,2.551,6.248,26.058,22.213,30.309,False
+Motorcycle,2,Regional road,Walloon Region,860,38,161,4.419,3.236,6.007,18.721,16.255,21.465,False
+Motorcycle,3,Motorway,Flemish Region,50,1,15,2.000,0.354,10.496,30.000,19.103,43.751,True
+Motorcycle,3,Motorway,Walloon Region,30,1,9,3.333,0.591,16.671,30.000,16.665,47.876,True
+Motorcycle,3,Municipal road,Flemish Region,609,19,151,3.120,2.006,4.821,24.795,21.530,28.375,False
+Motorcycle,3,Municipal road,Walloon Region,371,13,52,3.504,2.059,5.902,14.016,10.851,17.919,False
+Motorcycle,3,Regional road,Flemish Region,683,34,163,4.978,3.584,6.876,23.865,20.820,27.203,False
+Motorcycle,3,Regional road,Walloon Region,760,35,123,4.605,3.330,6.337,16.184,13.737,18.972,False
+Motorcycle,4,Motorway,Flemish Region,182,15,50,8.242,5.058,13.152,27.473,21.504,34.373,False
+Motorcycle,4,Motorway,Walloon Region,69,2,15,2.899,0.799,9.967,21.739,13.641,32.819,True
+Motorcycle,4,Municipal road,Flemish Region,1101,42,250,3.815,2.834,5.116,22.707,20.329,25.274,False
+Motorcycle,4,Municipal road,Walloon Region,443,13,63,2.935,1.723,4.956,14.221,11.276,17.782,False
+Motorcycle,4,Regional road,Flemish Region,1266,35,287,2.765,1.994,3.821,22.670,20.448,25.057,False
+Motorcycle,4,Regional road,Walloon Region,758,31,121,4.090,2.896,5.747,15.963,13.528,18.741,False
+Motorcycle,5,Motorway,Brussels-Capital Region,51,1,6,1.961,0.347,10.305,11.765,5.505,23.381,True
+Motorcycle,5,Motorway,Flemish Region,807,14,123,1.735,1.036,2.891,15.242,12.927,17.886,False
+Motorcycle,5,Motorway,Walloon Region,118,8,17,6.780,3.475,12.810,14.407,9.193,21.865,False
+Motorcycle,5,Municipal road,Brussels-Capital Region,1721,6,118,0.349,0.160,0.759,6.856,5.756,8.149,False
+Motorcycle,5,Municipal road,Flemish Region,1780,31,277,1.742,1.230,2.461,15.562,13.952,17.320,False
+Motorcycle,5,Municipal road,Walloon Region,998,18,112,1.804,1.144,2.833,11.222,9.411,13.331,False
+Motorcycle,5,Regional road,Brussels-Capital Region,1529,12,102,0.785,0.450,1.367,6.671,5.526,8.033,False
+Motorcycle,5,Regional road,Flemish Region,2050,29,362,1.415,0.987,2.024,17.659,16.069,19.369,False
+Motorcycle,5,Regional road,Walloon Region,1150,30,121,2.609,1.833,3.700,10.522,8.878,12.429,False
+Pedestrian,1,Motorway,Flemish Region,1,1,0,100.000,20.654,100.000,0.000,0.000,79.346,True
+Pedestrian,1,Motorway,Walloon Region,3,2,1,66.667,20.765,93.851,33.333,6.149,79.235,True
+Pedestrian,1,Municipal road,Flemish Region,36,3,9,8.333,2.875,21.827,25.000,13.750,41.071,True
+Pedestrian,1,Municipal road,Walloon Region,194,12,27,6.186,3.573,10.499,13.918,9.744,19.492,False
+Pedestrian,1,Regional road,Flemish Region,22,0,5,0.000,0.000,14.866,22.727,10.123,43.440,True
+Pedestrian,1,Regional road,Walloon Region,196,19,31,9.694,6.294,14.643,15.816,11.372,21.575,False
+Pedestrian,2,Motorway,Flemish Region,4,3,1,75.000,30.064,95.441,25.000,4.559,69.936,True
+Pedestrian,2,Motorway,Walloon Region,9,5,2,55.556,26.665,81.122,22.222,6.322,54.742,True
+Pedestrian,2,Municipal road,Flemish Region,353,13,48,3.683,2.165,6.198,13.598,10.412,17.568,False
+Pedestrian,2,Municipal road,Walloon Region,311,10,29,3.215,1.756,5.817,9.325,6.571,13.071,False
+Pedestrian,2,Regional road,Flemish Region,295,14,62,4.746,2.848,7.807,21.017,16.755,26.024,False
+Pedestrian,2,Regional road,Walloon Region,325,13,35,4.000,2.352,6.723,10.769,7.846,14.609,False
+Pedestrian,3,Motorway,Flemish Region,10,3,1,30.000,10.779,60.323,10.000,1.788,40.416,True
+Pedestrian,3,Motorway,Walloon Region,6,2,1,33.333,9.677,70.001,16.667,3.005,56.351,True
+Pedestrian,3,Municipal road,Flemish Region,742,19,106,2.561,1.645,3.965,14.286,11.952,16.988,False
+Pedestrian,3,Municipal road,Walloon Region,401,12,35,2.993,1.720,5.157,8.728,6.343,11.897,False
+Pedestrian,3,Regional road,Flemish Region,672,20,140,2.976,1.935,4.552,20.833,17.933,24.065,False
+Pedestrian,3,Regional road,Walloon Region,435,17,63,3.908,2.454,6.169,14.483,11.486,18.101,False
+Pedestrian,4,Motorway,Flemish Region,17,11,4,64.706,41.300,82.691,23.529,9.555,47.262,True
+Pedestrian,4,Motorway,Walloon Region,12,5,3,41.667,19.326,68.049,25.000,8.894,53.231,True
+Pedestrian,4,Municipal road,Flemish Region,1741,32,236,1.838,1.305,2.583,13.555,12.027,15.244,False
+Pedestrian,4,Municipal road,Walloon Region,688,10,64,1.453,0.791,2.655,9.302,7.352,11.705,False
+Pedestrian,4,Regional road,Flemish Region,1261,47,237,3.727,2.814,4.921,18.795,16.734,21.044,False
+Pedestrian,4,Regional road,Walloon Region,737,29,90,3.935,2.753,5.594,12.212,10.042,14.774,False
+Pedestrian,5,Motorway,Brussels-Capital Region,8,3,0,37.500,13.684,69.426,0.000,0.000,32.442,True
+Pedestrian,5,Motorway,Flemish Region,55,18,11,32.727,21.813,45.897,20.000,11.552,32.365,True
+Pedestrian,5,Motorway,Walloon Region,22,9,4,40.909,23.256,61.266,18.182,7.307,38.517,True
+Pedestrian,5,Municipal road,Brussels-Capital Region,4220,21,252,0.498,0.326,0.760,5.972,5.296,6.727,False
+Pedestrian,5,Municipal road,Flemish Region,5615,45,611,0.801,0.600,1.071,10.882,10.094,11.723,False
+Pedestrian,5,Municipal road,Walloon Region,3092,36,247,1.164,0.842,1.608,7.988,7.084,8.997,False
+Pedestrian,5,Regional road,Brussels-Capital Region,2317,23,162,0.993,0.662,1.485,6.992,6.023,8.103,False
+Pedestrian,5,Regional road,Flemish Region,3731,64,501,1.715,1.346,2.184,13.428,12.372,14.560,False
+Pedestrian,5,Regional road,Walloon Region,2243,62,203,2.764,2.162,3.528,9.050,7.932,10.309,False
