@@ -3,3 +3,5 @@
 .env
 !translation/*.csv
 !reports/*.csv
+!data/*.csv
+__pycache__/
