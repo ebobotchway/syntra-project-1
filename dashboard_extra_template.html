@@ -1,0 +1,259 @@
+<section id="sec-s2">
+  <div class="sec-head"><span class="tag">2</span><h2>Severity</h2></div>
+  <p class="sub">Who experiences the most severe outcomes? Fixed results from my analysis scripts, not recalculated here: the years filter on the left does not apply to sections 2 to 4. The severity class belongs to the WHOLE accident, not to one road user: a car-pedestrian accident counts for both groups.</p>
+  <fieldset class="ctl inline-ctl"><legend>Period</legend><div class="row" id="s2-scope"></div></fieldset>
+  <h3>Share of each group's accidents that are fatal, seriously injured or slightly injured</h3>
+  <p class="note">Dot = share, line = 95% interval, gray line = all accidents. Pre, during and post Covid-19 are my own period names; the data states no cause.</p>
+  <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-s2a"></div></div></div></div>
+  <h3 style="margin-top:18px">Severity distribution per group</h3>
+  <div class="card"><div class="scroll-x"><div class="inner" style="min-width:700px"><div id="chart-s2b"></div></div></div></div>
+  <div class="card findings">
+    <h3>Key findings</h3>
+    <p class="fixed">Fixed text for all years 2017-2024; it does not change with the controls.</p>
+    <ul>
+      <li>Accidents involving trucks and motorcycles are the most severe: fatal plus serious makes up 17.3% (trucks) and 18.9% (motorcycles) of their accidents, against 9.9% for all accidents.</li>
+      <li>The fatal share is 5.1% for trucks (3.6 times the 1.4% of all accidents), 2.8% for motorcycles and 2.0% for pedestrians. It is lowest for mopeds (0.6%), bicycles (0.9%) and passenger cars (1.3%).</li>
+      <li>Bicycle accidents are less often fatal but more often seriously injured (10.0% against 8.4% overall); motorcycles have the highest serious share (16.2%).</li>
+      <li>The fatal share of all accidents falls from 1.54% (2017-2019) to 1.47% (2020-2021) and 1.29% (2022-2024).</li>
+    </ul>
+  </div>
+  <p class="care">Read with care: these are the severity of the accidents a group is part of, not the harm to that group's own members. A truck accident may be fatal mostly for the other party. They are shares given that an accident happened, not the risk of having one. Intervals assume independent accidents, which is slightly optimistic because one accident can count for two groups.</p>
+  <details><summary>Table</summary><div class="table-wrap"><div id="table-s2"></div><p class="dl"><button type="button" class="download" id="dl-s2" hidden>Download CSV</button></p></div></details>
+</section>
+
+<section id="sec-s3">
+  <div class="sec-head"><span class="tag">3</span><h2>Geography</h2></div>
+  <p class="sub">Where are vulnerable road users most exposed? Fixed results (the years filter does not apply). Municipality outlines: Statbel statistical sectors 2023, CC BY 4.0 (outlines joined and simplified).</p>
+  <h3>3a. Accidents involving cyclists, by municipality, 2017-2024</h3>
+  <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-s3a"></div></div></div></div>
+  <fieldset class="ctl inline-ctl"><legend>Map</legend><div class="row" id="s3-map"></div></fieldset>
+  <p class="note" id="s3-map-note"></p>
+  <div class="card"><div class="scroll-x"><div class="inner" id="s3-map-inner" style="min-width:560px"><div id="chart-s3map"></div></div></div></div>
+  <div class="card findings">
+    <h3>Key findings</h3>
+    <p class="fixed">Fixed text for all years 2017-2024; it does not change with the controls.</p>
+    <ul>
+      <li>71,881 accidents involve cyclists, in 577 of the 581 municipalities; cyclists are in 24.8% of all accidents.</li>
+      <li>By count: Antwerpen 7,405 (37% of its accidents), Gent 4,229 (42%), Brussel 2,478 (25%), Leuven 1,773 (54%), Brugge 1,598 (37%).</li>
+      <li>By share (municipalities with 100+ accidents): Haacht 56.2%, Mortsel 54.4%, Leuven 54.3%, Hove 50.4%, Keerbergen 49.0%.</li>
+      <li>Cyclist share by region: Flanders 33.5%, Brussels 21.8%, Wallonia 7.0%. Wherever cyclists make up more than a third of the accidents, the municipality is in Flanders.</li>
+    </ul>
+  </div>
+  <p class="care">Read with care: counts favour big cities and the data has no population or cycling-traffic figures, so these are not rates per inhabitant or per cyclist.</p>
+  <details><summary>Table (all 581 municipalities)</summary><div class="table-wrap"><div id="table-s3a"></div><p class="dl"><button type="button" class="download" id="dl-s3a" hidden>Download CSV</button></p></div></details>
+
+  <h3 style="margin-top:30px">3b / 3c. Hotspots: pedestrians, motorcycles and mopeds (500 m squares)</h3>
+  <div class="row" style="gap:18px">
+    <fieldset class="ctl inline-ctl"><legend>Group</legend><div class="row" id="s3-group"></div></fieldset>
+    <fieldset class="ctl inline-ctl"><legend>Years</legend><div class="row" id="s3-years"></div></fieldset>
+  </div>
+  <p class="note" id="s3-hot-note"></p>
+  <div class="card"><div class="scroll-x"><div class="inner" style="min-width:560px"><div id="chart-s3hot"></div></div></div></div>
+  <div class="card findings">
+    <h3>Key findings</h3>
+    <p class="fixed">Fixed text for all years 2017-2024; it does not change with the controls.</p>
+    <ul>
+      <li>Pedestrians: 17 of the top 20 squares are in the Brussels area, 2 in Antwerp and 1 in Liège; the busiest square (Antwerp) has 82 accidents, only 0.31% of all located pedestrian accidents.</li>
+      <li>Motorcycles: all 20 busiest squares are in the Brussels area (busiest: 41 accidents).</li>
+      <li>Mopeds: 12 of the top 20 squares are in Antwerp, 4 in Gent, 2 in Brussels, 1 in Charleroi and 1 in Knokke-Heist (busiest: 45 accidents).</li>
+      <li>About two thirds of the hotspot squares come back in 2022-2024 (12, 16 and 12 of 20 for pedestrians, motorcycles and mopeds).</li>
+    </ul>
+  </div>
+  <p class="care">Read with care: hotspots are where accidents are COUNTED, which is mostly where many people and vehicles are; there are no traffic or population figures. 10-13% of accidents have no coordinates (3-5% in 2022-2024), more in Wallonia, so Walloon hotspots may be understated. Different square sizes would give different ranks.</p>
+  <details><summary id="s3-hot-summary">The 20 busiest squares</summary><div class="table-wrap"><div id="table-s3b"></div><p class="dl"><button type="button" class="download" id="dl-s3b" hidden>Download CSV</button></p></div></details>
+</section>
+
+<section id="sec-s4">
+  <div class="sec-head"><span class="tag">4</span><h2>Regions and concentration</h2></div>
+  <p class="sub">Regional differences in severity, concentration against severity, and the regional gap at the same density. Fixed results (the years filter does not apply). The severity class belongs to the whole accident; concentration is where accidents are counted, not traffic.</p>
+
+  <h3>4a. Regional severity</h3>
+  <p class="note">Fatal and serious share per region and province, all accidents. Brussels has no province.</p>
+  <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-s4a1"></div></div></div></div>
+  <h3 style="margin-top:18px">Province map</h3>
+  <div class="card"><div class="scroll-x"><div class="inner" style="min-width:560px"><div id="chart-s4a2"></div></div></div></div>
+  <h3 style="margin-top:18px">By road-user group</h3>
+  <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-s4a3"></div></div></div></div>
+  <h3 style="margin-top:18px">Within each road type</h3>
+  <p class="note">Hollow dots = fewer than 100 accidents; they can run off the panel. Mwy = motorway, Reg = regional road, Mun = municipal road.</p>
+  <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-s4a4"></div></div></div></div>
+  <div class="card findings">
+    <h3>Key findings</h3>
+    <p class="fixed">Fixed text for all years 2017-2024; it does not change with the controls.</p>
+    <ul>
+      <li>Fatal share: Wallonia 2.26% (1.6 times Belgium), Flanders 1.23%, Brussels 0.42%. Serious-injury share goes the other way: Flanders 9.67%, Wallonia 7.16%, Brussels 4.45%.</li>
+      <li>By province, the fatal share is highest in Luxembourg (3.37%), Namur (2.95%) and Hainaut (2.17%) and lowest in Antwerp (1.04%) and Brussels (0.42%); the serious share is highest in West Flanders (11.5%).</li>
+      <li>The order Brussels &lt; Flanders &lt; Wallonia in fatal share holds for cyclists, pedestrians, motorcycles and mopeds.</li>
+      <li>Wallonia has the higher fatal share on every road type: motorways 4.01% against 2.39% in Flanders, regional roads 2.54% against 1.22%, municipal roads 1.52% against 1.02%.</li>
+    </ul>
+  </div>
+  <p class="care">Read with care: Flanders has more serious but fewer fatal accidents than Wallonia. That could be real or come from how the classes are recorded; I have not tested it. Matching road type controls for road type only.</p>
+  <details><summary>Tables</summary><div class="table-wrap">
+    <h3>Regions and provinces, per group</h3><div id="table-s4a1"></div><p class="dl"><button type="button" class="download" id="dl-s4a1" hidden>Download CSV</button></p>
+    <h3>Region by road type, per group</h3><div id="table-s4a2"></div><p class="dl"><button type="button" class="download" id="dl-s4a2" hidden>Download CSV</button></p>
+  </div></details>
+
+  <h3 style="margin-top:34px">4b. Concentration against severity</h3>
+  <p class="note">By the number of accidents in the 500 m square (accidents with coordinates, two periods); hollow dots = fewer than 100 accidents.</p>
+  <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-s4b1"></div></div></div></div>
+  <h3 style="margin-top:18px">By municipality density</h3>
+  <p class="note">Five equal-sized classes of accidents per km2 per year (of that group).</p>
+  <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-s4b2"></div></div></div></div>
+  <h3 style="margin-top:18px">One dot per municipality</h3>
+  <p class="note">rho = Spearman rank correlation between density and severity share. Only municipalities with at least 100 accidents (for a group: at least 30 of its accidents).</p>
+  <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-s4b3"></div></div></div></div>
+  <div class="card findings">
+    <h3>Key findings</h3>
+    <p class="fixed">Fixed text for all years 2017-2024; it does not change with the controls.</p>
+    <ul>
+      <li>The busier the square, the less severe the accidents: for all accidents the fatal share falls from 3.00% in squares with one accident to 0.37% in squares with 100 or more; the serious share from 12.5% to 5.1%.</li>
+      <li>The same direction holds for cyclists (fatal 1.93% to 0.17%), pedestrians (4.29% to 0.70%), motorcycles and mopeds, and in 2022-2024 as well.</li>
+      <li>By municipality: the fatal share falls from 3.66% in the least dense fifth to 0.80% in the densest; Spearman rho is -0.66 for all accidents, -0.52 for motorcycles, -0.36 for pedestrians, -0.22 for cyclists and -0.15 for mopeds.</li>
+      <li>The accident hotspots are therefore not the deadliest places: an isolated pedestrian accident is fatal in 4.3% of cases, one in a busy square in under 1%.</li>
+    </ul>
+  </div>
+  <p class="care">Read with care: this is an association, not a cause. Dense places have lower speeds, other roads and more minor accidents, and density is accidents per km2, not per vehicle.</p>
+  <details><summary>Tables</summary><div class="table-wrap">
+    <h3>Severity by square concentration</h3><div id="table-s4b1"></div><p class="dl"><button type="button" class="download" id="dl-s4b1" hidden>Download CSV</button></p>
+    <h3>Severity by municipality density</h3><div id="table-s4b2"></div><p class="dl"><button type="button" class="download" id="dl-s4b2" hidden>Download CSV</button></p>
+    <h3>Spearman correlations</h3><div id="table-s4b3"></div><p class="dl"><button type="button" class="download" id="dl-s4b3" hidden>Download CSV</button></p>
+  </div></details>
+
+  <h3 style="margin-top:34px">4c. Regions within the same density</h3>
+  <p class="note">Is the Wallonia-Flanders gap still there when municipalities of the same accident density (and road type) are compared? Regions within the same density class, all accidents:</p>
+  <div class="card"><div class="scroll-x"><div class="inner" style="min-width:600px"><div id="chart-s4c1"></div></div></div></div>
+  <h3 style="margin-top:18px">Per road-user group</h3>
+  <p class="note">Each group has its own density classes.</p>
+  <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-s4c2"></div></div></div></div>
+  <h3 style="margin-top:18px">Within the same density class AND road type, all accidents</h3>
+  <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-s4c3"></div></div></div></div>
+  <h3 style="margin-top:18px">How much of the Wallonia-Flanders gap remains</h3>
+  <p class="note">Above 1 = Wallonia higher. Standardised ratio: Wallonia's share if it had Flanders' mix of strata. Odds ratio: logistic regression with bootstrap intervals (1,000 repetitions).</p>
+  <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-s4c4"></div></div></div></div>
+  <div class="card findings">
+    <h3>Key findings</h3>
+    <p class="fixed">Fixed text for all years 2017-2024; it does not change with the controls.</p>
+    <ul>
+      <li>At the same accident density Wallonia's fatal share stays 36-48% higher than Flanders' in every density class (ratio 1.48, 1.36, 1.36, 1.37 and 1.44); overall the ratio is 1.84.</li>
+      <li>Adjusted odds ratio Wallonia vs Flanders, fatal: 1.86 (region only), 1.39 (same density class), 1.35 (also same road type; 95% interval 1.25-1.44). Density and road type explain more than half of the excess; roughly 40% of it remains.</li>
+      <li>The serious-injury gap goes the other way and widens when matched: odds ratio 0.72 crude and 0.60 at the same density and road type.</li>
+      <li>By group (fatal, density + road type): mopeds 1.70 (gap remains), pedestrians 1.23 and motorcycles 1.21 (borderline), cyclists 0.69 (no gap; the standardised ratio's interval includes 1, so I treat it as "no clear gap").</li>
+    </ul>
+  </div>
+  <p class="care">Read with care: density and road type are the only things matched; speed limits, vehicle mix, enforcement, emergency response and how classes are recorded are not. Brussels is only in the densest class.</p>
+  <details><summary>Tables</summary><div class="table-wrap">
+    <h3>Standardised ratios</h3><div id="table-s4c1"></div><p class="dl"><button type="button" class="download" id="dl-s4c1" hidden>Download CSV</button></p>
+    <h3>Logistic regression</h3><div id="table-s4c2"></div><p class="dl"><button type="button" class="download" id="dl-s4c2" hidden>Download CSV</button></p>
+  </div></details>
+</section>
+<!--EXTRA-SCRIPT-->
+<script>
+/* Steps 2-4: saved results (decision #110). The graphs were built in Python (dashboard_extra.py) and are embedded as Plotly figures;
+   this script only draws them, switches between prepared versions, and applies the page's light or dark colours. */
+const EXTRA = /*__EXTRA__*/null;
+(function () {
+  if (!EXTRA || typeof Plotly === "undefined") return;
+  const el = id => document.getElementById(id);
+  const OUTLINE = EXTRA.outline;                         // municipality borders, shared by all maps
+  const GROUPS3 = ["Pedestrian", "Motorcycle", "Moped"];
+  const SCOPES = EXTRA.scopes;                           // [[key, label], ...]
+  const state = { scope: "pooled_2017_2024", map: "bubble", group: "Pedestrian", years: "2017-2024" };
+  const registry = {};                                   // chart id -> function that returns {data, layout}
+
+  // The figure with this page's colours: text, grid and axis lines follow the light or dark theme.
+  function themed(fig) {
+    const t = theme();
+    const layout = JSON.parse(JSON.stringify(fig.layout));
+    layout.font = Object.assign({}, layout.font, { family: t.font, color: t.fg });
+    layout.paper_bgcolor = "rgba(0,0,0,0)"; layout.plot_bgcolor = "rgba(0,0,0,0)";
+    Object.keys(layout).forEach(k => { if (/^(x|y)axis\d*$/.test(k)) Object.assign(layout[k], { automargin: true, gridcolor: t.line, zerolinecolor: t.line, linecolor: t.line, tickfont: Object.assign({}, layout[k].tickfont, { color: t.muted }) }); });
+    if (layout.legend) layout.legend.font = { color: t.fg };
+    const data = fig.data.map(tr => tr.name === "municipality borders" ? Object.assign({}, tr, { x: OUTLINE.x, y: OUTLINE.y }) : tr);
+    return { data, layout };
+  }
+  function draw(id) { const build = registry[id]; if (!build) return; const f = themed(build()); Plotly.react(el(id), f.data, f.layout, CONFIG); }
+  // Draw a chart when it comes near the screen, and again whenever its controls or the theme change.
+  const seen = new IntersectionObserver(entries => entries.forEach(e => { if (e.isIntersecting) { seen.unobserve(e.target); registry[e.target.id].drawn = true; draw(e.target.id); } }), { rootMargin: "500px" });
+  function register(id, build) { build.drawn = false; registry[id] = build; seen.observe(el(id)); }
+  function redraw(ids) { ids.forEach(id => { if (registry[id] && registry[id].drawn) draw(id); }); }
+
+  // A table with a CSV download button (the button appears only where claude.ai allows saving).
+  function table(containerId, dlId, filename, spec) {
+    const wrap = el(containerId); wrap.textContent = "";
+    const tbl = document.createElement("table");
+    const head = tbl.createTHead().insertRow();
+    spec.headers.forEach(h => { const th = document.createElement("th"); th.textContent = h; head.appendChild(th); });
+    const body = tbl.createTBody();
+    spec.rows.forEach(r => { const tr = body.insertRow(); r.forEach(c => { const td = tr.insertCell(); td.textContent = (c === null || c === undefined) ? "" : (typeof c === "number" ? c.toLocaleString("en-US", { maximumFractionDigits: 3 }) : c); }); });
+    wrap.appendChild(tbl);
+    const q = s => '"' + String(s).replace(/"/g, '""') + '"';
+    csvStore[dlId] = { filename, text: [spec.headers.map(q).join(",")].concat(spec.rows.map(r => r.map(c => c === null ? "" : (typeof c === "number" ? String(c) : q(c))).join(","))).join("\n") };
+    const b = el(dlId); b.hidden = !(downloads && csvStore[dlId]);
+  }
+  document.querySelectorAll('#sec-s2 .download, #sec-s3 .download, #sec-s4 .download').forEach(b => b.addEventListener("click", async () => {
+    const item = csvStore[b.id]; if (!downloads || !item) return;
+    try { await downloads.save({ filename: item.filename, data: item.text }); $("status").textContent = "Saved " + item.filename; }
+    catch (e) { if (!e || e.code !== "declined") $("status").textContent = "Could not save " + item.filename + (e && e.code ? " (" + e.code + ")" : ""); }
+  }));
+
+  function choice(containerId, name, options, current, onChange) {   // a row of radio buttons styled like the other controls
+    const box = el(containerId);
+    options.forEach(([value, label], i) => {
+      const lab = document.createElement("label"); lab.className = "seg";
+      lab.innerHTML = '<input type="radio" name="' + name + '" id="' + name + '-' + i + '"><span></span>';
+      lab.querySelector("span").textContent = label;
+      const input = lab.querySelector("input"); input.checked = value === current;
+      input.addEventListener("change", () => onChange(value));
+      box.appendChild(lab);
+    });
+  }
+
+  // ---- Step 2 ----
+  const scopeTable = () => table("table-s2", "dl-s2", "severity_" + state.scope + ".csv", EXTRA.tables["s2|" + state.scope]);
+  register("chart-s2a", () => EXTRA.figs["s2a|" + state.scope]);
+  register("chart-s2b", () => EXTRA.figs["s2b|" + state.scope]);
+  choice("s2-scope", "s2scope", SCOPES, state.scope, v => { state.scope = v; redraw(["chart-s2a", "chart-s2b"]); scopeTable(); });
+  scopeTable();
+
+  // ---- Step 3a ----
+  register("chart-s3a", () => EXTRA.figs.s3a);
+  const mapNote = { bubble: "Each bubble sits at the average position of the municipality's accidents. Size = accidents involving cyclists; colour = cyclist share of all its accidents (5 quantile classes, municipalities with 100+ accidents).",
+                    choropleth: "Five classes with about the same number of municipalities each; the legend gives the exact limits. Gray = fewer than 100 accidents, not ranked by share." };
+  const showMapNote = () => { el("s3-map-note").textContent = mapNote[state.map]; el("s3-map-inner").style.minWidth = state.map === "bubble" ? "560px" : "760px"; };
+  register("chart-s3map", () => EXTRA.figs["s3map|" + state.map]);
+  choice("s3-map", "s3map", [["bubble", "Bubble map"], ["choropleth", "Choropleth (two maps)"]], state.map, v => { state.map = v; showMapNote(); redraw(["chart-s3map"]); });
+  showMapNote();
+  table("table-s3a", "dl-s3a", "geo_cyclists_by_municipality.csv", EXTRA.tables.s3a);
+
+  // ---- Step 3b/3c: the heat map is filled in here from the compact list of squares ----
+  function hotspotFigure() {
+    const key = state.group + "|" + state.years, h = EXTRA.hotspots[key];
+    const z = Array.from({ length: h.rows }, () => new Array(h.cols).fill(null));
+    for (let i = 0; i < h.n.length; i++) z[h.cy[i] - h.cy0][h.cx[i] - h.cx0] = h.n[i];
+    const data = h.fig.data.map(tr => tr.type === "heatmap" ? Object.assign({}, tr, { z }) : tr);
+    return { data, layout: h.fig.layout };
+  }
+  function hotspotText() {
+    const h = EXTRA.hotspots[state.group + "|" + state.years];
+    el("s3-hot-note").textContent = h.coverage + " Heat map of accidents per 500 m square: zoom and pan; the 20 busiest squares are marked (hover for rank, municipality and counts).";
+    el("s3-hot-summary").textContent = "The 20 busiest squares: " + state.group.toLowerCase() + "s, " + state.years;
+    table("table-s3b", "dl-s3b", "hotspots_" + state.group.toLowerCase() + "_" + state.years + ".csv", h.table);
+  }
+  register("chart-s3hot", hotspotFigure);
+  const hotspotChanged = () => { hotspotText(); redraw(["chart-s3hot"]); };
+  choice("s3-group", "s3group", GROUPS3.map(g => [g, g]), state.group, v => { state.group = v; hotspotChanged(); });
+  choice("s3-years", "s3years", [["2017-2024", "2017-2024"], ["2022-2024", "2022-2024"]], state.years, v => { state.years = v; hotspotChanged(); });
+  hotspotText();
+
+  // ---- Step 4 ----
+  [["chart-s4a1", "s4a1"], ["chart-s4a2", "s4a2"], ["chart-s4a3", "s4a3"], ["chart-s4a4", "s4a4"], ["chart-s4b1", "s4b1"], ["chart-s4b2", "s4b2"], ["chart-s4b3", "s4b3"],
+   ["chart-s4c1", "s4c1"], ["chart-s4c2", "s4c2"], ["chart-s4c3", "s4c3"], ["chart-s4c4", "s4c4"]].forEach(([id, key]) => register(id, () => EXTRA.figs[key]));
+  ["s4a1", "s4a2", "s4b1", "s4b2", "s4b3", "s4c1", "s4c2"].forEach(k => table("table-" + k, "dl-" + k, EXTRA.tables[k].filename, EXTRA.tables[k]));
+
+  // Redraw the drawn charts when the viewer's theme changes (the first script already redraws step 1), and once downloads are known.
+  const redrawAll = () => redraw(Object.keys(registry));
+  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redrawAll);
+  new MutationObserver(redrawAll).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  if (window.claude && window.claude.use) window.claude.use("downloads").then(d => { downloads = d; document.querySelectorAll("#sec-s2 .download, #sec-s3 .download, #sec-s4 .download").forEach(b => { b.hidden = !(d && csvStore[b.id]); }); }).catch(() => {});
+})();
+</script>
