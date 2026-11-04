@@ -5,3 +5,4 @@
 !reports/*.csv
 !data/*.csv
 __pycache__/
+data/external/
