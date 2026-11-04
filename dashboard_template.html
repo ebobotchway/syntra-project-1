@@ -1,0 +1,534 @@
+<title>Belgian Road Accident Burden</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600&family=Barlow+Condensed:wght@600;700&display=swap">
+<style>
+/* Layout idea: a calm analyst's workbench. One sticky filter bar on top, then three sections (1a, 1b, 1c) read top to bottom.
+   Colour comes only from the data: road-sign blue for named groups, gray for "not a specific group", the rest is a blue-tinted neutral. */
+:root {
+  --bg: #f3f5f8;
+  --panel: #ffffff;
+  --fg: #14181d;
+  --muted: #566170;
+  --line: #dce1e8;
+  --accent: #2a78d6;
+  --accent-soft: #e3eefb;
+  --gray: #898781;
+  --focus: #1c5cab;
+  --font-body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-head: "Barlow Condensed", "Barlow", system-ui, sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0f1215; --panel: #171b20; --fg: #e8ecf0; --muted: #9aa5b1; --line: #2a313a;
+    --accent: #4a93ea; --accent-soft: #1b2a3d; --gray: #898781; --focus: #86b6ef;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0f1215; --panel: #171b20; --fg: #e8ecf0; --muted: #9aa5b1; --line: #2a313a;
+  --accent: #4a93ea; --accent-soft: #1b2a3d; --gray: #898781; --focus: #86b6ef;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--fg); font-family: var(--font-body); font-size: 15px; line-height: 1.5; }
+.wrap { max-width: 1320px; margin: 0 auto; padding-block: 24px 40px;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+h1, h2, h3 { font-family: var(--font-head); font-weight: 700; margin: 0; text-wrap: balance; line-height: 1.1; }
+h1 { font-size: clamp(30px, 5vw, 46px); letter-spacing: 0.005em; max-width: 24ch; }
+h2 { font-size: 28px; }
+h3 { font-size: 17px; font-weight: 600; letter-spacing: 0.01em; }
+p { margin: 0; }
+a { color: var(--accent); }
+.eyebrow { font-family: var(--font-head); font-weight: 600; font-size: 14px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.lede { color: var(--muted); max-width: 68ch; margin-top: 12px; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* Filters: stacked on top on a phone, a sticky left sidebar on a wide screen so they never cover the graphs */
+.layout { display: grid; gap: 18px; margin-top: 22px; }
+.content { min-width: 0; }
+.controls { display: flex; flex-wrap: wrap; gap: 14px 22px; align-items: flex-end; padding: 14px 16px;
+  background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+@media (min-width: 1000px) {
+  .layout { grid-template-columns: 270px minmax(0, 1fr); gap: 26px; }
+  .controls { flex-direction: column; align-items: stretch; flex-wrap: nowrap; position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); align-self: start; }
+}
+.ctl { display: flex; flex-direction: column; gap: 6px; min-width: 0; border: 0; padding: 0; margin: 0; }
+.ctl > label, .ctl > legend { font-family: var(--font-head); font-weight: 600; font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); padding: 0; }
+.row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+select, button { font: inherit; color: var(--fg); background: var(--panel); border: 1px solid var(--line); border-radius: 6px; padding: 6px 10px; min-height: 34px; }
+button { cursor: pointer; }
+button:hover, select:hover { border-color: var(--muted); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+.chip, .seg { position: relative; max-width: 100%; }
+.chip input, .seg input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.chip span, .seg span { display: inline-block; padding: 6px 11px; border: 1px solid var(--line); border-radius: 999px; background: var(--panel); }
+.chip span { max-width: 100%; box-sizing: border-box; }
+.chip.gray span { border-radius: 14px; line-height: 1.25; }
+.seg span { border-radius: 6px; }
+.chip input:checked + span, .seg input:checked + span { background: var(--accent-soft); border-color: var(--accent); color: var(--fg); font-weight: 600; }
+.chip input:focus-visible + span, .seg input:focus-visible + span { outline: 2px solid var(--focus); outline-offset: 2px; }
+.chip.gray input:checked + span { background: var(--panel); border-color: var(--gray); }
+.status { margin: 0; color: var(--muted); font-size: 14px; }
+
+/* Sections */
+section { margin-top: 44px; }
+.content > .status + section { margin-top: 24px; }
+.sec-head { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 4px; }
+.tag { font-family: var(--font-head); font-weight: 700; font-size: 15px; letter-spacing: 0.08em; color: #fff; background: var(--accent); border-radius: 4px; padding: 1px 8px; }
+.sub { color: var(--muted); margin: 2px 0 14px; max-width: 80ch; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; padding: 14px 16px; }
+.scroll-x { overflow-x: auto; }
+.scroll-x > .inner { min-width: 640px; }
+.panels { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 14px 12px; }
+.panel .meta { color: var(--muted); font-size: 12.5px; margin-bottom: 2px; }
+.findings { margin-top: 16px; }
+.findings h3 { margin-bottom: 4px; }
+.findings .fixed { color: var(--muted); font-size: 13.5px; font-style: italic; margin-bottom: 6px; }
+.findings ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.care { margin-top: 10px; color: var(--muted); font-size: 14px; max-width: 90ch; }
+.note { color: var(--muted); font-size: 13.5px; margin-top: 8px; max-width: 90ch; }
+details { margin-top: 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--panel); }
+summary { cursor: pointer; padding: 9px 14px; font-weight: 600; }
+.table-wrap { padding: 0 14px 14px; overflow-x: auto; }
+table { border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 13.5px; width: max-content; min-width: 100%; }
+th, td { padding: 5px 10px; border-bottom: 1px solid var(--line); text-align: right; white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; position: sticky; left: 0; background: var(--panel); }
+th { font-weight: 600; color: var(--muted); }
+.dl { margin: 10px 0 0; }
+.msg { padding: 18px; color: var(--muted); }
+.about ul { margin: 8px 0 0; padding-left: 20px; display: grid; gap: 6px; max-width: 90ch; }
+footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+@media (prefers-reduced-motion: no-preference) { button, .chip span, .seg span { transition: background-color .12s, border-color .12s; } }
+</style>
+
+<main class="wrap">
+  <header>
+    <div class="eyebrow">Belgian road accidents 2017-2024</div>
+    <h1>Which road user bears the greatest accident burden?</h1>
+    <p class="lede">289,532 accidents, compared across road-user groups. An accident counts once for every group it involves (road user 1 or 2), so one accident can count for two groups. These are counts, not rates per amount of traffic.</p>
+  </header>
+
+  <div class="layout">
+  <aside class="controls" id="controls" aria-label="Filters">
+    <div class="ctl">
+      <label for="year-from">Years</label>
+      <div class="row">
+        <select id="year-from" aria-label="First year"></select>
+        <span aria-hidden="true">to</span>
+        <select id="year-to" aria-label="Last year"></select>
+      </div>
+    </div>
+    <div class="ctl">
+      <label id="preset-label">Quick choice</label>
+      <div class="row" role="group" aria-labelledby="preset-label">
+        <button type="button" id="preset-all" data-from="2017" data-to="2024">All years</button>
+        <button type="button" id="preset-pre" data-from="2017" data-to="2019">Pre 2017-19</button>
+        <button type="button" id="preset-during" data-from="2020" data-to="2021">During 2020-21</button>
+        <button type="button" id="preset-post" data-from="2022" data-to="2024">Post 2022-24</button>
+      </div>
+    </div>
+    <fieldset class="ctl">
+      <legend>Road-user groups</legend>
+      <div class="row" id="group-chips"></div>
+    </fieldset>
+    <fieldset class="ctl">
+      <legend>Measure (monthly and seasonal graphs)</legend>
+      <div class="row" id="measure-seg"></div>
+    </fieldset>
+  </aside>
+  <div class="content">
+  <p class="status num" id="status" aria-live="polite"></p>
+
+  <section id="sec-a">
+    <div class="sec-head"><span class="tag">1a</span><h2>Who is involved</h2></div>
+    <p class="sub" id="a-sub"></p>
+    <div class="card"><div id="chart-a"></div><p class="note">Blue = a named road-user group. Gray = not a specific group (Unknown, Other road user).</p></div>
+    <div class="card findings">
+      <h3>Key findings</h3>
+      <p class="fixed">Fixed text for all years 2017-2024; it does not change with the filters.</p>
+      <ul>
+        <li>Passenger cars (70.2% of all accidents) and bicycles (24.8%) are involved most often. Pedestrians follow at 10.3%, vans 8.1%, mopeds 8.0%, motorcycles 6.8%, trucks 4.4%, buses 1.4%.</li>
+        <li>"Unknown" is 10.7%: for about one accident in ten the road user is not recorded.</li>
+        <li>Shares add up to more than 100% because one accident can involve two groups (136,144 accidents involve two different groups).</li>
+      </ul>
+    </div>
+    <p class="care">Read with care: these are raw counts. A group that is common on the road appears often for that reason alone; severity and traffic volume are not part of this graph.</p>
+    <details><summary>Table</summary><div class="table-wrap"><div id="table-a"></div><p class="dl"><button type="button" class="download" id="dl-a" hidden>Download CSV</button></p></div></details>
+  </section>
+
+  <section id="sec-b">
+    <div class="sec-head"><span class="tag">1b</span><h2>Annual change</h2></div>
+    <p class="sub" id="b-sub"></p>
+    <div id="chart-b"></div>
+    <div class="card findings">
+      <h3>Key findings</h3>
+      <p class="fixed">Fixed text for all years 2017-2024; it does not change with the filters.</p>
+      <ul>
+        <li>Almost every group drops in 2020 (bicycles only -5.5%; buses -37.7% and pedestrians -30.4% most) and rebounds in 2021-2022.</li>
+        <li>By 2024 (2017 = 100): bicycles 115, mopeds 105, vans and buses 97, pedestrians 86, motorcycles 83, passenger cars 82, trucks 73.</li>
+        <li>Post vs pre (average per year 2022-2024 against 2017-2019): trucks -17.2%, motorcycles -12.9%, cars -12.2%, pedestrians -10.4%, buses -6.4%, vans +1.5%, mopeds +7.3%, bicycles +14.6%.</li>
+        <li>"Unknown" more than doubles (+113% from 2017 to 2024). Part of the decline of the named groups may be recording shifting into "Unknown"; the data cannot show that.</li>
+      </ul>
+    </div>
+    <p class="care">Read with care: "Covid-19" is my own label for the periods. These are accident counts, not rates, so fewer accidents could also mean less traffic.</p>
+    <details><summary>Tables</summary><div class="table-wrap">
+      <h3>Accidents per year</h3><div id="table-b1"></div><p class="dl"><button type="button" class="download" id="dl-b1" hidden>Download CSV</button></p>
+      <h3 id="b-index-title">Index</h3><div id="table-b2"></div><p class="dl"><button type="button" class="download" id="dl-b2" hidden>Download CSV</button></p>
+      <div id="b-period-block"><h3>Pre and post period</h3><div id="table-b3"></div><p class="dl"><button type="button" class="download" id="dl-b3" hidden>Download CSV</button></p></div>
+    </div></details>
+  </section>
+
+  <section id="sec-c">
+    <div class="sec-head"><span class="tag">1c</span><h2>Months and seasons</h2></div>
+    <p class="sub" id="c-sub"></p>
+    <h3>Months (heatmap)</h3>
+    <div class="card"><div class="scroll-x"><div class="inner"><div id="chart-c1"></div></div></div>
+      <p class="note">Colour = seasonal index (blue below an average month, red above; 100 = average). Numbers = the measure chosen above. The index is not corrected for month length: February has 28 or 29 days; use "Per day" to correct for that.</p></div>
+    <h3 style="margin-top:18px">Seasons (grouped bars)</h3>
+    <div class="card"><div class="scroll-x"><div class="inner" style="min-width:560px"><div id="chart-c2"></div></div></div>
+      <p class="note">The number marks each group's highest season. Winter, spring, summer and autumn have 90-92 days, so an even share of 25% is approximate.</p></div>
+    <div class="card findings">
+      <h3>Key findings</h3>
+      <p class="fixed">Fixed text for all years 2017-2024; it does not change with the filters.</p>
+      <ul>
+        <li>Motorcycles, bicycles and mopeds peak in the warm months and nearly vanish in winter: motorcycles have 13.0% of their accidents in winter and 32.6% in summer.</li>
+        <li>Pedestrians are the reverse: highest share in winter (28.0%), lowest in summer (21.3%), with a peak in December (index 123).</li>
+        <li>Passenger cars, vans and trucks are fairly even, with a mild autumn peak (about 27%).</li>
+        <li>Per day, January is the quietest month for all accidents (84.8 a day), not February (91.2); February's low index is partly its length.</li>
+        <li>In 2020-2021 the spring share is lower for every group (all accidents 20.6% against 25.1% before); from 2022 the pattern looks like before again. The data states no cause.</li>
+      </ul>
+    </div>
+    <p class="care">Read with care: shares and indexes describe WHEN a group's accidents happen, not how many there are, and not rates per amount of traffic. The seasonal hypotheses (riding in good weather, darker months for pedestrians) are not tested.</p>
+    <details><summary>Tables</summary><div class="table-wrap">
+      <h3 id="c-month-title">Months</h3><div id="table-c1"></div><p class="dl"><button type="button" class="download" id="dl-c1" hidden>Download CSV</button></p>
+      <h3 id="c-season-title">Seasons</h3><div id="table-c2"></div><p class="dl"><button type="button" class="download" id="dl-c2" hidden>Download CSV</button></p>
+    </div></details>
+  </section>
+
+  <section id="sec-about" class="about">
+    <div class="sec-head"><h2>About and caveats</h2></div>
+    <div class="card">
+      <ul>
+        <li><b>Data:</b> Belgian road-accident open data 2017-2024 (289,532 accidents), translated to English. One row = one accident (the data has no ID to prove it).</li>
+        <li><b>Counting:</b> an accident counts for a road-user group if that group is road user 1 or road user 2, once per accident. "Single road user" is not a road user.</li>
+        <li><b>Unknown</b> (about 10% of accidents, growing over the years) and <b>Other road user</b> are separate lines and hidden by default.</li>
+        <li><b>Periods:</b> pre (2017-2019), during (2020-2021) and post (2022-2024) "Covid-19" are my own definition; the data states no cause.</li>
+        <li><b>Counts, not rates:</b> traffic volume is not in the data, so more accidents does not mean more risk per kilometre.</li>
+        <li><b>Seasons:</b> meteorological, whole months only (the data has no day). December, January and February of the same calendar year are grouped.</li>
+        <li><b>Open questions:</b> why empty coordinates jump in Brussels in 2024; the difference between accident classes "with fatalities" and "fatally injured".</li>
+        <li><b>Not done:</b> urban vs rural. The data has only "built-up area", no official urban/rural classification (decision #55).</li>
+      </ul>
+    </div>
+  </section>
+  </div>
+  </div>
+
+  <footer>
+    Decisions behind this dashboard: <a href="https://github.com/ebobotchway/syntra-project-1/blob/main/beslissingslogboek.md" target="_blank" rel="noopener">decision log</a>, entries #60-#69.
+    Code and data: <a href="https://github.com/ebobotchway/syntra-project-1" target="_blank" rel="noopener">GitHub</a>.
+  </footer>
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/plotly.js-dist-min@2.35.2/plotly.min.js"></script>
+<script>
+/* The data: accidents per road-user group, per year, per month (built by scripts/10_build_dashboard_data.py).
+   rows are [group index, year, month, accidents]; group index 0 = "All accidents", 1..10 = the ten groups ranked by total. */
+const DATA = /*__DATA__*/null;
+
+/* LOGIC START: pure calculations, the same as dashboard_logic.py in the Streamlit app */
+const REFERENCE = "All accidents";
+const GROUPS = DATA.names.slice(1);                                    // ranked by total accidents (step 07)
+const NOT_A_GROUP = ["Unknown", "Other road user"];                    // gray, hidden by default
+const NAMED = GROUPS.filter(g => !NOT_A_GROUP.includes(g));
+const YEARS = DATA.years;
+const MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const SEASONS = { Winter: [12, 1, 2], Spring: [3, 4, 5], Summer: [6, 7, 8], Autumn: [9, 10, 11] };  // meteorological, whole months
+const MEASURES = ["Accidents", "% share", "Per day", "Seasonal index"];
+const PERIOD_PRE = [2017, 2019], PERIOD_DURING = [2020, 2021], PERIOD_POST = [2022, 2024];          // my own names
+
+// counts[name][year][month] = accidents
+const counts = {};
+DATA.names.forEach(n => { counts[n] = {}; YEARS.forEach(y => { counts[n][y] = new Array(13).fill(0); }); });
+DATA.rows.forEach(([gi, year, month, n]) => { counts[DATA.names[gi]][year][month] = n; });
+
+function range(a, b) { const r = []; for (let y = a; y <= b; y++) r.push(y); return r; }
+function yearTotal(name, year) { return counts[name][year].reduce((s, v) => s + v, 0); }
+function monthTotals(name, y0, y1) {                                   // array of 12: accidents per month, summed over the years
+  const out = new Array(12).fill(0);
+  range(y0, y1).forEach(y => { for (let m = 1; m <= 12; m++) out[m - 1] += counts[name][y][m]; });
+  return out;
+}
+function daysInMonth(year, month) { return new Date(year, month, 0).getDate(); }   // month 1-12; leap years give 29 for February
+
+function totals(groups, y0, y1) {                                      // 1a
+  const all = range(y0, y1).reduce((s, y) => s + yearTotal(REFERENCE, y), 0);
+  const rows = groups.map(g => {
+    const accidents = range(y0, y1).reduce((s, y) => s + yearTotal(g, y), 0);
+    return { group: g, accidents, pct: accidents / all * 100 };
+  }).sort((a, b) => b.accidents - a.accidents);
+  return { rows, all };
+}
+function yearly(groups, y0, y1) {                                      // 1b: accidents per year
+  const names = [REFERENCE, ...groups], years = range(y0, y1), values = {};
+  names.forEach(n => { values[n] = years.map(y => yearTotal(n, y)); });
+  return { names, years, values };
+}
+function yearlyIndex(table) {                                          // first selected year = 100
+  const index = {};
+  table.names.forEach(n => { index[n] = table.values[n].map(v => v / table.values[n][0] * 100); });
+  return index;
+}
+function periodSummary(groups, y0, y1) {                               // pre/post averages, only when BOTH periods are fully inside the range
+  if (!(y0 <= PERIOD_PRE[0] && y1 >= PERIOD_PRE[1] && y0 <= PERIOD_POST[0] && y1 >= PERIOD_POST[1])) return null;
+  const mean = (name, [a, b]) => range(a, b).reduce((s, y) => s + yearTotal(name, y), 0) / (b - a + 1);
+  const out = {};
+  [REFERENCE, ...groups].forEach(n => {
+    const pre = mean(n, PERIOD_PRE), post = mean(n, PERIOD_POST);
+    out[n] = { pre, post, diff: (post / pre - 1) * 100 };
+  });
+  return out;
+}
+function distributions(groups, y0, y1) {                               // 1c: four measures, monthly and seasonal
+  const names = [REFERENCE, ...groups], years = range(y0, y1);
+  const days = []; for (let m = 1; m <= 12; m++) days.push(years.reduce((s, y) => s + daysInMonth(y, m), 0));
+  const seasonNames = Object.keys(SEASONS);
+  const seasonDays = seasonNames.map(s => SEASONS[s].reduce((sum, m) => sum + days[m - 1], 0));
+  const monthly = { Accidents: {}, "% share": {}, "Per day": {}, "Seasonal index": {} };
+  const seasonal = { Accidents: {}, "% share": {}, "Per day": {}, "Seasonal index": {} };
+  names.forEach(n => {
+    const m = monthTotals(n, y0, y1), total = m.reduce((s, v) => s + v, 0);
+    const s = seasonNames.map(season => SEASONS[season].reduce((sum, mo) => sum + m[mo - 1], 0));
+    monthly.Accidents[n] = m;
+    monthly["% share"][n] = m.map(v => v / total * 100);
+    monthly["Per day"][n] = m.map((v, i) => v / days[i]);
+    monthly["Seasonal index"][n] = m.map(v => (v / total * 100) / (100 / 12) * 100);        // 100 = even share of 8.33% per month
+    seasonal.Accidents[n] = s;
+    seasonal["% share"][n] = s.map(v => v / total * 100);
+    seasonal["Per day"][n] = s.map((v, i) => v / seasonDays[i]);
+    seasonal["Seasonal index"][n] = s.map(v => (v / total * 100) / 25 * 100);                // 100 = even share of 25% per season
+  });
+  return { names, monthly, seasonal, seasonNames };
+}
+/* LOGIC END */
+
+/* ---------- Page state and controls ---------- */
+const state = { y0: YEARS[0], y1: YEARS[YEARS.length - 1], chosen: new Set(NAMED), others: false, measure: "Seasonal index" };
+const $ = id => document.getElementById(id);
+let downloads = null;                                                  // the claude.ai download capability, if this view has it
+const csvStore = {};                                                   // id -> {filename, text} for the download buttons
+
+function fillControls() {
+  ["year-from", "year-to"].forEach(id => { YEARS.forEach(y => { const o = document.createElement("option"); o.value = y; o.textContent = y; $(id).appendChild(o); }); });
+  $("year-from").value = state.y0; $("year-to").value = state.y1;
+  const chips = $("group-chips");
+  NAMED.forEach((g, i) => {
+    const label = document.createElement("label"); label.className = "chip";
+    label.innerHTML = '<input type="checkbox" id="grp-' + i + '" checked><span></span>'; label.querySelector("span").textContent = g;
+    label.querySelector("input").addEventListener("change", e => { e.target.checked ? state.chosen.add(g) : state.chosen.delete(g); render(); });
+    chips.appendChild(label);
+  });
+  const others = document.createElement("label"); others.className = "chip gray";
+  others.innerHTML = '<input type="checkbox" id="grp-others"><span>Also show Unknown and Other road user</span>';
+  others.querySelector("input").addEventListener("change", e => { state.others = e.target.checked; render(); });
+  chips.appendChild(others);
+  const seg = $("measure-seg");
+  MEASURES.forEach((m, i) => {
+    const label = document.createElement("label"); label.className = "seg";
+    label.innerHTML = '<input type="radio" name="measure" id="measure-' + i + '"><span></span>'; label.querySelector("span").textContent = m;
+    const input = label.querySelector("input"); input.checked = (m === state.measure);
+    input.addEventListener("change", () => { state.measure = m; render(); });
+    seg.appendChild(label);
+  });
+  function setYears(a, b) { state.y0 = Math.min(a, b); state.y1 = Math.max(a, b); $("year-from").value = state.y0; $("year-to").value = state.y1; render(); }
+  $("year-from").addEventListener("change", () => setYears(+$("year-from").value, +$("year-to").value));
+  $("year-to").addEventListener("change", () => setYears(+$("year-from").value, +$("year-to").value));
+  document.querySelectorAll("[data-from]").forEach(b => b.addEventListener("click", () => setYears(+b.dataset.from, +b.dataset.to)));
+}
+function selectedGroups() { return GROUPS.filter(g => state.chosen.has(g) || (state.others && NOT_A_GROUP.includes(g))); }
+
+/* ---------- Helpers for drawing ---------- */
+const BLUE = "#2a78d6", GRAY = "#898781";
+const SEASON_COLORS = { Winter: "#2a78d6", Spring: "#eb6834", Summer: "#1baf7a", Autumn: "#eda100" };   // validated order
+const BAND_FILL = { pre: "rgba(137,135,129,0.07)", during: "rgba(137,135,129,0.22)", post: "rgba(137,135,129,0.13)" };
+const FMT = { Accidents: ",.0f", "% share": ".1f", "Per day": ".1f", "Seasonal index": ".0f" };
+const CONFIG = { displayModeBar: false, responsive: true };
+function css(name) { return getComputedStyle(document.documentElement).getPropertyValue(name).trim(); }
+function theme() { return { fg: css("--fg"), muted: css("--muted"), line: css("--line"), font: css("--font-body") }; }
+function baseLayout(t, extra) {
+  return Object.assign({ font: { family: t.font, color: t.fg, size: 12 }, paper_bgcolor: "rgba(0,0,0,0)", plot_bgcolor: "rgba(0,0,0,0)", showlegend: false }, extra);
+}
+function fmt(v, spec) {                                                // number formatting that matches the d3 specs above
+  const d = spec.includes(".0f") ? 0 : 1;
+  return v.toLocaleString("en-US", { minimumFractionDigits: d, maximumFractionDigits: d, useGrouping: spec.startsWith(",") });
+}
+function message(el, text) { Plotly.purge(el); el.textContent = ""; const p = document.createElement("p"); p.className = "msg"; p.textContent = text; el.appendChild(p); }
+
+function renderTable(containerId, downloadId, filename, headers, rows, decimals) {
+  const wrap = $(containerId); wrap.textContent = "";
+  const table = document.createElement("table");
+  const thead = table.createTHead().insertRow();
+  headers.forEach(h => { const th = document.createElement("th"); th.textContent = h; thead.appendChild(th); });
+  const body = table.createTBody();
+  rows.forEach(r => {
+    const tr = body.insertRow();
+    r.forEach((cell, i) => { const td = tr.insertCell(); td.textContent = (typeof cell === "number") ? fmt(cell, decimals[i] || ",.0f") : cell; });
+  });
+  wrap.appendChild(table);
+  const q = s => '"' + String(s).replace(/"/g, '""') + '"';
+  const csv = [headers.map(q).join(",")].concat(rows.map(r => r.map(c => typeof c === "number" ? String(Math.round(c * 100) / 100) : q(c)).join(","))).join("\n");
+  csvStore[downloadId] = { filename, text: csv };
+}
+
+/* ---------- The four graphs ---------- */
+function drawA(groups, t) {
+  const { rows, all } = totals(groups, state.y0, state.y1);
+  $("a-sub").textContent = "Share of all " + all.toLocaleString("en-US") + " accidents in " + state.y0 + "-" + state.y1 + ".";
+  const r = rows.slice().reverse();                                    // reversed so the biggest bar is at the top
+  Plotly.react("chart-a", [{
+    type: "bar", orientation: "h", y: r.map(x => x.group), x: r.map(x => x.accidents), width: 0.5,
+    marker: { color: r.map(x => NOT_A_GROUP.includes(x.group) ? GRAY : BLUE) },
+    text: r.map(x => x.accidents.toLocaleString("en-US") + " (" + x.pct.toFixed(1) + "%)"), textposition: "outside", cliponaxis: false,
+    textfont: { color: t.fg }, hovertemplate: "<b>%{y}</b><br>%{x:,} accidents<extra></extra>",
+  }], baseLayout(t, {
+    height: Math.max(260, 46 * rows.length + 90), margin: { l: 10, r: 10, t: 10, b: 30 },
+    xaxis: { range: [0, Math.max(...rows.map(x => x.accidents)) * 1.3], gridcolor: t.line, zeroline: false, tickformat: "~s", tickfont: { color: t.muted } },
+    yaxis: { automargin: true },
+  }), CONFIG);
+  renderTable("table-a", "dl-a", "accidents_per_road_user.csv", ["Road-user group", "Accidents", "% of all accidents"],
+    rows.map(x => [x.group, x.accidents, x.pct]), [null, ",.0f", ".1f"]);
+}
+
+function drawB(groups, t) {
+  const host = $("chart-b");
+  const bTitle = "Index (" + state.y0 + " = 100)";
+  if (state.y0 === state.y1) {
+    host.querySelectorAll(".js-plot").forEach(p => Plotly.purge(p)); host.textContent = "";
+    const p = document.createElement("p"); p.className = "msg card"; p.textContent = "Select at least two years above to see the annual change."; host.appendChild(p);
+    $("b-sub").textContent = ""; ["table-b1", "table-b2", "table-b3"].forEach(id => { $(id).textContent = ""; }); $("b-period-block").hidden = true;
+    ["dl-b1", "dl-b2", "dl-b3"].forEach(id => { delete csvStore[id]; });
+    return;
+  }
+  const table = yearly(groups, state.y0, state.y1), index = yearlyIndex(table), summary = periodSummary(groups, state.y0, state.y1);
+  $("b-sub").textContent = "Index: " + state.y0 + " = 100 for every group. Shaded bands are the three periods (names are my own definition; the data does not state a cause). " +
+    (summary ? "Thin lines mark the average per year in the pre and post period." : "Select 2017-2024 to also see the pre and post averages and \"post vs pre\".");
+  const all = groups.flatMap(g => index[g]);
+  const yRange = [Math.floor(Math.min(...all) / 10) * 10 - 10, Math.ceil(Math.max(...all) / 10) * 10 + 10];   // one shared scale
+  host.querySelectorAll(".js-plot").forEach(p => Plotly.purge(p)); host.textContent = "";
+  const grid = document.createElement("div"); grid.className = "panels"; host.appendChild(grid);
+  groups.forEach(g => {
+    const panel = document.createElement("div"); panel.className = "panel card";
+    const head = document.createElement("h3"); head.textContent = g;
+    const meta = document.createElement("div"); meta.className = "meta num"; meta.textContent = table.values[g][0].toLocaleString("en-US") + " accidents in " + state.y0;
+    const plot = document.createElement("div"); plot.className = "js-plot";
+    panel.append(head, meta, plot); grid.appendChild(panel);
+    const shapes = [];
+    [["pre", PERIOD_PRE], ["during", PERIOD_DURING], ["post", PERIOD_POST]].forEach(([key, [a, b]]) => {
+      if (b >= state.y0 && a <= state.y1) shapes.push({ type: "rect", xref: "x", yref: "paper", x0: Math.max(a, state.y0) - 0.5, x1: Math.min(b, state.y1) + 0.5, y0: 0, y1: 1, fillcolor: BAND_FILL[key], line: { width: 0 }, layer: "below" });
+    });
+    let above = true;
+    const annotations = [];
+    if (summary) {
+      const base = table.values[g][0];
+      [["pre", PERIOD_PRE], ["post", PERIOD_POST]].forEach(([key, [a, b]]) => {
+        const level = summary[g][key] / base * 100;
+        shapes.push({ type: "line", xref: "x", yref: "y", x0: a - 0.5, x1: b + 0.5, y0: level, y1: level, line: { color: GRAY, width: 2 } });
+        if (key === "post") above = index[g][index[g].length - 1] >= level;      // keep the end label clear of the average line
+      });
+      annotations.push({ xref: "paper", yref: "paper", x: 0.03, y: 0.04, xanchor: "left", yanchor: "bottom", showarrow: false,
+        text: "post vs pre: " + (summary[g].diff >= 0 ? "+" : "") + summary[g].diff.toFixed(0) + "%", font: { size: 11, color: t.muted } });
+    }
+    const last = state.y1, lastValue = index[g][index[g].length - 1];
+    const ticks = [state.y0, state.y1]; if (state.y0 < 2020 && state.y1 > 2020) ticks.splice(1, 0, 2020);
+    Plotly.newPlot(plot, [
+      { type: "scatter", mode: "lines", x: table.years, y: index[g], line: { color: BLUE, width: 2 }, customdata: table.values[g],
+        hovertemplate: "<b>%{x}</b><br>Index: %{y:.0f}<br>Accidents: %{customdata:,}<extra></extra>" },
+      { type: "scatter", mode: "markers+text", x: [last], y: [lastValue], marker: { color: BLUE, size: 9, line: { color: "#ffffff", width: 2 } },
+        text: [lastValue.toFixed(0)], textposition: above ? "top center" : "bottom center", textfont: { color: t.fg },
+        customdata: [table.values[g][table.values[g].length - 1]], hovertemplate: "<b>%{x}</b><br>Index: %{y:.0f}<br>Accidents: %{customdata:,}<extra></extra>" },
+    ], baseLayout(t, {
+      height: 200, margin: { l: 34, r: 10, t: 6, b: 26 }, shapes, annotations,
+      xaxis: { range: [state.y0 - 0.5, state.y1 + 0.5], tickmode: "array", tickvals: ticks, showgrid: false, tickfont: { color: t.muted }, fixedrange: true },
+      yaxis: { range: yRange, gridcolor: t.line, zeroline: false, tickfont: { color: t.muted }, fixedrange: true },
+    }), CONFIG);
+  });
+  $("b-index-title").textContent = bTitle;
+  renderTable("table-b1", "dl-b1", "annual_accidents_by_group.csv", ["Group", ...table.years.map(String)], table.names.map(n => [n, ...table.values[n]]), []);
+  renderTable("table-b2", "dl-b2", "annual_index.csv", ["Group", ...table.years.map(String)], table.names.map(n => [n, ...index[n]]), new Array(table.years.length + 1).fill(".1f"));
+  $("b-period-block").hidden = !summary;
+  if (summary) renderTable("table-b3", "dl-b3", "annual_pre_post.csv", ["Group", "Average per year pre", "Average per year post", "Post vs pre %"],
+    table.names.map(n => [n, summary[n].pre, summary[n].post, summary[n].diff]), [null, ".1f", ".1f", ".1f"]);
+  else { $("table-b3").textContent = ""; delete csvStore["dl-b3"]; }
+}
+
+function drawC(groups, t) {
+  const d = distributions(groups, state.y0, state.y1), measure = state.measure, spec = FMT[measure];
+  $("c-sub").textContent = "Years " + state.y0 + "-" + state.y1 + ", measure: " + measure + ". Meteorological seasons: winter = Dec-Feb, spring = Mar-May, summer = Jun-Aug, autumn = Sep-Nov (whole months).";
+  // Heatmap: colour = seasonal index, numbers = the chosen measure
+  const idx = d.monthly["Seasonal index"], shown = d.monthly[measure];
+  const dev = Math.max(...d.names.flatMap(n => idx[n].map(v => Math.abs(v - 100))));
+  const limit = Math.max(30, Math.ceil(dev / 10) * 10);
+  const labels = [REFERENCE, "", ...groups];
+  const z = [idx[REFERENCE], new Array(12).fill(null), ...groups.map(g => idx[g])];
+  const text = [shown[REFERENCE].map(v => fmt(v, spec)), new Array(12).fill(""), ...groups.map(g => shown[g].map(v => fmt(v, spec)))];
+  Plotly.react("chart-c1", [{
+    type: "heatmap", z, x: MONTH_NAMES, y: labels, text, texttemplate: "%{text}", xgap: 2, ygap: 2, hoverongaps: false,
+    colorscale: [[0, "#2a78d6"], [0.5, "#f0efec"], [1, "#e34948"]], zmin: 100 - limit, zmax: 100 + limit,
+    colorbar: { title: { text: "Index" }, thickness: 12, len: 0.8, tickfont: { color: t.muted } },
+    textfont: { size: 11 }, hovertemplate: "<b>%{y}</b>, %{x}<br>Seasonal index: %{z:.0f}<extra></extra>",
+  }], baseLayout(t, {
+    height: Math.max(300, 42 * labels.length + 90), margin: { l: 10, r: 10, t: 30, b: 10 },
+    yaxis: { autorange: "reversed", automargin: true, showgrid: false, tickfont: { color: t.fg } },
+    xaxis: { side: "top", automargin: true, showgrid: false, tickfont: { color: t.fg } },   // month names, in the theme's text colour
+  }), CONFIG);
+  // Grouped bars: seasons per group
+  const rows = [REFERENCE, ...groups], sShown = d.seasonal[measure];
+  const traces = d.seasonNames.map((season, i) => ({
+    type: "bar", name: season, x: rows, y: rows.map(n => sShown[n][i]), marker: { color: SEASON_COLORS[season] },
+    text: rows.map(n => (sShown[n].indexOf(Math.max(...sShown[n])) === i) ? fmt(sShown[n][i], spec) + (measure === "% share" ? "%" : "") : ""),
+    textposition: "outside", cliponaxis: false, textfont: { color: t.fg },
+    hovertemplate: "<b>%{x}</b><br>" + season + ": %{y:" + spec + "}<extra></extra>",
+  }));
+  const even = { "% share": 25, "Seasonal index": 100 }[measure];     // the even share only exists for these two measures
+  const shapes = even === undefined ? [] : [{ type: "line", xref: "paper", yref: "y", x0: 0, x1: 1, y0: even, y1: even, line: { color: GRAY, width: 2 } }];
+  const annotations = even === undefined ? [] : [{ xref: "x", yref: "y", x: rows.length - 0.4, y: even, xanchor: "left", yanchor: "bottom", showarrow: false,
+    text: "even share (" + even + (measure === "% share" ? "%" : "") + ")", font: { size: 11, color: t.muted } }];
+  Plotly.react("chart-c2", traces, baseLayout(t, {
+    barmode: "group", bargap: 0.25, bargroupgap: 0.03, height: 430, margin: { l: 10, r: 10, t: 10, b: 10 }, showlegend: true,
+    legend: { orientation: "h", y: -0.15, font: { color: t.fg } }, shapes, annotations,
+    xaxis: { range: [-0.6, rows.length + 0.5], showgrid: false, tickfont: { color: t.fg } },
+    yaxis: { gridcolor: t.line, zeroline: false, title: { text: measure }, tickfont: { color: t.muted }, automargin: true },
+  }), CONFIG);
+  const slug = measure.replace(/ /g, "_").replace("%", "pct");
+  $("c-month-title").textContent = "Months: " + measure; $("c-season-title").textContent = "Seasons: " + measure;
+  renderTable("table-c1", "dl-c1", "monthly_" + slug + ".csv", ["Group", ...MONTH_NAMES], d.names.map(n => [n, ...shown[n]]), new Array(13).fill(measure === "Accidents" ? ",.0f" : ".1f"));
+  renderTable("table-c2", "dl-c2", "seasonal_" + slug + ".csv", ["Group", ...d.seasonNames], d.names.map(n => [n, ...sShown[n]]), new Array(5).fill(measure === "Accidents" ? ",.0f" : ".1f"));
+}
+
+/* ---------- Putting it together ---------- */
+function render() {
+  if (typeof Plotly === "undefined") { $("status").textContent = "The chart library could not be loaded. Reload the page."; return; }
+  const groups = selectedGroups(), t = theme();
+  const labelGroups = groups.length + (groups.length === 1 ? " group" : " groups");
+  $("status").textContent = "Showing " + state.y0 + "-" + state.y1 + " · " + labelGroups + " · measure: " + state.measure;
+  if (!groups.length) {
+    ["chart-a", "chart-c1", "chart-c2"].forEach(id => message($(id), "Choose at least one road-user group above."));
+    message($("chart-b"), "Choose at least one road-user group above.");
+    $("a-sub").textContent = ""; $("b-sub").textContent = ""; $("c-sub").textContent = "";
+    ["table-a", "table-b1", "table-b2", "table-b3", "table-c1", "table-c2"].forEach(id => { $(id).textContent = ""; });
+    return;
+  }
+  drawA(groups, t); drawB(groups, t); drawC(groups, t);
+  document.querySelectorAll(".download").forEach(b => { b.hidden = !(downloads && csvStore[b.id]); });
+}
+fillControls();
+render();
+// Re-draw when the viewer's theme changes, so chart text and gridlines follow it.
+window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", render);
+new MutationObserver(render).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+// The download buttons only appear when this view can save files (claude.ai download capability).
+document.querySelectorAll(".download").forEach(b => b.addEventListener("click", async () => {
+  const item = csvStore[b.id]; if (!downloads || !item) return;
+  try { await downloads.save({ filename: item.filename, data: item.text }); $("status").textContent = "Saved " + item.filename; }
+  catch (e) { if (!e || e.code !== "declined") $("status").textContent = "Could not save " + item.filename + (e && e.code ? " (" + e.code + ")" : ""); }
+}));
+if (window.claude && window.claude.use) window.claude.use("downloads").then(d => { downloads = d; render(); }).catch(() => {});
+</script>
