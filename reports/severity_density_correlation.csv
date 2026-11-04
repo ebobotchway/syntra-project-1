@@ -1,0 +1,11 @@
+group,indicator,municipalities_used,minimum_accidents,spearman_rho,p_value
+All accidents,fatal,504,100,-0.6594,0.0000
+All accidents,serious,504,100,-0.3010,0.0000
+Bicycle,fatal,327,30,-0.2230,0.0000
+Bicycle,serious,327,30,-0.2606,0.0000
+Pedestrian,fatal,189,30,-0.3551,0.0000
+Pedestrian,serious,189,30,-0.4148,0.0000
+Motorcycle,fatal,180,30,-0.5206,0.0000
+Motorcycle,serious,180,30,-0.4106,0.0000
+Moped,fatal,178,30,-0.1469,0.0504
+Moped,serious,178,30,-0.2473,0.0009
