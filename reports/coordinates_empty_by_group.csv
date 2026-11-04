@@ -1,0 +1,16 @@
+variable,group,rows,empty,percent_empty,points_vs_overall
+collision_year,2017,38025,5808,15.27,2.88
+collision_year,2018,38453,6470,16.83,4.44
+collision_year,2019,37719,6502,17.24,4.85
+collision_year,2020,30251,5737,18.96,6.57
+collision_year,2021,34660,6326,18.25,5.86
+collision_year,2022,37650,1764,4.69,-7.7
+collision_year,2023,36858,1188,3.22,-9.17
+collision_year,2024,35916,2086,5.81,-6.58
+region,Brussels-Capital Region,30022,3687,12.28,-0.11
+region,Flemish Region,178348,18173,10.19,-2.2
+region,Walloon Region,81162,14021,17.28,4.89
+accident_class,With fatalities,3077,359,11.67,-0.72
+accident_class,Fatally injured,1064,135,12.69,0.3
+accident_class,With seriously injured,24391,2780,11.4,-0.99
+accident_class,With slightly injured,261000,32607,12.49,0.1
