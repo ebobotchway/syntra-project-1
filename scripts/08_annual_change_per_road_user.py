@@ -16,6 +16,8 @@ Decisions applied (see beslissingslogboek.md):
   #42 change within a period = average yearly % change (compound) and average accidents per year.
   #43 the graph shows the three periods as light shaded bands.
   #45 period averages are compared with the period before (during vs pre, post vs during).
+  #46/#47 added on request: "post vs pre" = % difference between the average accidents per year in 2022-2024 and 2017-2019.
+  #48 the graph shows the pre and post averages as thin lines in every panel, with a "post vs pre" label.
 
 How to run (from the project folder, with `conda activate syntra-ds`):
     python -I scripts/08_annual_change_per_road_user.py OPENDATA_MAP_2017-2024_en_flagged.csv.gz reports
@@ -26,6 +28,7 @@ from pathlib import Path
 import matplotlib
 matplotlib.use("Agg")  # draw to a file, not to a window
 import matplotlib.pyplot as plt
+from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
 import pandas as pd
 
@@ -108,6 +111,8 @@ for name, (start, end) in PERIODS.items():
 # % difference between period averages, each period vs the one before (decision #45)
 periods["avg_diff_pct_during_vs_pre"] = (periods["avg_per_year_during_2020_2021"] / periods["avg_per_year_pre_2017_2019"] - 1) * 100
 periods["avg_diff_pct_post_vs_during"] = (periods["avg_per_year_post_2022_2024"] / periods["avg_per_year_during_2020_2021"] - 1) * 100
+# decisions #46/#47: post vs pre, i.e. 2022-2024 against 2017-2019 (skips the "during" period)
+periods["avg_diff_pct_post_vs_pre"] = (periods["avg_per_year_post_2022_2024"] / periods["avg_per_year_pre_2017_2019"] - 1) * 100
 periods.to_csv(output_dir / "annual_periods.csv", float_format="%.2f")
 
 avg_cols = [c for c in periods.columns if c.startswith("avg_per_year") or c.startswith("avg_diff")]
@@ -133,10 +138,19 @@ for ax, group in zip(axes.flat, named):
     for key, (left, right) in band_edges.items():
         ax.axvspan(left, right, color=BANDS[key], zorder=0, linewidth=0)
     ax.axhline(100, color=BASELINE, linewidth=0.8, zorder=1)  # the 2017 level
+    # Thin lines at the average of the pre and the post period, on the same index scale (decision #48).
+    for key, column in (("pre", "avg_per_year_pre_2017_2019"), ("post", "avg_per_year_post_2022_2024")):
+        average_index = periods.loc[group, column] / counts.loc[group, first] * 100
+        ax.plot(band_edges[key], [average_index, average_index], color=INK_2, linewidth=1.4, zorder=2, solid_capstyle="butt")
+    ax.text(0.04, 0.04, f"post vs pre: {periods.loc[group, 'avg_diff_pct_post_vs_pre']:+.0f}%", transform=ax.transAxes, fontsize=8, color=INK_2, ha="left", va="bottom")
     ax.plot(years, index.loc[group], color=BLUE, linewidth=2, solid_capstyle="round", solid_joinstyle="round", zorder=3)
     ax.plot([years[-1]], [index.loc[group, years[-1]]], marker="o", markersize=7, color=BLUE, markeredgecolor=SURFACE, markeredgewidth=2, zorder=4)
     end_value = index.loc[group, years[-1]]
-    ax.annotate(f"{end_value:.0f}", (years[-1], end_value), xytext=(0, 9), textcoords="offset points", ha="center", fontsize=8.5, color=INK)
+    post_average = periods.loc[group, "avg_per_year_post_2022_2024"] / counts.loc[group, first] * 100
+    # Put the 2024 label on the side of the dot that does NOT have the post-average line, so they never overlap.
+    above = end_value >= post_average
+    ax.annotate(f"{end_value:.0f}", (years[-1], end_value), xytext=(0, 7 if above else -7), textcoords="offset points",
+                ha="center", va="bottom" if above else "top", fontsize=8.5, color=INK)
     ax.set_title(f"{group}", fontsize=9.5, color=INK, loc="left", pad=14, fontweight="bold")
     ax.text(0, 1.015, f"{counts.loc[group, first]:,} accidents in {first}", transform=ax.transAxes, fontsize=7.5, color=MUTED, ha="left", va="bottom")
     for side in ("top", "right", "left", "bottom"):
@@ -155,9 +169,10 @@ fig.text(0.04, 0.925, "The 8 named groups. An accident counts once for each grou
          fontsize=8, color=INK_2, ha="left", va="top")
 fig.legend(handles=[Patch(facecolor=BANDS["pre"], edgecolor=BASELINE, label="2017-2019 pre Covid-19"),
                     Patch(facecolor=BANDS["during"], edgecolor=BASELINE, label="2020-2021 during Covid-19"),
-                    Patch(facecolor=BANDS["post"], edgecolor=BASELINE, label="2022-2024 post Covid-19")],
-           loc="lower left", bbox_to_anchor=(0.04, 0.005), ncol=3, frameon=False, fontsize=8, labelcolor=INK_2, handlelength=1.2, handleheight=1.2)
-fig.text(0.97, 0.012, "Period names are my own definition; the data does not state a cause.", fontsize=7, color=MUTED, ha="right", va="bottom")
-fig.subplots_adjust(left=0.07, right=0.98, top=0.84, bottom=0.11, wspace=0.12, hspace=0.34)
+                    Patch(facecolor=BANDS["post"], edgecolor=BASELINE, label="2022-2024 post Covid-19"),
+                    Line2D([0], [0], color=INK_2, linewidth=1.4, label="Average per year in the pre and post period")],
+           loc="lower left", bbox_to_anchor=(0.04, 0.028), ncol=4, frameon=False, fontsize=8, labelcolor=INK_2, handlelength=1.4, handleheight=1.2)
+fig.text(0.04, 0.012, "Period names are my own definition; the data does not state a cause.", fontsize=7.5, color=MUTED, ha="left", va="bottom")
+fig.subplots_adjust(left=0.07, right=0.98, top=0.84, bottom=0.14, wspace=0.12, hspace=0.34)
 fig.savefig(output_dir / "annual_change_per_road_user.png", facecolor=SURFACE)
 print(f"Saved 4 CSV files and annual_change_per_road_user.png in {output_dir}/")
