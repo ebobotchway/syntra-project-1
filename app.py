@@ -2,10 +2,11 @@
 Dashboard: Belgian road accidents 2017-2024, which road users bear the greatest accident burden?
 Run with:  streamlit run app.py
 
-It shows the four graphs of analysis 1 (steps a, b, c) and lets you filter years and road-user groups.
-The calculations are in dashboard_logic.py, the graphs in dashboard_charts.py, and the data is the summary table
+It shows the four graphs of analysis 1 (steps a, b, c), which you can filter by years and road-user groups, and the SAVED results of steps 2-4
+(severity, geography, regions and concentration), which are fixed (dashboard_pages.py, dashboard_extra.py).
+The calculations of step 1 are in dashboard_logic.py, its graphs in dashboard_charts.py, and its data is the summary table
 data/dashboard_data.csv (accidents per road-user group, per year, per month; built by scripts/10_build_dashboard_data.py).
-The decisions behind it are in beslissingslogboek.md (#60-#68).
+The decisions behind it are in beslissingslogboek.md (#60-#68 and #109-#113).
 """
 from pathlib import Path
 
@@ -13,6 +14,7 @@ import streamlit as st
 
 import dashboard_charts as charts
 import dashboard_logic as dl
+import dashboard_pages as pages
 
 GITHUB = "https://github.com/ebobotchway/syntra-project-1"
 
@@ -60,11 +62,6 @@ st.title("Which road user bears the greatest accident burden?")
 st.caption(f"Belgian road accidents, years {first_year}-{last_year}. An accident counts once for every road-user group it involves "
            "(road user 1 or 2), so one accident can count for two groups. These are counts, not rates per amount of traffic.")
 
-if not groups:
-    st.warning("Choose at least one road-user group in the sidebar.")
-    st.stop()
-
-
 def csv_button(table, name, label="Download as CSV"):
     st.download_button(label, table.to_csv().encode("utf-8"), file_name=f"{name}.csv", mime="text/csv", key=f"download_{name}")
 
@@ -76,7 +73,19 @@ def findings(title, lines):
             st.markdown(f"- {line}")
 
 
-tab_a, tab_b, tab_c, tab_about = st.tabs(["1a  Who is involved", "1b  Annual change", "1c  Months and seasons", "About and caveats"])
+tab_a, tab_b, tab_c, tab_s, tab_g, tab_r, tab_about = st.tabs(["1a  Who is involved", "1b  Annual change", "1c  Months and seasons",
+                                                               "2  Severity", "3  Geography", "4  Regions and concentration", "About and caveats"])
+
+# Steps 2-4 show saved results and do not depend on the sidebar filters (decision #110).
+pages.render_severity(tab_s)
+pages.render_geography(tab_g)
+pages.render_regions(tab_r)
+
+if not groups:  # step 1 needs at least one group
+    for tab in (tab_a, tab_b, tab_c):
+        with tab:
+            st.warning("Choose at least one road-user group in the sidebar.")
+    st.stop()
 
 # --------------------------------------------------------------------------------------
 # 1a: accidents involving each road-user group
@@ -180,10 +189,12 @@ with tab_about:
         "- **Counts, not rates:** traffic volume is not in the data, so more accidents does not mean more risk per kilometre.\n"
         "- **Seasons:** meteorological, whole months only (the data has no day). December, January and February of the same calendar year are grouped.\n"
         "- **Open questions:** why empty coordinates jump in Brussels in 2024; the difference between accident classes 'with fatalities' and 'fatally injured'.\n"
-        "- **Not done:** urban vs rural. The data has only 'built-up area', no official urban/rural classification (decision #55)."
+        "- **Not done:** urban vs rural. The data has only 'built-up area', no official urban/rural classification (decision #55).\n"
+        "- **Steps 2-4** (severity, geography, regions and concentration) show saved results for all years; the severity class belongs to the whole accident, and hotspots and density are accident counts, not rates per traffic.\n"
+        "- **Coordinates:** about 10-13% of accidents have none (3-5% in 2022-2024); two impossible values are treated as missing (decision #90)."
     )
     st.markdown(f"Decisions and reasons: [decision log]({GITHUB}/blob/main/beslissingslogboek.md) · Code: [scripts]({GITHUB}/tree/main/scripts) · "
                 f"Summary of the missing-value work: [report]({GITHUB}/blob/main/reports/missing_values_summary.md)")
 
 st.divider()
-st.caption(f"Decisions behind this dashboard: [decision log]({GITHUB}/blob/main/beslissingslogboek.md), entries #60-#68. Code: [GitHub]({GITHUB}).")
+st.caption(f"Decisions behind this dashboard: [decision log]({GITHUB}/blob/main/beslissingslogboek.md), entries #60-#68 and #109-#113. Code: [GitHub]({GITHUB}).")
