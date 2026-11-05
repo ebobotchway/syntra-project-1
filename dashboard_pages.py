@@ -202,3 +202,52 @@ def render_regions(tab):
                 table(res["severity_regions_standardised"].round(3), "severity_regions_standardised")
                 table(res["severity_regions_logistic"].round(3), "severity_regions_logistic")
                 table(res["severity_regions_within_density"].round(3), "severity_regions_within_density")
+
+
+# --------------------------------------------------------------------------------------
+# Step 5: the saved logistic models
+# --------------------------------------------------------------------------------------
+def render_models(tab):
+    res = results()
+    with tab:
+        st.subheader("Logistic models of accident severity (saved study results)")
+        st.caption(FIXED_NOTE + " Severe = fatal, fatally injured or seriously injured. Standard errors are clustered by municipality. The models are fixed; to estimate a model on your own selection use 'Statistical models' in the analysis menu.")
+        fit = res["severity_logit_fit"]
+        fit = fit[fit["spec"] == "full"].set_index("model")[["accidents", "events", "event_rate_pct", "parameters", "mcfadden_r2", "aic", "auc", "icc_outcome", "icc_residual", "median_se_ratio_robust_to_ordinary"]].round(3)
+        st.dataframe(fit.rename(columns={"event_rate_pct": "severe %", "mcfadden_r2": "McFadden R2", "auc": "AUC (in-sample)", "icc_outcome": "ICC outcome", "icc_residual": "ICC residuals",
+                                         "median_se_ratio_robust_to_ordinary": "robust / ordinary SE"}), width="stretch")
+        view = st.radio("Show", ["Region, road type, intersection, lighting", "Weather and road surface", "Year and month", "Collision type", "The road users in the accident",
+                                 "Predicted probabilities", "Four typical situations", "Calibration", "Interactions between road users"], key="study_models_view")
+        if view.startswith("Region"):
+            plot(extra.fig_logit_forest(res, ["Region", "Road type", "Intersection", "Lighting"]))
+        elif view.startswith("Weather"):
+            plot(extra.fig_logit_forest(res, ["Weather", "Road surface"]))
+        elif view.startswith("Year"):
+            plot(extra.fig_logit_forest(res, ["Year", "Month"]))
+        elif view.startswith("Collision"):
+            plot(extra.fig_logit_forest(res, ["Collision type"]))
+        elif view.startswith("The road users"):
+            plot(extra.fig_logit_roadusers(res))
+        elif view.startswith("Predicted"):
+            plot(extra.fig_logit_predicted(res))
+        elif view.startswith("Four"):
+            plot(extra.fig_logit_scenarios(res))
+        elif view.startswith("Calibration"):
+            plot(extra.fig_logit_calibration(res))
+        else:
+            plot(extra.fig_logit_interactions(res))
+        findings([
+            "Baseline model (289,532 accidents, 28,532 severe): odds of a severe accident are 3.44 times higher with a motorcycle involved and 3.32 times higher with a pedestrian (against a car-only accident), 2.94 with a truck and 1.77 with a bicycle.",
+            "Night without public lighting raises the odds (1.78 in the baseline; 2.04 for pedestrians and 2.01 for motorcyclists); Brussels has much lower odds than Flanders in every model (0.29 to 0.41), Wallonia somewhat lower (0.74 to 0.81).",
+            "In the group models a truck as counterpart is the strongest risk factor (odds 5.22 for pedestrians, 4.26 for cyclists, 2.63 for mopeds, 2.26 for motorcyclists, against a passenger car).",
+            "Accidents in the same municipality are correlated (ICC 0.016 in the baseline); the cluster-robust standard errors are on average 11% larger in the baseline and up to 3.8 times larger for region-level terms.",
+            "The road users in one accident do not simply add up: 22 pairs were tested jointly (p < 10^-180). Bicycle + pedestrian is far less severe than the two effects added (0.33), car + motorcycle more severe (1.48); the order of road user 1 and 2 also matters (p = 2 x 10^-9), but their meaning is undocumented.",
+            "Predicted probabilities in a daytime urban situation in 2024: car-only accident 5.1%, bicycle against a car 8.6%, pedestrian 15.0%, motorcycle 15.5%.",
+        ])
+        st.caption("Read with care: these are associations, not causes; speed, traffic, vehicle type and helmet use are not in the data. The class belongs to the whole accident. AUC is in-sample. "
+                   "'With a pedestrian' (collision type) is 99% the same as the pedestrian road-user term and is left out of the models; without collision type the pedestrian odds ratio is 2.54 instead of 3.32.")
+        with st.expander("Tables"):
+            coef = res["severity_logit_coefficients"]
+            model = st.selectbox("Model", extra.MODELS5, key="study_models_table")
+            table(coef[(coef["model"] == model) & (coef["spec"] == "full")][["term", "odds_ratio", "or_ci_low", "or_ci_high", "p_value", "accidents", "events"]].round(4), f"logit_{model.lower()}_odds_ratios")
+            table(res["severity_logit_interactions_tests"].round(4), "logit_interaction_tests")

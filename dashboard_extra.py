@@ -26,7 +26,9 @@ SCOPE_LABELS = {"pooled_2017_2024": "All years 2017-2024", "pre_2017_2019": "Pre
 RESULT_FILES = ["severity_a_fatal", "severity_b_serious", "severity_c_slight", "severity_d_distribution", "geo_a_cyclists_by_municipality", "geo_hotspots_pedestrian",
                 "geo_hotspots_motorcycle", "geo_hotspots_moped", "geo_coverage", "severity_regional_regions_provinces", "severity_regional_roadtype",
                 "severity_by_square_concentration", "severity_by_municipality_density", "severity_density_correlation", "severity_municipality_density_table",
-                "severity_regions_within_density", "severity_regions_within_density_roadtype", "severity_regions_standardised", "severity_regions_logistic"]
+                "severity_regions_within_density", "severity_regions_within_density_roadtype", "severity_regions_standardised", "severity_regions_logistic",
+                "severity_logit_coefficients", "severity_logit_fit", "severity_logit_predicted_by_category", "severity_logit_scenarios", "severity_logit_calibration",
+                "severity_logit_interactions_pairs", "severity_logit_interactions_tests", "severity_logit_roaduser_with_without_collision"]
 
 
 # --------------------------------------------------------------------------------------
@@ -533,3 +535,143 @@ def fig_gap_adjusted(res):
     fig.update_xaxes(title_text="1 = no difference between the regions", row=2)
     fig.update_layout(legend=dict(orientation="h", y=-0.1))
     return _layout(fig, 680)
+
+
+# --------------------------------------------------------------------------------------
+# Step 5: the saved logistic models (script 20)
+# --------------------------------------------------------------------------------------
+MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+MODELS5 = ["Baseline", "Cyclists", "Pedestrians", "Motorcyclists", "Mopeds"]
+MODEL_STYLE = {"Baseline": ("#2a78d6", "circle"), "Cyclists": ("#eb6834", "square"), "Pedestrians": ("#1baf7a", "diamond"), "Motorcyclists": ("#eda100", "triangle-up"), "Mopeds": ("#e87ba4", "triangle-down")}
+
+
+def fig_logit_forest(res, variables, models=None, height=None):
+    """Adjusted odds ratios of the saved models (script 20, with collision type) for the given variables: one row per term, one marker per model, 95% cluster-robust intervals."""
+    c = res["severity_logit_coefficients"]
+    c = c[(c["spec"] == "full") & c["variable"].isin(variables)]
+    models = models or MODELS5
+    terms = []
+    for var in variables:
+        part = c[c["variable"] == var]
+        terms += list(dict.fromkeys(part.sort_values("model", key=lambda m: m.map({k: i for i, k in enumerate(MODELS5)}), kind="stable")["term"]))
+    fig = go.Figure()
+    fig.add_vline(x=1, line_color=GRAY, line_width=2)
+    offsets = np.linspace(-0.3, 0.3, len(MODELS5))
+    for m, off in zip(MODELS5, offsets):
+        if m not in models:
+            continue
+        colour, symbol = MODEL_STYLE[m]
+        ys, xs, lo, hi, hover = [], [], [], [], []
+        for i, term in enumerate(terms):
+            r = c[(c["model"] == m) & (c["term"] == term)]
+            if r.empty:
+                continue
+            r = r.iloc[0]
+            ys.append(len(terms) - 1 - i + off * 0.6); xs.append(r["odds_ratio"]); lo.append(r["or_ci_low"]); hi.append(r["or_ci_high"])
+            hover.append(f"<b>{m}</b>: {term}<br>odds ratio {r['odds_ratio']:.2f} (95% interval {r['or_ci_low']:.2f}-{r['or_ci_high']:.2f})<br>{int(r['accidents']):,} accidents, {int(r['events']):,} severe")
+        fig.add_trace(go.Scatter(x=xs, y=ys, mode="markers", name=m, marker=dict(size=7, color=colour, symbol=symbol),
+                                 error_x=dict(type="data", symmetric=False, array=np.array(hi) - np.array(xs), arrayminus=np.array(xs) - np.array(lo), thickness=1.4, width=0, color=colour),
+                                 hovertext=hover, hovertemplate="%{hovertext}<extra></extra>"))
+    fig.update_yaxes(tickvals=list(range(len(terms))), ticktext=[t.split(": ", 1)[1] if ": " in t else t for t in terms][::-1])
+    fig.update_xaxes(type="log", range=[np.log10(0.15), np.log10(25)], title="adjusted odds ratio of a severe accident (log scale; 1 = the reference category)")
+    fig.update_layout(legend=dict(orientation="h", y=1.02, x=0))
+    return _layout(fig, height or max(320, 24 * len(terms) + 120), margin=dict(l=10, r=10, t=40, b=10))
+
+
+def fig_logit_roadusers(res):
+    """The road-user terms: the baseline 'group involved' and the 'counterpart' of the four group models."""
+    fig = make_subplots(rows=1, cols=2, subplot_titles=["<b>Baseline: group involved (versus a car-only accident)</b>", "<b>Group models: the counterpart (versus a passenger car)</b>"], horizontal_spacing=0.22)
+    for col, (variable, models) in enumerate((("Group involved", ["Baseline"]), ("Counterpart", MODELS5[1:])), start=1):
+        sub = fig_logit_forest(res, [variable], models)
+        for tr in sub.data:
+            tr.showlegend = (col == 2) or tr.name == "Baseline"
+            fig.add_trace(tr, row=1, col=col)
+        fig.update_yaxes(tickvals=sub.layout.yaxis.tickvals, ticktext=sub.layout.yaxis.ticktext, row=1, col=col)
+        fig.update_xaxes(type="log", range=[np.log10(0.15), np.log10(25)], row=1, col=col)
+        fig.add_vline(x=1, line_color=GRAY, line_width=2, row=1, col=col)
+    fig.update_layout(legend=dict(orientation="h", y=-0.12))
+    return _layout(fig, 560)
+
+
+def fig_logit_predicted(res):
+    """Average adjusted predicted probability of a severe accident per category (six variables), per model, with 95% intervals."""
+    p = res["severity_logit_predicted_by_category"]
+    variables = ["Region", "Road type", "Intersection", "Lighting", "Year", "Month"]
+    fig = make_subplots(rows=2, cols=3, subplot_titles=[f"<b>{v}</b>" for v in variables], horizontal_spacing=0.07, vertical_spacing=0.2)
+    for i, var in enumerate(variables):
+        r, c = i // 3 + 1, i % 3 + 1
+        part = p[p["variable"] == var]
+        cats = list(dict.fromkeys(part[part["model"] == "Baseline"]["category"]))
+        if var == "Month":
+            cats = MONTH_NAMES
+        cats = [x for x in cats if not x.startswith("Unknown")]
+        for m, off in zip(MODELS5, np.linspace(-0.3, 0.3, 5)):
+            d = part[part["model"] == m].set_index("category")
+            sel = [x for x in cats if x in d.index]
+            colour, symbol = MODEL_STYLE[m]
+            fig.add_trace(go.Scatter(x=[cats.index(x) + off for x in sel], y=d.loc[sel, "predicted_pct"], mode="markers", name=m, legendgroup=m, showlegend=(i == 0), marker=dict(size=6, color=colour, symbol=symbol),
+                                     error_y=dict(type="data", symmetric=False, array=d.loc[sel, "ci_high_pct"] - d.loc[sel, "predicted_pct"], arrayminus=d.loc[sel, "predicted_pct"] - d.loc[sel, "ci_low_pct"], thickness=1.3, width=0, color=colour),
+                                     hovertext=[f"<b>{m}</b>: {x}<br>{d.loc[x, 'predicted_pct']:.1f}% (95% interval {d.loc[x, 'ci_low_pct']:.1f}-{d.loc[x, 'ci_high_pct']:.1f}%)" for x in sel], hovertemplate="%{hovertext}<extra></extra>"), row=r, col=c)
+        fig.update_xaxes(tickvals=list(range(len(cats))), ticktext=[x.replace("Night, public lighting present and lit", "Night, lit").replace("Night, public lighting present but not lit", "Night, not lit").replace("Night, no public lighting", "Night, no light").replace(" Region", "").replace("-Capital", "")[:16] for x in cats], tickangle=-30, row=r, col=c)
+        fig.update_yaxes(ticksuffix="%", row=r, col=c)
+    fig.update_layout(legend=dict(orientation="h", y=-0.1))
+    return _layout(fig, 640)
+
+
+def fig_logit_scenarios(res):
+    """Predicted probability of a severe accident in four typical situations (2024), per model."""
+    sc = res["severity_logit_scenarios"]
+    rows = list(dict.fromkeys(sc["model"] + " | " + sc["evaluated_as"]))
+    names = list(dict.fromkeys(sc["scenario"]))
+    fig = make_subplots(rows=1, cols=4, subplot_titles=[f"<b>{n}</b>" for n in names], horizontal_spacing=0.03, shared_yaxes=True)
+    for i, name in enumerate(names, start=1):
+        part = sc[sc["scenario"] == name]
+        for j, row in enumerate(rows):
+            r = part[(part["model"] + " | " + part["evaluated_as"]) == row].iloc[0]
+            if np.isnan(r["predicted_pct"]):
+                continue
+            colour, symbol = MODEL_STYLE[r["model"]]
+            hollow = r["model"] == "Baseline" and r["evaluated_as"] != "car-only accident"
+            fig.add_trace(go.Scatter(x=[r["predicted_pct"]], y=[row.replace(" | (counterpart: passenger car)", " vs car").replace(" | ", ": ")], mode="markers+text", text=[f"  {r['predicted_pct']:.1f}%"], textposition="middle right", showlegend=False,
+                                     marker=dict(size=9, color="rgba(0,0,0,0)" if hollow else colour, symbol=symbol, line=dict(color=colour, width=2)),
+                                     error_x=dict(type="data", symmetric=False, array=[r["ci_high_pct"] - r["predicted_pct"]], arrayminus=[r["predicted_pct"] - r["ci_low_pct"]], thickness=1.6, width=0, color=colour),
+                                     hovertext=[f"<b>{row}</b><br>{name}<br>{r['predicted_pct']:.1f}% (95% interval {r['ci_low_pct']:.1f}-{r['ci_high_pct']:.1f}%)"], hovertemplate="%{hovertext}<extra></extra>"), row=1, col=i)
+        fig.update_xaxes(range=[0, 52], ticksuffix="%", row=1, col=i)
+    fig.update_yaxes(autorange="reversed")
+    return _layout(fig, 480)
+
+
+def fig_logit_calibration(res):
+    """Predicted against observed share of severe accidents in ten groups of accidents, per model (in-sample)."""
+    cal, fit = res["severity_logit_calibration"], res["severity_logit_fit"]
+    fig = make_subplots(rows=1, cols=5, subplot_titles=[f"<b>{m}</b>" for m in MODELS5], horizontal_spacing=0.05)
+    for i, m in enumerate(MODELS5, start=1):
+        d = cal[cal["model"] == m]
+        top = max(d["mean_predicted_pct"].max(), d["observed_pct"].max()) * 1.08
+        colour, symbol = MODEL_STYLE[m]
+        fig.add_trace(go.Scatter(x=[0, top], y=[0, top], mode="lines", line=dict(color=GRAY, width=2), showlegend=False, hoverinfo="skip"), row=1, col=i)
+        fig.add_trace(go.Scatter(x=d["mean_predicted_pct"], y=d["observed_pct"], mode="markers", showlegend=False, marker=dict(size=8, color=colour, symbol=symbol),
+                                 hovertext=[f"decile {k}: predicted {a:.1f}%, observed {b:.1f}%" for k, a, b in zip(d["decile"], d["mean_predicted_pct"], d["observed_pct"])], hovertemplate="%{hovertext}<extra></extra>"), row=1, col=i)
+        f = fit[(fit["model"] == m) & (fit["spec"] == "full")].iloc[0]
+        fig.add_annotation(text=f"AUC {f['auc']:.2f}<br>R2 {f['mcfadden_r2']:.3f}", xref=f"x{i if i > 1 else ''} domain", yref=f"y{i if i > 1 else ''} domain", x=0.04, y=0.96, showarrow=False, xanchor="left", yanchor="top", font=dict(size=11))
+        fig.update_xaxes(range=[0, top], ticksuffix="%", row=1, col=i)
+        fig.update_yaxes(range=[0, top], ticksuffix="%", row=1, col=i)
+    return _layout(fig, 360)
+
+
+def fig_logit_interactions(res):
+    """Odds of a severe accident for each pair of road-user groups against a car-only accident: what the baseline adds up, and with the pair's own effect."""
+    t = res["severity_logit_interactions_pairs"]
+    t = t[t["spec"] == "full"]
+    order = list(t[t["version"] == "with the pair's own effect"].sort_values("accidents", ascending=True)["pair"])
+    fig = go.Figure()
+    fig.add_vline(x=1, line_color=GRAY, line_width=2)
+    for version, colour, symbol, name in (("additive (baseline model)", "#898781", "circle-open", "what the baseline predicts (the two group effects added up)"), ("with the pair's own effect", "#2a78d6", "square", "with the pair's own effect (model with pair interactions)")):
+        d = t[t["version"] == version].set_index("pair").loc[order]
+        fig.add_trace(go.Scatter(x=d["odds_ratio_vs_car_only"], y=[f"{p}  ({int(n):,})" for p, n in zip(order, d["accidents"])], mode="markers", name=name,
+                                 marker=dict(size=9, color=colour if symbol == "square" else "rgba(0,0,0,0)", symbol=symbol, line=dict(color=colour, width=2)),
+                                 error_x=dict(type="data", symmetric=False, array=d["ci_high"] - d["odds_ratio_vs_car_only"], arrayminus=d["odds_ratio_vs_car_only"] - d["ci_low"], thickness=1.5, width=0, color=colour),
+                                 hovertext=[f"<b>{p}</b><br>{name}<br>odds ratio {o:.2f} (95% interval {lo:.2f}-{hi:.2f})" for p, o, lo, hi in zip(order, d["odds_ratio_vs_car_only"], d["ci_low"], d["ci_high"])], hovertemplate="%{hovertext}<extra></extra>"))
+    fig.update_xaxes(type="log", title="odds ratio of a severe accident against a car-only accident (log scale)")
+    fig.update_layout(legend=dict(orientation="h", y=1.04))
+    return _layout(fig, 24 * len(order) + 140, margin=dict(l=10, r=10, t=40, b=10))

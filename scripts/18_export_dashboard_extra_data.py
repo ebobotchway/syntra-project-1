@@ -93,6 +93,11 @@ positions = df[usable].groupby("municipality_nis_code").agg(municipality=("munic
 assert len(positions) == 581, "a municipality has no usable coordinates"
 positions.to_csv(output_dir / "municipality_positions.csv")
 
-for name in ("municipality_outlines.json", "province_outlines.json", "hotspot_cells.csv", "municipality_positions.csv"):
+# --- 5. Area of each municipality in km2 (for accidents per km2 in the interactive tool) ---
+areas = outlines.assign(area_km2=outlines.geometry.area / 1e6)[["nis_code", "area_km2"]].rename(columns={"nis_code": "municipality_nis_code"})
+assert len(areas) == 581 and 30_600 < areas["area_km2"].sum() < 30_800, "the areas do not add up to the size of Belgium"
+areas.round(4).to_csv(output_dir / "municipality_areas.csv", index=False)
+
+for name in ("municipality_outlines.json", "province_outlines.json", "hotspot_cells.csv", "municipality_positions.csv", "municipality_areas.csv"):
     print(f"{name}: {(output_dir / name).stat().st_size / 1e6:.2f} MB")
 print(f"Checks passed: 581 municipalities, 11 province areas, hotspot squares match step 14, {len(hotspot_cells):,} squares in total.")
