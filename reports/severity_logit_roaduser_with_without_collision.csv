@@ -1,0 +1,49 @@
+model,term,full,no_collision,change_pct
+Baseline,Group involved: Bicycle,1.7651,1.7418,1.3391
+Baseline,Group involved: Bus,1.3165,1.2669,3.9151
+Baseline,Group involved: Moped,1.2235,1.2042,1.6036
+Baseline,Group involved: Motorcycle,3.4432,3.2712,5.2582
+Baseline,Group involved: Other road user,2.0688,2.0477,1.0305
+Baseline,Group involved: Pedestrian,3.3242,2.5428,30.7293
+Baseline,Group involved: Single road user (no second party),,2.0707,
+Baseline,Group involved: Truck,2.9360,2.7232,7.8150
+Baseline,Group involved: Unknown,1.2466,1.6604,-24.9209
+Baseline,Group involved: Van / light truck,1.3039,1.2644,3.1294
+Cyclists,Counterpart: Bus,1.7064,1.6805,1.5390
+Cyclists,Counterpart: Moped,0.7086,0.7542,-6.0483
+Cyclists,Counterpart: Motorcycle,1.7379,1.7608,-1.3024
+Cyclists,Counterpart: None (single road user),,2.3937,
+Cyclists,Counterpart: Other road user,1.7742,1.8225,-2.6505
+Cyclists,Counterpart: Pedestrian,1.1915,1.3480,-11.6108
+Cyclists,Counterpart: Same group (Bicycle),1.4816,1.5774,-6.0683
+Cyclists,Counterpart: Truck,4.2562,4.2226,0.7945
+Cyclists,Counterpart: Unknown,0.8491,0.9227,-7.9839
+Cyclists,Counterpart: Van / light truck,1.4085,1.4034,0.3658
+Mopeds,Counterpart: Bicycle,0.7451,0.8865,-15.9470
+Mopeds,Counterpart: Bus,0.9993,1.0603,-5.7534
+Mopeds,Counterpart: Motorcycle,2.1029,2.1552,-2.4305
+Mopeds,Counterpart: None (single road user),,1.6269,
+Mopeds,Counterpart: Other road user,2.2885,2.2627,1.1416
+Mopeds,Counterpart: Pedestrian,1.1170,1.1485,-2.7451
+Mopeds,Counterpart: Same group (Moped),0.8142,0.9138,-10.8933
+Mopeds,Counterpart: Truck,2.6317,2.5409,3.5751
+Mopeds,Counterpart: Unknown,0.8118,1.0382,-21.8042
+Mopeds,Counterpart: Van / light truck,1.3282,1.3041,1.8459
+Motorcyclists,Counterpart: Bicycle,0.6704,0.7119,-5.8256
+Motorcyclists,Counterpart: Bus,1.0518,1.1150,-5.6685
+Motorcyclists,Counterpart: Moped,0.7473,0.7777,-3.8992
+Motorcyclists,Counterpart: None (single road user),,1.4349,
+Motorcyclists,Counterpart: Other road user,2.4801,2.4801,0.0009
+Motorcyclists,Counterpart: Pedestrian,1.6757,1.1944,40.2963
+Motorcyclists,Counterpart: Same group (Motorcycle),1.1377,0.9814,15.9216
+Motorcyclists,Counterpart: Truck,2.2570,2.0650,9.3001
+Motorcyclists,Counterpart: Unknown,0.6817,0.7276,-6.3178
+Motorcyclists,Counterpart: Van / light truck,1.0951,1.0485,4.4457
+Pedestrians,Counterpart: Bicycle,0.7857,0.7857,0.0000
+Pedestrians,Counterpart: Bus,1.2989,1.2989,0.0000
+Pedestrians,Counterpart: Moped,0.5154,0.5154,0.0000
+Pedestrians,Counterpart: Motorcycle,1.4502,1.4502,0.0000
+Pedestrians,Counterpart: Other road user,1.9437,1.9437,0.0000
+Pedestrians,Counterpart: Truck,5.2240,5.2240,0.0000
+Pedestrians,Counterpart: Unknown,0.5033,0.5033,0.0000
+Pedestrians,Counterpart: Van / light truck,1.2886,1.2886,0.0000

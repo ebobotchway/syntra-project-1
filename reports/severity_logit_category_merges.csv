@@ -1,0 +1,45 @@
+model,variable,category,accidents,what_happened
+all accidents,Weather,Rain + Snowfall,38,fewer than 100 accidents on all accidents -> Other / combined
+all accidents,Weather,Rain + Fog (visibility under 100 m),15,fewer than 100 accidents on all accidents -> Other / combined
+all accidents,Weather,Rain + Hail,15,fewer than 100 accidents on all accidents -> Other / combined
+all accidents,Weather,Snowfall + Hail,11,fewer than 100 accidents on all accidents -> Other / combined
+all accidents,Weather,"Strong wind, gusts + Snowfall",11,fewer than 100 accidents on all accidents -> Other / combined
+all accidents,Weather,"Rain + Other (thick smoke, ...)",3,fewer than 100 accidents on all accidents -> Other / combined
+all accidents,Weather,"Strong wind, gusts + Hail",1,fewer than 100 accidents on all accidents -> Other / combined
+all accidents,Road surface,"Ice, snow + Clean",53,fewer than 100 accidents on all accidents -> Other / combined
+all accidents,Road surface,"Ice, snow + Dirty (sand, gravel, leaves, ...)",2,fewer than 100 accidents on all accidents -> Other / combined
+Baseline,Intersection,Unknown,4,under 30 accidents or no severe/non-severe accident -> Not at intersection
+Baseline,Collision type,With a pedestrian,30012,"correlation 0.998 with 'Group involved: Pedestrian': left out, the road-user term stays"
+Cyclists,Weather,Hail,22,under 30 accidents or no severe/non-severe accident -> Normal
+Cyclists,Weather,Other / combined,7,under 30 accidents or no severe/non-severe accident -> Normal
+Cyclists,Road surface,"Dry + Dirty (sand, gravel, leaves, ...)",26,under 30 accidents or no severe/non-severe accident -> Other / combined
+Cyclists,Road surface,Other / combined,6,under 30 accidents or no severe/non-severe accident -> Other / combined
+Cyclists,Road surface,"Wet, puddles + Ice or snow",7,under 30 accidents or no severe/non-severe accident -> Other / combined
+Cyclists,Collision type,With a pedestrian,3663,"correlation 0.993 with 'Counterpart: Pedestrian': left out, the road-user term stays"
+Pedestrians,Counterpart,None (single road user),4,under 30 accidents or no severe/non-severe accident -> Passenger car
+Pedestrians,Counterpart,Same group (Pedestrian),18,under 30 accidents or no severe/non-severe accident -> Passenger car
+Pedestrians,Weather,Hail,9,under 30 accidents or no severe/non-severe accident -> Normal
+Pedestrians,Weather,Other / combined,10,under 30 accidents or no severe/non-severe accident -> Normal
+Pedestrians,Road surface,"Dry + Dirty (sand, gravel, leaves, ...)",17,under 30 accidents or no severe/non-severe accident -> Other / combined
+Pedestrians,Road surface,Other / combined,2,under 30 accidents or no severe/non-severe accident -> Other / combined
+Pedestrians,Road surface,"Wet, puddles + Dirty (sand, gravel, leaves, ...)",10,under 30 accidents or no severe/non-severe accident -> Other / combined
+Pedestrians,Road surface,"Wet, puddles + Ice or snow",14,under 30 accidents or no severe/non-severe accident -> Other / combined
+Pedestrians,Collision type,Between 2 drivers: Rear-end collision,0,reference has fewer than 30 accidents; the most common category 'With a pedestrian' is the reference
+Pedestrians,Collision type,Road user against obstacle outside the roadway,2,under 30 accidents or no severe/non-severe accident -> With a pedestrian
+Pedestrians,Collision type,"Single road user, no obstacle (incl. fall)",2,under 30 accidents or no severe/non-severe accident -> With a pedestrian
+Motorcyclists,Weather,Hail,7,under 30 accidents or no severe/non-severe accident -> Other / combined
+Motorcyclists,Weather,Other / combined,3,under 30 accidents or no severe/non-severe accident -> Other / combined
+Motorcyclists,Weather,"Rain + Strong wind, gusts",25,under 30 accidents or no severe/non-severe accident -> Other / combined
+Motorcyclists,Weather,Snowfall,23,under 30 accidents or no severe/non-severe accident -> Other / combined
+Motorcyclists,Road surface,"Dry + Dirty (sand, gravel, leaves, ...)",24,under 30 accidents or no severe/non-severe accident -> Other / combined
+Motorcyclists,Road surface,Other / combined,3,under 30 accidents or no severe/non-severe accident -> Other / combined
+Motorcyclists,Road surface,"Wet, puddles + Ice or snow",9,under 30 accidents or no severe/non-severe accident -> Other / combined
+Motorcyclists,Collision type,With a pedestrian,418,"correlation 0.998 with 'Counterpart: Pedestrian': left out, the road-user term stays"
+Mopeds,Weather,Hail,10,under 30 accidents or no severe/non-severe accident -> Other / combined
+Mopeds,Weather,Other / combined,9,under 30 accidents or no severe/non-severe accident -> Other / combined
+Mopeds,Weather,"Rain + Strong wind, gusts",24,under 30 accidents or no severe/non-severe accident -> Other / combined
+Mopeds,Road surface,"Dry + Dirty (sand, gravel, leaves, ...)",9,under 30 accidents or no severe/non-severe accident -> Other / combined
+Mopeds,Road surface,Other / combined,4,under 30 accidents or no severe/non-severe accident -> Other / combined
+Mopeds,Road surface,"Wet, puddles + Dirty (sand, gravel, leaves, ...)",21,under 30 accidents or no severe/non-severe accident -> Other / combined
+Mopeds,Road surface,"Wet, puddles + Ice or snow",10,under 30 accidents or no severe/non-severe accident -> Other / combined
+Mopeds,Collision type,With a pedestrian,994,"correlation 0.998 with 'Counterpart: Pedestrian': left out, the road-user term stays"

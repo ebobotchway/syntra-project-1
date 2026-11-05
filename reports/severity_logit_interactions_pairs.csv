@@ -1,0 +1,133 @@
+spec,pair,accidents,severe_pct,version,odds_ratio_vs_car_only,ci_low,ci_high
+full,Passenger car + Van / light truck,10297,5.8464,additive (baseline model),1.3039,1.2445,1.3662
+full,Passenger car + Van / light truck,10297,5.8464,with the pair's own effect,1.2308,1.1299,1.3406
+full,Passenger car + Van / light truck,10297,5.8464,interaction term (ratio of odds ratios),1.0170,0.8883,1.1644
+full,Passenger car + Truck,6825,12.0293,additive (baseline model),2.9360,2.7573,3.1263
+full,Passenger car + Truck,6825,12.0293,with the pair's own effect,2.6642,2.3509,3.0193
+full,Passenger car + Truck,6825,12.0293,interaction term (ratio of odds ratios),0.9041,0.7668,1.0660
+full,Passenger car + Bus,1486,6.2584,additive (baseline model),1.3165,1.1211,1.5460
+full,Passenger car + Bus,1486,6.2584,with the pair's own effect,1.5294,1.2311,1.8999
+full,Passenger car + Bus,1486,6.2584,interaction term (ratio of odds ratios),1.4810,1.0554,2.0784
+full,Passenger car + Motorcycle,11248,16.9630,additive (baseline model),3.4432,3.2671,3.6289
+full,Passenger car + Motorcycle,11248,16.9630,with the pair's own effect,4.6071,4.2927,4.9446
+full,Passenger car + Motorcycle,11248,16.9630,interaction term (ratio of odds ratios),1.4799,1.3470,1.6260
+full,Passenger car + Moped,13433,7.4890,additive (baseline model),1.2235,1.1483,1.3037
+full,Passenger car + Moped,13433,7.4890,with the pair's own effect,1.6564,1.5196,1.8055
+full,Passenger car + Moped,13433,7.4890,interaction term (ratio of odds ratios),1.1799,1.0555,1.3190
+full,Passenger car + Bicycle,40467,8.3204,additive (baseline model),1.7651,1.6475,1.8911
+full,Passenger car + Bicycle,40467,8.3204,with the pair's own effect,1.9274,1.7791,2.0880
+full,Passenger car + Bicycle,40467,8.3204,interaction term (ratio of odds ratios),0.7789,0.7251,0.8367
+full,Passenger car + Pedestrian,20530,12.1432,additive (baseline model),3.3242,3.0518,3.6208
+full,Passenger car + Pedestrian,20530,12.1432,with the pair's own effect,4.1838,3.8426,4.5553
+full,Passenger car + Pedestrian,20530,12.1432,interaction term (ratio of odds ratios),1.0745,0.8889,1.2990
+full,Passenger car + Other road user,2528,8.8212,additive (baseline model),2.0688,1.8919,2.2622
+full,Passenger car + Other road user,2528,8.8212,with the pair's own effect,2.1265,1.8054,2.5047
+full,Passenger car + Other road user,2528,8.8212,interaction term (ratio of odds ratios),0.8148,0.6772,0.9803
+full,Van / light truck + Truck,1066,20.7317,additive (baseline model),3.8284,3.5269,4.1556
+full,Van / light truck + Truck,1066,20.7317,with the pair's own effect,5.0992,4.2722,6.0862
+full,Van / light truck + Truck,1066,20.7317,interaction term (ratio of odds ratios),1.4299,1.1472,1.7823
+full,Van / light truck + Motorcycle,1079,18.6284,additive (baseline model),4.4897,4.1791,4.8234
+full,Van / light truck + Motorcycle,1079,18.6284,with the pair's own effect,5.0235,4.2861,5.8877
+full,Van / light truck + Motorcycle,1079,18.6284,interaction term (ratio of odds ratios),1.3334,1.0992,1.6175
+full,Van / light truck + Moped,1340,9.5522,additive (baseline model),1.5954,1.4759,1.7246
+full,Van / light truck + Moped,1340,9.5522,with the pair's own effect,2.1786,1.8005,2.6361
+full,Van / light truck + Moped,1340,9.5522,interaction term (ratio of odds ratios),1.2824,1.0165,1.6179
+full,Van / light truck + Bicycle,4226,11.6422,additive (baseline model),2.3016,2.1214,2.4970
+full,Van / light truck + Bicycle,4226,11.6422,with the pair's own effect,2.8117,2.5066,3.1540
+full,Van / light truck + Bicycle,4226,11.6422,interaction term (ratio of odds ratios),0.9389,0.8111,1.0869
+full,Van / light truck + Pedestrian,1638,15.4457,additive (baseline model),4.3345,3.9542,4.7513
+full,Van / light truck + Pedestrian,1638,15.4457,with the pair's own effect,5.4168,4.6991,6.2441
+full,Van / light truck + Pedestrian,1638,15.4457,interaction term (ratio of odds ratios),1.1496,0.8841,1.4947
+full,Truck + Bicycle,1362,28.2673,additive (baseline model),5.1824,4.6516,5.7738
+full,Truck + Bicycle,1362,28.2673,with the pair's own effect,8.6838,7.5288,10.0159
+full,Truck + Bicycle,1362,28.2673,interaction term (ratio of odds ratios),1.1909,0.9951,1.4253
+full,Bus + Bicycle,590,12.5424,additive (baseline model),2.3238,1.9317,2.7954
+full,Bus + Bicycle,590,12.5424,with the pair's own effect,3.3731,2.5990,4.3778
+full,Bus + Bicycle,590,12.5424,interaction term (ratio of odds ratios),1.3201,0.9671,1.8018
+full,Bus + Pedestrian,810,14.0741,additive (baseline model),4.3763,3.5904,5.3343
+full,Bus + Pedestrian,810,14.0741,with the pair's own effect,5.3598,4.1742,6.8823
+full,Bus + Pedestrian,810,14.0741,interaction term (ratio of odds ratios),1.3331,0.9598,1.8515
+full,Motorcycle + Bicycle,629,13.8315,additive (baseline model),6.0777,5.4713,6.7512
+full,Motorcycle + Bicycle,629,13.8315,with the pair's own effect,3.3214,2.6951,4.0931
+full,Motorcycle + Bicycle,629,13.8315,interaction term (ratio of odds ratios),0.4311,0.3400,0.5468
+full,Moped + Bicycle,2423,6.6859,additive (baseline model),2.1597,1.9200,2.4293
+full,Moped + Bicycle,2423,6.6859,with the pair's own effect,1.1758,1.0158,1.3610
+full,Moped + Bicycle,2423,6.6859,interaction term (ratio of odds ratios),0.3385,0.2793,0.4102
+full,Moped + Pedestrian,990,8.0808,additive (baseline model),4.0672,3.6162,4.5745
+full,Moped + Pedestrian,990,8.0808,with the pair's own effect,2.2522,1.8000,2.8182
+full,Moped + Pedestrian,990,8.0808,interaction term (ratio of odds ratios),0.4121,0.3121,0.5440
+full,Bicycle + Pedestrian,3617,10.5889,additive (baseline model),5.8675,5.1487,6.6865
+full,Bicycle + Pedestrian,3617,10.5889,with the pair's own effect,3.1869,2.8208,3.6005
+full,Bicycle + Pedestrian,3617,10.5889,interaction term (ratio of odds ratios),0.3308,0.2585,0.4233
+full,Bicycle + Other road user,1130,13.2743,additive (baseline model),3.6517,3.1817,4.1911
+full,Bicycle + Other road user,1130,13.2743,with the pair's own effect,3.4111,2.8967,4.0168
+full,Bicycle + Other road user,1130,13.2743,interaction term (ratio of odds ratios),0.5282,0.4167,0.6695
+full,Pedestrian + Other road user,936,20.0855,additive (baseline model),6.8771,5.9454,7.9548
+full,Pedestrian + Other road user,936,20.0855,with the pair's own effect,8.1067,6.8016,9.6620
+full,Pedestrian + Other road user,936,20.0855,interaction term (ratio of odds ratios),0.7978,0.5795,1.0983
+no_collision,Passenger car + Van / light truck,10297,5.8464,additive (baseline model),1.2644,1.2074,1.3240
+no_collision,Passenger car + Van / light truck,10297,5.8464,with the pair's own effect,1.1237,1.0329,1.2225
+no_collision,Passenger car + Van / light truck,10297,5.8464,interaction term (ratio of odds ratios),0.9080,0.7932,1.0394
+no_collision,Passenger car + Truck,6825,12.0293,additive (baseline model),2.7232,2.5607,2.8961
+no_collision,Passenger car + Truck,6825,12.0293,with the pair's own effect,2.3431,2.0617,2.6630
+no_collision,Passenger car + Truck,6825,12.0293,interaction term (ratio of odds ratios),0.8122,0.6839,0.9645
+no_collision,Passenger car + Bus,1486,6.2584,additive (baseline model),1.2669,1.0714,1.4981
+no_collision,Passenger car + Bus,1486,6.2584,with the pair's own effect,1.4193,1.1375,1.7709
+no_collision,Passenger car + Bus,1486,6.2584,interaction term (ratio of odds ratios),1.5057,1.0631,2.1325
+no_collision,Passenger car + Motorcycle,11248,16.9630,additive (baseline model),3.2712,3.1191,3.4308
+no_collision,Passenger car + Motorcycle,11248,16.9630,with the pair's own effect,4.2926,4.0079,4.5975
+no_collision,Passenger car + Motorcycle,11248,16.9630,interaction term (ratio of odds ratios),1.5512,1.4218,1.6923
+no_collision,Passenger car + Moped,13433,7.4890,additive (baseline model),1.2042,1.1385,1.2738
+no_collision,Passenger car + Moped,13433,7.4890,with the pair's own effect,1.5555,1.4372,1.6835
+no_collision,Passenger car + Moped,13433,7.4890,interaction term (ratio of odds ratios),1.2716,1.1397,1.4188
+no_collision,Passenger car + Bicycle,40467,8.3204,additive (baseline model),1.7418,1.6428,1.8467
+no_collision,Passenger car + Bicycle,40467,8.3204,with the pair's own effect,1.8325,1.6927,1.9839
+no_collision,Passenger car + Bicycle,40467,8.3204,interaction term (ratio of odds ratios),0.8217,0.7529,0.8968
+no_collision,Passenger car + Pedestrian,20530,12.1432,additive (baseline model),2.5428,2.3896,2.7058
+no_collision,Passenger car + Pedestrian,20530,12.1432,with the pair's own effect,3.1615,2.9573,3.3799
+no_collision,Passenger car + Pedestrian,20530,12.1432,interaction term (ratio of odds ratios),1.0900,0.8793,1.3512
+no_collision,Passenger car + Other road user,2528,8.8212,additive (baseline model),2.0477,1.8800,2.2304
+no_collision,Passenger car + Other road user,2528,8.8212,with the pair's own effect,2.0400,1.7260,2.4112
+no_collision,Passenger car + Other road user,2528,8.8212,interaction term (ratio of odds ratios),0.8383,0.6979,1.0069
+no_collision,Van / light truck + Truck,1066,20.7317,additive (baseline model),3.4431,3.1749,3.7340
+no_collision,Van / light truck + Truck,1066,20.7317,with the pair's own effect,4.3619,3.6485,5.2148
+no_collision,Van / light truck + Truck,1066,20.7317,interaction term (ratio of odds ratios),1.2216,0.9781,1.5259
+no_collision,Van / light truck + Motorcycle,1079,18.6284,additive (baseline model),4.1360,3.8657,4.4253
+no_collision,Van / light truck + Motorcycle,1079,18.6284,with the pair's own effect,4.5727,3.9104,5.3471
+no_collision,Van / light truck + Motorcycle,1079,18.6284,interaction term (ratio of odds ratios),1.3351,1.1045,1.6139
+no_collision,Van / light truck + Moped,1340,9.5522,additive (baseline model),1.5226,1.4164,1.6368
+no_collision,Van / light truck + Moped,1340,9.5522,with the pair's own effect,1.9902,1.6445,2.4085
+no_collision,Van / light truck + Moped,1340,9.5522,interaction term (ratio of odds ratios),1.3146,1.0396,1.6625
+no_collision,Van / light truck + Bicycle,4226,11.6422,additive (baseline model),2.2022,2.0442,2.3725
+no_collision,Van / light truck + Bicycle,4226,11.6422,with the pair's own effect,2.5956,2.3187,2.9057
+no_collision,Van / light truck + Bicycle,4226,11.6422,interaction term (ratio of odds ratios),0.9404,0.8103,1.0915
+no_collision,Van / light truck + Pedestrian,1638,15.4457,additive (baseline model),3.2150,2.9826,3.4654
+no_collision,Van / light truck + Pedestrian,1638,15.4457,with the pair's own effect,4.1000,3.5709,4.7076
+no_collision,Van / light truck + Pedestrian,1638,15.4457,interaction term (ratio of odds ratios),1.1421,0.8506,1.5336
+no_collision,Truck + Bicycle,1362,28.2673,additive (baseline model),4.7432,4.3083,5.2221
+no_collision,Truck + Bicycle,1362,28.2673,with the pair's own effect,7.7399,6.6989,8.9427
+no_collision,Truck + Bicycle,1362,28.2673,interaction term (ratio of odds ratios),1.2030,1.0105,1.4321
+no_collision,Bus + Bicycle,590,12.5424,additive (baseline model),2.2067,1.8326,2.6571
+no_collision,Bus + Bicycle,590,12.5424,with the pair's own effect,3.0632,2.3595,3.9768
+no_collision,Bus + Bicycle,590,12.5424,interaction term (ratio of odds ratios),1.4571,1.0448,2.0322
+no_collision,Bus + Pedestrian,810,14.0741,additive (baseline model),3.2215,2.6650,3.8943
+no_collision,Bus + Pedestrian,810,14.0741,with the pair's own effect,4.0751,3.1941,5.1989
+no_collision,Bus + Pedestrian,810,14.0741,interaction term (ratio of odds ratios),1.4904,1.0322,2.1520
+no_collision,Motorcycle + Bicycle,629,13.8315,additive (baseline model),5.6978,5.2150,6.2252
+no_collision,Motorcycle + Bicycle,629,13.8315,with the pair's own effect,3.2421,2.6310,3.9950
+no_collision,Motorcycle + Bicycle,629,13.8315,interaction term (ratio of odds ratios),0.5253,0.4151,0.6649
+no_collision,Moped + Bicycle,2423,6.6859,additive (baseline model),2.0975,1.9014,2.3139
+no_collision,Moped + Bicycle,2423,6.6859,with the pair's own effect,1.3372,1.1599,1.5416
+no_collision,Moped + Bicycle,2423,6.6859,interaction term (ratio of odds ratios),0.4902,0.4085,0.5881
+no_collision,Moped + Pedestrian,990,8.0808,additive (baseline model),3.0621,2.7882,3.3628
+no_collision,Moped + Pedestrian,990,8.0808,with the pair's own effect,1.7059,1.3798,2.1090
+no_collision,Moped + Pedestrian,990,8.0808,interaction term (ratio of odds ratios),0.4808,0.3647,0.6339
+no_collision,Bicycle + Pedestrian,3617,10.5889,additive (baseline model),4.4289,3.9945,4.9106
+no_collision,Bicycle + Pedestrian,3617,10.5889,with the pair's own effect,2.4158,2.1494,2.7152
+no_collision,Bicycle + Pedestrian,3617,10.5889,interaction term (ratio of odds ratios),0.3735,0.2889,0.4828
+no_collision,Bicycle + Other road user,1130,13.2743,additive (baseline model),3.5667,3.1537,4.0337
+no_collision,Bicycle + Other road user,1130,13.2743,with the pair's own effect,3.3518,2.8563,3.9332
+no_collision,Bicycle + Other road user,1130,13.2743,interaction term (ratio of odds ratios),0.6176,0.4921,0.7750
+no_collision,Pedestrian + Other road user,936,20.0855,additive (baseline model),5.2069,4.6048,5.8878
+no_collision,Pedestrian + Other road user,936,20.0855,with the pair's own effect,6.1622,5.2207,7.2734
+no_collision,Pedestrian + Other road user,936,20.0855,interaction term (ratio of odds ratios),0.8730,0.6234,1.2225

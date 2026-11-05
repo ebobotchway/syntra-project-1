@@ -1,0 +1,176 @@
+model,variable,category,accidents_in_category,predicted_pct,ci_low_pct,ci_high_pct,observed_pct
+Baseline,Region,Flemish Region,178348,11.0546,10.2706,11.9279,10.8927
+Baseline,Region,Brussels-Capital Region,30022,4.7053,4.3486,5.0876,4.8664
+Baseline,Region,Walloon Region,81162,9.2208,8.5181,10.1034,9.4182
+Baseline,Road type,Municipal road,132717,9.3709,8.8885,9.9578,9.5738
+Baseline,Road type,Motorway,21860,10.1949,9.0026,11.8288,11.2489
+Baseline,Road type,Regional road,133453,10.2861,9.7362,10.9749,9.9084
+Baseline,Road type,Unknown,1502,11.1094,8.9304,13.8250,9.5872
+Baseline,Intersection,Not at intersection,192455,10.1934,9.6440,10.8719,10.5822
+Baseline,Intersection,At intersection,97077,9.1131,8.5327,9.8156,8.4119
+Baseline,Lighting,Daylight,199795,9.2203,8.7032,9.8630,9.5117
+Baseline,Lighting,"Dawn, dusk",13688,9.1767,8.5046,10.0300,9.3366
+Baseline,Lighting,"Night, no public lighting",7175,14.9508,13.9200,16.2074,16.4181
+Baseline,Lighting,"Night, public lighting present and lit",56044,11.5649,10.8326,12.5106,11.0681
+Baseline,Lighting,"Night, public lighting present but not lit",2912,13.7233,12.5078,15.1461,14.4918
+Baseline,Lighting,"Unknown, undetermined",9918,8.9070,7.9071,10.0030,4.5070
+Baseline,Year,2017,38025,10.3224,9.8005,10.9893,10.4536
+Baseline,Year,2018,38453,10.0488,9.4395,10.8150,9.9888
+Baseline,Year,2019,37719,10.3019,9.6523,11.1439,10.1991
+Baseline,Year,2020,30251,10.4588,9.8166,11.2655,10.5848
+Baseline,Year,2021,34660,9.7066,9.1720,10.4072,9.6307
+Baseline,Year,2022,37650,9.5562,8.9671,10.3051,9.6175
+Baseline,Year,2023,36858,9.5586,8.9140,10.2946,9.5610
+Baseline,Year,2024,35916,8.9215,8.1773,9.7392,8.8651
+Baseline,Month,Jan,21021,9.2642,8.6919,9.9346,9.0624
+Baseline,Month,Apr,21137,10.4421,9.6871,11.3813,10.4083
+Baseline,Month,Aug,23708,10.3462,9.7381,11.1457,10.7137
+Baseline,Month,Dec,22288,9.3580,8.7317,10.1596,9.1709
+Baseline,Month,Feb,20617,9.5832,8.9053,10.3276,9.4340
+Baseline,Month,Jul,23502,10.8235,10.0916,11.7598,11.1820
+Baseline,Month,Jun,28471,10.1478,9.5051,10.9473,10.1331
+Baseline,Month,Mar,22235,9.4090,8.6925,10.1889,9.2692
+Baseline,Month,May,26315,10.3729,9.6566,11.2214,10.4123
+Baseline,Month,Nov,24430,9.1263,8.6283,9.7657,8.9849
+Baseline,Month,Oct,27882,9.4931,8.9508,10.1558,9.4756
+Baseline,Month,Sep,27926,9.7221,9.1451,10.4345,9.8367
+Cyclists,Region,Flemish Region,59683,11.9003,10.7550,13.0892,11.7471
+Cyclists,Region,Brussels-Capital Region,6538,3.8421,3.3346,4.4702,4.0685
+Cyclists,Region,Walloon Region,5660,9.4123,8.2501,10.7080,10.1590
+Cyclists,Road type,Municipal road,41869,10.9549,9.9836,12.0012,11.2470
+Cyclists,Road type,Motorway,132,14.9612,11.0923,19.9258,17.4242
+Cyclists,Road type,Regional road,29579,10.8384,9.8948,11.8911,10.4229
+Cyclists,Road type,Unknown,301,12.5812,8.5227,17.6414,12.2924
+Cyclists,Intersection,Not at intersection,40725,11.1184,10.2562,12.0298,11.8306
+Cyclists,Intersection,At intersection,31156,10.6349,9.4690,11.8779,9.7381
+Cyclists,Lighting,Daylight,56961,10.8867,9.9602,11.9175,11.0971
+Cyclists,Lighting,"Dawn, dusk",3658,8.9738,7.8741,10.2377,8.5019
+Cyclists,Lighting,"Night, no public lighting",706,13.4015,11.0112,15.9667,16.1473
+Cyclists,Lighting,"Night, public lighting present and lit",8163,11.9479,10.6032,13.3404,11.6134
+Cyclists,Lighting,"Night, public lighting present but not lit",344,12.3073,9.1754,16.4906,13.9535
+Cyclists,Lighting,"Unknown, undetermined",2049,9.5169,7.9972,11.2922,5.3685
+Cyclists,Year,2017,7989,11.0012,10.0707,12.1284,10.9776
+Cyclists,Year,2018,8601,11.1531,10.0704,12.3506,10.9638
+Cyclists,Year,2019,8856,11.0059,9.8355,12.2668,10.7498
+Cyclists,Year,2020,8368,11.9316,10.8271,13.1980,12.0459
+Cyclists,Year,2021,8897,10.7287,9.7055,11.7900,10.8801
+Cyclists,Year,2022,10273,10.7442,9.7288,11.9313,10.9608
+Cyclists,Year,2023,9707,11.0281,10.0413,12.2038,11.0436
+Cyclists,Year,2024,9190,9.9207,8.6753,11.3704,9.8585
+Cyclists,Month,Jan,4171,10.7287,9.4441,12.2722,10.2374
+Cyclists,Month,Apr,5317,11.3357,10.2417,12.6370,11.3786
+Cyclists,Month,Aug,6280,11.2607,10.1216,12.5635,11.9108
+Cyclists,Month,Dec,4133,10.2759,8.9884,11.5627,9.7266
+Cyclists,Month,Feb,4417,10.9595,9.4188,12.6278,10.5049
+Cyclists,Month,Jul,6221,12.1798,10.9894,13.5260,12.8757
+Cyclists,Month,Jun,8120,11.4153,10.3120,12.5280,11.7734
+Cyclists,Month,Mar,5234,10.2154,9.0841,11.5116,10.0306
+Cyclists,Month,May,7242,10.9872,9.6559,12.4304,11.2676
+Cyclists,Month,Nov,5645,10.1360,9.0557,11.4423,9.6546
+Cyclists,Month,Oct,7246,10.6981,9.6374,11.8302,10.3505
+Cyclists,Month,Sep,7855,10.3463,9.3995,11.4631,10.3501
+Pedestrians,Region,Flemish Region,14603,15.6066,14.1928,17.3127,15.5653
+Pedestrians,Region,Brussels-Capital Region,6561,7.2966,6.0774,8.9583,7.0416
+Pedestrians,Region,Walloon Region,8733,12.1537,10.6382,13.9274,12.4241
+Pedestrians,Road type,Municipal road,17393,11.1148,10.3268,12.1513,10.7917
+Pedestrians,Road type,Motorway,147,41.4811,33.2517,49.2113,61.2245
+Pedestrians,Road type,Regional road,12234,14.6199,13.6063,15.8525,15.0155
+Pedestrians,Road type,Unknown,123,14.1635,9.5009,20.5776,13.0081
+Pedestrians,Intersection,Not at intersection,22217,13.1834,12.3971,14.2123,13.1161
+Pedestrians,Intersection,At intersection,7680,11.6350,10.6282,12.8036,11.7969
+Pedestrians,Lighting,Daylight,21051,11.4770,10.7536,12.4588,11.5481
+Pedestrians,Lighting,"Dawn, dusk",1611,12.3534,10.7976,14.2440,12.7871
+Pedestrians,Lighting,"Night, no public lighting",414,20.2567,16.3093,24.3753,24.3961
+Pedestrians,Lighting,"Night, public lighting present and lit",5704,16.6838,15.2153,18.4119,17.0757
+Pedestrians,Lighting,"Night, public lighting present but not lit",235,21.5775,17.2123,26.7022,24.6809
+Pedestrians,Lighting,"Unknown, undetermined",882,12.2221,9.4285,15.8229,5.6689
+Pedestrians,Year,2017,4155,14.3098,13.1656,15.6621,14.4886
+Pedestrians,Year,2018,4084,12.4462,11.2916,13.7727,12.4878
+Pedestrians,Year,2019,4170,12.6722,11.4196,14.1460,12.8297
+Pedestrians,Year,2020,2904,13.0186,11.8668,14.2372,13.0854
+Pedestrians,Year,2021,3460,12.0137,10.8785,13.3849,11.9942
+Pedestrians,Year,2022,3724,12.5388,11.1137,14.1113,12.3255
+Pedestrians,Year,2023,3816,12.9807,11.5923,14.7582,13.0765
+Pedestrians,Year,2024,3584,12.0327,10.5797,13.8021,11.7188
+Pedestrians,Month,Jan,2737,12.2820,11.0590,13.7573,13.5550
+Pedestrians,Month,Apr,1906,13.1811,11.9263,14.5699,12.1721
+Pedestrians,Month,Aug,1867,13.4925,11.2659,16.1267,13.0155
+Pedestrians,Month,Dec,3061,12.7714,11.5880,14.2538,14.4397
+Pedestrians,Month,Feb,2578,12.3516,10.9220,13.9554,12.5679
+Pedestrians,Month,Jul,1945,13.7093,12.0191,15.8539,13.0077
+Pedestrians,Month,Jun,2562,12.5386,11.0268,14.5685,11.3193
+Pedestrians,Month,Mar,2393,12.0379,10.4833,13.8557,11.8262
+Pedestrians,Month,May,2537,14.1434,12.5063,16.0426,13.0469
+Pedestrians,Month,Nov,2824,12.7045,11.3429,14.3071,13.8102
+Pedestrians,Month,Oct,2874,12.2980,11.1714,13.5124,12.3869
+Pedestrians,Month,Sep,2613,12.5691,11.0096,14.4746,11.6724
+Motorcyclists,Region,Flemish Region,9686,22.7895,21.2377,24.5303,23.1055
+Motorcyclists,Region,Brussels-Capital Region,3354,8.4986,7.8313,9.3316,7.3643
+Motorcyclists,Region,Walloon Region,6752,18.0993,16.4387,20.0509,18.7204
+Motorcyclists,Road type,Municipal road,8103,17.9997,16.7653,19.3979,17.9069
+Motorcyclists,Road type,Motorway,1384,19.1395,16.6253,22.3084,21.6040
+Motorcyclists,Road type,Regional road,10184,19.6171,18.8393,20.5970,19.4324
+Motorcyclists,Road type,Unknown,121,22.7867,14.0352,34.2297,16.5289
+Motorcyclists,Intersection,Not at intersection,13187,19.2229,18.2313,20.4108,19.5268
+Motorcyclists,Intersection,At intersection,6605,18.3665,17.2867,19.6450,17.7744
+Motorcyclists,Lighting,Daylight,15400,18.0919,17.1868,19.1939,18.4091
+Motorcyclists,Lighting,"Dawn, dusk",842,20.2781,17.9168,23.2469,20.7838
+Motorcyclists,Lighting,"Night, no public lighting",248,29.6969,24.5059,34.9753,34.2742
+Motorcyclists,Lighting,"Night, public lighting present and lit",2996,22.1366,20.2465,24.4106,20.2937
+Motorcyclists,Lighting,"Night, public lighting present but not lit",96,27.6711,19.6775,37.1047,30.2083
+Motorcyclists,Lighting,"Unknown, undetermined",210,15.3656,8.9496,23.5884,8.0952
+Motorcyclists,Year,2017,2765,19.1066,17.4226,21.0001,19.8915
+Motorcyclists,Year,2018,2837,19.9289,18.2869,21.8865,20.0564
+Motorcyclists,Year,2019,2639,18.5116,17.0508,20.2692,18.0371
+Motorcyclists,Year,2020,2148,20.1825,18.5936,22.0571,20.4842
+Motorcyclists,Year,2021,2227,18.6278,16.9903,20.4002,18.6798
+Motorcyclists,Year,2022,2503,19.0354,17.5789,20.7723,18.8973
+Motorcyclists,Year,2023,2376,18.4673,16.8798,20.3578,17.9293
+Motorcyclists,Year,2024,2297,17.4833,15.7945,19.4879,17.3705
+Motorcyclists,Month,Jan,734,15.8674,13.4571,18.8856,14.8501
+Motorcyclists,Month,Apr,1673,21.4504,19.3983,23.8265,21.9366
+Motorcyclists,Month,Aug,2046,20.2794,18.3949,22.4037,21.2610
+Motorcyclists,Month,Dec,816,15.7650,12.6690,19.6254,14.3382
+Motorcyclists,Month,Feb,1022,17.5321,15.5640,19.8074,17.5147
+Motorcyclists,Month,Jul,2061,20.8939,19.3803,22.6708,21.6885
+Motorcyclists,Month,Jun,2339,18.8107,17.4074,20.5864,18.8970
+Motorcyclists,Month,Mar,1415,18.0613,15.6389,20.5961,17.5265
+Motorcyclists,Month,May,2256,19.3515,17.7607,21.2347,19.2819
+Motorcyclists,Month,Nov,1160,16.6982,14.3615,19.3640,16.0345
+Motorcyclists,Month,Oct,1967,18.0540,16.5682,19.8307,18.0986
+Motorcyclists,Month,Sep,2303,18.7607,16.9505,20.6428,18.5845
+Mopeds,Region,Flemish Region,16894,9.3281,8.6899,10.2765,8.8907
+Mopeds,Region,Brussels-Capital Region,1584,3.4093,2.7477,4.3024,3.6616
+Mopeds,Region,Walloon Region,4780,7.7639,6.9568,8.8015,8.8912
+Mopeds,Road type,Municipal road,11013,8.7029,8.0410,9.5971,8.8350
+Mopeds,Road type,Motorway,58,14.1738,6.9913,26.5096,15.5172
+Mopeds,Road type,Regional road,12117,8.3386,7.8949,8.9992,8.2199
+Mopeds,Road type,Unknown,70,10.3516,4.9065,19.1755,10.0000
+Mopeds,Intersection,Not at intersection,14274,8.5884,8.1135,9.2716,8.8623
+Mopeds,Intersection,At intersection,8984,8.4434,7.7334,9.4563,8.0142
+Mopeds,Lighting,Daylight,16595,7.7098,7.2951,8.3755,7.8638
+Mopeds,Lighting,"Dawn, dusk",1237,8.5633,7.2774,10.1852,8.1649
+Mopeds,Lighting,"Night, no public lighting",360,12.0331,9.2036,15.7402,13.3333
+Mopeds,Lighting,"Night, public lighting present and lit",4417,11.3680,10.2800,12.8866,11.1841
+Mopeds,Lighting,"Night, public lighting present but not lit",141,14.1258,9.3050,21.0670,15.6028
+Mopeds,Lighting,"Unknown, undetermined",508,6.1789,3.6515,11.1438,2.9528
+Mopeds,Year,2017,2858,9.9041,9.0625,11.1049,10.3569
+Mopeds,Year,2018,2924,9.0921,8.1802,10.2484,9.2681
+Mopeds,Year,2019,2907,9.5126,8.6370,10.7193,9.4943
+Mopeds,Year,2020,2299,8.4089,7.3986,9.7805,8.2645
+Mopeds,Year,2021,2943,8.2311,7.2339,9.5364,8.0190
+Mopeds,Year,2022,3178,7.9969,7.0644,9.0797,7.8666
+Mopeds,Year,2023,3149,8.0400,7.1513,9.2557,8.0661
+Mopeds,Year,2024,3000,7.1340,6.1230,8.6733,7.0667
+Mopeds,Month,Jan,1451,7.2625,6.0132,8.7834,7.6499
+Mopeds,Month,Apr,1697,8.8735,7.7036,10.2675,8.7213
+Mopeds,Month,Aug,1976,8.5583,7.4635,10.0057,8.8563
+Mopeds,Month,Dec,1636,7.8490,6.2714,9.8984,7.9462
+Mopeds,Month,Feb,1446,7.8059,6.7727,9.1532,7.9530
+Mopeds,Month,Jul,1812,8.8207,7.8021,10.2890,8.9956
+Mopeds,Month,Jun,2398,9.3838,8.1629,10.9446,9.1326
+Mopeds,Month,Mar,1707,8.7853,7.4417,10.6248,8.5530
+Mopeds,Month,May,2133,10.1645,8.8638,11.6612,9.8922
+Mopeds,Month,Nov,2042,7.8983,6.7956,9.2680,8.0313
+Mopeds,Month,Oct,2472,7.8097,6.9117,9.0141,7.7265
+Mopeds,Month,Sep,2488,8.6512,7.6736,9.9937,8.5209

@@ -1,0 +1,575 @@
+model,spec,term,coefficient,se_robust,se_ordinary,odds_ratio,or_ci_low,or_ci_high,z,p_value,variable,category,accidents,events
+Baseline,full,Region: Brussels-Capital Region,-0.95095,0.06788,0.03021,0.38637,0.33824,0.44136,-14.00878,0.00000,Region,Brussels-Capital Region,30022.00000,1461.00000
+Baseline,full,Region: Walloon Region,-0.20962,0.06875,0.01811,0.81090,0.70867,0.92787,-3.04883,0.00230,Region,Walloon Region,81162.00000,7644.00000
+Baseline,full,Road type: Motorway,0.09734,0.05949,0.02688,1.10224,0.98093,1.23855,1.63630,0.10178,Road type,Motorway,21860.00000,2459.00000
+Baseline,full,Road type: Regional road,0.10769,0.01760,0.01365,1.11371,1.07594,1.15280,6.11787,0.00000,Road type,Regional road,133453.00000,13223.00000
+Baseline,full,Road type: Unknown,0.19780,0.12611,0.09094,1.21871,0.95182,1.56044,1.56846,0.11677,Road type,Unknown,1502.00000,144.00000
+Baseline,full,Intersection: At intersection,-0.12900,0.01777,0.01525,0.87898,0.84889,0.91013,-7.26012,0.00000,Intersection,At intersection,97077.00000,8166.00000
+Baseline,full,"Lighting: Dawn, dusk",-0.00542,0.03271,0.03128,0.99459,0.93284,1.06044,-0.16578,0.86833,Lighting,"Dawn, dusk",13688.00000,1278.00000
+Baseline,full,"Lighting: Night, no public lighting",0.57427,0.03926,0.03469,1.77583,1.64431,1.91788,14.62705,0.00000,Lighting,"Night, no public lighting",7175.00000,1178.00000
+Baseline,full,"Lighting: Night, public lighting present and lit",0.26342,0.01826,0.01715,1.30138,1.25561,1.34881,14.42227,0.00000,Lighting,"Night, public lighting present and lit",56044.00000,6203.00000
+Baseline,full,"Lighting: Night, public lighting present but not lit",0.46888,0.06219,0.05512,1.59820,1.41480,1.80538,7.53948,0.00000,Lighting,"Night, public lighting present but not lit",2912.00000,422.00000
+Baseline,full,"Lighting: Unknown, undetermined",-0.03946,0.06322,0.05873,0.96131,0.84927,1.08812,-0.62415,0.53253,Lighting,"Unknown, undetermined",9918.00000,447.00000
+Baseline,full,Weather: Fog (visibility under 100 m),0.17988,0.08529,0.08907,1.19707,1.01280,1.41488,2.10914,0.03493,Weather,Fog (visibility under 100 m),1193.00000,154.00000
+Baseline,full,Weather: Hail,-0.23377,0.26842,0.25790,0.79154,0.46772,1.33956,-0.87090,0.38381,Weather,Hail,206.00000,17.00000
+Baseline,full,"Weather: Other (thick smoke, ...)",-0.08227,0.09603,0.09547,0.92103,0.76300,1.11178,-0.85662,0.39165,Weather,"Other (thick smoke, ...)",1238.00000,129.00000
+Baseline,full,Weather: Rain,-0.10700,0.02955,0.02958,0.89853,0.84796,0.95211,-3.62037,0.00029,Weather,Rain,29706.00000,2590.00000
+Baseline,full,"Weather: Rain + Strong wind, gusts",0.28009,0.14666,0.14949,1.32324,0.99266,1.76391,1.90980,0.05616,Weather,"Rain + Strong wind, gusts",416.00000,56.00000
+Baseline,full,Weather: Snowfall,-0.17036,0.11221,0.10776,0.84337,0.67686,1.05082,-1.51820,0.12896,Weather,Snowfall,1466.00000,120.00000
+Baseline,full,"Weather: Strong wind, gusts",0.24062,0.10650,0.10360,1.27204,1.03239,1.56731,2.25930,0.02386,Weather,"Strong wind, gusts",814.00000,116.00000
+Baseline,full,"Weather: Unknown, undetermined",-0.23075,0.04184,0.04010,0.79394,0.73143,0.86179,-5.51524,0.00000,Weather,"Unknown, undetermined",27763.00000,1469.00000
+Baseline,full,Weather: Other / combined,0.18841,0.29450,0.31731,1.20732,0.67786,2.15033,0.63975,0.52233,Weather,Other / combined,94.00000,13.00000
+Baseline,full,Road surface: Clean,-0.04756,0.05011,0.02510,0.95355,0.86434,1.05197,-0.94907,0.34258,Road surface,Clean,31155.00000,2768.00000
+Baseline,full,"Road surface: Dirty (sand, gravel, leaves, ...)",-0.31874,0.08302,0.08010,0.72707,0.61788,0.85555,-3.83909,0.00012,Road surface,"Dirty (sand, gravel, leaves, ...)",1661.00000,189.00000
+Baseline,full,Road surface: Dry + Clean,0.13344,0.05134,0.02762,1.14276,1.03337,1.26372,2.59940,0.00934,Road surface,Dry + Clean,20509.00000,2036.00000
+Baseline,full,"Road surface: Dry + Dirty (sand, gravel, leaves, ...)",-0.35105,0.30909,0.32439,0.70395,0.38410,1.29016,-1.13575,0.25606,Road surface,"Dry + Dirty (sand, gravel, leaves, ...)",111.00000,11.00000
+Baseline,full,"Road surface: Ice, snow",-0.18539,0.07120,0.07135,0.83078,0.72257,0.95519,-2.60384,0.00922,Road surface,"Ice, snow",3095.00000,291.00000
+Baseline,full,"Road surface: Unknown, undetermined",-0.69112,0.05730,0.04850,0.50101,0.44779,0.56056,-12.06196,0.00000,Road surface,"Unknown, undetermined",24236.00000,1086.00000
+Baseline,full,"Road surface: Wet, puddles",-0.08100,0.02673,0.02413,0.92219,0.87513,0.97179,-3.03086,0.00244,Road surface,"Wet, puddles",51883.00000,4819.00000
+Baseline,full,"Road surface: Wet, puddles + Clean",0.13223,0.08897,0.06596,1.14137,0.95872,1.35881,1.48618,0.13723,Road surface,"Wet, puddles + Clean",3080.00000,295.00000
+Baseline,full,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",0.11130,0.20689,0.19010,1.11773,0.74513,1.67664,0.53796,0.59061,Road surface,"Wet, puddles + Dirty (sand, gravel, leaves, ...)",249.00000,34.00000
+Baseline,full,"Road surface: Wet, puddles + Ice or snow",0.22337,0.26754,0.26424,1.25029,0.74007,2.11224,0.83492,0.40377,Road surface,"Wet, puddles + Ice or snow",135.00000,19.00000
+Baseline,full,Road surface: Other / combined,0.23245,0.43926,0.44321,1.26169,0.53340,2.98440,0.52919,0.59667,Road surface,Other / combined,55.00000,6.00000
+Baseline,full,Year: 2018,-0.03120,0.02545,0.02450,0.96928,0.92212,1.01885,-1.22605,0.22018,Year,2018,38453.00000,3841.00000
+Baseline,full,Year: 2019,-0.00232,0.02682,0.02452,0.99769,0.94660,1.05154,-0.08634,0.93120,Year,2019,37719.00000,3847.00000
+Baseline,full,Year: 2020,0.01529,0.02837,0.02586,1.01540,0.96048,1.07347,0.53877,0.59005,Year,2020,30251.00000,3202.00000
+Baseline,full,Year: 2021,-0.07126,0.02912,0.02544,0.93122,0.87956,0.98591,-2.44751,0.01438,Year,2021,34660.00000,3338.00000
+Baseline,full,Year: 2022,-0.08926,0.03134,0.02494,0.91460,0.86012,0.97254,-2.84869,0.00439,Year,2022,37650.00000,3621.00000
+Baseline,full,Year: 2023,-0.08897,0.03517,0.02514,0.91487,0.85393,0.98016,-2.52967,0.01142,Year,2023,36858.00000,3524.00000
+Baseline,full,Year: 2024,-0.16800,0.03935,0.02576,0.84535,0.78261,0.91312,-4.26982,0.00002,Year,2024,35916.00000,3184.00000
+Baseline,full,Month: Apr,0.13830,0.03810,0.03456,1.14832,1.06570,1.23735,3.63015,0.00028,Month,Apr,21137.00000,2200.00000
+Baseline,full,Month: Aug,0.12755,0.03345,0.03355,1.13604,1.06395,1.21301,3.81319,0.00014,Month,Aug,23708.00000,2540.00000
+Baseline,full,Month: Dec,0.01155,0.03263,0.03412,1.01162,0.94894,1.07843,0.35391,0.72341,Month,Dec,22288.00000,2044.00000
+Baseline,full,Month: Feb,0.03888,0.03612,0.03471,1.03965,0.96860,1.11591,1.07658,0.28167,Month,Feb,20617.00000,1945.00000
+Baseline,full,Month: Jul,0.18021,0.03751,0.03346,1.19747,1.11259,1.28883,4.80438,0.00000,Month,Jul,23502.00000,2628.00000
+Baseline,full,Month: Jun,0.10505,0.03410,0.03286,1.11077,1.03896,1.18754,3.08091,0.00206,Month,Jun,28471.00000,2885.00000
+Baseline,full,Month: Mar,0.01780,0.03495,0.03453,1.01796,0.95055,1.09014,0.50919,0.61062,Month,Mar,22235.00000,2061.00000
+Baseline,full,Month: May,0.13054,0.03298,0.03312,1.13945,1.06812,1.21554,3.95811,0.00008,Month,May,26315.00000,2740.00000
+Baseline,full,Month: Nov,-0.01717,0.03552,0.03369,0.98298,0.91687,1.05385,-0.48341,0.62880,Month,Nov,24430.00000,2195.00000
+Baseline,full,Month: Oct,0.02801,0.03438,0.03271,1.02841,0.96139,1.10010,0.81474,0.41522,Month,Oct,27882.00000,2642.00000
+Baseline,full,Month: Sep,0.05546,0.03076,0.03278,1.05703,0.99519,1.12272,1.80310,0.07137,Month,Sep,27926.00000,2747.00000
+Baseline,full,Collision type: Between 2 drivers: Flank against flank,-0.02385,0.04266,0.03595,0.97643,0.89811,1.06158,-0.55917,0.57605,Collision type,Between 2 drivers: Flank against flank,19385.00000,1355.00000
+Baseline,full,Collision type: Between 2 drivers: Head-on collision,0.86274,0.04603,0.02990,2.36964,2.16522,2.59336,18.74348,0.00000,Collision type,Between 2 drivers: Head-on collision,21010.00000,3003.00000
+Baseline,full,Collision type: Between 2 drivers: Side collision (front/rear against flank),0.21911,0.03063,0.02567,1.24497,1.17244,1.32199,7.15454,0.00000,Collision type,Between 2 drivers: Side collision (front/rear against flank),86280.00000,6989.00000
+Baseline,full,Collision type: Chain collision (3 or more drivers),-0.04605,0.05254,0.05265,0.95499,0.86153,1.05858,-0.87648,0.38077,Collision type,Chain collision (3 or more drivers),8553.00000,465.00000
+Baseline,full,Collision type: Collision type not specified,0.67645,0.12312,0.07044,1.96687,1.54518,2.50365,5.49441,0.00000,Collision type,Collision type not specified,14528.00000,835.00000
+Baseline,full,Collision type: Other or unknown,0.58809,0.10430,0.06817,1.80055,1.46765,2.20896,5.63847,0.00000,Collision type,Other or unknown,11140.00000,915.00000
+Baseline,full,Collision type: Road user against obstacle on the roadway,0.81677,0.05641,0.04489,2.26319,2.02628,2.52779,14.47815,0.00000,Collision type,Road user against obstacle on the roadway,5924.00000,794.00000
+Baseline,full,Collision type: Road user against obstacle outside the roadway,1.11742,0.03396,0.02710,3.05697,2.86010,3.26739,32.90127,0.00000,Collision type,Road user against obstacle outside the roadway,34827.00000,5120.00000
+Baseline,full,"Collision type: Single road user, no obstacle (incl. fall)",0.81306,0.05031,0.03110,2.25480,2.04305,2.48849,16.15955,0.00000,Collision type,"Single road user, no obstacle (incl. fall)",19053.00000,2644.00000
+Baseline,full,Group involved: Van / light truck,0.26538,0.02380,0.02379,1.30393,1.24449,1.36620,11.14941,0.00000,Group involved,Van / light truck,23557.00000,2351.00000
+Baseline,full,Group involved: Truck,1.07706,0.03204,0.02714,2.93604,2.75733,3.12633,33.61652,0.00000,Group involved,Truck,12595.00000,2178.00000
+Baseline,full,Group involved: Bus,0.27499,0.08196,0.05644,1.31652,1.12114,1.54596,3.35505,0.00079,Group involved,Bus,4095.00000,367.00000
+Baseline,full,Group involved: Motorcycle,1.23642,0.02680,0.02230,3.44325,3.26706,3.62894,46.13666,0.00000,Group involved,Motorcycle,19792.00000,3749.00000
+Baseline,full,Group involved: Moped,0.20175,0.03239,0.02638,1.22354,1.14827,1.30373,6.22841,0.00000,Group involved,Moped,23258.00000,1985.00000
+Baseline,full,Group involved: Bicycle,0.56821,0.03519,0.01826,1.76510,1.64746,1.89113,16.14786,0.00000,Group involved,Bicycle,71881.00000,7852.00000
+Baseline,full,Group involved: Pedestrian,1.20122,0.04362,0.02860,3.32416,3.05178,3.62085,27.53913,0.00000,Group involved,Pedestrian,29897.00000,3820.00000
+Baseline,full,Group involved: Other road user,0.72698,0.04560,0.03861,2.06882,1.89194,2.26224,15.94234,0.00000,Group involved,Other road user,6356.00000,871.00000
+Baseline,full,Group involved: Unknown,0.22045,0.10718,0.05559,1.24664,1.01044,1.53805,2.05694,0.03969,Group involved,Unknown,31086.00000,2133.00000
+Cyclists,full,Counterpart: Bus,0.53436,0.12725,0.12675,1.70636,1.32971,2.18970,4.19942,0.00003,Counterpart,Bus,590.00000,74.00000
+Cyclists,full,Counterpart: Moped,-0.34452,0.08121,0.08491,0.70856,0.60429,0.83083,-4.24204,0.00002,Counterpart,Moped,2423.00000,162.00000
+Cyclists,full,Counterpart: Motorcycle,0.55266,0.10899,0.11806,1.73787,1.40359,2.15177,5.07056,0.00000,Counterpart,Motorcycle,629.00000,87.00000
+Cyclists,full,Counterpart: Other road user,0.57334,0.08706,0.09105,1.77418,1.49585,2.10428,6.58545,0.00000,Counterpart,Other road user,1130.00000,150.00000
+Cyclists,full,Counterpart: Pedestrian,0.17522,0.07186,0.07182,1.19151,1.03497,1.37173,2.43839,0.01475,Counterpart,Pedestrian,3617.00000,383.00000
+Cyclists,full,Counterpart: Same group (Bicycle),0.39315,0.04190,0.04301,1.48165,1.36484,1.60845,9.38379,0.00000,Counterpart,Same group (Bicycle),6812.00000,906.00000
+Cyclists,full,Counterpart: Truck,1.44837,0.08121,0.06376,4.25616,3.62986,4.99051,17.83472,0.00000,Counterpart,Truck,1362.00000,385.00000
+Cyclists,full,Counterpart: Unknown,-0.16361,0.14594,0.17155,0.84907,0.63785,1.13025,-1.12105,0.26226,Counterpart,Unknown,530.00000,38.00000
+Cyclists,full,Counterpart: Van / light truck,0.34256,0.04969,0.05161,1.40854,1.27784,1.55262,6.89424,0.00000,Counterpart,Van / light truck,4226.00000,492.00000
+Cyclists,full,Region: Brussels-Capital Region,-1.24066,0.09410,0.06903,0.28919,0.24049,0.34777,-13.18483,0.00000,Region,Brussels-Capital Region,6538.00000,266.00000
+Cyclists,full,Region: Walloon Region,-0.26917,0.09497,0.05326,0.76402,0.63426,0.92032,-2.83433,0.00459,Region,Walloon Region,5660.00000,575.00000
+Cyclists,full,Road type: Motorway,0.37061,0.17313,0.23533,1.44862,1.03178,2.03388,2.14069,0.03230,Road type,Motorway,132.00000,23.00000
+Cyclists,full,Road type: Regional road,-0.01238,0.02592,0.02541,0.98770,0.93877,1.03917,-0.47760,0.63293,Road type,Regional road,29579.00000,3083.00000
+Cyclists,full,Road type: Unknown,0.16213,0.20826,0.18024,1.17601,0.78188,1.76882,0.77849,0.43628,Road type,Unknown,301.00000,37.00000
+Cyclists,full,Intersection: At intersection,-0.05145,0.03435,0.02727,0.94985,0.88800,1.01601,-1.49754,0.13425,Intersection,At intersection,31156.00000,3034.00000
+Cyclists,full,"Lighting: Dawn, dusk",-0.22057,0.05883,0.06269,0.80207,0.71472,0.90008,-3.74947,0.00018,Lighting,"Dawn, dusk",3658.00000,311.00000
+Cyclists,full,"Lighting: Night, no public lighting",0.24435,0.10282,0.10641,1.27679,1.04376,1.56186,2.37651,0.01748,Lighting,"Night, no public lighting",706.00000,114.00000
+Cyclists,full,"Lighting: Night, public lighting present and lit",0.10835,0.03977,0.03983,1.11444,1.03087,1.20478,2.72438,0.00644,Lighting,"Night, public lighting present and lit",8163.00000,948.00000
+Cyclists,full,"Lighting: Night, public lighting present but not lit",0.14320,0.15579,0.15997,1.15396,0.85032,1.56603,0.91919,0.35799,Lighting,"Night, public lighting present but not lit",344.00000,48.00000
+Cyclists,full,"Lighting: Unknown, undetermined",-0.15409,0.11473,0.11285,0.85720,0.68458,1.07335,-1.34306,0.17925,Lighting,"Unknown, undetermined",2049.00000,110.00000
+Cyclists,full,Weather: Fog (visibility under 100 m),-0.16913,0.28045,0.25320,0.84440,0.48734,1.46308,-0.60307,0.54646,Weather,Fog (visibility under 100 m),183.00000,18.00000
+Cyclists,full,"Weather: Other (thick smoke, ...)",-0.01452,0.17688,0.16970,0.98559,0.69685,1.39398,-0.08207,0.93459,Weather,"Other (thick smoke, ...)",341.00000,41.00000
+Cyclists,full,Weather: Rain,-0.23048,0.06695,0.06966,0.79415,0.69649,0.90550,-3.44269,0.00058,Weather,Rain,5014.00000,429.00000
+Cyclists,full,"Weather: Rain + Strong wind, gusts",0.11050,0.47307,0.49427,1.11684,0.44188,2.82280,0.23358,0.81531,Weather,"Rain + Strong wind, gusts",39.00000,5.00000
+Cyclists,full,Weather: Snowfall,-0.48371,0.36448,0.34855,0.61649,0.30177,1.25944,-1.32713,0.18447,Weather,Snowfall,129.00000,10.00000
+Cyclists,full,"Weather: Strong wind, gusts",0.16423,0.22997,0.21986,1.17848,0.75088,1.84958,0.71412,0.47515,Weather,"Strong wind, gusts",163.00000,26.00000
+Cyclists,full,"Weather: Unknown, undetermined",-0.26847,0.08062,0.07638,0.76455,0.65281,0.89542,-3.33021,0.00087,Weather,"Unknown, undetermined",6622.00000,412.00000
+Cyclists,full,Road surface: Clean,-0.02782,0.07593,0.06675,0.97256,0.83808,1.12861,-0.36647,0.71401,Road surface,Clean,3980.00000,333.00000
+Cyclists,full,"Road surface: Dirty (sand, gravel, leaves, ...)",-0.24945,0.13980,0.13605,0.77923,0.59246,1.02487,-1.78429,0.07438,Road surface,"Dirty (sand, gravel, leaves, ...)",490.00000,66.00000
+Cyclists,full,Road surface: Dry + Clean,0.35284,0.07058,0.06493,1.42311,1.23925,1.63425,4.99908,0.00000,Road surface,Dry + Clean,3215.00000,349.00000
+Cyclists,full,"Road surface: Ice, snow",-0.02307,0.17539,0.15156,0.97719,0.69292,1.37808,-0.13155,0.89534,Road surface,"Ice, snow",449.00000,60.00000
+Cyclists,full,"Road surface: Unknown, undetermined",-0.57587,0.08160,0.08362,0.56222,0.47912,0.65972,-7.05746,0.00000,Road surface,"Unknown, undetermined",6189.00000,350.00000
+Cyclists,full,"Road surface: Wet, puddles",-0.01849,0.04821,0.05196,0.98168,0.89317,1.07896,-0.38354,0.70132,Road surface,"Wet, puddles",9124.00000,896.00000
+Cyclists,full,"Road surface: Wet, puddles + Clean",0.39572,0.18813,0.21979,1.48545,1.02734,2.14784,2.10339,0.03543,Road surface,"Wet, puddles + Clean",268.00000,25.00000
+Cyclists,full,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",0.37109,0.45630,0.39967,1.44931,0.59259,3.54461,0.81326,0.41607,Road surface,"Wet, puddles + Dirty (sand, gravel, leaves, ...)",48.00000,8.00000
+Cyclists,full,Road surface: Other / combined,-1.73861,1.02030,1.01757,0.17576,0.02379,1.29846,-1.70402,0.08838,Road surface,Other / combined,39.00000,1.00000
+Cyclists,full,Year: 2018,0.01591,0.05562,0.05074,1.01603,0.91110,1.13306,0.28599,0.77489,Year,2018,8601.00000,943.00000
+Cyclists,full,Year: 2019,0.00049,0.05497,0.05064,1.00049,0.89830,1.11430,0.00893,0.99287,Year,2019,8856.00000,952.00000
+Cyclists,full,Year: 2020,0.09470,0.06018,0.05032,1.09932,0.97702,1.23694,1.57366,0.11557,Year,2020,8368.00000,1008.00000
+Cyclists,full,Year: 2021,-0.02903,0.05109,0.05057,0.97139,0.87882,1.07371,-0.56815,0.56994,Year,2021,8897.00000,968.00000
+Cyclists,full,Year: 2022,-0.02736,0.05752,0.04891,0.97301,0.86928,1.08913,-0.47563,0.63434,Year,2022,10273.00000,1126.00000
+Cyclists,full,Year: 2023,0.00283,0.05520,0.04946,1.00283,0.90000,1.11741,0.05125,0.95913,Year,2023,9707.00000,1072.00000
+Cyclists,full,Year: 2024,-0.11897,0.06641,0.05119,0.88783,0.77947,1.01126,-1.79140,0.07323,Year,2024,9190.00000,906.00000
+Cyclists,full,Month: Apr,0.06380,0.06972,0.06977,1.06588,0.92973,1.22196,0.91500,0.36019,Month,Apr,5317.00000,605.00000
+Cyclists,full,Month: Aug,0.05608,0.07392,0.06716,1.05768,0.91502,1.22258,0.75859,0.44810,Month,Aug,6280.00000,748.00000
+Cyclists,full,Month: Dec,-0.04963,0.06622,0.07455,0.95158,0.83575,1.08346,-0.74948,0.45357,Month,Dec,4133.00000,402.00000
+Cyclists,full,Month: Feb,0.02461,0.07076,0.07254,1.02491,0.89219,1.17739,0.34780,0.72799,Month,Feb,4417.00000,464.00000
+Cyclists,full,Month: Jul,0.14787,0.06812,0.06672,1.15936,1.01445,1.32497,2.17055,0.02996,Month,Jul,6221.00000,801.00000
+Cyclists,full,Month: Jun,0.07195,0.06839,0.06477,1.07460,0.93979,1.22875,1.05207,0.29277,Month,Jun,8120.00000,956.00000
+Cyclists,full,Month: Mar,-0.05640,0.07597,0.07102,0.94516,0.81440,1.09691,-0.74241,0.45784,Month,Mar,5234.00000,525.00000
+Cyclists,full,Month: May,0.02753,0.06494,0.06627,1.02792,0.90506,1.16745,0.42397,0.67158,Month,May,7242.00000,816.00000
+Cyclists,full,Month: Nov,-0.06534,0.06509,0.06968,0.93675,0.82455,1.06421,-1.00388,0.31543,Month,Nov,5645.00000,545.00000
+Cyclists,full,Month: Oct,-0.00329,0.06872,0.06602,0.99672,0.87112,1.14042,-0.04787,0.96182,Month,Oct,7246.00000,750.00000
+Cyclists,full,Month: Sep,-0.04179,0.06491,0.06574,0.95907,0.84449,1.08918,-0.64389,0.51965,Month,Sep,7855.00000,813.00000
+Cyclists,full,Collision type: Between 2 drivers: Flank against flank,-0.23335,0.06052,0.05944,0.79188,0.70331,0.89160,-3.85605,0.00012,Collision type,Between 2 drivers: Flank against flank,8245.00000,743.00000
+Cyclists,full,Collision type: Between 2 drivers: Head-on collision,0.08499,0.06557,0.05670,1.08871,0.95740,1.23802,1.29612,0.19493,Collision type,Between 2 drivers: Head-on collision,8351.00000,1010.00000
+Cyclists,full,Collision type: Between 2 drivers: Side collision (front/rear against flank),-0.16227,0.05005,0.04915,0.85021,0.77076,0.93785,-3.24187,0.00119,Collision type,Between 2 drivers: Side collision (front/rear against flank),35848.00000,3278.00000
+Cyclists,full,Collision type: Chain collision (3 or more drivers),0.00816,0.21546,0.18738,1.00819,0.66091,1.53797,0.03787,0.96979,Collision type,Chain collision (3 or more drivers),304.00000,35.00000
+Cyclists,full,Collision type: Road user against obstacle on the roadway,0.65534,0.09341,0.07388,1.92579,1.60361,2.31270,7.01585,0.00000,Collision type,Road user against obstacle on the roadway,2321.00000,381.00000
+Cyclists,full,Collision type: Road user against obstacle outside the roadway,0.72842,0.08588,0.08229,2.07180,1.75085,2.45158,8.48228,0.00000,Collision type,Road user against obstacle outside the roadway,1487.00000,273.00000
+Cyclists,full,"Collision type: Single road user, no obstacle (incl. fall)",0.79032,0.08518,0.05754,2.20410,1.86521,2.60456,9.27865,0.00000,Collision type,"Single road user, no obstacle (incl. fall)",6287.00000,1154.00000
+Pedestrians,full,Counterpart: Bicycle,-0.24124,0.06775,0.06165,0.78566,0.68795,0.89723,-3.56051,0.00037,Counterpart,Bicycle,3617.00000,383.00000
+Pedestrians,full,Counterpart: Bus,0.26149,0.11873,0.10580,1.29886,1.02920,1.63918,2.20241,0.02764,Counterpart,Bus,810.00000,114.00000
+Pedestrians,full,Counterpart: Moped,-0.66273,0.10927,0.12080,0.51544,0.41607,0.63855,-6.06490,0.00000,Counterpart,Moped,990.00000,80.00000
+Pedestrians,full,Counterpart: Motorcycle,0.37172,0.12550,0.14112,1.45023,1.13399,1.85467,2.96189,0.00306,Counterpart,Motorcycle,416.00000,64.00000
+Pedestrians,full,Counterpart: Other road user,0.66460,0.07916,0.08805,1.94371,1.66438,2.26993,8.39595,0.00000,Counterpart,Other road user,936.00000,188.00000
+Pedestrians,full,Counterpart: Truck,1.65326,0.11271,0.09983,5.22401,4.18857,6.51541,14.66870,0.00000,Counterpart,Truck,482.00000,219.00000
+Pedestrians,full,Counterpart: Unknown,-0.68657,0.29727,0.20992,0.50330,0.28105,0.90129,-2.30961,0.02091,Counterpart,Unknown,456.00000,25.00000
+Pedestrians,full,Counterpart: Van / light truck,0.25352,0.06891,0.07358,1.28855,1.12576,1.47489,3.67903,0.00023,Counterpart,Van / light truck,1638.00000,253.00000
+Pedestrians,full,Region: Brussels-Capital Region,-0.89159,0.14317,0.05957,0.41000,0.30968,0.54282,-6.22739,0.00000,Region,Brussels-Capital Region,6561.00000,462.00000
+Pedestrians,full,Region: Walloon Region,-0.30412,0.11186,0.04871,0.73777,0.59252,0.91862,-2.71879,0.00655,Region,Walloon Region,8733.00000,1085.00000
+Pedestrians,full,Road type: Motorway,1.84399,0.18089,0.18573,6.32174,4.43462,9.01189,10.19380,0.00000,Road type,Motorway,147.00000,90.00000
+Pedestrians,full,Road type: Regional road,0.32854,0.04208,0.03638,1.38894,1.27898,1.50835,7.80750,0.00000,Road type,Regional road,12234.00000,1837.00000
+Pedestrians,full,Road type: Unknown,0.28969,0.23694,0.27707,1.33601,0.83970,2.12567,1.22264,0.22147,Road type,Unknown,123.00000,16.00000
+Pedestrians,full,Intersection: At intersection,-0.15087,0.04178,0.04287,0.85996,0.79234,0.93334,-3.61108,0.00030,Intersection,At intersection,7680.00000,906.00000
+Pedestrians,full,"Lighting: Dawn, dusk",0.08778,0.07886,0.08149,1.09175,0.93539,1.27425,1.11308,0.26567,Lighting,"Dawn, dusk",1611.00000,206.00000
+Pedestrians,full,"Lighting: Night, no public lighting",0.71065,0.12701,0.12443,2.03532,1.58680,2.61061,5.59543,0.00000,Lighting,"Night, no public lighting",414.00000,101.00000
+Pedestrians,full,"Lighting: Night, public lighting present and lit",0.45827,0.04994,0.04698,1.58134,1.43389,1.74395,9.17663,0.00000,Lighting,"Night, public lighting present and lit",5704.00000,974.00000
+Pedestrians,full,"Lighting: Night, public lighting present but not lit",0.79565,0.16657,0.16339,2.21589,1.59868,3.07137,4.77676,0.00000,Lighting,"Night, public lighting present but not lit",235.00000,58.00000
+Pedestrians,full,"Lighting: Unknown, undetermined",0.07497,0.15664,0.16707,1.07785,0.79291,1.46519,0.47860,0.63222,Lighting,"Unknown, undetermined",882.00000,50.00000
+Pedestrians,full,Weather: Fog (visibility under 100 m),0.12323,0.31438,0.31218,1.13115,0.61082,2.09470,0.39199,0.69507,Weather,Fog (visibility under 100 m),75.00000,14.00000
+Pedestrians,full,"Weather: Other (thick smoke, ...)",-0.28874,0.26011,0.30026,0.74921,0.44998,1.24740,-1.11009,0.26696,Weather,"Other (thick smoke, ...)",116.00000,13.00000
+Pedestrians,full,Weather: Rain,-0.16149,0.07054,0.07624,0.85088,0.74100,0.97704,-2.28926,0.02206,Weather,Rain,3656.00000,523.00000
+Pedestrians,full,"Weather: Rain + Strong wind, gusts",-0.07065,0.37099,0.39589,0.93179,0.45032,1.92800,-0.19044,0.84896,Weather,"Rain + Strong wind, gusts",53.00000,8.00000
+Pedestrians,full,Weather: Snowfall,-0.41846,0.27073,0.28881,0.65806,0.38709,1.11870,-1.54568,0.12218,Weather,Snowfall,154.00000,17.00000
+Pedestrians,full,"Weather: Strong wind, gusts",0.10845,0.36410,0.33704,1.11455,0.54597,2.27522,0.29785,0.76582,Weather,"Strong wind, gusts",67.00000,12.00000
+Pedestrians,full,"Weather: Unknown, undetermined",-0.35310,0.09942,0.10579,0.70250,0.57813,0.85364,-3.55173,0.00038,Weather,"Unknown, undetermined",3341.00000,195.00000
+Pedestrians,full,Road surface: Clean,-0.12641,0.10483,0.06631,0.88125,0.71758,1.08226,-1.20590,0.22785,Road surface,Clean,3932.00000,406.00000
+Pedestrians,full,"Road surface: Dirty (sand, gravel, leaves, ...)",0.05591,0.33877,0.32632,1.05750,0.54439,2.05423,0.16503,0.86892,Road surface,"Dirty (sand, gravel, leaves, ...)",83.00000,12.00000
+Pedestrians,full,Road surface: Dry + Clean,-0.07977,0.12446,0.07807,0.92333,0.72347,1.17841,-0.64094,0.52156,Road surface,Dry + Clean,2543.00000,252.00000
+Pedestrians,full,"Road surface: Ice, snow",0.05038,0.21840,0.24075,1.05167,0.68545,1.61356,0.23068,0.81756,Road surface,"Ice, snow",191.00000,25.00000
+Pedestrians,full,"Road surface: Unknown, undetermined",-0.85475,0.14008,0.12576,0.42539,0.32326,0.55979,-6.10182,0.00000,Road surface,"Unknown, undetermined",2957.00000,141.00000
+Pedestrians,full,"Road surface: Wet, puddles",0.12727,0.06984,0.06816,1.13572,0.99042,1.30234,1.82223,0.06842,Road surface,"Wet, puddles",5427.00000,821.00000
+Pedestrians,full,"Road surface: Wet, puddles + Clean",0.54966,0.19141,0.15437,1.73266,1.19065,2.52141,2.87164,0.00408,Road surface,"Wet, puddles + Clean",353.00000,63.00000
+Pedestrians,full,Road surface: Other / combined,0.70894,0.37292,0.39390,2.03183,0.97825,4.22013,1.90104,0.05730,Road surface,Other / combined,43.00000,9.00000
+Pedestrians,full,Year: 2018,-0.17063,0.06768,0.06660,0.84313,0.73838,0.96274,-2.52102,0.01170,Year,2018,4084.00000,510.00000
+Pedestrians,full,Year: 2019,-0.14886,0.06283,0.06594,0.86169,0.76185,0.97461,-2.36931,0.01782,Year,2019,4170.00000,535.00000
+Pedestrians,full,Year: 2020,-0.11611,0.06740,0.07300,0.89038,0.78020,1.01612,-1.72272,0.08494,Year,2020,2904.00000,380.00000
+Pedestrians,full,Year: 2021,-0.21324,0.07309,0.07074,0.80797,0.70013,0.93241,-2.91747,0.00353,Year,2021,3460.00000,415.00000
+Pedestrians,full,Year: 2022,-0.16168,0.07637,0.06873,0.85072,0.73245,0.98808,-2.11708,0.03425,Year,2022,3724.00000,459.00000
+Pedestrians,full,Year: 2023,-0.11966,0.08367,0.06747,0.88722,0.75304,1.04532,-1.43021,0.15266,Year,2023,3816.00000,499.00000
+Pedestrians,full,Year: 2024,-0.21134,0.08543,0.07045,0.80950,0.68469,0.95706,-2.47372,0.01337,Year,2024,3584.00000,420.00000
+Pedestrians,full,Month: Apr,0.08574,0.08944,0.09504,1.08953,0.91434,1.29828,0.95868,0.33772,Month,Apr,1906.00000,232.00000
+Pedestrians,full,Month: Aug,0.11430,0.10796,0.09404,1.12109,0.90729,1.38528,1.05880,0.28969,Month,Aug,1867.00000,243.00000
+Pedestrians,full,Month: Dec,0.04729,0.07386,0.07852,1.04842,0.90712,1.21175,0.64021,0.52204,Month,Dec,3061.00000,442.00000
+Pedestrians,full,Month: Feb,0.00681,0.08412,0.08441,1.00684,0.85380,1.18731,0.08101,0.93543,Month,Feb,2578.00000,324.00000
+Pedestrians,full,Month: Jul,0.13388,0.09880,0.09303,1.14326,0.94198,1.38753,1.35505,0.17540,Month,Jul,1945.00000,253.00000
+Pedestrians,full,Month: Jun,0.02498,0.09318,0.08947,1.02530,0.85415,1.23073,0.26812,0.78861,Month,Jun,2562.00000,290.00000
+Pedestrians,full,Month: Mar,-0.02418,0.08647,0.08875,0.97611,0.82393,1.15640,-0.27961,0.77978,Month,Mar,2393.00000,283.00000
+Pedestrians,full,Month: May,0.17233,0.09030,0.08689,1.18806,0.99534,1.41810,1.90830,0.05635,Month,May,2537.00000,331.00000
+Pedestrians,full,Month: Nov,0.04092,0.08015,0.08076,1.04176,0.89032,1.21897,0.51049,0.60971,Month,Nov,2824.00000,390.00000
+Pedestrians,full,Month: Oct,0.00157,0.07911,0.08326,1.00157,0.85770,1.16956,0.01980,0.98420,Month,Oct,2874.00000,356.00000
+Pedestrians,full,Month: Sep,0.02792,0.08819,0.08713,1.02832,0.86508,1.22235,0.31662,0.75153,Month,Sep,2613.00000,305.00000
+Motorcyclists,full,Counterpart: Bicycle,-0.39990,0.11011,0.12141,0.67039,0.54026,0.83187,-3.63179,0.00028,Counterpart,Bicycle,629.00000,87.00000
+Motorcyclists,full,Counterpart: Bus,0.05054,0.24746,0.29406,1.05184,0.64760,1.70840,0.20424,0.83816,Counterpart,Bus,89.00000,15.00000
+Motorcyclists,full,Counterpart: Moped,-0.29124,0.26062,0.26223,0.74734,0.44841,1.24556,-1.11747,0.26379,Counterpart,Moped,126.00000,18.00000
+Motorcyclists,full,Counterpart: Other road user,0.90829,0.18254,0.16889,2.48009,1.73415,3.54689,4.97590,0.00000,Counterpart,Other road user,172.00000,59.00000
+Motorcyclists,full,Counterpart: Pedestrian,0.51622,0.14484,0.15139,1.67568,1.26155,2.22576,3.56418,0.00036,Counterpart,Pedestrian,416.00000,64.00000
+Motorcyclists,full,Counterpart: Same group (Motorcycle),0.12899,0.15733,0.15005,1.13768,0.83579,1.54862,0.81986,0.41230,Counterpart,Same group (Motorcycle),332.00000,59.00000
+Motorcyclists,full,Counterpart: Truck,0.81404,0.11201,0.12000,2.25700,1.81211,2.81113,7.26732,0.00000,Counterpart,Truck,369.00000,115.00000
+Motorcyclists,full,Counterpart: Unknown,-0.38322,0.72671,0.61659,0.68166,0.16405,2.83241,-0.52733,0.59796,Counterpart,Unknown,38.00000,3.00000
+Motorcyclists,full,Counterpart: Van / light truck,0.09083,0.08303,0.08438,1.09508,0.93062,1.28862,1.09397,0.27397,Counterpart,Van / light truck,1079.00000,201.00000
+Motorcyclists,full,Region: Brussels-Capital Region,-1.20381,0.07415,0.07663,0.30005,0.25946,0.34698,-16.23541,0.00000,Region,Brussels-Capital Region,3354.00000,247.00000
+Motorcyclists,full,Region: Walloon Region,-0.30422,0.08830,0.05021,0.73770,0.62047,0.87708,-3.44543,0.00057,Region,Walloon Region,6752.00000,1264.00000
+Motorcyclists,full,Road type: Motorway,0.08085,0.08997,0.07754,1.08420,0.90892,1.29329,0.89858,0.36888,Road type,Motorway,1384.00000,299.00000
+Motorcyclists,full,Road type: Regional road,0.11368,0.04797,0.04052,1.12040,1.01986,1.23084,2.37002,0.01779,Road type,Regional road,10184.00000,1979.00000
+Motorcyclists,full,Road type: Unknown,0.31860,0.30252,0.26078,1.37520,0.76007,2.48817,1.05314,0.29228,Road type,Unknown,121.00000,20.00000
+Motorcyclists,full,Intersection: At intersection,-0.06018,0.04077,0.04346,0.94160,0.86928,1.01993,-1.47599,0.13995,Intersection,At intersection,6605.00000,1174.00000
+Motorcyclists,full,"Lighting: Dawn, dusk",0.15100,0.08832,0.09173,1.16299,0.97814,1.38279,1.70969,0.08732,Lighting,"Dawn, dusk",842.00000,175.00000
+Motorcyclists,full,"Lighting: Night, no public lighting",0.69994,0.14533,0.14468,2.01362,1.51449,2.67725,4.81606,0.00000,Lighting,"Night, no public lighting",248.00000,85.00000
+Motorcyclists,full,"Lighting: Night, public lighting present and lit",0.27060,0.06281,0.05570,1.31075,1.15893,1.48245,4.30845,0.00002,Lighting,"Night, public lighting present and lit",2996.00000,608.00000
+Motorcyclists,full,"Lighting: Night, public lighting present but not lit",0.59198,0.24356,0.23488,1.80756,1.12143,2.91349,2.43055,0.01508,Lighting,"Night, public lighting present but not lit",96.00000,29.00000
+Motorcyclists,full,"Lighting: Unknown, undetermined",-0.20851,0.29167,0.27665,0.81179,0.45832,1.43787,-0.71489,0.47468,Lighting,"Unknown, undetermined",210.00000,17.00000
+Motorcyclists,full,Weather: Fog (visibility under 100 m),0.36538,0.37524,0.34370,1.44106,0.69068,3.00670,0.97374,0.33019,Weather,Fog (visibility under 100 m),47.00000,13.00000
+Motorcyclists,full,"Weather: Other (thick smoke, ...)",-0.55387,0.33899,0.33398,0.57472,0.29573,1.11689,-1.63389,0.10228,Weather,"Other (thick smoke, ...)",79.00000,11.00000
+Motorcyclists,full,Weather: Rain,-0.15565,0.11347,0.10970,0.85586,0.68520,1.06903,-1.37174,0.17015,Weather,Rain,1395.00000,190.00000
+Motorcyclists,full,"Weather: Strong wind, gusts",0.32973,0.36884,0.39157,1.39060,0.67490,2.86525,0.89398,0.37133,Weather,"Strong wind, gusts",38.00000,10.00000
+Motorcyclists,full,"Weather: Unknown, undetermined",-0.22641,0.11964,0.12211,0.79739,0.63071,1.00812,-1.89239,0.05844,Weather,"Unknown, undetermined",978.00000,106.00000
+Motorcyclists,full,Weather: Other / combined,0.70239,0.35761,0.34191,2.01856,1.00147,4.06864,1.96409,0.04952,Weather,Other / combined,58.00000,14.00000
+Motorcyclists,full,Road surface: Clean,-0.11059,0.08026,0.06467,0.89530,0.76498,1.04783,-1.37792,0.16823,Road surface,Clean,3063.00000,503.00000
+Motorcyclists,full,"Road surface: Dirty (sand, gravel, leaves, ...)",-0.81238,0.19061,0.18432,0.44380,0.30545,0.64481,-4.26212,0.00002,Road surface,"Dirty (sand, gravel, leaves, ...)",343.00000,36.00000
+Motorcyclists,full,Road surface: Dry + Clean,0.07539,0.08405,0.06961,1.07831,0.91452,1.27142,0.89693,0.36975,Road surface,Dry + Clean,2180.00000,379.00000
+Motorcyclists,full,"Road surface: Ice, snow",-0.46754,0.31161,0.33519,0.62654,0.34018,1.15398,-1.50040,0.13351,Road surface,"Ice, snow",89.00000,12.00000
+Motorcyclists,full,"Road surface: Unknown, undetermined",-0.94593,0.18100,0.18264,0.38832,0.27234,0.55368,-5.22609,0.00000,Road surface,"Unknown, undetermined",647.00000,45.00000
+Motorcyclists,full,"Road surface: Wet, puddles",-0.19275,0.08244,0.08430,0.82469,0.70165,0.96930,-2.33820,0.01938,Road surface,"Wet, puddles",2486.00000,388.00000
+Motorcyclists,full,"Road surface: Wet, puddles + Clean",-0.23563,0.24494,0.24366,0.79007,0.48884,1.27691,-0.96202,0.33604,Road surface,"Wet, puddles + Clean",199.00000,22.00000
+Motorcyclists,full,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",-0.46250,0.53445,0.54791,0.62971,0.22091,1.79504,-0.86537,0.38684,Road surface,"Wet, puddles + Dirty (sand, gravel, leaves, ...)",34.00000,4.00000
+Motorcyclists,full,Road surface: Other / combined,-0.30985,0.48099,0.49468,0.73356,0.28576,1.88305,-0.64419,0.51945,Road surface,Other / combined,36.00000,5.00000
+Motorcyclists,full,Year: 2018,0.05623,0.07100,0.06981,1.05784,0.92042,1.21578,0.79199,0.42837,Year,2018,2837.00000,569.00000
+Motorcyclists,full,Year: 2019,-0.04179,0.07142,0.07254,0.95907,0.83380,1.10317,-0.58511,0.55848,Year,2019,2639.00000,476.00000
+Motorcyclists,full,Year: 2020,0.07324,0.07788,0.07512,1.07599,0.92366,1.25343,0.94040,0.34701,Year,2020,2148.00000,440.00000
+Motorcyclists,full,Year: 2021,-0.03355,0.07433,0.07559,0.96701,0.83591,1.11866,-0.45139,0.65171,Year,2021,2227.00000,416.00000
+Motorcyclists,full,Year: 2022,-0.00495,0.06660,0.07296,0.99506,0.87329,1.13381,-0.07437,0.94072,Year,2022,2503.00000,473.00000
+Motorcyclists,full,Year: 2023,-0.04493,0.07578,0.07505,0.95606,0.82410,1.10914,-0.59299,0.55319,Year,2023,2376.00000,426.00000
+Motorcyclists,full,Year: 2024,-0.11637,0.08998,0.07618,0.89015,0.74623,1.06183,-1.29329,0.19591,Year,2024,2297.00000,399.00000
+Motorcyclists,full,Month: Apr,0.39581,0.13622,0.12684,1.48558,1.13748,1.94021,2.90568,0.00366,Month,Apr,1673.00000,367.00000
+Motorcyclists,full,Month: Aug,0.31956,0.12667,0.12414,1.37652,1.07389,1.76444,2.52280,0.01164,Month,Aug,2046.00000,435.00000
+Motorcyclists,full,Month: Dec,-0.00817,0.16301,0.14949,0.99186,0.72060,1.36524,-0.05013,0.96002,Month,Dec,816.00000,117.00000
+Motorcyclists,full,Month: Feb,0.12750,0.13394,0.13812,1.13599,0.87370,1.47701,0.95192,0.34114,Month,Feb,1022.00000,179.00000
+Motorcyclists,full,Month: Jul,0.35994,0.12781,0.12420,1.43325,1.11565,1.84126,2.81621,0.00486,Month,Jul,2061.00000,447.00000
+Motorcyclists,full,Month: Jun,0.21941,0.11703,0.12405,1.24534,0.99007,1.56643,1.87475,0.06083,Month,Jun,2339.00000,442.00000
+Motorcyclists,full,Month: Mar,0.16612,0.14263,0.13163,1.18072,0.89277,1.56154,1.16472,0.24413,Month,Mar,1415.00000,248.00000
+Motorcyclists,full,Month: May,0.25692,0.12702,0.12409,1.29294,1.00799,1.65844,2.02265,0.04311,Month,May,2256.00000,435.00000
+Motorcyclists,full,Month: Nov,0.06483,0.13823,0.13644,1.06698,0.81376,1.39900,0.46904,0.63904,Month,Nov,1160.00000,186.00000
+Motorcyclists,full,Month: Oct,0.16559,0.12574,0.12488,1.18009,0.92232,1.50990,1.31692,0.18787,Month,Oct,1967.00000,356.00000
+Motorcyclists,full,Month: Sep,0.21590,0.12666,0.12333,1.24098,0.96817,1.59067,1.70461,0.08827,Month,Sep,2303.00000,428.00000
+Motorcyclists,full,Collision type: Between 2 drivers: Flank against flank,-0.22161,0.09123,0.09150,0.80123,0.67004,0.95810,-2.42913,0.01514,Collision type,Between 2 drivers: Flank against flank,2047.00000,216.00000
+Motorcyclists,full,Collision type: Between 2 drivers: Head-on collision,0.98586,0.08337,0.08057,2.68013,2.27607,3.15590,11.82472,0.00000,Collision type,Between 2 drivers: Head-on collision,1539.00000,448.00000
+Motorcyclists,full,Collision type: Between 2 drivers: Side collision (front/rear against flank),0.43224,0.07256,0.06402,1.54070,1.33645,1.77617,5.95691,0.00000,Collision type,Between 2 drivers: Side collision (front/rear against flank),7281.00000,1340.00000
+Motorcyclists,full,Collision type: Chain collision (3 or more drivers),0.39621,0.18986,0.17188,1.48619,1.02438,2.15617,2.08688,0.03690,Collision type,Chain collision (3 or more drivers),273.00000,48.00000
+Motorcyclists,full,Collision type: Road user against obstacle on the roadway,0.46138,0.11743,0.12369,1.58626,1.26012,1.99681,3.92887,0.00009,Collision type,Road user against obstacle on the roadway,566.00000,111.00000
+Motorcyclists,full,Collision type: Road user against obstacle outside the roadway,1.39377,0.08579,0.07967,4.03002,3.40627,4.76799,16.24592,0.00000,Collision type,Road user against obstacle outside the roadway,1456.00000,583.00000
+Motorcyclists,full,"Collision type: Single road user, no obstacle (incl. fall)",0.30384,0.09409,0.07597,1.35506,1.12686,1.62947,3.22941,0.00124,Collision type,"Single road user, no obstacle (incl. fall)",3272.00000,526.00000
+Mopeds,full,Counterpart: Bicycle,-0.29420,0.08780,0.09421,0.74512,0.62732,0.88505,-3.35079,0.00081,Counterpart,Bicycle,2423.00000,162.00000
+Mopeds,full,Counterpart: Bus,-0.00073,0.34729,0.35104,0.99927,0.50590,1.97380,-0.00209,0.99833,Counterpart,Bus,124.00000,9.00000
+Mopeds,full,Counterpart: Motorcycle,0.74330,0.26529,0.26239,2.10286,1.25022,3.53699,2.80179,0.00508,Counterpart,Motorcycle,126.00000,18.00000
+Mopeds,full,Counterpart: Other road user,0.82790,0.21159,0.20400,2.28851,1.51163,3.46465,3.91279,0.00009,Counterpart,Other road user,209.00000,30.00000
+Mopeds,full,Counterpart: Pedestrian,0.11062,0.15531,0.14502,1.11697,0.82384,1.51439,0.71224,0.47631,Counterpart,Pedestrian,990.00000,80.00000
+Mopeds,full,Counterpart: Same group (Moped),-0.20552,0.24050,0.22245,0.81422,0.50819,1.30456,-0.85454,0.39281,Counterpart,Same group (Moped),318.00000,23.00000
+Mopeds,full,Counterpart: Truck,0.96764,0.17426,0.15836,2.63174,1.87029,3.70319,5.55284,0.00000,Counterpart,Truck,304.00000,52.00000
+Mopeds,full,Counterpart: Unknown,-0.20845,0.35799,0.40034,0.81184,0.40248,1.63756,-0.58228,0.56038,Counterpart,Unknown,96.00000,7.00000
+Mopeds,full,Counterpart: Van / light truck,0.28379,0.10537,0.09967,1.32815,1.08033,1.63283,2.69325,0.00708,Counterpart,Van / light truck,1340.00000,128.00000
+Mopeds,full,Region: Brussels-Capital Region,-1.08897,0.13715,0.14390,0.33656,0.25723,0.44036,-7.94016,0.00000,Region,Brussels-Capital Region,1584.00000,58.00000
+Mopeds,full,Region: Walloon Region,-0.20558,0.08503,0.07394,0.81417,0.68919,0.96182,-2.41783,0.01561,Region,Walloon Region,4780.00000,425.00000
+Mopeds,full,Road type: Motorway,0.56748,0.39921,0.37349,1.76382,0.80656,3.85719,1.42151,0.15517,Road type,Motorway,58.00000,9.00000
+Mopeds,full,Road type: Regional road,-0.04797,0.05030,0.04857,0.95316,0.86368,1.05192,-0.95371,0.34023,Road type,Regional road,12117.00000,996.00000
+Mopeds,full,Road type: Unknown,0.19723,0.41028,0.40977,1.21802,0.54503,2.72201,0.48071,0.63072,Road type,Unknown,70.00000,7.00000
+Mopeds,full,Intersection: At intersection,-0.01910,0.05641,0.05254,0.98109,0.87839,1.09579,-0.33850,0.73499,Intersection,At intersection,8984.00000,720.00000
+Mopeds,full,"Lighting: Dawn, dusk",0.11673,0.09672,0.11075,1.12382,0.92976,1.35838,1.20694,0.22745,Lighting,"Dawn, dusk",1237.00000,101.00000
+Mopeds,full,"Lighting: Night, no public lighting",0.50539,0.15883,0.16297,1.65763,1.21419,2.26303,3.18186,0.00146,Lighting,"Night, no public lighting",360.00000,48.00000
+Mopeds,full,"Lighting: Night, public lighting present and lit",0.43914,0.06320,0.06130,1.55137,1.37061,1.75596,6.94796,0.00000,Lighting,"Night, public lighting present and lit",4417.00000,494.00000
+Mopeds,full,"Lighting: Night, public lighting present but not lit",0.69560,0.26503,0.24180,2.00490,1.19261,3.37045,2.62463,0.00867,Lighting,"Night, public lighting present but not lit",141.00000,22.00000
+Mopeds,full,"Lighting: Unknown, undetermined",-0.24225,0.29682,0.29335,0.78486,0.43866,1.40428,-0.81614,0.41442,Lighting,"Unknown, undetermined",508.00000,15.00000
+Mopeds,full,Weather: Fog (visibility under 100 m),-0.10051,0.45598,0.47201,0.90438,0.37001,2.21049,-0.22042,0.82555,Weather,Fog (visibility under 100 m),66.00000,5.00000
+Mopeds,full,"Weather: Other (thick smoke, ...)",-0.04718,0.35802,0.35448,0.95392,0.47288,1.92427,-0.13177,0.89516,Weather,"Other (thick smoke, ...)",101.00000,9.00000
+Mopeds,full,Weather: Rain,0.02842,0.12629,0.11468,1.02882,0.80323,1.31777,0.22501,0.82197,Weather,Rain,2359.00000,177.00000
+Mopeds,full,Weather: Snowfall,0.25937,0.43987,0.48032,1.29611,0.54729,3.06947,0.58965,0.55543,Weather,Snowfall,55.00000,6.00000
+Mopeds,full,"Weather: Strong wind, gusts",0.31734,0.34363,0.33682,1.37347,0.70034,2.69355,0.92348,0.35576,Weather,"Strong wind, gusts",78.00000,11.00000
+Mopeds,full,"Weather: Unknown, undetermined",-0.11535,0.16398,0.14902,0.89106,0.64613,1.22882,-0.70343,0.48179,Weather,"Unknown, undetermined",1644.00000,75.00000
+Mopeds,full,Weather: Other / combined,0.13758,0.55361,0.53946,1.14749,0.38771,3.39618,0.24851,0.80374,Weather,Other / combined,43.00000,4.00000
+Mopeds,full,Road surface: Clean,0.16839,0.09988,0.10063,1.18339,0.97299,1.43930,1.68584,0.09183,Road surface,Clean,1904.00000,176.00000
+Mopeds,full,"Road surface: Dirty (sand, gravel, leaves, ...)",-0.37667,0.26799,0.26806,0.68614,0.40579,1.16020,-1.40553,0.15986,Road surface,"Dirty (sand, gravel, leaves, ...)",224.00000,16.00000
+Mopeds,full,Road surface: Dry + Clean,0.32076,0.11762,0.11124,1.37818,1.09443,1.73549,2.72717,0.00639,Road surface,Dry + Clean,1246.00000,124.00000
+Mopeds,full,"Road surface: Ice, snow",-0.06833,0.27209,0.29755,0.93396,0.54792,1.59197,-0.25112,0.80172,Road surface,"Ice, snow",166.00000,16.00000
+Mopeds,full,"Road surface: Unknown, undetermined",-0.94329,0.19605,0.20378,0.38934,0.26512,0.57176,-4.81145,0.00000,Road surface,"Unknown, undetermined",1362.00000,41.00000
+Mopeds,full,"Road surface: Wet, puddles",-0.27846,0.10860,0.09393,0.75695,0.61182,0.93651,-2.56398,0.01035,Road surface,"Wet, puddles",4175.00000,306.00000
+Mopeds,full,"Road surface: Wet, puddles + Clean",0.37428,0.24695,0.26023,1.45394,0.89606,2.35916,1.51560,0.12962,Road surface,"Wet, puddles + Clean",178.00000,19.00000
+Mopeds,full,Road surface: Other / combined,-0.43931,0.64146,0.61085,0.64448,0.18331,2.26585,-0.68486,0.49343,Road surface,Other / combined,44.00000,3.00000
+Mopeds,full,Year: 2018,-0.09712,0.08134,0.09029,0.90745,0.77373,1.06428,-1.19406,0.23245,Year,2018,2924.00000,271.00000
+Mopeds,full,Year: 2019,-0.04593,0.08603,0.08999,0.95511,0.80691,1.13054,-0.53385,0.59344,Year,2019,2907.00000,276.00000
+Mopeds,full,Year: 2020,-0.18494,0.08468,0.09963,0.83115,0.70404,0.98122,-2.18394,0.02897,Year,2020,2299.00000,190.00000
+Mopeds,full,Year: 2021,-0.20883,0.09087,0.09342,0.81153,0.67913,0.96975,-2.29806,0.02156,Year,2021,2943.00000,236.00000
+Mopeds,full,Year: 2022,-0.24101,0.09134,0.09189,0.78584,0.65703,0.93990,-2.63858,0.00833,Year,2022,3178.00000,250.00000
+Mopeds,full,Year: 2023,-0.23503,0.09334,0.09163,0.79055,0.65839,0.94925,-2.51805,0.01180,Year,2023,3149.00000,254.00000
+Mopeds,full,Year: 2024,-0.36737,0.11152,0.09602,0.69256,0.55659,0.86175,-3.29431,0.00099,Year,2024,3000.00000,212.00000
+Mopeds,full,Month: Apr,0.22333,0.14376,0.13617,1.25024,0.94324,1.65715,1.55354,0.12029,Month,Apr,1697.00000,148.00000
+Mopeds,full,Month: Aug,0.18266,0.13222,0.13163,1.20040,0.92637,1.55550,1.38150,0.16712,Month,Aug,1976.00000,175.00000
+Mopeds,full,Month: Dec,0.08601,0.15982,0.13641,1.08982,0.79673,1.49072,0.53818,0.59045,Month,Dec,1636.00000,130.00000
+Mopeds,full,Month: Feb,0.07989,0.13526,0.14117,1.08317,0.83092,1.41200,0.59063,0.55477,Month,Feb,1446.00000,115.00000
+Mopeds,full,Month: Jul,0.21660,0.13777,0.13403,1.24185,0.94798,1.62683,1.57222,0.11590,Month,Jul,1812.00000,163.00000
+Mopeds,full,Month: Jun,0.28656,0.14287,0.12801,1.33184,1.00656,1.76225,2.00574,0.04488,Month,Jun,2398.00000,219.00000
+Mopeds,full,Month: Mar,0.21208,0.15669,0.13507,1.23624,0.90934,1.68066,1.35348,0.17590,Month,Mar,1707.00000,146.00000
+Mopeds,full,Month: May,0.37773,0.13799,0.12820,1.45897,1.11324,1.91208,2.73742,0.00619,Month,May,2133.00000,211.00000
+Mopeds,full,Month: Nov,0.09297,0.14067,0.13050,1.09743,0.83299,1.44582,0.66094,0.50865,Month,Nov,2042.00000,164.00000
+Mopeds,full,Month: Oct,0.08043,0.12644,0.12757,1.08376,0.84586,1.38856,0.63611,0.52470,Month,Oct,2472.00000,191.00000
+Mopeds,full,Month: Sep,0.19477,0.12916,0.12666,1.21503,0.94330,1.56505,1.50804,0.13154,Month,Sep,2488.00000,212.00000
+Mopeds,full,Collision type: Between 2 drivers: Flank against flank,-0.32445,0.12048,0.12132,0.72293,0.57087,0.91548,-2.69293,0.00708,Collision type,Between 2 drivers: Flank against flank,2454.00000,136.00000
+Mopeds,full,Collision type: Between 2 drivers: Head-on collision,0.53954,0.12695,0.10514,1.71522,1.33738,2.19980,4.24996,0.00002,Collision type,Between 2 drivers: Head-on collision,2369.00000,293.00000
+Mopeds,full,Collision type: Between 2 drivers: Side collision (front/rear against flank),-0.10545,0.08526,0.09090,0.89992,0.76142,1.06360,-1.23681,0.21616,Collision type,Between 2 drivers: Side collision (front/rear against flank),11312.00000,829.00000
+Mopeds,full,Collision type: Chain collision (3 or more drivers),0.02573,0.38085,0.40409,1.02606,0.48639,2.16450,0.06755,0.94614,Collision type,Chain collision (3 or more drivers),96.00000,7.00000
+Mopeds,full,Collision type: Road user against obstacle on the roadway,0.51452,0.16225,0.15703,1.67283,1.21713,2.29913,3.17106,0.00152,Collision type,Road user against obstacle on the roadway,515.00000,69.00000
+Mopeds,full,Collision type: Road user against obstacle outside the roadway,0.97225,0.11820,0.12085,2.64387,2.09713,3.33317,8.22525,0.00000,Collision type,Road user against obstacle outside the roadway,860.00000,173.00000
+Mopeds,full,"Collision type: Single road user, no obstacle (incl. fall)",0.18434,0.11308,0.11050,1.20243,0.96339,1.50077,1.63021,0.10306,Collision type,"Single road user, no obstacle (incl. fall)",2520.00000,228.00000
+Baseline,no_collision,Region: Brussels-Capital Region,-0.99960,0.06889,0.03006,0.36803,0.32154,0.42123,-14.50997,0.00000,Region,Brussels-Capital Region,30022.00000,1461.00000
+Baseline,no_collision,Region: Walloon Region,-0.20462,0.07249,0.01802,0.81496,0.70702,0.93938,-2.82260,0.00476,Region,Walloon Region,81162.00000,7644.00000
+Baseline,no_collision,Road type: Motorway,0.01994,0.05607,0.02651,1.02014,0.91397,1.13864,0.35563,0.72212,Road type,Motorway,21860.00000,2459.00000
+Baseline,no_collision,Road type: Regional road,0.09711,0.01759,0.01362,1.10199,1.06464,1.14064,5.52146,0.00000,Road type,Regional road,133453.00000,13223.00000
+Baseline,no_collision,Road type: Unknown,0.19200,0.12559,0.09082,1.21167,0.94729,1.54984,1.52884,0.12630,Road type,Unknown,1502.00000,144.00000
+Baseline,no_collision,Intersection: At intersection,-0.11576,0.01941,0.01490,0.89069,0.85743,0.92523,-5.96283,0.00000,Intersection,At intersection,97077.00000,8166.00000
+Baseline,no_collision,"Lighting: Dawn, dusk",0.01491,0.03283,0.03120,1.01502,0.95176,1.08249,0.45416,0.64972,Lighting,"Dawn, dusk",13688.00000,1278.00000
+Baseline,no_collision,"Lighting: Night, no public lighting",0.60592,0.04005,0.03458,1.83294,1.69456,1.98263,15.12889,0.00000,Lighting,"Night, no public lighting",7175.00000,1178.00000
+Baseline,no_collision,"Lighting: Night, public lighting present and lit",0.28499,0.01845,0.01706,1.32975,1.28253,1.37871,15.44953,0.00000,Lighting,"Night, public lighting present and lit",56044.00000,6203.00000
+Baseline,no_collision,"Lighting: Night, public lighting present but not lit",0.49315,0.06310,0.05492,1.63746,1.44698,1.85302,7.81566,0.00000,Lighting,"Night, public lighting present but not lit",2912.00000,422.00000
+Baseline,no_collision,"Lighting: Unknown, undetermined",-0.00771,0.06257,0.05830,0.99232,0.87779,1.12180,-0.12317,0.90197,Lighting,"Unknown, undetermined",9918.00000,447.00000
+Baseline,no_collision,Weather: Fog (visibility under 100 m),0.18868,0.08502,0.08879,1.20765,1.02227,1.42664,2.21909,0.02648,Weather,Fog (visibility under 100 m),1193.00000,154.00000
+Baseline,no_collision,Weather: Hail,-0.20173,0.27036,0.25763,0.81732,0.48112,1.38844,-0.74614,0.45558,Weather,Hail,206.00000,17.00000
+Baseline,no_collision,"Weather: Other (thick smoke, ...)",-0.06485,0.09658,0.09520,0.93721,0.77557,1.13254,-0.67138,0.50198,Weather,"Other (thick smoke, ...)",1238.00000,129.00000
+Baseline,no_collision,Weather: Rain,-0.10285,0.02993,0.02952,0.90226,0.85086,0.95677,-3.43637,0.00059,Weather,Rain,29706.00000,2590.00000
+Baseline,no_collision,"Weather: Rain + Strong wind, gusts",0.28981,0.14660,0.14913,1.33617,1.00247,1.78095,1.97685,0.04806,Weather,"Rain + Strong wind, gusts",416.00000,56.00000
+Baseline,no_collision,Weather: Snowfall,-0.12537,0.11188,0.10758,0.88217,0.70847,1.09846,-1.12060,0.26246,Weather,Snowfall,1466.00000,120.00000
+Baseline,no_collision,"Weather: Strong wind, gusts",0.23995,0.10670,0.10345,1.27118,1.03130,1.56687,2.24882,0.02452,Weather,"Strong wind, gusts",814.00000,116.00000
+Baseline,no_collision,"Weather: Unknown, undetermined",-0.22928,0.04285,0.03988,0.79510,0.73105,0.86477,-5.35084,0.00000,Weather,"Unknown, undetermined",27763.00000,1469.00000
+Baseline,no_collision,Weather: Other / combined,0.19402,0.29488,0.31676,1.21413,0.68117,2.16407,0.65797,0.51056,Weather,Other / combined,94.00000,13.00000
+Baseline,no_collision,Road surface: Clean,-0.04441,0.05215,0.02503,0.95656,0.86362,1.05951,-0.85155,0.39446,Road surface,Clean,31155.00000,2768.00000
+Baseline,no_collision,"Road surface: Dirty (sand, gravel, leaves, ...)",-0.38703,0.08344,0.07990,0.67907,0.57662,0.79974,-4.63811,0.00000,Road surface,"Dirty (sand, gravel, leaves, ...)",1661.00000,189.00000
+Baseline,no_collision,Road surface: Dry + Clean,0.13060,0.05267,0.02753,1.13951,1.02775,1.26342,2.47978,0.01315,Road surface,Dry + Clean,20509.00000,2036.00000
+Baseline,no_collision,"Road surface: Dry + Dirty (sand, gravel, leaves, ...)",-0.39729,0.30926,0.32479,0.67214,0.36661,1.23228,-1.28463,0.19892,Road surface,"Dry + Dirty (sand, gravel, leaves, ...)",111.00000,11.00000
+Baseline,no_collision,"Road surface: Ice, snow",-0.18052,0.07092,0.07123,0.83483,0.72650,0.95932,-2.54561,0.01091,Road surface,"Ice, snow",3095.00000,291.00000
+Baseline,no_collision,"Road surface: Unknown, undetermined",-0.68070,0.05814,0.04788,0.50626,0.45174,0.56737,-11.70824,0.00000,Road surface,"Unknown, undetermined",24236.00000,1086.00000
+Baseline,no_collision,"Road surface: Wet, puddles",-0.07796,0.02683,0.02406,0.92500,0.87762,0.97494,-2.90606,0.00366,Road surface,"Wet, puddles",51883.00000,4819.00000
+Baseline,no_collision,"Road surface: Wet, puddles + Clean",0.14543,0.09035,0.06575,1.15654,0.96883,1.38060,1.60958,0.10749,Road surface,"Wet, puddles + Clean",3080.00000,295.00000
+Baseline,no_collision,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",0.08106,0.20986,0.19048,1.08444,0.71873,1.63622,0.38627,0.69930,Road surface,"Wet, puddles + Dirty (sand, gravel, leaves, ...)",249.00000,34.00000
+Baseline,no_collision,"Road surface: Wet, puddles + Ice or snow",0.24778,0.27298,0.26418,1.28118,0.75032,2.18764,0.90770,0.36404,Road surface,"Wet, puddles + Ice or snow",135.00000,19.00000
+Baseline,no_collision,Road surface: Other / combined,0.21653,0.44681,0.44429,1.24176,0.51725,2.98106,0.48460,0.62796,Road surface,Other / combined,55.00000,6.00000
+Baseline,no_collision,Year: 2018,-0.06065,0.02545,0.02436,0.94115,0.89536,0.98929,-2.38290,0.01718,Year,2018,38453.00000,3841.00000
+Baseline,no_collision,Year: 2019,-0.03352,0.02686,0.02437,0.96703,0.91743,1.01932,-1.24781,0.21210,Year,2019,37719.00000,3847.00000
+Baseline,no_collision,Year: 2020,-0.01769,0.02894,0.02572,0.98247,0.92829,1.03981,-0.61111,0.54112,Year,2020,30251.00000,3202.00000
+Baseline,no_collision,Year: 2021,-0.10873,0.02983,0.02529,0.89697,0.84603,0.95098,-3.64514,0.00027,Year,2021,34660.00000,3338.00000
+Baseline,no_collision,Year: 2022,-0.12806,0.03272,0.02478,0.87980,0.82515,0.93808,-3.91331,0.00009,Year,2022,37650.00000,3621.00000
+Baseline,no_collision,Year: 2023,-0.12789,0.03712,0.02498,0.87995,0.81820,0.94637,-3.44490,0.00057,Year,2023,36858.00000,3524.00000
+Baseline,no_collision,Year: 2024,-0.19982,0.04150,0.02560,0.81888,0.75490,0.88828,-4.81439,0.00000,Year,2024,35916.00000,3184.00000
+Baseline,no_collision,Month: Apr,0.13795,0.03823,0.03448,1.14792,1.06505,1.23723,3.60871,0.00031,Month,Apr,21137.00000,2200.00000
+Baseline,no_collision,Month: Aug,0.12915,0.03336,0.03347,1.13786,1.06583,1.21475,3.87101,0.00011,Month,Aug,23708.00000,2540.00000
+Baseline,no_collision,Month: Dec,0.01168,0.03269,0.03404,1.01174,0.94896,1.07868,0.35720,0.72094,Month,Dec,22288.00000,2044.00000
+Baseline,no_collision,Month: Feb,0.04240,0.03632,0.03463,1.04332,0.97163,1.12029,1.16764,0.24295,Month,Feb,20617.00000,1945.00000
+Baseline,no_collision,Month: Jul,0.18389,0.03767,0.03339,1.20188,1.11634,1.29398,4.88162,0.00000,Month,Jul,23502.00000,2628.00000
+Baseline,no_collision,Month: Jun,0.10989,0.03412,0.03278,1.11615,1.04394,1.19335,3.22032,0.00128,Month,Jun,28471.00000,2885.00000
+Baseline,no_collision,Month: Mar,0.02152,0.03500,0.03445,1.02175,0.95400,1.09431,0.61468,0.53877,Month,Mar,22235.00000,2061.00000
+Baseline,no_collision,Month: May,0.13429,0.03301,0.03304,1.14372,1.07207,1.22016,4.06844,0.00005,Month,May,26315.00000,2740.00000
+Baseline,no_collision,Month: Nov,-0.01700,0.03553,0.03361,0.98314,0.91699,1.05405,-0.47854,0.63227,Month,Nov,24430.00000,2195.00000
+Baseline,no_collision,Month: Oct,0.03103,0.03488,0.03263,1.03151,0.96335,1.10449,0.88959,0.37369,Month,Oct,27882.00000,2642.00000
+Baseline,no_collision,Month: Sep,0.06060,0.03088,0.03270,1.06248,1.00007,1.12878,1.96218,0.04974,Month,Sep,27926.00000,2747.00000
+Baseline,no_collision,Group involved: Van / light truck,0.23457,0.02352,0.02366,1.26436,1.20740,1.32401,9.97383,0.00000,Group involved,Van / light truck,23557.00000,2351.00000
+Baseline,no_collision,Group involved: Truck,1.00182,0.03140,0.02683,2.72322,2.56067,2.89609,31.90398,0.00000,Group involved,Truck,12595.00000,2178.00000
+Baseline,no_collision,Group involved: Bus,0.23659,0.08551,0.05619,1.26692,1.07143,1.49808,2.76690,0.00566,Group involved,Bus,4095.00000,367.00000
+Baseline,no_collision,Group involved: Motorcycle,1.18517,0.02430,0.02160,3.27124,3.11911,3.43079,48.77808,0.00000,Group involved,Motorcycle,19792.00000,3749.00000
+Baseline,no_collision,Group involved: Moped,0.18584,0.02864,0.02587,1.20423,1.13848,1.27377,6.48785,0.00000,Group involved,Moped,23258.00000,1985.00000
+Baseline,no_collision,Group involved: Bicycle,0.55490,0.02985,0.01730,1.74177,1.64281,1.84670,18.59282,0.00000,Group involved,Bicycle,71881.00000,7852.00000
+Baseline,no_collision,Group involved: Pedestrian,0.93326,0.03171,0.02128,2.54278,2.38956,2.70582,29.43341,0.00000,Group involved,Pedestrian,29897.00000,3820.00000
+Baseline,no_collision,Group involved: Other road user,0.71673,0.04361,0.03834,2.04772,1.87997,2.23044,16.43569,0.00000,Group involved,Other road user,6356.00000,871.00000
+Baseline,no_collision,Group involved: Unknown,0.50708,0.03572,0.02728,1.66044,1.54817,1.78084,14.19708,0.00000,Group involved,Unknown,31086.00000,2133.00000
+Baseline,no_collision,Group involved: Single road user (no second party),0.72788,0.03685,0.01655,2.07068,1.92638,2.22579,19.74978,0.00000,Group involved,Single road user (no second party),59804.00000,8558.00000
+Cyclists,no_collision,Counterpart: Bus,0.51909,0.12673,0.12661,1.68049,1.31088,2.15433,4.09600,0.00004,Counterpart,Bus,590.00000,74.00000
+Cyclists,no_collision,Counterpart: Moped,-0.28213,0.07966,0.08406,0.75418,0.64516,0.88162,-3.54163,0.00040,Counterpart,Moped,2423.00000,162.00000
+Cyclists,no_collision,Counterpart: Motorcycle,0.56577,0.10953,0.11796,1.76080,1.42061,2.18247,5.16525,0.00000,Counterpart,Motorcycle,629.00000,87.00000
+Cyclists,no_collision,Counterpart: None (single road user),0.87285,0.07214,0.03453,2.39373,2.07811,2.75728,12.09961,0.00000,Counterpart,None (single road user),10095.00000,1808.00000
+Cyclists,no_collision,Counterpart: Other road user,0.60020,0.08731,0.09082,1.82248,1.53582,2.16265,6.87398,0.00000,Counterpart,Other road user,1130.00000,150.00000
+Cyclists,no_collision,Counterpart: Pedestrian,0.29864,0.06255,0.05854,1.34803,1.19250,1.52384,4.77471,0.00000,Counterpart,Pedestrian,3617.00000,383.00000
+Cyclists,no_collision,Counterpart: Same group (Bicycle),0.45576,0.04040,0.04124,1.57737,1.45729,1.70733,11.28212,0.00000,Counterpart,Same group (Bicycle),6812.00000,906.00000
+Cyclists,no_collision,Counterpart: Truck,1.44045,0.08242,0.06353,4.22261,3.59270,4.96295,17.47653,0.00000,Counterpart,Truck,1362.00000,385.00000
+Cyclists,no_collision,Counterpart: Unknown,-0.08040,0.14859,0.17081,0.92274,0.68960,1.23470,-0.54112,0.58842,Counterpart,Unknown,530.00000,38.00000
+Cyclists,no_collision,Counterpart: Van / light truck,0.33890,0.04959,0.05155,1.40341,1.27342,1.54667,6.83391,0.00000,Counterpart,Van / light truck,4226.00000,492.00000
+Cyclists,no_collision,Region: Brussels-Capital Region,-1.23865,0.09467,0.06895,0.28977,0.24070,0.34886,-13.08362,0.00000,Region,Brussels-Capital Region,6538.00000,266.00000
+Cyclists,no_collision,Region: Walloon Region,-0.25993,0.09601,0.05317,0.77110,0.63883,0.93076,-2.70739,0.00678,Region,Walloon Region,5660.00000,575.00000
+Cyclists,no_collision,Road type: Motorway,0.38160,0.17017,0.23528,1.46463,1.04925,2.04445,2.24251,0.02493,Road type,Motorway,132.00000,23.00000
+Cyclists,no_collision,Road type: Regional road,-0.01801,0.02592,0.02535,0.98215,0.93350,1.03333,-0.69491,0.48711,Road type,Regional road,29579.00000,3083.00000
+Cyclists,no_collision,Road type: Unknown,0.15515,0.20781,0.18017,1.16783,0.77712,1.75497,0.74659,0.45531,Road type,Unknown,301.00000,37.00000
+Cyclists,no_collision,Intersection: At intersection,-0.06139,0.03512,0.02683,0.94045,0.87790,1.00747,-1.74818,0.08043,Intersection,At intersection,31156.00000,3034.00000
+Cyclists,no_collision,"Lighting: Dawn, dusk",-0.21276,0.05854,0.06265,0.80835,0.72072,0.90664,-3.63416,0.00028,Lighting,"Dawn, dusk",3658.00000,311.00000
+Cyclists,no_collision,"Lighting: Night, no public lighting",0.25245,0.10341,0.10628,1.28717,1.05102,1.57637,2.44124,0.01464,Lighting,"Night, no public lighting",706.00000,114.00000
+Cyclists,no_collision,"Lighting: Night, public lighting present and lit",0.11920,0.03963,0.03977,1.12659,1.04240,1.21758,3.00786,0.00263,Lighting,"Night, public lighting present and lit",8163.00000,948.00000
+Cyclists,no_collision,"Lighting: Night, public lighting present but not lit",0.15286,0.15584,0.15993,1.16517,0.85849,1.58139,0.98091,0.32664,Lighting,"Night, public lighting present but not lit",344.00000,48.00000
+Cyclists,no_collision,"Lighting: Unknown, undetermined",-0.15161,0.11543,0.11282,0.85932,0.68532,1.07749,-1.31342,0.18904,Lighting,"Unknown, undetermined",2049.00000,110.00000
+Cyclists,no_collision,Weather: Fog (visibility under 100 m),-0.17891,0.28066,0.25308,0.83618,0.48239,1.44945,-0.63747,0.52382,Weather,Fog (visibility under 100 m),183.00000,18.00000
+Cyclists,no_collision,"Weather: Other (thick smoke, ...)",-0.00352,0.17871,0.16963,0.99649,0.70203,1.41446,-0.01968,0.98429,Weather,"Other (thick smoke, ...)",341.00000,41.00000
+Cyclists,no_collision,Weather: Rain,-0.23239,0.06711,0.06961,0.79264,0.69495,0.90406,-3.46293,0.00053,Weather,Rain,5014.00000,429.00000
+Cyclists,no_collision,"Weather: Rain + Strong wind, gusts",0.10388,0.47626,0.49453,1.10946,0.43623,2.82171,0.21811,0.82734,Weather,"Rain + Strong wind, gusts",39.00000,5.00000
+Cyclists,no_collision,Weather: Snowfall,-0.49128,0.36757,0.34828,0.61184,0.29769,1.25753,-1.33659,0.18136,Weather,Snowfall,129.00000,10.00000
+Cyclists,no_collision,"Weather: Strong wind, gusts",0.15481,0.23113,0.21985,1.16743,0.74215,1.83643,0.66979,0.50299,Weather,"Strong wind, gusts",163.00000,26.00000
+Cyclists,no_collision,"Weather: Unknown, undetermined",-0.27292,0.08089,0.07642,0.76115,0.64956,0.89191,-3.37417,0.00074,Weather,"Unknown, undetermined",6622.00000,412.00000
+Cyclists,no_collision,Road surface: Clean,-0.02592,0.07608,0.06672,0.97442,0.83943,1.13110,-0.34067,0.73335,Road surface,Clean,3980.00000,333.00000
+Cyclists,no_collision,"Road surface: Dirty (sand, gravel, leaves, ...)",-0.24574,0.14053,0.13590,0.78212,0.59382,1.03014,-1.74866,0.08035,Road surface,"Dirty (sand, gravel, leaves, ...)",490.00000,66.00000
+Cyclists,no_collision,Road surface: Dry + Clean,0.35250,0.07069,0.06490,1.42262,1.23856,1.63403,4.98677,0.00000,Road surface,Dry + Clean,3215.00000,349.00000
+Cyclists,no_collision,"Road surface: Ice, snow",0.00153,0.17697,0.15103,1.00153,0.70799,1.41677,0.00862,0.99312,Road surface,"Ice, snow",449.00000,60.00000
+Cyclists,no_collision,"Road surface: Unknown, undetermined",-0.58449,0.08202,0.08364,0.55739,0.47461,0.65460,-7.12597,0.00000,Road surface,"Unknown, undetermined",6189.00000,350.00000
+Cyclists,no_collision,"Road surface: Wet, puddles",-0.01370,0.04843,0.05191,0.98639,0.89708,1.08461,-0.28288,0.77727,Road surface,"Wet, puddles",9124.00000,896.00000
+Cyclists,no_collision,"Road surface: Wet, puddles + Clean",0.39761,0.18924,0.21972,1.48826,1.02705,2.15658,2.10103,0.03564,Road surface,"Wet, puddles + Clean",268.00000,25.00000
+Cyclists,no_collision,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",0.37181,0.45429,0.39948,1.45035,0.59535,3.53327,0.81843,0.41311,Road surface,"Wet, puddles + Dirty (sand, gravel, leaves, ...)",48.00000,8.00000
+Cyclists,no_collision,Road surface: Other / combined,-1.73442,1.02068,1.01765,0.17650,0.02387,1.30487,-1.69929,0.08927,Road surface,Other / combined,39.00000,1.00000
+Cyclists,no_collision,Year: 2018,-0.01043,0.05575,0.05051,0.98963,0.88720,1.10388,-0.18704,0.85163,Year,2018,8601.00000,943.00000
+Cyclists,no_collision,Year: 2019,-0.02464,0.05532,0.05038,0.97566,0.87540,1.08740,-0.44543,0.65601,Year,2019,8856.00000,952.00000
+Cyclists,no_collision,Year: 2020,0.06857,0.05970,0.05003,1.07098,0.95272,1.20391,1.14865,0.25070,Year,2020,8368.00000,1008.00000
+Cyclists,no_collision,Year: 2021,-0.05223,0.05133,0.05029,0.94911,0.85827,1.04957,-1.01750,0.30891,Year,2021,8897.00000,968.00000
+Cyclists,no_collision,Year: 2022,-0.05327,0.05726,0.04861,0.94813,0.84748,1.06073,-0.93027,0.35223,Year,2022,10273.00000,1126.00000
+Cyclists,no_collision,Year: 2023,-0.02108,0.05521,0.04918,0.97914,0.87872,1.09105,-0.38173,0.70266,Year,2023,9707.00000,1072.00000
+Cyclists,no_collision,Year: 2024,-0.14221,0.06652,0.05093,0.86744,0.76141,0.98823,-2.13799,0.03252,Year,2024,9190.00000,906.00000
+Cyclists,no_collision,Month: Apr,0.06174,0.06978,0.06975,1.06369,0.92771,1.21960,0.88476,0.37629,Month,Apr,5317.00000,605.00000
+Cyclists,no_collision,Month: Aug,0.05567,0.07408,0.06714,1.05725,0.91437,1.22245,0.75153,0.45233,Month,Aug,6280.00000,748.00000
+Cyclists,no_collision,Month: Dec,-0.05326,0.06609,0.07450,0.94814,0.83293,1.07927,-0.80576,0.42038,Month,Dec,4133.00000,402.00000
+Cyclists,no_collision,Month: Feb,0.02335,0.07075,0.07251,1.02363,0.89108,1.17590,0.33008,0.74134,Month,Feb,4417.00000,464.00000
+Cyclists,no_collision,Month: Jul,0.15003,0.06823,0.06669,1.16187,1.01644,1.32810,2.19894,0.02788,Month,Jul,6221.00000,801.00000
+Cyclists,no_collision,Month: Jun,0.07379,0.06850,0.06474,1.07658,0.94132,1.23127,1.07725,0.28137,Month,Jun,8120.00000,956.00000
+Cyclists,no_collision,Month: Mar,-0.05693,0.07613,0.07100,0.94466,0.81372,1.09666,-0.74790,0.45452,Month,Mar,5234.00000,525.00000
+Cyclists,no_collision,Month: May,0.02855,0.06468,0.06624,1.02896,0.90645,1.16803,0.44140,0.65892,Month,May,7242.00000,816.00000
+Cyclists,no_collision,Month: Nov,-0.06660,0.06528,0.06965,0.93557,0.82320,1.06327,-1.02022,0.30763,Month,Nov,5645.00000,545.00000
+Cyclists,no_collision,Month: Oct,-0.00372,0.06921,0.06600,0.99629,0.86990,1.14105,-0.05367,0.95719,Month,Oct,7246.00000,750.00000
+Cyclists,no_collision,Month: Sep,-0.04103,0.06535,0.06571,0.95980,0.84441,1.09097,-0.62775,0.53017,Month,Sep,7855.00000,813.00000
+Pedestrians,no_collision,Counterpart: Bicycle,-0.24124,0.06775,0.06165,0.78566,0.68795,0.89723,-3.56051,0.00037,Counterpart,Bicycle,3617.00000,383.00000
+Pedestrians,no_collision,Counterpart: Bus,0.26149,0.11873,0.10580,1.29886,1.02920,1.63918,2.20241,0.02764,Counterpart,Bus,810.00000,114.00000
+Pedestrians,no_collision,Counterpart: Moped,-0.66273,0.10927,0.12080,0.51544,0.41607,0.63855,-6.06490,0.00000,Counterpart,Moped,990.00000,80.00000
+Pedestrians,no_collision,Counterpart: Motorcycle,0.37172,0.12550,0.14112,1.45023,1.13399,1.85467,2.96189,0.00306,Counterpart,Motorcycle,416.00000,64.00000
+Pedestrians,no_collision,Counterpart: Other road user,0.66460,0.07916,0.08805,1.94371,1.66438,2.26993,8.39595,0.00000,Counterpart,Other road user,936.00000,188.00000
+Pedestrians,no_collision,Counterpart: Truck,1.65326,0.11271,0.09983,5.22401,4.18857,6.51541,14.66870,0.00000,Counterpart,Truck,482.00000,219.00000
+Pedestrians,no_collision,Counterpart: Unknown,-0.68657,0.29727,0.20992,0.50330,0.28105,0.90129,-2.30961,0.02091,Counterpart,Unknown,456.00000,25.00000
+Pedestrians,no_collision,Counterpart: Van / light truck,0.25352,0.06891,0.07358,1.28855,1.12576,1.47489,3.67903,0.00023,Counterpart,Van / light truck,1638.00000,253.00000
+Pedestrians,no_collision,Region: Brussels-Capital Region,-0.89159,0.14317,0.05957,0.41000,0.30968,0.54282,-6.22739,0.00000,Region,Brussels-Capital Region,6561.00000,462.00000
+Pedestrians,no_collision,Region: Walloon Region,-0.30412,0.11186,0.04871,0.73777,0.59252,0.91862,-2.71879,0.00655,Region,Walloon Region,8733.00000,1085.00000
+Pedestrians,no_collision,Road type: Motorway,1.84399,0.18089,0.18573,6.32174,4.43462,9.01189,10.19380,0.00000,Road type,Motorway,147.00000,90.00000
+Pedestrians,no_collision,Road type: Regional road,0.32854,0.04208,0.03638,1.38894,1.27898,1.50835,7.80750,0.00000,Road type,Regional road,12234.00000,1837.00000
+Pedestrians,no_collision,Road type: Unknown,0.28969,0.23694,0.27707,1.33601,0.83970,2.12567,1.22264,0.22147,Road type,Unknown,123.00000,16.00000
+Pedestrians,no_collision,Intersection: At intersection,-0.15087,0.04178,0.04287,0.85996,0.79234,0.93334,-3.61108,0.00030,Intersection,At intersection,7680.00000,906.00000
+Pedestrians,no_collision,"Lighting: Dawn, dusk",0.08778,0.07886,0.08149,1.09175,0.93539,1.27425,1.11308,0.26567,Lighting,"Dawn, dusk",1611.00000,206.00000
+Pedestrians,no_collision,"Lighting: Night, no public lighting",0.71065,0.12701,0.12443,2.03532,1.58680,2.61061,5.59543,0.00000,Lighting,"Night, no public lighting",414.00000,101.00000
+Pedestrians,no_collision,"Lighting: Night, public lighting present and lit",0.45827,0.04994,0.04698,1.58134,1.43389,1.74395,9.17663,0.00000,Lighting,"Night, public lighting present and lit",5704.00000,974.00000
+Pedestrians,no_collision,"Lighting: Night, public lighting present but not lit",0.79565,0.16657,0.16339,2.21589,1.59868,3.07137,4.77676,0.00000,Lighting,"Night, public lighting present but not lit",235.00000,58.00000
+Pedestrians,no_collision,"Lighting: Unknown, undetermined",0.07497,0.15664,0.16707,1.07785,0.79291,1.46519,0.47860,0.63222,Lighting,"Unknown, undetermined",882.00000,50.00000
+Pedestrians,no_collision,Weather: Fog (visibility under 100 m),0.12323,0.31438,0.31218,1.13115,0.61082,2.09470,0.39199,0.69507,Weather,Fog (visibility under 100 m),75.00000,14.00000
+Pedestrians,no_collision,"Weather: Other (thick smoke, ...)",-0.28874,0.26011,0.30026,0.74921,0.44998,1.24740,-1.11009,0.26696,Weather,"Other (thick smoke, ...)",116.00000,13.00000
+Pedestrians,no_collision,Weather: Rain,-0.16149,0.07054,0.07624,0.85088,0.74100,0.97704,-2.28926,0.02206,Weather,Rain,3656.00000,523.00000
+Pedestrians,no_collision,"Weather: Rain + Strong wind, gusts",-0.07065,0.37099,0.39589,0.93179,0.45032,1.92800,-0.19044,0.84896,Weather,"Rain + Strong wind, gusts",53.00000,8.00000
+Pedestrians,no_collision,Weather: Snowfall,-0.41846,0.27073,0.28881,0.65806,0.38709,1.11870,-1.54568,0.12218,Weather,Snowfall,154.00000,17.00000
+Pedestrians,no_collision,"Weather: Strong wind, gusts",0.10845,0.36410,0.33704,1.11455,0.54597,2.27522,0.29785,0.76582,Weather,"Strong wind, gusts",67.00000,12.00000
+Pedestrians,no_collision,"Weather: Unknown, undetermined",-0.35310,0.09942,0.10579,0.70250,0.57813,0.85364,-3.55173,0.00038,Weather,"Unknown, undetermined",3341.00000,195.00000
+Pedestrians,no_collision,Road surface: Clean,-0.12641,0.10483,0.06631,0.88125,0.71758,1.08226,-1.20590,0.22785,Road surface,Clean,3932.00000,406.00000
+Pedestrians,no_collision,"Road surface: Dirty (sand, gravel, leaves, ...)",0.05591,0.33877,0.32632,1.05750,0.54439,2.05423,0.16503,0.86892,Road surface,"Dirty (sand, gravel, leaves, ...)",83.00000,12.00000
+Pedestrians,no_collision,Road surface: Dry + Clean,-0.07977,0.12446,0.07807,0.92333,0.72347,1.17841,-0.64094,0.52156,Road surface,Dry + Clean,2543.00000,252.00000
+Pedestrians,no_collision,"Road surface: Ice, snow",0.05038,0.21840,0.24075,1.05167,0.68545,1.61356,0.23068,0.81756,Road surface,"Ice, snow",191.00000,25.00000
+Pedestrians,no_collision,"Road surface: Unknown, undetermined",-0.85475,0.14008,0.12576,0.42539,0.32326,0.55979,-6.10182,0.00000,Road surface,"Unknown, undetermined",2957.00000,141.00000
+Pedestrians,no_collision,"Road surface: Wet, puddles",0.12727,0.06984,0.06816,1.13572,0.99042,1.30234,1.82223,0.06842,Road surface,"Wet, puddles",5427.00000,821.00000
+Pedestrians,no_collision,"Road surface: Wet, puddles + Clean",0.54966,0.19141,0.15437,1.73266,1.19065,2.52141,2.87164,0.00408,Road surface,"Wet, puddles + Clean",353.00000,63.00000
+Pedestrians,no_collision,Road surface: Other / combined,0.70894,0.37292,0.39390,2.03183,0.97825,4.22013,1.90104,0.05730,Road surface,Other / combined,43.00000,9.00000
+Pedestrians,no_collision,Year: 2018,-0.17063,0.06768,0.06660,0.84313,0.73838,0.96274,-2.52102,0.01170,Year,2018,4084.00000,510.00000
+Pedestrians,no_collision,Year: 2019,-0.14886,0.06283,0.06594,0.86169,0.76185,0.97461,-2.36931,0.01782,Year,2019,4170.00000,535.00000
+Pedestrians,no_collision,Year: 2020,-0.11611,0.06740,0.07300,0.89038,0.78020,1.01612,-1.72272,0.08494,Year,2020,2904.00000,380.00000
+Pedestrians,no_collision,Year: 2021,-0.21324,0.07309,0.07074,0.80797,0.70013,0.93241,-2.91747,0.00353,Year,2021,3460.00000,415.00000
+Pedestrians,no_collision,Year: 2022,-0.16168,0.07637,0.06873,0.85072,0.73245,0.98808,-2.11708,0.03425,Year,2022,3724.00000,459.00000
+Pedestrians,no_collision,Year: 2023,-0.11966,0.08367,0.06747,0.88722,0.75304,1.04532,-1.43021,0.15266,Year,2023,3816.00000,499.00000
+Pedestrians,no_collision,Year: 2024,-0.21134,0.08543,0.07045,0.80950,0.68469,0.95706,-2.47372,0.01337,Year,2024,3584.00000,420.00000
+Pedestrians,no_collision,Month: Apr,0.08574,0.08944,0.09504,1.08953,0.91434,1.29828,0.95868,0.33772,Month,Apr,1906.00000,232.00000
+Pedestrians,no_collision,Month: Aug,0.11430,0.10796,0.09404,1.12109,0.90729,1.38528,1.05880,0.28969,Month,Aug,1867.00000,243.00000
+Pedestrians,no_collision,Month: Dec,0.04729,0.07386,0.07852,1.04842,0.90712,1.21175,0.64021,0.52204,Month,Dec,3061.00000,442.00000
+Pedestrians,no_collision,Month: Feb,0.00681,0.08412,0.08441,1.00684,0.85380,1.18731,0.08101,0.93543,Month,Feb,2578.00000,324.00000
+Pedestrians,no_collision,Month: Jul,0.13388,0.09880,0.09303,1.14326,0.94198,1.38753,1.35505,0.17540,Month,Jul,1945.00000,253.00000
+Pedestrians,no_collision,Month: Jun,0.02498,0.09318,0.08947,1.02530,0.85415,1.23073,0.26812,0.78861,Month,Jun,2562.00000,290.00000
+Pedestrians,no_collision,Month: Mar,-0.02418,0.08647,0.08875,0.97611,0.82393,1.15640,-0.27961,0.77978,Month,Mar,2393.00000,283.00000
+Pedestrians,no_collision,Month: May,0.17233,0.09030,0.08689,1.18806,0.99534,1.41810,1.90830,0.05635,Month,May,2537.00000,331.00000
+Pedestrians,no_collision,Month: Nov,0.04092,0.08015,0.08076,1.04176,0.89032,1.21897,0.51049,0.60971,Month,Nov,2824.00000,390.00000
+Pedestrians,no_collision,Month: Oct,0.00157,0.07911,0.08326,1.00157,0.85770,1.16956,0.01980,0.98420,Month,Oct,2874.00000,356.00000
+Pedestrians,no_collision,Month: Sep,0.02792,0.08819,0.08713,1.02832,0.86508,1.22235,0.31662,0.75153,Month,Sep,2613.00000,305.00000
+Motorcyclists,no_collision,Counterpart: Bicycle,-0.33987,0.11079,0.12041,0.71186,0.57291,0.88451,-3.06768,0.00216,Counterpart,Bicycle,629.00000,87.00000
+Motorcyclists,no_collision,Counterpart: Bus,0.10890,0.25586,0.29115,1.11505,0.67531,1.84114,0.42561,0.67039,Counterpart,Bus,89.00000,15.00000
+Motorcyclists,no_collision,Counterpart: Moped,-0.25146,0.26390,0.25992,0.77766,0.46361,1.30446,-0.95287,0.34066,Counterpart,Moped,126.00000,18.00000
+Motorcyclists,no_collision,Counterpart: None (single road user),0.36109,0.05333,0.04486,1.43489,1.29247,1.59301,6.77031,0.00000,Counterpart,None (single road user),5294.00000,1220.00000
+Motorcyclists,no_collision,Counterpart: Other road user,0.90828,0.17598,0.16724,2.48006,1.75655,3.50158,5.16115,0.00000,Counterpart,Other road user,172.00000,59.00000
+Motorcyclists,no_collision,Counterpart: Pedestrian,0.17763,0.13450,0.14289,1.19439,0.91760,1.55467,1.32064,0.18662,Counterpart,Pedestrian,416.00000,64.00000
+Motorcyclists,no_collision,Counterpart: Same group (Motorcycle),-0.01875,0.15245,0.14785,0.98142,0.72793,1.32318,-0.12301,0.90210,Counterpart,Same group (Motorcycle),332.00000,59.00000
+Motorcyclists,no_collision,Counterpart: Truck,0.72511,0.11190,0.11829,2.06496,1.65829,2.57136,6.48000,0.00000,Counterpart,Truck,369.00000,115.00000
+Motorcyclists,no_collision,Counterpart: Unknown,-0.31795,0.73864,0.61720,0.72764,0.17107,3.09496,-0.43046,0.66686,Counterpart,Unknown,38.00000,3.00000
+Motorcyclists,no_collision,Counterpart: Van / light truck,0.04733,0.08209,0.08356,1.04847,0.89265,1.23150,0.57661,0.56420,Counterpart,Van / light truck,1079.00000,201.00000
+Motorcyclists,no_collision,Region: Brussels-Capital Region,-1.26892,0.07366,0.07608,0.28113,0.24334,0.32480,-17.22613,0.00000,Region,Brussels-Capital Region,3354.00000,247.00000
+Motorcyclists,no_collision,Region: Walloon Region,-0.30161,0.08876,0.04940,0.73963,0.62153,0.88017,-3.39803,0.00068,Region,Walloon Region,6752.00000,1264.00000
+Motorcyclists,no_collision,Road type: Motorway,-0.05092,0.09027,0.07519,0.95036,0.79624,1.13430,-0.56405,0.57272,Road type,Motorway,1384.00000,299.00000
+Motorcyclists,no_collision,Road type: Regional road,0.08184,0.04628,0.03983,1.08528,0.99117,1.18833,1.76840,0.07699,Road type,Regional road,10184.00000,1979.00000
+Motorcyclists,no_collision,Road type: Unknown,0.21222,0.30383,0.25922,1.23642,0.68162,2.24281,0.69848,0.48488,Road type,Unknown,121.00000,20.00000
+Motorcyclists,no_collision,Intersection: At intersection,-0.02376,0.03936,0.04232,0.97652,0.90401,1.05484,-0.60369,0.54605,Intersection,At intersection,6605.00000,1174.00000
+Motorcyclists,no_collision,"Lighting: Dawn, dusk",0.18903,0.08814,0.09052,1.20807,1.01641,1.43587,2.14472,0.03197,Lighting,"Dawn, dusk",842.00000,175.00000
+Motorcyclists,no_collision,"Lighting: Night, no public lighting",0.74725,0.13759,0.14085,2.11118,1.61215,2.76468,5.43090,0.00000,Lighting,"Night, no public lighting",248.00000,85.00000
+Motorcyclists,no_collision,"Lighting: Night, public lighting present and lit",0.32396,0.05878,0.05458,1.38259,1.23214,1.55142,5.51140,0.00000,Lighting,"Night, public lighting present and lit",2996.00000,608.00000
+Motorcyclists,no_collision,"Lighting: Night, public lighting present but not lit",0.67310,0.24169,0.23014,1.96031,1.22066,3.14816,2.78498,0.00535,Lighting,"Night, public lighting present but not lit",96.00000,29.00000
+Motorcyclists,no_collision,"Lighting: Unknown, undetermined",-0.26796,0.27869,0.27481,0.76494,0.44300,1.32083,-0.96152,0.33629,Lighting,"Unknown, undetermined",210.00000,17.00000
+Motorcyclists,no_collision,Weather: Fog (visibility under 100 m),0.44284,0.36562,0.33819,1.55712,0.76050,3.18818,1.21119,0.22582,Weather,Fog (visibility under 100 m),47.00000,13.00000
+Motorcyclists,no_collision,"Weather: Other (thick smoke, ...)",-0.50433,0.33610,0.33077,0.60391,0.31252,1.16700,-1.50052,0.13348,Weather,"Other (thick smoke, ...)",79.00000,11.00000
+Motorcyclists,no_collision,Weather: Rain,-0.16623,0.11169,0.10852,0.84685,0.68036,1.05409,-1.48834,0.13666,Weather,Rain,1395.00000,190.00000
+Motorcyclists,no_collision,"Weather: Strong wind, gusts",0.34989,0.38427,0.38636,1.41891,0.66812,3.01336,0.91052,0.36255,Weather,"Strong wind, gusts",38.00000,10.00000
+Motorcyclists,no_collision,"Weather: Unknown, undetermined",-0.24444,0.11941,0.12081,0.78315,0.61973,0.98965,-2.04710,0.04065,Weather,"Unknown, undetermined",978.00000,106.00000
+Motorcyclists,no_collision,Weather: Other / combined,0.66228,0.32249,0.33406,1.93921,1.03066,3.64869,2.05363,0.04001,Weather,Other / combined,58.00000,14.00000
+Motorcyclists,no_collision,Road surface: Clean,-0.09819,0.07993,0.06368,0.90647,0.77502,1.06022,-1.22845,0.21928,Road surface,Clean,3063.00000,503.00000
+Motorcyclists,no_collision,"Road surface: Dirty (sand, gravel, leaves, ...)",-1.01886,0.18890,0.18184,0.36101,0.24930,0.52277,-5.39371,0.00000,Road surface,"Dirty (sand, gravel, leaves, ...)",343.00000,36.00000
+Motorcyclists,no_collision,Road surface: Dry + Clean,0.07740,0.08289,0.06864,1.08048,0.91846,1.27107,0.93383,0.35039,Road surface,Dry + Clean,2180.00000,379.00000
+Motorcyclists,no_collision,"Road surface: Ice, snow",-0.66395,0.31355,0.33284,0.51481,0.27845,0.95181,-2.11752,0.03422,Road surface,"Ice, snow",89.00000,12.00000
+Motorcyclists,no_collision,"Road surface: Unknown, undetermined",-1.00034,0.18048,0.18172,0.36775,0.25819,0.52382,-5.54267,0.00000,Road surface,"Unknown, undetermined",647.00000,45.00000
+Motorcyclists,no_collision,"Road surface: Wet, puddles",-0.23747,0.07965,0.08301,0.78862,0.67463,0.92187,-2.98126,0.00287,Road surface,"Wet, puddles",2486.00000,388.00000
+Motorcyclists,no_collision,"Road surface: Wet, puddles + Clean",-0.23448,0.24619,0.24121,0.79098,0.48821,1.28152,-0.95246,0.34087,Road surface,"Wet, puddles + Clean",199.00000,22.00000
+Motorcyclists,no_collision,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",-0.68328,0.57230,0.54465,0.50496,0.16448,1.55027,-1.19392,0.23251,Road surface,"Wet, puddles + Dirty (sand, gravel, leaves, ...)",34.00000,4.00000
+Motorcyclists,no_collision,Road surface: Other / combined,-0.53409,0.50242,0.49072,0.58620,0.21897,1.56932,-1.06305,0.28776,Road surface,Other / combined,36.00000,5.00000
+Motorcyclists,no_collision,Year: 2018,-0.00791,0.06639,0.06862,0.99212,0.87108,1.12999,-0.11915,0.90516,Year,2018,2837.00000,569.00000
+Motorcyclists,no_collision,Year: 2019,-0.12333,0.06708,0.07119,0.88397,0.77507,1.00819,-1.83845,0.06600,Year,2019,2639.00000,476.00000
+Motorcyclists,no_collision,Year: 2020,0.00209,0.07490,0.07378,1.00209,0.86526,1.16055,0.02786,0.97777,Year,2020,2148.00000,440.00000
+Motorcyclists,no_collision,Year: 2021,-0.09319,0.07153,0.07421,0.91102,0.79184,1.04814,-1.30274,0.19266,Year,2021,2227.00000,416.00000
+Motorcyclists,no_collision,Year: 2022,-0.08669,0.06454,0.07169,0.91696,0.80800,1.04061,-1.34320,0.17921,Year,2022,2503.00000,473.00000
+Motorcyclists,no_collision,Year: 2023,-0.12836,0.07361,0.07372,0.87953,0.76137,1.01604,-1.74383,0.08119,Year,2023,2376.00000,426.00000
+Motorcyclists,no_collision,Year: 2024,-0.15673,0.08805,0.07475,0.85494,0.71942,1.01599,-1.77988,0.07509,Year,2024,2297.00000,399.00000
+Motorcyclists,no_collision,Month: Apr,0.40543,0.13555,0.12535,1.49995,1.15000,1.95640,2.99113,0.00278,Month,Apr,1673.00000,367.00000
+Motorcyclists,no_collision,Month: Aug,0.33899,0.12453,0.12269,1.40352,1.09956,1.79151,2.72216,0.00649,Month,Aug,2046.00000,435.00000
+Motorcyclists,no_collision,Month: Dec,-0.00500,0.15952,0.14786,0.99502,0.72785,1.36025,-0.03132,0.97501,Month,Dec,816.00000,117.00000
+Motorcyclists,no_collision,Month: Feb,0.12797,0.13278,0.13652,1.13652,0.87610,1.47435,0.96378,0.33516,Month,Feb,1022.00000,179.00000
+Motorcyclists,no_collision,Month: Jul,0.38326,0.12722,0.12269,1.46705,1.14329,1.88250,3.01265,0.00259,Month,Jul,2061.00000,447.00000
+Motorcyclists,no_collision,Month: Jun,0.24847,0.11459,0.12259,1.28206,1.02416,1.60492,2.16829,0.03014,Month,Jun,2339.00000,442.00000
+Motorcyclists,no_collision,Month: Mar,0.15598,0.13855,0.13023,1.16880,0.89084,1.53348,1.12574,0.26027,Month,Mar,1415.00000,248.00000
+Motorcyclists,no_collision,Month: May,0.26444,0.12504,0.12273,1.30270,1.01955,1.66448,2.11488,0.03444,Month,May,2256.00000,435.00000
+Motorcyclists,no_collision,Month: Nov,0.05751,0.13556,0.13504,1.05920,0.81206,1.38156,0.42428,0.67136,Month,Nov,1160.00000,186.00000
+Motorcyclists,no_collision,Month: Oct,0.17470,0.12505,0.12351,1.19089,0.93203,1.52165,1.39711,0.16238,Month,Oct,1967.00000,356.00000
+Motorcyclists,no_collision,Month: Sep,0.21718,0.12487,0.12199,1.24256,0.97281,1.58712,1.73922,0.08200,Month,Sep,2303.00000,428.00000
+Mopeds,no_collision,Counterpart: Bicycle,-0.12048,0.07967,0.08999,0.88649,0.75832,1.03632,-1.51218,0.13049,Counterpart,Bicycle,2423.00000,162.00000
+Mopeds,no_collision,Counterpart: Bus,0.05853,0.34333,0.34988,1.06028,0.54097,2.07810,0.17048,0.86464,Counterpart,Bus,124.00000,9.00000
+Mopeds,no_collision,Counterpart: Motorcycle,0.76791,0.26495,0.26052,2.15525,1.28223,3.62266,2.89829,0.00375,Counterpart,Motorcycle,126.00000,18.00000
+Mopeds,no_collision,Counterpart: None (single road user),0.48667,0.07550,0.06462,1.62689,1.40312,1.88635,6.44626,0.00000,Counterpart,None (single road user),3895.00000,470.00000
+Mopeds,no_collision,Counterpart: Other road user,0.81655,0.20818,0.20327,2.26268,1.50457,3.40277,3.92223,0.00009,Counterpart,Other road user,209.00000,30.00000
+Mopeds,no_collision,Counterpart: Pedestrian,0.13845,0.12140,0.12363,1.14849,0.90529,1.45703,1.14041,0.25412,Counterpart,Pedestrian,990.00000,80.00000
+Mopeds,no_collision,Counterpart: Same group (Moped),-0.09018,0.23871,0.22066,0.91376,0.57232,1.45891,-0.37779,0.70558,Counterpart,Same group (Moped),318.00000,23.00000
+Mopeds,no_collision,Counterpart: Truck,0.93252,0.17368,0.15767,2.54090,1.80779,3.57130,5.36917,0.00000,Counterpart,Truck,304.00000,52.00000
+Mopeds,no_collision,Counterpart: Unknown,0.03750,0.35945,0.39708,1.03822,0.51323,2.10021,0.10434,0.91690,Counterpart,Unknown,96.00000,7.00000
+Mopeds,no_collision,Counterpart: Van / light truck,0.26550,0.10487,0.09937,1.30408,1.06180,1.60165,2.53181,0.01135,Counterpart,Van / light truck,1340.00000,128.00000
+Mopeds,no_collision,Region: Brussels-Capital Region,-1.14293,0.14159,0.14350,0.31888,0.24161,0.42088,-8.07214,0.00000,Region,Brussels-Capital Region,1584.00000,58.00000
+Mopeds,no_collision,Region: Walloon Region,-0.23707,0.08695,0.07313,0.78893,0.66532,0.93552,-2.72664,0.00640,Region,Walloon Region,4780.00000,425.00000
+Mopeds,no_collision,Road type: Motorway,0.54884,0.38593,0.37386,1.73125,0.81255,3.68864,1.42215,0.15498,Road type,Motorway,58.00000,9.00000
+Mopeds,no_collision,Road type: Regional road,-0.07110,0.04991,0.04828,0.93137,0.84457,1.02709,-1.42446,0.15431,Road type,Regional road,12117.00000,996.00000
+Mopeds,no_collision,Road type: Unknown,0.25606,0.41830,0.40775,1.29182,0.56904,2.93269,0.61213,0.54045,Road type,Unknown,70.00000,7.00000
+Mopeds,no_collision,Intersection: At intersection,-0.04285,0.05757,0.05152,0.95805,0.85582,1.07250,-0.74435,0.45667,Intersection,At intersection,8984.00000,720.00000
+Mopeds,no_collision,"Lighting: Dawn, dusk",0.13173,0.09693,0.11036,1.14080,0.94341,1.37950,1.35904,0.17413,Lighting,"Dawn, dusk",1237.00000,101.00000
+Mopeds,no_collision,"Lighting: Night, no public lighting",0.53204,0.15667,0.16192,1.70240,1.25228,2.31432,3.39592,0.00068,Lighting,"Night, no public lighting",360.00000,48.00000
+Mopeds,no_collision,"Lighting: Night, public lighting present and lit",0.50119,0.06358,0.06063,1.65069,1.45727,1.86977,7.88233,0.00000,Lighting,"Night, public lighting present and lit",4417.00000,494.00000
+Mopeds,no_collision,"Lighting: Night, public lighting present but not lit",0.76532,0.26790,0.24060,2.14969,1.27156,3.63423,2.85680,0.00428,Lighting,"Night, public lighting present but not lit",141.00000,22.00000
+Mopeds,no_collision,"Lighting: Unknown, undetermined",-0.21279,0.29726,0.29285,0.80833,0.45140,1.44750,-0.71584,0.47409,Lighting,"Unknown, undetermined",508.00000,15.00000
+Mopeds,no_collision,Weather: Fog (visibility under 100 m),-0.15421,0.45592,0.47145,0.85709,0.35070,2.09465,-0.33825,0.73518,Weather,Fog (visibility under 100 m),66.00000,5.00000
+Mopeds,no_collision,"Weather: Other (thick smoke, ...)",-0.06492,0.35417,0.35318,0.93714,0.46809,1.87622,-0.18330,0.85456,Weather,"Other (thick smoke, ...)",101.00000,9.00000
+Mopeds,no_collision,Weather: Rain,0.02048,0.12710,0.11427,1.02069,0.79563,1.30943,0.16115,0.87198,Weather,Rain,2359.00000,177.00000
+Mopeds,no_collision,Weather: Snowfall,0.31875,0.44495,0.47735,1.37541,0.57502,3.28986,0.71638,0.47376,Weather,Snowfall,55.00000,6.00000
+Mopeds,no_collision,"Weather: Strong wind, gusts",0.31111,0.34438,0.33429,1.36494,0.69497,2.68077,0.90339,0.36632,Weather,"Strong wind, gusts",78.00000,11.00000
+Mopeds,no_collision,"Weather: Unknown, undetermined",-0.12632,0.16526,0.14899,0.88133,0.63749,1.21846,-0.76437,0.44465,Weather,"Unknown, undetermined",1644.00000,75.00000
+Mopeds,no_collision,Weather: Other / combined,0.14711,0.54385,0.53826,1.15849,0.39899,3.36374,0.27051,0.78677,Weather,Other / combined,43.00000,4.00000
+Mopeds,no_collision,Road surface: Clean,0.18713,0.09916,0.10018,1.20579,0.99280,1.46446,1.88717,0.05914,Road surface,Clean,1904.00000,176.00000
+Mopeds,no_collision,"Road surface: Dirty (sand, gravel, leaves, ...)",-0.50738,0.26761,0.26671,0.60207,0.35633,1.01729,-1.89594,0.05797,Road surface,"Dirty (sand, gravel, leaves, ...)",224.00000,16.00000
+Mopeds,no_collision,Road surface: Dry + Clean,0.33490,0.11846,0.11070,1.39779,1.10817,1.76311,2.82706,0.00470,Road surface,Dry + Clean,1246.00000,124.00000
+Mopeds,no_collision,"Road surface: Ice, snow",-0.19903,0.27443,0.29572,0.81953,0.47859,1.40335,-0.72523,0.46831,Road surface,"Ice, snow",166.00000,16.00000
+Mopeds,no_collision,"Road surface: Unknown, undetermined",-0.95503,0.19720,0.20402,0.38480,0.26144,0.56636,-4.84301,0.00000,Road surface,"Unknown, undetermined",1362.00000,41.00000
+Mopeds,no_collision,"Road surface: Wet, puddles",-0.29182,0.10969,0.09353,0.74690,0.60241,0.92605,-2.66044,0.00780,Road surface,"Wet, puddles",4175.00000,306.00000
+Mopeds,no_collision,"Road surface: Wet, puddles + Clean",0.35536,0.25079,0.25971,1.42670,0.87269,2.33241,1.41699,0.15649,Road surface,"Wet, puddles + Clean",178.00000,19.00000
+Mopeds,no_collision,Road surface: Other / combined,-0.53083,0.64876,0.60955,0.58811,0.16490,2.09749,-0.81823,0.41323,Road surface,Other / combined,44.00000,3.00000
+Mopeds,no_collision,Year: 2018,-0.13684,0.08143,0.08954,0.87211,0.74346,1.02303,-1.68040,0.09288,Year,2018,2924.00000,271.00000
+Mopeds,no_collision,Year: 2019,-0.09871,0.08419,0.08926,0.90601,0.76820,1.06854,-1.17249,0.24100,Year,2019,2907.00000,276.00000
+Mopeds,no_collision,Year: 2020,-0.23266,0.08403,0.09892,0.79242,0.67209,0.93429,-2.76879,0.00563,Year,2020,2299.00000,190.00000
+Mopeds,no_collision,Year: 2021,-0.27767,0.08825,0.09262,0.75755,0.63723,0.90059,-3.14659,0.00165,Year,2021,2943.00000,236.00000
+Mopeds,no_collision,Year: 2022,-0.29441,0.09051,0.09114,0.74497,0.62387,0.88958,-3.25269,0.00114,Year,2022,3178.00000,250.00000
+Mopeds,no_collision,Year: 2023,-0.29233,0.09218,0.09090,0.74653,0.62313,0.89436,-3.17115,0.00152,Year,2023,3149.00000,254.00000
+Mopeds,no_collision,Year: 2024,-0.40739,0.11110,0.09525,0.66539,0.53519,0.82726,-3.66692,0.00025,Year,2024,3000.00000,212.00000
+Mopeds,no_collision,Month: Apr,0.23822,0.14354,0.13571,1.26899,0.95780,1.68128,1.65960,0.09700,Month,Apr,1697.00000,148.00000
+Mopeds,no_collision,Month: Aug,0.20624,0.12978,0.13113,1.22905,0.95302,1.58503,1.58923,0.11201,Month,Aug,1976.00000,175.00000
+Mopeds,no_collision,Month: Dec,0.07723,0.15789,0.13604,1.08029,0.79276,1.47211,0.48912,0.62476,Month,Dec,1636.00000,130.00000
+Mopeds,no_collision,Month: Feb,0.10555,0.13523,0.14066,1.11132,0.85258,1.44860,0.78056,0.43506,Month,Feb,1446.00000,115.00000
+Mopeds,no_collision,Month: Jul,0.24323,0.13648,0.13352,1.27536,0.97602,1.66650,1.78214,0.07473,Month,Jul,1812.00000,163.00000
+Mopeds,no_collision,Month: Jun,0.30854,0.14501,0.12760,1.36144,1.02462,1.80899,2.12769,0.03336,Month,Jun,2398.00000,219.00000
+Mopeds,no_collision,Month: Mar,0.23071,0.15603,0.13468,1.25949,0.92764,1.71005,1.47862,0.13924,Month,Mar,1707.00000,146.00000
+Mopeds,no_collision,Month: May,0.39115,0.13780,0.12778,1.47868,1.12869,1.93719,2.83846,0.00453,Month,May,2133.00000,211.00000
+Mopeds,no_collision,Month: Nov,0.11656,0.13818,0.13003,1.12363,0.85703,1.47315,0.84352,0.39894,Month,Nov,2042.00000,164.00000
+Mopeds,no_collision,Month: Oct,0.08641,0.12616,0.12719,1.09025,0.85140,1.39611,0.68487,0.49343,Month,Oct,2472.00000,191.00000
+Mopeds,no_collision,Month: Sep,0.21061,0.12824,0.12628,1.23443,0.96009,1.58717,1.64239,0.10051,Month,Sep,2488.00000,212.00000

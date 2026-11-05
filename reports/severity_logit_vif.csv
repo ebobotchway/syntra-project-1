@@ -1,0 +1,575 @@
+model,spec,term,vif
+Baseline,full,Region: Brussels-Capital Region,1.273
+Baseline,full,Region: Walloon Region,1.554
+Baseline,full,Road type: Motorway,1.339
+Baseline,full,Road type: Regional road,1.133
+Baseline,full,Road type: Unknown,1.015
+Baseline,full,Intersection: At intersection,1.194
+Baseline,full,"Lighting: Dawn, dusk",1.047
+Baseline,full,"Lighting: Night, no public lighting",1.067
+Baseline,full,"Lighting: Night, public lighting present and lit",1.199
+Baseline,full,"Lighting: Night, public lighting present but not lit",1.027
+Baseline,full,"Lighting: Unknown, undetermined",1.550
+Baseline,full,Weather: Fog (visibility under 100 m),1.016
+Baseline,full,Weather: Hail,1.010
+Baseline,full,"Weather: Other (thick smoke, ...)",1.011
+Baseline,full,Weather: Rain,1.888
+Baseline,full,"Weather: Rain + Strong wind, gusts",1.019
+Baseline,full,Weather: Snowfall,1.286
+Baseline,full,"Weather: Strong wind, gusts",1.011
+Baseline,full,"Weather: Unknown, undetermined",2.768
+Baseline,full,Weather: Other / combined,1.052
+Baseline,full,Road surface: Clean,1.375
+Baseline,full,"Road surface: Dirty (sand, gravel, leaves, ...)",1.029
+Baseline,full,Road surface: Dry + Clean,1.234
+Baseline,full,"Road surface: Dry + Dirty (sand, gravel, leaves, ...)",1.002
+Baseline,full,"Road surface: Ice, snow",1.336
+Baseline,full,"Road surface: Unknown, undetermined",3.081
+Baseline,full,"Road surface: Wet, puddles",2.130
+Baseline,full,"Road surface: Wet, puddles + Clean",1.101
+Baseline,full,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",1.010
+Baseline,full,"Road surface: Wet, puddles + Ice or snow",1.064
+Baseline,full,Road surface: Other / combined,1.002
+Baseline,full,Year: 2018,1.762
+Baseline,full,Year: 2019,1.751
+Baseline,full,Year: 2020,1.635
+Baseline,full,Year: 2021,1.707
+Baseline,full,Year: 2022,1.766
+Baseline,full,Year: 2023,1.754
+Baseline,full,Year: 2024,1.740
+Baseline,full,Month: Apr,1.958
+Baseline,full,Month: Aug,2.063
+Baseline,full,Month: Dec,1.915
+Baseline,full,Month: Feb,1.863
+Baseline,full,Month: Jul,2.067
+Baseline,full,Month: Jun,2.277
+Baseline,full,Month: Mar,1.959
+Baseline,full,Month: May,2.180
+Baseline,full,Month: Nov,2.011
+Baseline,full,Month: Oct,2.173
+Baseline,full,Month: Sep,2.210
+Baseline,full,Collision type: Between 2 drivers: Flank against flank,1.481
+Baseline,full,Collision type: Between 2 drivers: Head-on collision,1.513
+Baseline,full,Collision type: Between 2 drivers: Side collision (front/rear against flank),2.598
+Baseline,full,Collision type: Chain collision (3 or more drivers),1.199
+Baseline,full,Collision type: Collision type not specified,4.287
+Baseline,full,Collision type: Other or unknown,3.315
+Baseline,full,Collision type: Road user against obstacle on the roadway,1.164
+Baseline,full,Collision type: Road user against obstacle outside the roadway,1.800
+Baseline,full,"Collision type: Single road user, no obstacle (incl. fall)",1.511
+Baseline,full,Group involved: Van / light truck,1.052
+Baseline,full,Group involved: Truck,1.110
+Baseline,full,Group involved: Bus,1.016
+Baseline,full,Group involved: Motorcycle,1.139
+Baseline,full,Group involved: Moped,1.149
+Baseline,full,Group involved: Bicycle,1.533
+Baseline,full,Group involved: Pedestrian,1.712
+Baseline,full,Group involved: Other road user,1.025
+Baseline,full,Group involved: Unknown,5.599
+Cyclists,full,Counterpart: Bus,1.008
+Cyclists,full,Counterpart: Moped,1.070
+Cyclists,full,Counterpart: Motorcycle,1.009
+Cyclists,full,Counterpart: Other road user,1.025
+Cyclists,full,Counterpart: Pedestrian,1.643
+Cyclists,full,Counterpart: Same group (Bicycle),1.190
+Cyclists,full,Counterpart: Truck,1.019
+Cyclists,full,Counterpart: Unknown,1.026
+Cyclists,full,Counterpart: Van / light truck,1.045
+Cyclists,full,Region: Brussels-Capital Region,1.258
+Cyclists,full,Region: Walloon Region,1.273
+Cyclists,full,Road type: Motorway,1.004
+Cyclists,full,Road type: Regional road,1.037
+Cyclists,full,Road type: Unknown,1.012
+Cyclists,full,Intersection: At intersection,1.180
+Cyclists,full,"Lighting: Dawn, dusk",1.063
+Cyclists,full,"Lighting: Night, no public lighting",1.021
+Cyclists,full,"Lighting: Night, public lighting present and lit",1.130
+Cyclists,full,"Lighting: Night, public lighting present but not lit",1.008
+Cyclists,full,"Lighting: Unknown, undetermined",1.367
+Cyclists,full,Weather: Fog (visibility under 100 m),1.012
+Cyclists,full,"Weather: Other (thick smoke, ...)",1.004
+Cyclists,full,Weather: Rain,1.918
+Cyclists,full,"Weather: Rain + Strong wind, gusts",1.010
+Cyclists,full,Weather: Snowfall,1.128
+Cyclists,full,"Weather: Strong wind, gusts",1.010
+Cyclists,full,"Weather: Unknown, undetermined",2.570
+Cyclists,full,Road surface: Clean,1.280
+Cyclists,full,"Road surface: Dirty (sand, gravel, leaves, ...)",1.031
+Cyclists,full,Road surface: Dry + Clean,1.200
+Cyclists,full,"Road surface: Ice, snow",1.171
+Cyclists,full,"Road surface: Unknown, undetermined",2.683
+Cyclists,full,"Road surface: Wet, puddles",2.054
+Cyclists,full,"Road surface: Wet, puddles + Clean",1.050
+Cyclists,full,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",1.009
+Cyclists,full,Road surface: Other / combined,1.003
+Cyclists,full,Year: 2018,1.849
+Cyclists,full,Year: 2019,1.873
+Cyclists,full,Year: 2020,1.842
+Cyclists,full,Year: 2021,1.882
+Cyclists,full,Year: 2022,1.994
+Cyclists,full,Year: 2023,1.951
+Cyclists,full,Year: 2024,1.908
+Cyclists,full,Month: Apr,2.213
+Cyclists,full,Month: Aug,2.414
+Cyclists,full,Month: Dec,1.886
+Cyclists,full,Month: Feb,1.962
+Cyclists,full,Month: Jul,2.413
+Cyclists,full,Month: Jun,2.790
+Cyclists,full,Month: Mar,2.161
+Cyclists,full,Month: May,2.615
+Cyclists,full,Month: Nov,2.197
+Cyclists,full,Month: Oct,2.535
+Cyclists,full,Month: Sep,2.696
+Cyclists,full,Collision type: Between 2 drivers: Flank against flank,2.271
+Cyclists,full,Collision type: Between 2 drivers: Head-on collision,2.324
+Cyclists,full,Collision type: Between 2 drivers: Side collision (front/rear against flank),4.006
+Cyclists,full,Collision type: Chain collision (3 or more drivers),1.056
+Cyclists,full,Collision type: Road user against obstacle on the roadway,1.439
+Cyclists,full,Collision type: Road user against obstacle outside the roadway,1.276
+Cyclists,full,"Collision type: Single road user, no obstacle (incl. fall)",2.092
+Pedestrians,full,Counterpart: Bicycle,1.154
+Pedestrians,full,Counterpart: Bus,1.017
+Pedestrians,full,Counterpart: Moped,1.042
+Pedestrians,full,Counterpart: Motorcycle,1.015
+Pedestrians,full,Counterpart: Other road user,1.031
+Pedestrians,full,Counterpart: Truck,1.034
+Pedestrians,full,Counterpart: Unknown,1.035
+Pedestrians,full,Counterpart: Van / light truck,1.027
+Pedestrians,full,Region: Brussels-Capital Region,1.443
+Pedestrians,full,Region: Walloon Region,1.570
+Pedestrians,full,Road type: Motorway,1.038
+Pedestrians,full,Road type: Regional road,1.032
+Pedestrians,full,Road type: Unknown,1.009
+Pedestrians,full,Intersection: At intersection,1.066
+Pedestrians,full,"Lighting: Dawn, dusk",1.067
+Pedestrians,full,"Lighting: Night, no public lighting",1.028
+Pedestrians,full,"Lighting: Night, public lighting present and lit",1.229
+Pedestrians,full,"Lighting: Night, public lighting present but not lit",1.020
+Pedestrians,full,"Lighting: Unknown, undetermined",1.284
+Pedestrians,full,Weather: Fog (visibility under 100 m),1.012
+Pedestrians,full,"Weather: Other (thick smoke, ...)",1.006
+Pedestrians,full,Weather: Rain,2.277
+Pedestrians,full,"Weather: Rain + Strong wind, gusts",1.024
+Pedestrians,full,Weather: Snowfall,1.266
+Pedestrians,full,"Weather: Strong wind, gusts",1.009
+Pedestrians,full,"Weather: Unknown, undetermined",2.569
+Pedestrians,full,Road surface: Clean,1.390
+Pedestrians,full,"Road surface: Dirty (sand, gravel, leaves, ...)",1.010
+Pedestrians,full,Road surface: Dry + Clean,1.264
+Pedestrians,full,"Road surface: Ice, snow",1.260
+Pedestrians,full,"Road surface: Unknown, undetermined",2.756
+Pedestrians,full,"Road surface: Wet, puddles",2.572
+Pedestrians,full,"Road surface: Wet, puddles + Clean",1.126
+Pedestrians,full,Road surface: Other / combined,1.015
+Pedestrians,full,Year: 2018,1.718
+Pedestrians,full,Year: 2019,1.729
+Pedestrians,full,Year: 2020,1.548
+Pedestrians,full,Year: 2021,1.632
+Pedestrians,full,Year: 2022,1.676
+Pedestrians,full,Year: 2023,1.692
+Pedestrians,full,Year: 2024,1.661
+Pedestrians,full,Month: Apr,1.683
+Pedestrians,full,Month: Aug,1.667
+Pedestrians,full,Month: Dec,1.915
+Pedestrians,full,Month: Feb,1.799
+Pedestrians,full,Month: Jul,1.697
+Pedestrians,full,Month: Jun,1.908
+Pedestrians,full,Month: Mar,1.788
+Pedestrians,full,Month: May,1.890
+Pedestrians,full,Month: Nov,1.858
+Pedestrians,full,Month: Oct,1.915
+Pedestrians,full,Month: Sep,1.878
+Motorcyclists,full,Counterpart: Bicycle,1.044
+Motorcyclists,full,Counterpart: Bus,1.006
+Motorcyclists,full,Counterpart: Moped,1.009
+Motorcyclists,full,Counterpart: Other road user,1.011
+Motorcyclists,full,Counterpart: Pedestrian,1.149
+Motorcyclists,full,Counterpart: Same group (Motorcycle),1.034
+Motorcyclists,full,Counterpart: Truck,1.026
+Motorcyclists,full,Counterpart: Unknown,1.012
+Motorcyclists,full,Counterpart: Van / light truck,1.045
+Motorcyclists,full,Region: Brussels-Capital Region,1.415
+Motorcyclists,full,Region: Walloon Region,1.624
+Motorcyclists,full,Road type: Motorway,1.197
+Motorcyclists,full,Road type: Regional road,1.139
+Motorcyclists,full,Road type: Unknown,1.023
+Motorcyclists,full,Intersection: At intersection,1.152
+Motorcyclists,full,"Lighting: Dawn, dusk",1.041
+Motorcyclists,full,"Lighting: Night, no public lighting",1.031
+Motorcyclists,full,"Lighting: Night, public lighting present and lit",1.153
+Motorcyclists,full,"Lighting: Night, public lighting present but not lit",1.014
+Motorcyclists,full,"Lighting: Unknown, undetermined",1.222
+Motorcyclists,full,Weather: Fog (visibility under 100 m),1.013
+Motorcyclists,full,"Weather: Other (thick smoke, ...)",1.013
+Motorcyclists,full,Weather: Rain,1.841
+Motorcyclists,full,"Weather: Strong wind, gusts",1.014
+Motorcyclists,full,"Weather: Unknown, undetermined",1.579
+Motorcyclists,full,Weather: Other / combined,1.077
+Motorcyclists,full,Road surface: Clean,1.417
+Motorcyclists,full,"Road surface: Dirty (sand, gravel, leaves, ...)",1.080
+Motorcyclists,full,Road surface: Dry + Clean,1.274
+Motorcyclists,full,"Road surface: Ice, snow",1.100
+Motorcyclists,full,"Road surface: Unknown, undetermined",1.704
+Motorcyclists,full,"Road surface: Wet, puddles",2.038
+Motorcyclists,full,"Road surface: Wet, puddles + Clean",1.108
+Motorcyclists,full,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",1.026
+Motorcyclists,full,Road surface: Other / combined,1.016
+Motorcyclists,full,Year: 2018,1.769
+Motorcyclists,full,Year: 2019,1.729
+Motorcyclists,full,Year: 2020,1.624
+Motorcyclists,full,Year: 2021,1.636
+Motorcyclists,full,Year: 2022,1.701
+Motorcyclists,full,Year: 2023,1.681
+Motorcyclists,full,Year: 2024,1.653
+Motorcyclists,full,Month: Apr,3.166
+Motorcyclists,full,Month: Aug,3.585
+Motorcyclists,full,Month: Dec,2.043
+Motorcyclists,full,Month: Feb,2.305
+Motorcyclists,full,Month: Jul,3.615
+Motorcyclists,full,Month: Jun,3.935
+Motorcyclists,full,Month: Mar,2.819
+Motorcyclists,full,Month: May,3.831
+Motorcyclists,full,Month: Nov,2.471
+Motorcyclists,full,Month: Oct,3.414
+Motorcyclists,full,Month: Sep,3.828
+Motorcyclists,full,Collision type: Between 2 drivers: Flank against flank,1.558
+Motorcyclists,full,Collision type: Between 2 drivers: Head-on collision,1.452
+Motorcyclists,full,Collision type: Between 2 drivers: Side collision (front/rear against flank),2.324
+Motorcyclists,full,Collision type: Chain collision (3 or more drivers),1.086
+Motorcyclists,full,Collision type: Road user against obstacle on the roadway,1.213
+Motorcyclists,full,Collision type: Road user against obstacle outside the roadway,1.471
+Motorcyclists,full,"Collision type: Single road user, no obstacle (incl. fall)",1.964
+Mopeds,full,Counterpart: Bicycle,1.208
+Mopeds,full,Counterpart: Bus,1.007
+Mopeds,full,Counterpart: Motorcycle,1.008
+Mopeds,full,Counterpart: Other road user,1.013
+Mopeds,full,Counterpart: Pedestrian,1.448
+Mopeds,full,Counterpart: Same group (Moped),1.024
+Mopeds,full,Counterpart: Truck,1.014
+Mopeds,full,Counterpart: Unknown,1.018
+Mopeds,full,Counterpart: Van / light truck,1.043
+Mopeds,full,Region: Brussels-Capital Region,1.196
+Mopeds,full,Region: Walloon Region,1.522
+Mopeds,full,Road type: Motorway,1.011
+Mopeds,full,Road type: Regional road,1.037
+Mopeds,full,Road type: Unknown,1.011
+Mopeds,full,Intersection: At intersection,1.114
+Mopeds,full,"Lighting: Dawn, dusk",1.058
+Mopeds,full,"Lighting: Night, no public lighting",1.031
+Mopeds,full,"Lighting: Night, public lighting present and lit",1.179
+Mopeds,full,"Lighting: Night, public lighting present but not lit",1.019
+Mopeds,full,"Lighting: Unknown, undetermined",1.380
+Mopeds,full,Weather: Fog (visibility under 100 m),1.014
+Mopeds,full,"Weather: Other (thick smoke, ...)",1.008
+Mopeds,full,Weather: Rain,1.886
+Mopeds,full,Weather: Snowfall,1.158
+Mopeds,full,"Weather: Strong wind, gusts",1.018
+Mopeds,full,"Weather: Unknown, undetermined",2.090
+Mopeds,full,Weather: Other / combined,1.027
+Mopeds,full,Road surface: Clean,1.373
+Mopeds,full,"Road surface: Dirty (sand, gravel, leaves, ...)",1.062
+Mopeds,full,Road surface: Dry + Clean,1.221
+Mopeds,full,"Road surface: Ice, snow",1.202
+Mopeds,full,"Road surface: Unknown, undetermined",2.261
+Mopeds,full,"Road surface: Wet, puddles",2.071
+Mopeds,full,"Road surface: Wet, puddles + Clean",1.076
+Mopeds,full,Road surface: Other / combined,1.028
+Mopeds,full,Year: 2018,1.789
+Mopeds,full,Year: 2019,1.790
+Mopeds,full,Year: 2020,1.654
+Mopeds,full,Year: 2021,1.801
+Mopeds,full,Year: 2022,1.853
+Mopeds,full,Year: 2023,1.851
+Mopeds,full,Year: 2024,1.816
+Mopeds,full,Month: Apr,2.122
+Mopeds,full,Month: Aug,2.276
+Mopeds,full,Month: Dec,1.987
+Mopeds,full,Month: Feb,1.899
+Mopeds,full,Month: Jul,2.198
+Mopeds,full,Month: Jun,2.565
+Mopeds,full,Month: Mar,2.084
+Mopeds,full,Month: May,2.389
+Mopeds,full,Month: Nov,2.227
+Mopeds,full,Month: Oct,2.493
+Mopeds,full,Month: Sep,2.547
+Mopeds,full,Collision type: Between 2 drivers: Flank against flank,1.968
+Mopeds,full,Collision type: Between 2 drivers: Head-on collision,1.984
+Mopeds,full,Collision type: Between 2 drivers: Side collision (front/rear against flank),3.406
+Mopeds,full,Collision type: Chain collision (3 or more drivers),1.046
+Mopeds,full,Collision type: Road user against obstacle on the roadway,1.259
+Mopeds,full,Collision type: Road user against obstacle outside the roadway,1.394
+Mopeds,full,"Collision type: Single road user, no obstacle (incl. fall)",2.085
+Baseline,no_collision,Region: Brussels-Capital Region,1.258
+Baseline,no_collision,Region: Walloon Region,1.546
+Baseline,no_collision,Road type: Motorway,1.302
+Baseline,no_collision,Road type: Regional road,1.128
+Baseline,no_collision,Road type: Unknown,1.015
+Baseline,no_collision,Intersection: At intersection,1.133
+Baseline,no_collision,"Lighting: Dawn, dusk",1.046
+Baseline,no_collision,"Lighting: Night, no public lighting",1.065
+Baseline,no_collision,"Lighting: Night, public lighting present and lit",1.194
+Baseline,no_collision,"Lighting: Night, public lighting present but not lit",1.026
+Baseline,no_collision,"Lighting: Unknown, undetermined",1.522
+Baseline,no_collision,Weather: Fog (visibility under 100 m),1.016
+Baseline,no_collision,Weather: Hail,1.010
+Baseline,no_collision,"Weather: Other (thick smoke, ...)",1.011
+Baseline,no_collision,Weather: Rain,1.888
+Baseline,no_collision,"Weather: Rain + Strong wind, gusts",1.019
+Baseline,no_collision,Weather: Snowfall,1.285
+Baseline,no_collision,"Weather: Strong wind, gusts",1.010
+Baseline,no_collision,"Weather: Unknown, undetermined",2.756
+Baseline,no_collision,Weather: Other / combined,1.052
+Baseline,no_collision,Road surface: Clean,1.374
+Baseline,no_collision,"Road surface: Dirty (sand, gravel, leaves, ...)",1.022
+Baseline,no_collision,Road surface: Dry + Clean,1.233
+Baseline,no_collision,"Road surface: Dry + Dirty (sand, gravel, leaves, ...)",1.002
+Baseline,no_collision,"Road surface: Ice, snow",1.334
+Baseline,no_collision,"Road surface: Unknown, undetermined",3.035
+Baseline,no_collision,"Road surface: Wet, puddles",2.129
+Baseline,no_collision,"Road surface: Wet, puddles + Clean",1.101
+Baseline,no_collision,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",1.010
+Baseline,no_collision,"Road surface: Wet, puddles + Ice or snow",1.064
+Baseline,no_collision,Road surface: Other / combined,1.002
+Baseline,no_collision,Year: 2018,1.748
+Baseline,no_collision,Year: 2019,1.737
+Baseline,no_collision,Year: 2020,1.623
+Baseline,no_collision,Year: 2021,1.692
+Baseline,no_collision,Year: 2022,1.747
+Baseline,no_collision,Year: 2023,1.735
+Baseline,no_collision,Year: 2024,1.722
+Baseline,no_collision,Month: Apr,1.957
+Baseline,no_collision,Month: Aug,2.063
+Baseline,no_collision,Month: Dec,1.915
+Baseline,no_collision,Month: Feb,1.863
+Baseline,no_collision,Month: Jul,2.067
+Baseline,no_collision,Month: Jun,2.277
+Baseline,no_collision,Month: Mar,1.958
+Baseline,no_collision,Month: May,2.180
+Baseline,no_collision,Month: Nov,2.011
+Baseline,no_collision,Month: Oct,2.173
+Baseline,no_collision,Month: Sep,2.210
+Baseline,no_collision,Group involved: Van / light truck,1.049
+Baseline,no_collision,Group involved: Truck,1.104
+Baseline,no_collision,Group involved: Bus,1.013
+Baseline,no_collision,Group involved: Motorcycle,1.101
+Baseline,no_collision,Group involved: Moped,1.103
+Baseline,no_collision,Group involved: Bicycle,1.392
+Baseline,no_collision,Group involved: Pedestrian,1.183
+Baseline,no_collision,Group involved: Other road user,1.021
+Baseline,no_collision,Group involved: Unknown,1.428
+Baseline,no_collision,Group involved: Single road user (no second party),1.265
+Cyclists,no_collision,Counterpart: Bus,1.007
+Cyclists,no_collision,Counterpart: Moped,1.046
+Cyclists,no_collision,Counterpart: Motorcycle,1.009
+Cyclists,no_collision,Counterpart: None (single road user),1.221
+Cyclists,no_collision,Counterpart: Other road user,1.023
+Cyclists,no_collision,Counterpart: Pedestrian,1.077
+Cyclists,no_collision,Counterpart: Same group (Bicycle),1.113
+Cyclists,no_collision,Counterpart: Truck,1.017
+Cyclists,no_collision,Counterpart: Unknown,1.016
+Cyclists,no_collision,Counterpart: Van / light truck,1.044
+Cyclists,no_collision,Region: Brussels-Capital Region,1.254
+Cyclists,no_collision,Region: Walloon Region,1.269
+Cyclists,no_collision,Road type: Motorway,1.004
+Cyclists,no_collision,Road type: Regional road,1.033
+Cyclists,no_collision,Road type: Unknown,1.012
+Cyclists,no_collision,Intersection: At intersection,1.142
+Cyclists,no_collision,"Lighting: Dawn, dusk",1.062
+Cyclists,no_collision,"Lighting: Night, no public lighting",1.019
+Cyclists,no_collision,"Lighting: Night, public lighting present and lit",1.128
+Cyclists,no_collision,"Lighting: Night, public lighting present but not lit",1.007
+Cyclists,no_collision,"Lighting: Unknown, undetermined",1.367
+Cyclists,no_collision,Weather: Fog (visibility under 100 m),1.012
+Cyclists,no_collision,"Weather: Other (thick smoke, ...)",1.004
+Cyclists,no_collision,Weather: Rain,1.918
+Cyclists,no_collision,"Weather: Rain + Strong wind, gusts",1.010
+Cyclists,no_collision,Weather: Snowfall,1.128
+Cyclists,no_collision,"Weather: Strong wind, gusts",1.009
+Cyclists,no_collision,"Weather: Unknown, undetermined",2.569
+Cyclists,no_collision,Road surface: Clean,1.280
+Cyclists,no_collision,"Road surface: Dirty (sand, gravel, leaves, ...)",1.029
+Cyclists,no_collision,Road surface: Dry + Clean,1.200
+Cyclists,no_collision,"Road surface: Ice, snow",1.166
+Cyclists,no_collision,"Road surface: Unknown, undetermined",2.681
+Cyclists,no_collision,"Road surface: Wet, puddles",2.052
+Cyclists,no_collision,"Road surface: Wet, puddles + Clean",1.050
+Cyclists,no_collision,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",1.009
+Cyclists,no_collision,Road surface: Other / combined,1.003
+Cyclists,no_collision,Year: 2018,1.832
+Cyclists,no_collision,Year: 2019,1.854
+Cyclists,no_collision,Year: 2020,1.822
+Cyclists,no_collision,Year: 2021,1.861
+Cyclists,no_collision,Year: 2022,1.970
+Cyclists,no_collision,Year: 2023,1.929
+Cyclists,no_collision,Year: 2024,1.888
+Cyclists,no_collision,Month: Apr,2.213
+Cyclists,no_collision,Month: Aug,2.413
+Cyclists,no_collision,Month: Dec,1.885
+Cyclists,no_collision,Month: Feb,1.962
+Cyclists,no_collision,Month: Jul,2.413
+Cyclists,no_collision,Month: Jun,2.789
+Cyclists,no_collision,Month: Mar,2.161
+Cyclists,no_collision,Month: May,2.615
+Cyclists,no_collision,Month: Nov,2.197
+Cyclists,no_collision,Month: Oct,2.534
+Cyclists,no_collision,Month: Sep,2.696
+Pedestrians,no_collision,Counterpart: Bicycle,1.154
+Pedestrians,no_collision,Counterpart: Bus,1.017
+Pedestrians,no_collision,Counterpart: Moped,1.042
+Pedestrians,no_collision,Counterpart: Motorcycle,1.015
+Pedestrians,no_collision,Counterpart: Other road user,1.031
+Pedestrians,no_collision,Counterpart: Truck,1.034
+Pedestrians,no_collision,Counterpart: Unknown,1.035
+Pedestrians,no_collision,Counterpart: Van / light truck,1.027
+Pedestrians,no_collision,Region: Brussels-Capital Region,1.443
+Pedestrians,no_collision,Region: Walloon Region,1.570
+Pedestrians,no_collision,Road type: Motorway,1.038
+Pedestrians,no_collision,Road type: Regional road,1.032
+Pedestrians,no_collision,Road type: Unknown,1.009
+Pedestrians,no_collision,Intersection: At intersection,1.066
+Pedestrians,no_collision,"Lighting: Dawn, dusk",1.067
+Pedestrians,no_collision,"Lighting: Night, no public lighting",1.028
+Pedestrians,no_collision,"Lighting: Night, public lighting present and lit",1.229
+Pedestrians,no_collision,"Lighting: Night, public lighting present but not lit",1.020
+Pedestrians,no_collision,"Lighting: Unknown, undetermined",1.284
+Pedestrians,no_collision,Weather: Fog (visibility under 100 m),1.012
+Pedestrians,no_collision,"Weather: Other (thick smoke, ...)",1.006
+Pedestrians,no_collision,Weather: Rain,2.277
+Pedestrians,no_collision,"Weather: Rain + Strong wind, gusts",1.024
+Pedestrians,no_collision,Weather: Snowfall,1.266
+Pedestrians,no_collision,"Weather: Strong wind, gusts",1.009
+Pedestrians,no_collision,"Weather: Unknown, undetermined",2.569
+Pedestrians,no_collision,Road surface: Clean,1.390
+Pedestrians,no_collision,"Road surface: Dirty (sand, gravel, leaves, ...)",1.010
+Pedestrians,no_collision,Road surface: Dry + Clean,1.264
+Pedestrians,no_collision,"Road surface: Ice, snow",1.260
+Pedestrians,no_collision,"Road surface: Unknown, undetermined",2.756
+Pedestrians,no_collision,"Road surface: Wet, puddles",2.572
+Pedestrians,no_collision,"Road surface: Wet, puddles + Clean",1.126
+Pedestrians,no_collision,Road surface: Other / combined,1.015
+Pedestrians,no_collision,Year: 2018,1.718
+Pedestrians,no_collision,Year: 2019,1.729
+Pedestrians,no_collision,Year: 2020,1.548
+Pedestrians,no_collision,Year: 2021,1.632
+Pedestrians,no_collision,Year: 2022,1.676
+Pedestrians,no_collision,Year: 2023,1.692
+Pedestrians,no_collision,Year: 2024,1.661
+Pedestrians,no_collision,Month: Apr,1.683
+Pedestrians,no_collision,Month: Aug,1.667
+Pedestrians,no_collision,Month: Dec,1.915
+Pedestrians,no_collision,Month: Feb,1.799
+Pedestrians,no_collision,Month: Jul,1.697
+Pedestrians,no_collision,Month: Jun,1.908
+Pedestrians,no_collision,Month: Mar,1.788
+Pedestrians,no_collision,Month: May,1.890
+Pedestrians,no_collision,Month: Nov,1.858
+Pedestrians,no_collision,Month: Oct,1.915
+Pedestrians,no_collision,Month: Sep,1.878
+Motorcyclists,no_collision,Counterpart: Bicycle,1.042
+Motorcyclists,no_collision,Counterpart: Bus,1.006
+Motorcyclists,no_collision,Counterpart: Moped,1.009
+Motorcyclists,no_collision,Counterpart: None (single road user),1.248
+Motorcyclists,no_collision,Counterpart: Other road user,1.011
+Motorcyclists,no_collision,Counterpart: Pedestrian,1.033
+Motorcyclists,no_collision,Counterpart: Same group (Motorcycle),1.020
+Motorcyclists,no_collision,Counterpart: Truck,1.024
+Motorcyclists,no_collision,Counterpart: Unknown,1.011
+Motorcyclists,no_collision,Counterpart: Van / light truck,1.043
+Motorcyclists,no_collision,Region: Brussels-Capital Region,1.406
+Motorcyclists,no_collision,Region: Walloon Region,1.619
+Motorcyclists,no_collision,Road type: Motorway,1.173
+Motorcyclists,no_collision,Road type: Regional road,1.134
+Motorcyclists,no_collision,Road type: Unknown,1.022
+Motorcyclists,no_collision,Intersection: At intersection,1.122
+Motorcyclists,no_collision,"Lighting: Dawn, dusk",1.040
+Motorcyclists,no_collision,"Lighting: Night, no public lighting",1.027
+Motorcyclists,no_collision,"Lighting: Night, public lighting present and lit",1.147
+Motorcyclists,no_collision,"Lighting: Night, public lighting present but not lit",1.013
+Motorcyclists,no_collision,"Lighting: Unknown, undetermined",1.221
+Motorcyclists,no_collision,Weather: Fog (visibility under 100 m),1.012
+Motorcyclists,no_collision,"Weather: Other (thick smoke, ...)",1.012
+Motorcyclists,no_collision,Weather: Rain,1.840
+Motorcyclists,no_collision,"Weather: Strong wind, gusts",1.013
+Motorcyclists,no_collision,"Weather: Unknown, undetermined",1.577
+Motorcyclists,no_collision,Weather: Other / combined,1.076
+Motorcyclists,no_collision,Road surface: Clean,1.416
+Motorcyclists,no_collision,"Road surface: Dirty (sand, gravel, leaves, ...)",1.070
+Motorcyclists,no_collision,Road surface: Dry + Clean,1.274
+Motorcyclists,no_collision,"Road surface: Ice, snow",1.096
+Motorcyclists,no_collision,"Road surface: Unknown, undetermined",1.703
+Motorcyclists,no_collision,"Road surface: Wet, puddles",2.034
+Motorcyclists,no_collision,"Road surface: Wet, puddles + Clean",1.108
+Motorcyclists,no_collision,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",1.025
+Motorcyclists,no_collision,Road surface: Other / combined,1.015
+Motorcyclists,no_collision,Year: 2018,1.749
+Motorcyclists,no_collision,Year: 2019,1.701
+Motorcyclists,no_collision,Year: 2020,1.607
+Motorcyclists,no_collision,Year: 2021,1.617
+Motorcyclists,no_collision,Year: 2022,1.678
+Motorcyclists,no_collision,Year: 2023,1.658
+Motorcyclists,no_collision,Year: 2024,1.632
+Motorcyclists,no_collision,Month: Apr,3.165
+Motorcyclists,no_collision,Month: Aug,3.583
+Motorcyclists,no_collision,Month: Dec,2.043
+Motorcyclists,no_collision,Month: Feb,2.305
+Motorcyclists,no_collision,Month: Jul,3.612
+Motorcyclists,no_collision,Month: Jun,3.932
+Motorcyclists,no_collision,Month: Mar,2.819
+Motorcyclists,no_collision,Month: May,3.830
+Motorcyclists,no_collision,Month: Nov,2.470
+Motorcyclists,no_collision,Month: Oct,3.413
+Motorcyclists,no_collision,Month: Sep,3.828
+Mopeds,no_collision,Counterpart: Bicycle,1.124
+Mopeds,no_collision,Counterpart: Bus,1.006
+Mopeds,no_collision,Counterpart: Motorcycle,1.008
+Mopeds,no_collision,Counterpart: None (single road user),1.240
+Mopeds,no_collision,Counterpart: Other road user,1.013
+Mopeds,no_collision,Counterpart: Pedestrian,1.056
+Mopeds,no_collision,Counterpart: Same group (Moped),1.017
+Mopeds,no_collision,Counterpart: Truck,1.013
+Mopeds,no_collision,Counterpart: Unknown,1.010
+Mopeds,no_collision,Counterpart: Van / light truck,1.042
+Mopeds,no_collision,Region: Brussels-Capital Region,1.184
+Mopeds,no_collision,Region: Walloon Region,1.496
+Mopeds,no_collision,Road type: Motorway,1.010
+Mopeds,no_collision,Road type: Regional road,1.034
+Mopeds,no_collision,Road type: Unknown,1.010
+Mopeds,no_collision,Intersection: At intersection,1.082
+Mopeds,no_collision,"Lighting: Dawn, dusk",1.057
+Mopeds,no_collision,"Lighting: Night, no public lighting",1.030
+Mopeds,no_collision,"Lighting: Night, public lighting present and lit",1.168
+Mopeds,no_collision,"Lighting: Night, public lighting present but not lit",1.017
+Mopeds,no_collision,"Lighting: Unknown, undetermined",1.379
+Mopeds,no_collision,Weather: Fog (visibility under 100 m),1.012
+Mopeds,no_collision,"Weather: Other (thick smoke, ...)",1.008
+Mopeds,no_collision,Weather: Rain,1.886
+Mopeds,no_collision,Weather: Snowfall,1.158
+Mopeds,no_collision,"Weather: Strong wind, gusts",1.016
+Mopeds,no_collision,"Weather: Unknown, undetermined",2.089
+Mopeds,no_collision,Weather: Other / combined,1.027
+Mopeds,no_collision,Road surface: Clean,1.373
+Mopeds,no_collision,"Road surface: Dirty (sand, gravel, leaves, ...)",1.054
+Mopeds,no_collision,Road surface: Dry + Clean,1.219
+Mopeds,no_collision,"Road surface: Ice, snow",1.195
+Mopeds,no_collision,"Road surface: Unknown, undetermined",2.260
+Mopeds,no_collision,"Road surface: Wet, puddles",2.067
+Mopeds,no_collision,"Road surface: Wet, puddles + Clean",1.076
+Mopeds,no_collision,Road surface: Other / combined,1.027
+Mopeds,no_collision,Year: 2018,1.774
+Mopeds,no_collision,Year: 2019,1.772
+Mopeds,no_collision,Year: 2020,1.640
+Mopeds,no_collision,Year: 2021,1.780
+Mopeds,no_collision,Year: 2022,1.833
+Mopeds,no_collision,Year: 2023,1.831
+Mopeds,no_collision,Year: 2024,1.798
+Mopeds,no_collision,Month: Apr,2.120
+Mopeds,no_collision,Month: Aug,2.274
+Mopeds,no_collision,Month: Dec,1.987
+Mopeds,no_collision,Month: Feb,1.898
+Mopeds,no_collision,Month: Jul,2.196
+Mopeds,no_collision,Month: Jun,2.564
+Mopeds,no_collision,Month: Mar,2.083
+Mopeds,no_collision,Month: May,2.388
+Mopeds,no_collision,Month: Nov,2.226
+Mopeds,no_collision,Month: Oct,2.492
+Mopeds,no_collision,Month: Sep,2.546

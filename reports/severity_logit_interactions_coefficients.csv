@@ -1,0 +1,361 @@
+model,spec,term,coefficient,se_robust,se_ordinary,odds_ratio,or_ci_low,or_ci_high,z,p_value,variable,category,accidents,events
+Baseline + pairs,full,Region: Brussels-Capital Region,-0.97558,0.06740,0.03028,0.37697,0.33032,0.43022,-14.47340,0.00000,Region,Brussels-Capital Region,30022.00000,1461.00000
+Baseline + pairs,full,Region: Walloon Region,-0.20319,0.07053,0.01815,0.81612,0.71075,0.93711,-2.88087,0.00397,Region,Walloon Region,81162.00000,7644.00000
+Baseline + pairs,full,Road type: Motorway,0.16372,0.05416,0.02722,1.17789,1.05926,1.30981,3.02292,0.00250,Road type,Motorway,21860.00000,2459.00000
+Baseline + pairs,full,Road type: Regional road,0.12313,0.01763,0.01370,1.13103,1.09262,1.17079,6.98511,0.00000,Road type,Regional road,133453.00000,13223.00000
+Baseline + pairs,full,Road type: Unknown,0.20502,0.12610,0.09100,1.22755,0.95875,1.57171,1.62589,0.10397,Road type,Unknown,1502.00000,144.00000
+Baseline + pairs,full,Intersection: At intersection,-0.13901,0.01833,0.01533,0.87022,0.83952,0.90205,-7.58479,0.00000,Intersection,At intersection,97077.00000,8166.00000
+Baseline + pairs,full,"Lighting: Dawn, dusk",-0.00004,0.03272,0.03133,0.99996,0.93783,1.06619,-0.00137,0.99891,Lighting,"Dawn, dusk",13688.00000,1278.00000
+Baseline + pairs,full,"Lighting: Night, no public lighting",0.60004,0.03929,0.03480,1.82219,1.68713,1.96806,15.27175,0.00000,Lighting,"Night, no public lighting",7175.00000,1178.00000
+Baseline + pairs,full,"Lighting: Night, public lighting present and lit",0.27381,0.01825,0.01721,1.31497,1.26877,1.36285,15.00579,0.00000,Lighting,"Night, public lighting present and lit",56044.00000,6203.00000
+Baseline + pairs,full,"Lighting: Night, public lighting present but not lit",0.46861,0.06210,0.05529,1.59777,1.41466,1.80458,7.54595,0.00000,Lighting,"Night, public lighting present but not lit",2912.00000,422.00000
+Baseline + pairs,full,"Lighting: Unknown, undetermined",-0.03018,0.06287,0.05877,0.97027,0.85777,1.09752,-0.48003,0.63120,Lighting,"Unknown, undetermined",9918.00000,447.00000
+Baseline + pairs,full,Weather: Fog (visibility under 100 m),0.19166,0.08583,0.08928,1.21125,1.02371,1.43315,2.23307,0.02554,Weather,Fog (visibility under 100 m),1193.00000,154.00000
+Baseline + pairs,full,Weather: Hail,-0.22995,0.27183,0.25811,0.79458,0.46639,1.35370,-0.84592,0.39760,Weather,Hail,206.00000,17.00000
+Baseline + pairs,full,"Weather: Other (thick smoke, ...)",-0.09099,0.09670,0.09563,0.91303,0.75539,1.10356,-0.94095,0.34673,Weather,"Other (thick smoke, ...)",1238.00000,129.00000
+Baseline + pairs,full,Weather: Rain,-0.11223,0.02976,0.02964,0.89383,0.84320,0.94751,-3.77183,0.00016,Weather,Rain,29706.00000,2590.00000
+Baseline + pairs,full,"Weather: Rain + Strong wind, gusts",0.27854,0.14589,0.14964,1.32120,0.99263,1.75853,1.90930,0.05622,Weather,"Rain + Strong wind, gusts",416.00000,56.00000
+Baseline + pairs,full,Weather: Snowfall,-0.16805,0.11221,0.10778,0.84531,0.67842,1.05325,-1.49763,0.13423,Weather,Snowfall,1466.00000,120.00000
+Baseline + pairs,full,"Weather: Strong wind, gusts",0.23022,0.10602,0.10384,1.25888,1.02268,1.54964,2.17152,0.02989,Weather,"Strong wind, gusts",814.00000,116.00000
+Baseline + pairs,full,"Weather: Unknown, undetermined",-0.23725,0.04127,0.04013,0.78879,0.72750,0.85525,-5.74874,0.00000,Weather,"Unknown, undetermined",27763.00000,1469.00000
+Baseline + pairs,full,Weather: Other / combined,0.18034,0.29488,0.31752,1.19762,0.67192,2.13463,0.61158,0.54082,Weather,Other / combined,94.00000,13.00000
+Baseline + pairs,full,Road surface: Clean,-0.04918,0.05065,0.02512,0.95201,0.86205,1.05137,-0.97093,0.33158,Road surface,Clean,31155.00000,2768.00000
+Baseline + pairs,full,"Road surface: Dirty (sand, gravel, leaves, ...)",-0.29737,0.08209,0.07999,0.74277,0.63238,0.87242,-3.62274,0.00029,Road surface,"Dirty (sand, gravel, leaves, ...)",1661.00000,189.00000
+Baseline + pairs,full,Road surface: Dry + Clean,0.13105,0.05119,0.02765,1.14002,1.03120,1.26033,2.56022,0.01046,Road surface,Dry + Clean,20509.00000,2036.00000
+Baseline + pairs,full,"Road surface: Dry + Dirty (sand, gravel, leaves, ...)",-0.30761,0.30794,0.32387,0.73520,0.40205,1.34442,-0.99891,0.31784,Road surface,"Dry + Dirty (sand, gravel, leaves, ...)",111.00000,11.00000
+Baseline + pairs,full,"Road surface: Ice, snow",-0.17407,0.07069,0.07134,0.84024,0.73152,0.96511,-2.46238,0.01380,Road surface,"Ice, snow",3095.00000,291.00000
+Baseline + pairs,full,"Road surface: Unknown, undetermined",-0.69425,0.05700,0.04852,0.49945,0.44666,0.55848,-12.18047,0.00000,Road surface,"Unknown, undetermined",24236.00000,1086.00000
+Baseline + pairs,full,"Road surface: Wet, puddles",-0.07446,0.02684,0.02419,0.92824,0.88068,0.97837,-2.77473,0.00552,Road surface,"Wet, puddles",51883.00000,4819.00000
+Baseline + pairs,full,"Road surface: Wet, puddles + Clean",0.13537,0.08871,0.06606,1.14496,0.96224,1.36238,1.52607,0.12699,Road surface,"Wet, puddles + Clean",3080.00000,295.00000
+Baseline + pairs,full,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",0.14275,0.20571,0.19003,1.15344,0.77071,1.72622,0.69394,0.48772,Road surface,"Wet, puddles + Dirty (sand, gravel, leaves, ...)",249.00000,34.00000
+Baseline + pairs,full,"Road surface: Wet, puddles + Ice or snow",0.25053,0.26319,0.26397,1.28471,0.76697,2.15195,0.95192,0.34114,Road surface,"Wet, puddles + Ice or snow",135.00000,19.00000
+Baseline + pairs,full,Road surface: Other / combined,0.25664,0.43809,0.44249,1.29258,0.54771,3.05046,0.58581,0.55800,Road surface,Other / combined,55.00000,6.00000
+Baseline + pairs,full,Year: 2018,-0.03457,0.02544,0.02454,0.96602,0.91903,1.01540,-1.35909,0.17412,Year,2018,38453.00000,3841.00000
+Baseline + pairs,full,Year: 2019,-0.00495,0.02656,0.02456,0.99506,0.94458,1.04824,-0.18642,0.85211,Year,2019,37719.00000,3847.00000
+Baseline + pairs,full,Year: 2020,0.01098,0.02829,0.02591,1.01104,0.95650,1.06868,0.38800,0.69802,Year,2020,30251.00000,3202.00000
+Baseline + pairs,full,Year: 2021,-0.07686,0.02905,0.02549,0.92602,0.87476,0.98028,-2.64557,0.00816,Year,2021,34660.00000,3338.00000
+Baseline + pairs,full,Year: 2022,-0.09566,0.03072,0.02499,0.90877,0.85567,0.96517,-3.11408,0.00185,Year,2022,37650.00000,3621.00000
+Baseline + pairs,full,Year: 2023,-0.09171,0.03483,0.02519,0.91237,0.85217,0.97682,-2.63343,0.00845,Year,2023,36858.00000,3524.00000
+Baseline + pairs,full,Year: 2024,-0.17043,0.03865,0.02581,0.84330,0.78178,0.90966,-4.40972,0.00001,Year,2024,35916.00000,3184.00000
+Baseline + pairs,full,Month: Apr,0.14892,0.03785,0.03464,1.16058,1.07760,1.24995,3.93453,0.00008,Month,Apr,21137.00000,2200.00000
+Baseline + pairs,full,Month: Aug,0.13243,0.03371,0.03364,1.14160,1.06862,1.21957,3.92902,0.00009,Month,Aug,23708.00000,2540.00000
+Baseline + pairs,full,Month: Dec,0.01471,0.03283,0.03418,1.01482,0.95157,1.08228,0.44816,0.65404,Month,Dec,22288.00000,2044.00000
+Baseline + pairs,full,Month: Feb,0.04486,0.03632,0.03478,1.04588,0.97401,1.12305,1.23500,0.21683,Month,Feb,20617.00000,1945.00000
+Baseline + pairs,full,Month: Jul,0.18686,0.03755,0.03355,1.20546,1.11992,1.29752,4.97633,0.00000,Month,Jul,23502.00000,2628.00000
+Baseline + pairs,full,Month: Jun,0.10945,0.03435,0.03294,1.11567,1.04303,1.19336,3.18651,0.00144,Month,Jun,28471.00000,2885.00000
+Baseline + pairs,full,Month: Mar,0.02657,0.03499,0.03461,1.02693,0.95887,1.09982,0.75948,0.44757,Month,Mar,22235.00000,2061.00000
+Baseline + pairs,full,Month: May,0.13850,0.03328,0.03319,1.14855,1.07603,1.22596,4.16204,0.00003,Month,May,26315.00000,2740.00000
+Baseline + pairs,full,Month: Nov,-0.01446,0.03568,0.03376,0.98565,0.91907,1.05705,-0.40520,0.68533,Month,Nov,24430.00000,2195.00000
+Baseline + pairs,full,Month: Oct,0.02998,0.03458,0.03278,1.03043,0.96291,1.10269,0.86689,0.38600,Month,Oct,27882.00000,2642.00000
+Baseline + pairs,full,Month: Sep,0.05746,0.03100,0.03285,1.05914,0.99670,1.12549,1.85331,0.06384,Month,Sep,27926.00000,2747.00000
+Baseline + pairs,full,Collision type: Between 2 drivers: Flank against flank,-0.07067,0.04269,0.03626,0.93177,0.85699,1.01308,-1.65557,0.09781,Collision type,Between 2 drivers: Flank against flank,19385.00000,1355.00000
+Baseline + pairs,full,Collision type: Between 2 drivers: Head-on collision,0.84656,0.04986,0.03013,2.33162,2.11452,2.57100,16.97734,0.00000,Collision type,Between 2 drivers: Head-on collision,21010.00000,3003.00000
+Baseline + pairs,full,Collision type: Between 2 drivers: Side collision (front/rear against flank),0.18150,0.03163,0.02623,1.19902,1.12693,1.27571,5.73769,0.00000,Collision type,Between 2 drivers: Side collision (front/rear against flank),86280.00000,6989.00000
+Baseline + pairs,full,Collision type: Chain collision (3 or more drivers),-0.00861,0.05251,0.05289,0.99142,0.89447,1.09889,-0.16406,0.86968,Collision type,Chain collision (3 or more drivers),8553.00000,465.00000
+Baseline + pairs,full,Collision type: Collision type not specified,0.72493,0.13592,0.07145,2.06459,1.58175,2.69483,5.33352,0.00000,Collision type,Collision type not specified,14528.00000,835.00000
+Baseline + pairs,full,Collision type: Other or unknown,0.63729,0.11785,0.06922,1.89135,1.50125,2.38281,5.40751,0.00000,Collision type,Other or unknown,11140.00000,915.00000
+Baseline + pairs,full,Collision type: Road user against obstacle on the roadway,0.74221,0.05833,0.04724,2.10058,1.87364,2.35500,12.72416,0.00000,Collision type,Road user against obstacle on the roadway,5924.00000,794.00000
+Baseline + pairs,full,Collision type: Road user against obstacle outside the roadway,1.16436,0.03611,0.02914,3.20387,2.98495,3.43886,32.24355,0.00000,Collision type,Road user against obstacle outside the roadway,34827.00000,5120.00000
+Baseline + pairs,full,"Collision type: Single road user, no obstacle (incl. fall)",0.76938,0.05290,0.03465,2.15844,1.94586,2.39424,14.54482,0.00000,Collision type,"Single road user, no obstacle (incl. fall)",19053.00000,2644.00000
+Baseline + pairs,full,Group involved: Van / light truck,0.19078,0.05455,0.05248,1.21019,1.08748,1.34674,3.49742,0.00047,Group involved,Van / light truck,23557.00000,2351.00000
+Baseline + pairs,full,Group involved: Truck,1.08068,0.04845,0.04637,2.94667,2.67970,3.24024,22.30287,0.00000,Group involved,Truck,12595.00000,2178.00000
+Baseline + pairs,full,Group involved: Bus,0.03212,0.14634,0.11459,1.03264,0.77515,1.37566,0.21947,0.82629,Group involved,Bus,4095.00000,367.00000
+Baseline + pairs,full,Group involved: Motorcycle,1.13563,0.03808,0.03398,3.11312,2.88920,3.35439,29.81874,0.00000,Group involved,Motorcycle,19792.00000,3749.00000
+Baseline + pairs,full,Group involved: Moped,0.33919,0.04490,0.04674,1.40381,1.28555,1.53296,7.55398,0.00000,Group involved,Moped,23258.00000,1985.00000
+Baseline + pairs,full,Group involved: Bicycle,0.90605,0.04048,0.02828,2.47452,2.28577,2.67886,22.38188,0.00000,Group involved,Bicycle,71881.00000,7852.00000
+Baseline + pairs,full,Group involved: Pedestrian,1.35933,0.10167,0.07488,3.89357,3.19011,4.75217,13.36997,0.00000,Group involved,Pedestrian,29897.00000,3820.00000
+Baseline + pairs,full,Group involved: Other road user,0.95929,0.07712,0.06575,2.60985,2.24371,3.03574,12.43838,0.00000,Group involved,Other road user,6356.00000,871.00000
+Baseline + pairs,full,Group involved: Unknown,0.25092,0.12057,0.05733,1.28521,1.01472,1.62780,2.08116,0.03742,Group involved,Unknown,31086.00000,2133.00000
+Baseline + pairs,full,Pair: Passenger car + Van / light truck,0.01686,0.06905,0.06833,1.01700,0.88827,1.16439,0.24414,0.80713,Interaction,Pair: Passenger car + Van / light truck,10297.00000,602.00000
+Baseline + pairs,full,Pair: Passenger car + Truck,-0.10078,0.08403,0.05937,0.90414,0.76683,1.06602,-1.19922,0.23044,Interaction,Pair: Passenger car + Truck,6825.00000,821.00000
+Baseline + pairs,full,Pair: Passenger car + Bus,0.39274,0.17288,0.15738,1.48103,1.05537,2.07837,2.27170,0.02310,Interaction,Pair: Passenger car + Bus,1486.00000,93.00000
+Baseline + pairs,full,Pair: Passenger car + Motorcycle,0.39197,0.04803,0.04358,1.47990,1.34695,1.62597,8.16175,0.00000,Interaction,Pair: Passenger car + Motorcycle,11248.00000,1908.00000
+Baseline + pairs,full,Pair: Passenger car + Moped,0.16544,0.05686,0.05797,1.17991,1.05547,1.31902,2.90951,0.00362,Interaction,Pair: Passenger car + Moped,13433.00000,1006.00000
+Baseline + pairs,full,Pair: Passenger car + Bicycle,-0.24989,0.03651,0.03275,0.77889,0.72509,0.83668,-6.84351,0.00000,Interaction,Pair: Passenger car + Bicycle,40467.00000,3367.00000
+Baseline + pairs,full,Pair: Passenger car + Pedestrian,0.07189,0.09677,0.07540,1.07454,0.88889,1.29896,0.74289,0.45755,Interaction,Pair: Passenger car + Pedestrian,20530.00000,2493.00000
+Baseline + pairs,full,Pair: Passenger car + Other road user,-0.20482,0.09436,0.09676,0.81480,0.67721,0.98033,-2.17057,0.02996,Interaction,Pair: Passenger car + Other road user,2528.00000,223.00000
+Baseline + pairs,full,Pair: Van / light truck + Truck,0.35763,0.11239,0.10375,1.42994,1.14723,1.78231,3.18212,0.00146,Interaction,Pair: Van / light truck + Truck,1066.00000,221.00000
+Baseline + pairs,full,Pair: Van / light truck + Motorcycle,0.28772,0.09856,0.10184,1.33338,1.09915,1.61752,2.91923,0.00351,Interaction,Pair: Van / light truck + Motorcycle,1079.00000,201.00000
+Baseline + pairs,full,Pair: Van / light truck + Moped,0.24873,0.11856,0.11765,1.28239,1.01648,1.61786,2.09790,0.03591,Interaction,Pair: Van / light truck + Moped,1340.00000,128.00000
+Baseline + pairs,full,Pair: Van / light truck + Bicycle,-0.06303,0.07467,0.07674,0.93891,0.81108,1.08690,-0.84407,0.39863,Interaction,Pair: Van / light truck + Bicycle,4226.00000,492.00000
+Baseline + pairs,full,Pair: Van / light truck + Pedestrian,0.13939,0.13396,0.11215,1.14958,0.88412,1.49473,1.04059,0.29806,Interaction,Pair: Van / light truck + Pedestrian,1638.00000,253.00000
+Baseline + pairs,full,Pair: Truck + Bicycle,0.17473,0.09165,0.08062,1.19092,0.99512,1.42526,1.90658,0.05657,Interaction,Pair: Truck + Bicycle,1362.00000,385.00000
+Baseline + pairs,full,Pair: Bus + Bicycle,0.27768,0.15873,0.17208,1.32006,0.96711,1.80182,1.74933,0.08023,Interaction,Pair: Bus + Bicycle,590.00000,74.00000
+Baseline + pairs,full,Pair: Bus + Pedestrian,0.28749,0.16759,0.17023,1.33308,0.95983,1.85146,1.71539,0.08627,Interaction,Pair: Bus + Pedestrian,810.00000,114.00000
+Baseline + pairs,full,Pair: Motorcycle + Bicycle,-0.84130,0.12121,0.12584,0.43115,0.33998,0.54677,-6.94101,0.00000,Interaction,Pair: Motorcycle + Bicycle,629.00000,87.00000
+Baseline + pairs,full,Pair: Moped + Bicycle,-1.08331,0.09802,0.09934,0.33847,0.27931,0.41017,-11.05178,0.00000,Interaction,Pair: Moped + Bicycle,2423.00000,162.00000
+Baseline + pairs,full,Pair: Moped + Pedestrian,-0.88659,0.14171,0.14500,0.41206,0.31213,0.54398,-6.25653,0.00000,Interaction,Pair: Moped + Pedestrian,990.00000,80.00000
+Baseline + pairs,full,Pair: Bicycle + Pedestrian,-1.10633,0.12581,0.09305,0.33077,0.25848,0.42328,-8.79331,0.00000,Interaction,Pair: Bicycle + Pedestrian,3617.00000,383.00000
+Baseline + pairs,full,Pair: Bicycle + Other road user,-0.63832,0.12099,0.11378,0.52818,0.41667,0.66953,-5.27586,0.00000,Interaction,Pair: Bicycle + Other road user,1130.00000,150.00000
+Baseline + pairs,full,Pair: Pedestrian + Other road user,-0.22594,0.16312,0.12860,0.79777,0.57946,1.09832,-1.38507,0.16603,Interaction,Pair: Pedestrian + Other road user,936.00000,188.00000
+Baseline + pairs + order,full,Region: Brussels-Capital Region,-0.97543,0.06661,0.03029,0.37703,0.33088,0.42961,-14.64337,0.00000,Region,Brussels-Capital Region,30022.00000,1461.00000
+Baseline + pairs + order,full,Region: Walloon Region,-0.20539,0.06922,0.01816,0.81433,0.71102,0.93265,-2.96729,0.00300,Region,Walloon Region,81162.00000,7644.00000
+Baseline + pairs + order,full,Road type: Motorway,0.16199,0.05333,0.02723,1.17585,1.05915,1.30542,3.03754,0.00239,Road type,Motorway,21860.00000,2459.00000
+Baseline + pairs + order,full,Road type: Regional road,0.12183,0.01761,0.01370,1.12956,1.09124,1.16923,6.91809,0.00000,Road type,Regional road,133453.00000,13223.00000
+Baseline + pairs + order,full,Road type: Unknown,0.20269,0.12607,0.09102,1.22470,0.95657,1.56799,1.60777,0.10789,Road type,Unknown,1502.00000,144.00000
+Baseline + pairs + order,full,Intersection: At intersection,-0.13999,0.01827,0.01535,0.86937,0.83878,0.90107,-7.66107,0.00000,Intersection,At intersection,97077.00000,8166.00000
+Baseline + pairs + order,full,"Lighting: Dawn, dusk",-0.00074,0.03276,0.03133,0.99926,0.93712,1.06553,-0.02255,0.98201,Lighting,"Dawn, dusk",13688.00000,1278.00000
+Baseline + pairs + order,full,"Lighting: Night, no public lighting",0.59921,0.03919,0.03481,1.82068,1.68605,1.96605,15.28864,0.00000,Lighting,"Night, no public lighting",7175.00000,1178.00000
+Baseline + pairs + order,full,"Lighting: Night, public lighting present and lit",0.27352,0.01825,0.01722,1.31458,1.26839,1.36246,14.98626,0.00000,Lighting,"Night, public lighting present and lit",56044.00000,6203.00000
+Baseline + pairs + order,full,"Lighting: Night, public lighting present but not lit",0.46453,0.06148,0.05531,1.59127,1.41064,1.79504,7.55631,0.00000,Lighting,"Night, public lighting present but not lit",2912.00000,422.00000
+Baseline + pairs + order,full,"Lighting: Unknown, undetermined",-0.03194,0.06288,0.05881,0.96857,0.85626,1.09560,-0.50797,0.61148,Lighting,"Unknown, undetermined",9918.00000,447.00000
+Baseline + pairs + order,full,Weather: Fog (visibility under 100 m),0.19086,0.08586,0.08929,1.21029,1.02283,1.43212,2.22288,0.02622,Weather,Fog (visibility under 100 m),1193.00000,154.00000
+Baseline + pairs + order,full,Weather: Hail,-0.23261,0.27238,0.25814,0.79246,0.46464,1.35156,-0.85399,0.39311,Weather,Hail,206.00000,17.00000
+Baseline + pairs + order,full,"Weather: Other (thick smoke, ...)",-0.09412,0.09667,0.09564,0.91017,0.75307,1.10004,-0.97366,0.33022,Weather,"Other (thick smoke, ...)",1238.00000,129.00000
+Baseline + pairs + order,full,Weather: Rain,-0.11237,0.02977,0.02964,0.89371,0.84306,0.94741,-3.77509,0.00016,Weather,Rain,29706.00000,2590.00000
+Baseline + pairs + order,full,"Weather: Rain + Strong wind, gusts",0.27677,0.14585,0.14968,1.31887,0.99095,1.75529,1.89770,0.05774,Weather,"Rain + Strong wind, gusts",416.00000,56.00000
+Baseline + pairs + order,full,Weather: Snowfall,-0.16931,0.11189,0.10778,0.84425,0.67799,1.05127,-1.51312,0.13025,Weather,Snowfall,1466.00000,120.00000
+Baseline + pairs + order,full,"Weather: Strong wind, gusts",0.23364,0.10587,0.10386,1.26319,1.02647,1.55449,2.20679,0.02733,Weather,"Strong wind, gusts",814.00000,116.00000
+Baseline + pairs + order,full,"Weather: Unknown, undetermined",-0.23374,0.04137,0.04013,0.79157,0.72992,0.85842,-5.65037,0.00000,Weather,"Unknown, undetermined",27763.00000,1469.00000
+Baseline + pairs + order,full,Weather: Other / combined,0.17256,0.29463,0.31751,1.18834,0.66704,2.11705,0.58568,0.55809,Weather,Other / combined,94.00000,13.00000
+Baseline + pairs + order,full,Road surface: Clean,-0.04957,0.04990,0.02512,0.95163,0.86296,1.04942,-0.99339,0.32052,Road surface,Clean,31155.00000,2768.00000
+Baseline + pairs + order,full,"Road surface: Dirty (sand, gravel, leaves, ...)",-0.29688,0.08204,0.08000,0.74313,0.63276,0.87276,-3.61893,0.00030,Road surface,"Dirty (sand, gravel, leaves, ...)",1661.00000,189.00000
+Baseline + pairs + order,full,Road surface: Dry + Clean,0.12887,0.05066,0.02765,1.13755,1.03002,1.25630,2.54380,0.01097,Road surface,Dry + Clean,20509.00000,2036.00000
+Baseline + pairs + order,full,"Road surface: Dry + Dirty (sand, gravel, leaves, ...)",-0.30984,0.30742,0.32382,0.73357,0.40157,1.34005,-1.00786,0.31352,Road surface,"Dry + Dirty (sand, gravel, leaves, ...)",111.00000,11.00000
+Baseline + pairs + order,full,"Road surface: Ice, snow",-0.17438,0.07062,0.07134,0.83997,0.73140,0.96466,-2.46946,0.01353,Road surface,"Ice, snow",3095.00000,291.00000
+Baseline + pairs + order,full,"Road surface: Unknown, undetermined",-0.68637,0.05688,0.04854,0.50340,0.45029,0.56276,-12.06752,0.00000,Road surface,"Unknown, undetermined",24236.00000,1086.00000
+Baseline + pairs + order,full,"Road surface: Wet, puddles",-0.07494,0.02691,0.02419,0.92780,0.88013,0.97805,-2.78489,0.00535,Road surface,"Wet, puddles",51883.00000,4819.00000
+Baseline + pairs + order,full,"Road surface: Wet, puddles + Clean",0.13195,0.08821,0.06607,1.14105,0.95989,1.35640,1.49587,0.13469,Road surface,"Wet, puddles + Clean",3080.00000,295.00000
+Baseline + pairs + order,full,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",0.13854,0.20545,0.19001,1.14860,0.76786,1.71812,0.67433,0.50010,Road surface,"Wet, puddles + Dirty (sand, gravel, leaves, ...)",249.00000,34.00000
+Baseline + pairs + order,full,"Road surface: Wet, puddles + Ice or snow",0.25550,0.26312,0.26396,1.29110,0.77088,2.16238,0.97102,0.33154,Road surface,"Wet, puddles + Ice or snow",135.00000,19.00000
+Baseline + pairs + order,full,Road surface: Other / combined,0.25880,0.43846,0.44258,1.29537,0.54849,3.05931,0.59024,0.55503,Road surface,Other / combined,55.00000,6.00000
+Baseline + pairs + order,full,Year: 2018,-0.03496,0.02538,0.02455,0.96564,0.91878,1.01489,-1.37759,0.16833,Year,2018,38453.00000,3841.00000
+Baseline + pairs + order,full,Year: 2019,-0.00475,0.02647,0.02457,0.99526,0.94494,1.04827,-0.17934,0.85767,Year,2019,37719.00000,3847.00000
+Baseline + pairs + order,full,Year: 2020,0.01040,0.02826,0.02591,1.01045,0.95601,1.06800,0.36792,0.71293,Year,2020,30251.00000,3202.00000
+Baseline + pairs + order,full,Year: 2021,-0.07579,0.02898,0.02549,0.92701,0.87583,0.98118,-2.61550,0.00891,Year,2021,34660.00000,3338.00000
+Baseline + pairs + order,full,Year: 2022,-0.09512,0.03062,0.02500,0.90926,0.85630,0.96550,-3.10680,0.00189,Year,2022,37650.00000,3621.00000
+Baseline + pairs + order,full,Year: 2023,-0.09185,0.03463,0.02519,0.91225,0.85239,0.97631,-2.65247,0.00799,Year,2023,36858.00000,3524.00000
+Baseline + pairs + order,full,Year: 2024,-0.16976,0.03853,0.02582,0.84387,0.78249,0.91006,-4.40615,0.00001,Year,2024,35916.00000,3184.00000
+Baseline + pairs + order,full,Month: Apr,0.14851,0.03788,0.03464,1.16010,1.07710,1.24950,3.92088,0.00009,Month,Apr,21137.00000,2200.00000
+Baseline + pairs + order,full,Month: Aug,0.13246,0.03364,0.03364,1.14164,1.06879,1.21945,3.93755,0.00008,Month,Aug,23708.00000,2540.00000
+Baseline + pairs + order,full,Month: Dec,0.01409,0.03286,0.03419,1.01419,0.95093,1.08166,0.42878,0.66808,Month,Dec,22288.00000,2044.00000
+Baseline + pairs + order,full,Month: Feb,0.04420,0.03636,0.03479,1.04520,0.97329,1.12241,1.21560,0.22414,Month,Feb,20617.00000,1945.00000
+Baseline + pairs + order,full,Month: Jul,0.18777,0.03760,0.03356,1.20655,1.12083,1.29884,4.99344,0.00000,Month,Jul,23502.00000,2628.00000
+Baseline + pairs + order,full,Month: Jun,0.10925,0.03437,0.03295,1.11544,1.04278,1.19317,3.17893,0.00148,Month,Jun,28471.00000,2885.00000
+Baseline + pairs + order,full,Month: Mar,0.02721,0.03497,0.03462,1.02759,0.95952,1.10049,0.77820,0.43645,Month,Mar,22235.00000,2061.00000
+Baseline + pairs + order,full,Month: May,0.13833,0.03326,0.03320,1.14835,1.07588,1.22570,4.15924,0.00003,Month,May,26315.00000,2740.00000
+Baseline + pairs + order,full,Month: Nov,-0.01475,0.03563,0.03376,0.98536,0.91890,1.05663,-0.41388,0.67896,Month,Nov,24430.00000,2195.00000
+Baseline + pairs + order,full,Month: Oct,0.02994,0.03448,0.03279,1.03039,0.96305,1.10244,0.86818,0.38530,Month,Oct,27882.00000,2642.00000
+Baseline + pairs + order,full,Month: Sep,0.05769,0.03102,0.03286,1.05939,0.99690,1.12580,1.85990,0.06290,Month,Sep,27926.00000,2747.00000
+Baseline + pairs + order,full,Collision type: Between 2 drivers: Flank against flank,-0.06601,0.04205,0.03631,0.93612,0.86206,1.01654,-1.56983,0.11645,Collision type,Between 2 drivers: Flank against flank,19385.00000,1355.00000
+Baseline + pairs + order,full,Collision type: Between 2 drivers: Head-on collision,0.84559,0.04919,0.03017,2.32935,2.11525,2.56513,17.18894,0.00000,Collision type,Between 2 drivers: Head-on collision,21010.00000,3003.00000
+Baseline + pairs + order,full,Collision type: Between 2 drivers: Side collision (front/rear against flank),0.18304,0.03099,0.02629,1.20087,1.13009,1.27608,5.90583,0.00000,Collision type,Between 2 drivers: Side collision (front/rear against flank),86280.00000,6989.00000
+Baseline + pairs + order,full,Collision type: Chain collision (3 or more drivers),-0.00116,0.05300,0.05299,0.99884,0.90029,1.10818,-0.02188,0.98254,Collision type,Chain collision (3 or more drivers),8553.00000,465.00000
+Baseline + pairs + order,full,Collision type: Collision type not specified,0.72186,0.13652,0.07148,2.05825,1.57504,2.68971,5.28758,0.00000,Collision type,Collision type not specified,14528.00000,835.00000
+Baseline + pairs + order,full,Collision type: Other or unknown,0.63789,0.11841,0.06923,1.89247,1.50051,2.38683,5.38718,0.00000,Collision type,Other or unknown,11140.00000,915.00000
+Baseline + pairs + order,full,Collision type: Road user against obstacle on the roadway,0.74284,0.05871,0.04727,2.10189,1.87342,2.35823,12.65254,0.00000,Collision type,Road user against obstacle on the roadway,5924.00000,794.00000
+Baseline + pairs + order,full,Collision type: Road user against obstacle outside the roadway,1.16568,0.03634,0.02918,3.20812,2.98754,3.44498,32.07336,0.00000,Collision type,Road user against obstacle outside the roadway,34827.00000,5120.00000
+Baseline + pairs + order,full,"Collision type: Single road user, no obstacle (incl. fall)",0.77052,0.05358,0.03469,2.16088,1.94544,2.40017,14.37938,0.00000,Collision type,"Single road user, no obstacle (incl. fall)",19053.00000,2644.00000
+Baseline + pairs + order,full,Group involved: Van / light truck,0.19052,0.05456,0.05248,1.20988,1.08718,1.34642,3.49217,0.00048,Group involved,Van / light truck,23557.00000,2351.00000
+Baseline + pairs + order,full,Group involved: Truck,1.08043,0.04837,0.04636,2.94596,2.67951,3.23891,22.33788,0.00000,Group involved,Truck,12595.00000,2178.00000
+Baseline + pairs + order,full,Group involved: Bus,0.03123,0.14635,0.11459,1.03172,0.77444,1.37448,0.21341,0.83101,Group involved,Bus,4095.00000,367.00000
+Baseline + pairs + order,full,Group involved: Motorcycle,1.13521,0.03806,0.03398,3.11181,2.88811,3.35284,29.82486,0.00000,Group involved,Motorcycle,19792.00000,3749.00000
+Baseline + pairs + order,full,Group involved: Moped,0.33833,0.04490,0.04674,1.40260,1.28444,1.53163,7.53520,0.00000,Group involved,Moped,23258.00000,1985.00000
+Baseline + pairs + order,full,Group involved: Bicycle,0.90411,0.04059,0.02828,2.46974,2.28086,2.67426,22.27331,0.00000,Group involved,Bicycle,71881.00000,7852.00000
+Baseline + pairs + order,full,Group involved: Pedestrian,1.35977,0.10083,0.07489,3.89531,3.19678,4.74648,13.48561,0.00000,Group involved,Pedestrian,29897.00000,3820.00000
+Baseline + pairs + order,full,Group involved: Other road user,0.95817,0.07715,0.06575,2.60693,2.24108,3.03251,12.41936,0.00000,Group involved,Other road user,6356.00000,871.00000
+Baseline + pairs + order,full,Group involved: Unknown,0.24993,0.12066,0.05732,1.28394,1.01352,1.62649,2.07133,0.03833,Group involved,Unknown,31086.00000,2133.00000
+Baseline + pairs + order,full,Pair: Passenger car + Van / light truck,0.03467,0.08184,0.07943,1.03528,0.88185,1.21541,0.42369,0.67179,Interaction,Pair: Passenger car + Van / light truck,10297.00000,602.00000
+Baseline + pairs + order,full,Pair: Passenger car + Truck,-0.24624,0.11393,0.07470,0.78173,0.62529,0.97732,-2.16133,0.03067,Interaction,Pair: Passenger car + Truck,6825.00000,821.00000
+Baseline + pairs + order,full,Pair: Passenger car + Bus,0.39322,0.17289,0.15738,1.48175,1.05586,2.07943,2.27438,0.02294,Interaction,Pair: Passenger car + Bus,1486.00000,93.00000
+Baseline + pairs + order,full,Pair: Passenger car + Motorcycle,0.43089,0.05049,0.05198,1.53863,1.39365,1.69869,8.53378,0.00000,Interaction,Pair: Passenger car + Motorcycle,11248.00000,1908.00000
+Baseline + pairs + order,full,Pair: Passenger car + Moped,0.16092,0.07373,0.07134,1.17459,1.01655,1.35721,2.18264,0.02906,Interaction,Pair: Passenger car + Moped,13433.00000,1006.00000
+Baseline + pairs + order,full,Pair: Passenger car + Bicycle,-0.35968,0.04797,0.04287,0.69790,0.63527,0.76669,-7.49880,0.00000,Interaction,Pair: Passenger car + Bicycle,40467.00000,3367.00000
+Baseline + pairs + order,full,Pair: Passenger car + Pedestrian,-0.28466,0.11252,0.09615,0.75227,0.60339,0.93789,-2.52989,0.01141,Interaction,Pair: Passenger car + Pedestrian,20530.00000,2493.00000
+Baseline + pairs + order,full,Pair: Passenger car + Other road user,-0.34859,0.13507,0.13344,0.70569,0.54155,0.91957,-2.58083,0.00986,Interaction,Pair: Passenger car + Other road user,2528.00000,223.00000
+Baseline + pairs + order,full,Pair: Van / light truck + Truck,0.35839,0.11245,0.10375,1.43102,1.14797,1.78388,3.18718,0.00144,Interaction,Pair: Van / light truck + Truck,1066.00000,221.00000
+Baseline + pairs + order,full,Pair: Van / light truck + Motorcycle,0.28760,0.09858,0.10183,1.33322,1.09899,1.61738,2.91755,0.00353,Interaction,Pair: Van / light truck + Motorcycle,1079.00000,201.00000
+Baseline + pairs + order,full,Pair: Van / light truck + Moped,0.24859,0.11852,0.11764,1.28222,1.01643,1.61751,2.09749,0.03595,Interaction,Pair: Van / light truck + Moped,1340.00000,128.00000
+Baseline + pairs + order,full,Pair: Van / light truck + Bicycle,-0.14130,0.09737,0.10181,0.86823,0.71738,1.05080,-1.45115,0.14674,Interaction,Pair: Van / light truck + Bicycle,4226.00000,492.00000
+Baseline + pairs + order,full,Pair: Van / light truck + Pedestrian,0.13913,0.13392,0.11214,1.14927,0.88395,1.49424,1.03889,0.29886,Interaction,Pair: Van / light truck + Pedestrian,1638.00000,253.00000
+Baseline + pairs + order,full,Pair: Truck + Bicycle,0.17490,0.09169,0.08061,1.19113,0.99520,1.42563,1.90753,0.05645,Interaction,Pair: Truck + Bicycle,1362.00000,385.00000
+Baseline + pairs + order,full,Pair: Bus + Bicycle,0.27838,0.15876,0.17207,1.32099,0.96775,1.80317,1.75350,0.07952,Interaction,Pair: Bus + Bicycle,590.00000,74.00000
+Baseline + pairs + order,full,Pair: Bus + Pedestrian,0.28756,0.16759,0.17022,1.33317,0.95992,1.85157,1.71590,0.08618,Interaction,Pair: Bus + Pedestrian,810.00000,114.00000
+Baseline + pairs + order,full,Pair: Motorcycle + Bicycle,-0.84032,0.12118,0.12583,0.43157,0.34033,0.54727,-6.93457,0.00000,Interaction,Pair: Motorcycle + Bicycle,629.00000,87.00000
+Baseline + pairs + order,full,Pair: Moped + Bicycle,-1.15012,0.13353,0.13557,0.31660,0.24370,0.41131,-8.61338,0.00000,Interaction,Pair: Moped + Bicycle,2423.00000,162.00000
+Baseline + pairs + order,full,Pair: Moped + Pedestrian,-0.88664,0.14162,0.14500,0.41204,0.31217,0.54385,-6.26087,0.00000,Interaction,Pair: Moped + Pedestrian,990.00000,80.00000
+Baseline + pairs + order,full,Pair: Bicycle + Pedestrian,-1.18812,0.13111,0.13425,0.30479,0.23573,0.39410,-9.06222,0.00000,Interaction,Pair: Bicycle + Pedestrian,3617.00000,383.00000
+Baseline + pairs + order,full,Pair: Bicycle + Other road user,-0.63817,0.12094,0.11376,0.52826,0.41677,0.66956,-5.27683,0.00000,Interaction,Pair: Bicycle + Other road user,1130.00000,150.00000
+Baseline + pairs + order,full,Pair: Pedestrian + Other road user,-0.22654,0.16307,0.12859,0.79729,0.57918,1.09754,-1.38925,0.16476,Interaction,Pair: Pedestrian + Other road user,936.00000,188.00000
+Baseline + pairs + order,full,Order: Passenger car is road user 1 (Passenger car + Van / light truck),-0.03712,0.08805,0.08455,0.96356,0.81084,1.14506,-0.42155,0.67335,Interaction,Order: Passenger car is road user 1 (Passenger car + Van / light truck),4972.00000,288.00000
+Baseline + pairs + order,full,Order: Passenger car is road user 1 (Passenger car + Truck),0.25524,0.09514,0.07659,1.29078,1.07119,1.55537,2.68286,0.00730,Interaction,Order: Passenger car is road user 1 (Passenger car + Truck),3680.00000,495.00000
+Baseline + pairs + order,full,Order: Passenger car is road user 1 (Passenger car + Motorcycle),-0.06991,0.05626,0.05136,0.93248,0.83512,1.04120,-1.24247,0.21406,Interaction,Order: Passenger car is road user 1 (Passenger car + Motorcycle),6350.00000,1047.00000
+Baseline + pairs + order,full,Order: Passenger car is road user 1 (Passenger car + Moped),0.00717,0.06717,0.06779,1.00720,0.88296,1.14892,0.10677,0.91497,Interaction,Order: Passenger car is road user 1 (Passenger car + Moped),8141.00000,619.00000
+Baseline + pairs + order,full,Order: Passenger car is road user 1 (Passenger car + Bicycle),0.16050,0.03901,0.03966,1.17410,1.08768,1.26739,4.11456,0.00004,Interaction,Order: Passenger car is road user 1 (Passenger car + Bicycle),26748.00000,2373.00000
+Baseline + pairs + order,full,Order: Passenger car is road user 1 (Passenger car + Pedestrian),0.41148,0.07876,0.06749,1.50904,1.29317,1.76094,5.22424,0.00000,Interaction,Order: Passenger car is road user 1 (Passenger car + Pedestrian),17231.00000,2217.00000
+Baseline + pairs + order,full,Order: Passenger car is road user 1 (Passenger car + Other road user),0.23890,0.14272,0.14679,1.26985,0.95999,1.67972,1.67388,0.09415,Interaction,Order: Passenger car is road user 1 (Passenger car + Other road user),1455.00000,141.00000
+Baseline + pairs + order,full,Order: Van / light truck is road user 1 (Van / light truck + Bicycle),0.12154,0.10498,0.10192,1.12923,0.91924,1.38721,1.15779,0.24695,Interaction,Order: Van / light truck is road user 1 (Van / light truck + Bicycle),2660.00000,325.00000
+Baseline + pairs + order,full,Order: Moped is road user 1 (Moped + Bicycle),0.12527,0.18813,0.16530,1.13346,0.78391,1.63887,0.66588,0.50549,Interaction,Order: Moped is road user 1 (Moped + Bicycle),1244.00000,91.00000
+Baseline + pairs + order,full,Order: Bicycle is road user 1 (Bicycle + Pedestrian),0.10931,0.12526,0.12739,1.11551,0.87266,1.42593,0.87262,0.38287,Interaction,Order: Bicycle is road user 1 (Bicycle + Pedestrian),2674.00000,292.00000
+Baseline + pairs,no_collision,Region: Brussels-Capital Region,-1.02775,0.06887,0.03014,0.35781,0.31263,0.40952,-14.92329,0.00000,Region,Brussels-Capital Region,30022.00000,1461.00000
+Baseline + pairs,no_collision,Region: Walloon Region,-0.20108,0.07431,0.01806,0.81785,0.70699,0.94608,-2.70581,0.00681,Region,Walloon Region,81162.00000,7644.00000
+Baseline + pairs,no_collision,Road type: Motorway,0.09030,0.05052,0.02688,1.09450,0.99132,1.20842,1.78737,0.07388,Road type,Motorway,21860.00000,2459.00000
+Baseline + pairs,no_collision,Road type: Regional road,0.11193,0.01760,0.01367,1.11843,1.08050,1.15769,6.35835,0.00000,Road type,Regional road,133453.00000,13223.00000
+Baseline + pairs,no_collision,Road type: Unknown,0.19946,0.12545,0.09089,1.22074,0.95463,1.56104,1.58991,0.11185,Road type,Unknown,1502.00000,144.00000
+Baseline + pairs,no_collision,Intersection: At intersection,-0.13021,0.01985,0.01503,0.87791,0.84442,0.91273,-6.56120,0.00000,Intersection,At intersection,97077.00000,8166.00000
+Baseline + pairs,no_collision,"Lighting: Dawn, dusk",0.02019,0.03281,0.03124,1.02039,0.95684,1.08817,0.61530,0.53835,Lighting,"Dawn, dusk",13688.00000,1278.00000
+Baseline + pairs,no_collision,"Lighting: Night, no public lighting",0.62806,0.03982,0.03470,1.87397,1.73329,2.02608,15.77377,0.00000,Lighting,"Night, no public lighting",7175.00000,1178.00000
+Baseline + pairs,no_collision,"Lighting: Night, public lighting present and lit",0.29428,0.01835,0.01712,1.34216,1.29474,1.39132,16.03387,0.00000,Lighting,"Night, public lighting present and lit",56044.00000,6203.00000
+Baseline + pairs,no_collision,"Lighting: Night, public lighting present but not lit",0.49404,0.06314,0.05507,1.63893,1.44816,1.85482,7.82513,0.00000,Lighting,"Night, public lighting present but not lit",2912.00000,422.00000
+Baseline + pairs,no_collision,"Lighting: Unknown, undetermined",0.00315,0.06253,0.05833,1.00316,0.88745,1.13394,0.05041,0.95979,Lighting,"Unknown, undetermined",9918.00000,447.00000
+Baseline + pairs,no_collision,Weather: Fog (visibility under 100 m),0.19912,0.08565,0.08899,1.22032,1.03173,1.44339,2.32474,0.02009,Weather,Fog (visibility under 100 m),1193.00000,154.00000
+Baseline + pairs,no_collision,Weather: Hail,-0.19824,0.27446,0.25788,0.82017,0.47894,1.40452,-0.72231,0.47010,Weather,Hail,206.00000,17.00000
+Baseline + pairs,no_collision,"Weather: Other (thick smoke, ...)",-0.07160,0.09717,0.09532,0.93090,0.76947,1.12620,-0.73688,0.46120,Weather,"Other (thick smoke, ...)",1238.00000,129.00000
+Baseline + pairs,no_collision,Weather: Rain,-0.10764,0.03011,0.02957,0.89795,0.84649,0.95254,-3.57486,0.00035,Weather,Rain,29706.00000,2590.00000
+Baseline + pairs,no_collision,"Weather: Rain + Strong wind, gusts",0.29473,0.14561,0.14916,1.34277,1.00938,1.78627,2.02410,0.04296,Weather,"Rain + Strong wind, gusts",416.00000,56.00000
+Baseline + pairs,no_collision,Weather: Snowfall,-0.12352,0.11193,0.10764,0.88381,0.70971,1.10061,-1.10355,0.26979,Weather,Snowfall,1466.00000,120.00000
+Baseline + pairs,no_collision,"Weather: Strong wind, gusts",0.23000,0.10652,0.10365,1.25861,1.02146,1.55081,2.15934,0.03082,Weather,"Strong wind, gusts",814.00000,116.00000
+Baseline + pairs,no_collision,"Weather: Unknown, undetermined",-0.23568,0.04217,0.03989,0.79004,0.72736,0.85811,-5.58875,0.00000,Weather,"Unknown, undetermined",27763.00000,1469.00000
+Baseline + pairs,no_collision,Weather: Other / combined,0.18354,0.29550,0.31691,1.20146,0.67324,2.14411,0.62110,0.53453,Weather,Other / combined,94.00000,13.00000
+Baseline + pairs,no_collision,Road surface: Clean,-0.04527,0.05283,0.02504,0.95574,0.86172,1.06002,-0.85682,0.39154,Road surface,Clean,31155.00000,2768.00000
+Baseline + pairs,no_collision,"Road surface: Dirty (sand, gravel, leaves, ...)",-0.36565,0.08314,0.07988,0.69375,0.58943,0.81653,-4.39799,0.00001,Road surface,"Dirty (sand, gravel, leaves, ...)",1661.00000,189.00000
+Baseline + pairs,no_collision,Road surface: Dry + Clean,0.12876,0.05277,0.02756,1.13741,1.02564,1.26136,2.43980,0.01470,Road surface,Dry + Clean,20509.00000,2036.00000
+Baseline + pairs,no_collision,"Road surface: Dry + Dirty (sand, gravel, leaves, ...)",-0.35490,0.30768,0.32406,0.70125,0.38368,1.28167,-1.15344,0.24873,Road surface,"Dry + Dirty (sand, gravel, leaves, ...)",111.00000,11.00000
+Baseline + pairs,no_collision,"Road surface: Ice, snow",-0.17288,0.07051,0.07124,0.84124,0.73265,0.96591,-2.45188,0.01421,Road surface,"Ice, snow",3095.00000,291.00000
+Baseline + pairs,no_collision,"Road surface: Unknown, undetermined",-0.68123,0.05772,0.04789,0.50599,0.45187,0.56660,-11.80307,0.00000,Road surface,"Unknown, undetermined",24236.00000,1086.00000
+Baseline + pairs,no_collision,"Road surface: Wet, puddles",-0.07174,0.02692,0.02411,0.93077,0.88292,0.98121,-2.66464,0.00771,Road surface,"Wet, puddles",51883.00000,4819.00000
+Baseline + pairs,no_collision,"Road surface: Wet, puddles + Clean",0.14802,0.09025,0.06585,1.15954,0.97155,1.38390,1.64017,0.10097,Road surface,"Wet, puddles + Clean",3080.00000,295.00000
+Baseline + pairs,no_collision,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",0.10789,0.20928,0.19033,1.11393,0.73912,1.67880,0.51555,0.60617,Road surface,"Wet, puddles + Dirty (sand, gravel, leaves, ...)",249.00000,34.00000
+Baseline + pairs,no_collision,"Road surface: Wet, puddles + Ice or snow",0.27030,0.26915,0.26390,1.31035,0.77318,2.22072,1.00425,0.31526,Road surface,"Wet, puddles + Ice or snow",135.00000,19.00000
+Baseline + pairs,no_collision,Road surface: Other / combined,0.23555,0.44648,0.44369,1.26560,0.52753,3.03634,0.52757,0.59780,Road surface,Other / combined,55.00000,6.00000
+Baseline + pairs,no_collision,Year: 2018,-0.06337,0.02543,0.02440,0.93859,0.89296,0.98655,-2.49238,0.01269,Year,2018,38453.00000,3841.00000
+Baseline + pairs,no_collision,Year: 2019,-0.03517,0.02659,0.02441,0.96544,0.91641,1.01709,-1.32283,0.18589,Year,2019,37719.00000,3847.00000
+Baseline + pairs,no_collision,Year: 2020,-0.02050,0.02889,0.02576,0.97971,0.92578,1.03678,-0.70972,0.47788,Year,2020,30251.00000,3202.00000
+Baseline + pairs,no_collision,Year: 2021,-0.11403,0.02986,0.02533,0.89223,0.84151,0.94600,-3.81912,0.00013,Year,2021,34660.00000,3338.00000
+Baseline + pairs,no_collision,Year: 2022,-0.13455,0.03224,0.02483,0.87411,0.82058,0.93112,-4.17351,0.00003,Year,2022,37650.00000,3621.00000
+Baseline + pairs,no_collision,Year: 2023,-0.13102,0.03684,0.02502,0.87720,0.81610,0.94288,-3.55660,0.00038,Year,2023,36858.00000,3524.00000
+Baseline + pairs,no_collision,Year: 2024,-0.20238,0.04102,0.02564,0.81678,0.75368,0.88516,-4.93367,0.00000,Year,2024,35916.00000,3184.00000
+Baseline + pairs,no_collision,Month: Apr,0.14952,0.03806,0.03455,1.16127,1.07780,1.25121,3.92859,0.00009,Month,Apr,21137.00000,2200.00000
+Baseline + pairs,no_collision,Month: Aug,0.13614,0.03364,0.03355,1.14585,1.07272,1.22395,4.04655,0.00005,Month,Aug,23708.00000,2540.00000
+Baseline + pairs,no_collision,Month: Dec,0.01457,0.03283,0.03411,1.01467,0.95144,1.08211,0.44370,0.65726,Month,Dec,22288.00000,2044.00000
+Baseline + pairs,no_collision,Month: Feb,0.04882,0.03647,0.03470,1.05003,0.97759,1.12783,1.33854,0.18072,Month,Feb,20617.00000,1945.00000
+Baseline + pairs,no_collision,Month: Jul,0.19216,0.03771,0.03346,1.21186,1.12553,1.30482,5.09606,0.00000,Month,Jul,23502.00000,2628.00000
+Baseline + pairs,no_collision,Month: Jun,0.11600,0.03436,0.03285,1.12299,1.04985,1.20124,3.37561,0.00074,Month,Jun,28471.00000,2885.00000
+Baseline + pairs,no_collision,Month: Mar,0.03066,0.03489,0.03453,1.03113,0.96297,1.10412,0.87869,0.37957,Month,Mar,22235.00000,2061.00000
+Baseline + pairs,no_collision,Month: May,0.14318,0.03327,0.03312,1.15394,1.08110,1.23168,4.30425,0.00002,Month,May,26315.00000,2740.00000
+Baseline + pairs,no_collision,Month: Nov,-0.01388,0.03563,0.03368,0.98622,0.91970,1.05754,-0.38957,0.69686,Month,Nov,24430.00000,2195.00000
+Baseline + pairs,no_collision,Month: Oct,0.03408,0.03510,0.03270,1.03467,0.96589,1.10835,0.97105,0.33152,Month,Oct,27882.00000,2642.00000
+Baseline + pairs,no_collision,Month: Sep,0.06408,0.03112,0.03277,1.06617,1.00308,1.13323,2.05897,0.03950,Month,Sep,27926.00000,2747.00000
+Baseline + pairs,no_collision,Group involved: Van / light truck,0.21319,0.05469,0.05217,1.23762,1.11183,1.37764,3.89841,0.00010,Group involved,Van / light truck,23557.00000,2351.00000
+Baseline + pairs,no_collision,Group involved: Truck,1.05953,0.04854,0.04590,2.88502,2.62319,3.17298,21.82767,0.00000,Group involved,Truck,12595.00000,2178.00000
+Baseline + pairs,no_collision,Group involved: Bus,-0.05906,0.15793,0.11393,0.94265,0.69169,1.28465,-0.37398,0.70842,Group involved,Bus,4095.00000,367.00000
+Baseline + pairs,no_collision,Group involved: Motorcycle,1.01787,0.03303,0.03260,2.76730,2.59381,2.95240,30.81344,0.00000,Group involved,Motorcycle,19792.00000,3749.00000
+Baseline + pairs,no_collision,Group involved: Moped,0.20149,0.04380,0.04565,1.22322,1.12260,1.33286,4.60064,0.00000,Group involved,Moped,23258.00000,1985.00000
+Baseline + pairs,no_collision,Group involved: Bicycle,0.80207,0.03545,0.02600,2.23016,2.08046,2.39062,22.62540,0.00000,Group involved,Bicycle,71881.00000,7852.00000
+Baseline + pairs,no_collision,Group involved: Pedestrian,1.06490,0.11174,0.07069,2.90056,2.33004,3.61076,9.52988,0.00000,Group involved,Pedestrian,29897.00000,3820.00000
+Baseline + pairs,no_collision,Group involved: Other road user,0.88938,0.07471,0.06517,2.43361,2.10214,2.81736,11.90516,0.00000,Group involved,Other road user,6356.00000,871.00000
+Baseline + pairs,no_collision,Group involved: Unknown,0.56967,0.03750,0.02890,1.76768,1.64242,1.90248,15.19267,0.00000,Group involved,Unknown,31086.00000,2133.00000
+Baseline + pairs,no_collision,Group involved: Single road user (no second party),0.75737,0.03557,0.02066,2.13267,1.98906,2.28664,21.29413,0.00000,Group involved,Single road user (no second party),59804.00000,8558.00000
+Baseline + pairs,no_collision,Pair: Passenger car + Van / light truck,-0.09657,0.06896,0.06771,0.90795,0.79315,1.03936,-1.40022,0.16145,Interaction,Pair: Passenger car + Van / light truck,10297.00000,602.00000
+Baseline + pairs,no_collision,Pair: Passenger car + Truck,-0.20804,0.08769,0.05868,0.81218,0.68393,0.96448,-2.37247,0.01767,Interaction,Pair: Passenger car + Truck,6825.00000,821.00000
+Baseline + pairs,no_collision,Pair: Passenger car + Bus,0.40923,0.17759,0.15676,1.50566,1.06306,2.13252,2.30437,0.02120,Interaction,Pair: Passenger car + Bus,1486.00000,93.00000
+Baseline + pairs,no_collision,Pair: Passenger car + Motorcycle,0.43902,0.04442,0.04265,1.55119,1.42184,1.69231,9.88279,0.00000,Interaction,Pair: Passenger car + Motorcycle,11248.00000,1908.00000
+Baseline + pairs,no_collision,Pair: Passenger car + Moped,0.24030,0.05588,0.05719,1.27164,1.13971,1.41883,4.30027,0.00002,Interaction,Pair: Passenger car + Moped,13433.00000,1006.00000
+Baseline + pairs,no_collision,Pair: Passenger car + Bicycle,-0.19638,0.04461,0.03142,0.82170,0.75291,0.89678,-4.40234,0.00001,Interaction,Pair: Passenger car + Bicycle,40467.00000,3367.00000
+Baseline + pairs,no_collision,Pair: Passenger car + Pedestrian,0.08615,0.10960,0.07388,1.08997,0.87927,1.35117,0.78605,0.43184,Interaction,Pair: Passenger car + Pedestrian,20530.00000,2493.00000
+Baseline + pairs,no_collision,Pair: Passenger car + Other road user,-0.17642,0.09353,0.09623,0.83826,0.69785,1.00692,-1.88626,0.05926,Interaction,Pair: Passenger car + Other road user,2528.00000,223.00000
+Baseline + pairs,no_collision,Pair: Van / light truck + Truck,0.20020,0.11345,0.10280,1.22164,0.97808,1.52586,1.76460,0.07763,Interaction,Pair: Van / light truck + Truck,1066.00000,221.00000
+Baseline + pairs,no_collision,Pair: Van / light truck + Motorcycle,0.28904,0.09675,0.10112,1.33514,1.10452,1.61392,2.98749,0.00281,Interaction,Pair: Van / light truck + Motorcycle,1079.00000,201.00000
+Baseline + pairs,no_collision,Pair: Van / light truck + Moped,0.27357,0.11978,0.11708,1.31464,1.03956,1.66252,2.28392,0.02238,Interaction,Pair: Van / light truck + Moped,1340.00000,128.00000
+Baseline + pairs,no_collision,Pair: Van / light truck + Bicycle,-0.06142,0.07600,0.07609,0.94043,0.81027,1.09149,-0.80814,0.41901,Interaction,Pair: Van / light truck + Bicycle,4226.00000,492.00000
+Baseline + pairs,no_collision,Pair: Van / light truck + Pedestrian,0.13290,0.15035,0.11082,1.14214,0.85063,1.53355,0.88396,0.37672,Interaction,Pair: Van / light truck + Pedestrian,1638.00000,253.00000
+Baseline + pairs,no_collision,Pair: Truck + Bicycle,0.18478,0.08895,0.07963,1.20296,1.01050,1.43207,2.07743,0.03776,Interaction,Pair: Truck + Bicycle,1362.00000,385.00000
+Baseline + pairs,no_collision,Pair: Bus + Bicycle,0.37647,0.16973,0.17096,1.45713,1.04477,2.03224,2.21802,0.02655,Interaction,Pair: Bus + Bicycle,590.00000,74.00000
+Baseline + pairs,no_collision,Pair: Bus + Pedestrian,0.39905,0.18743,0.16911,1.49040,1.03220,2.15201,2.12907,0.03325,Interaction,Pair: Bus + Pedestrian,810.00000,114.00000
+Baseline + pairs,no_collision,Pair: Motorcycle + Bicycle,-0.64373,0.12019,0.12411,0.52533,0.41507,0.66488,-5.35575,0.00000,Interaction,Pair: Motorcycle + Bicycle,629.00000,87.00000
+Baseline + pairs,no_collision,Pair: Moped + Bicycle,-0.71300,0.09295,0.09763,0.49017,0.40853,0.58813,-7.67059,0.00000,Interaction,Pair: Moped + Bicycle,2423.00000,162.00000
+Baseline + pairs,no_collision,Pair: Moped + Pedestrian,-0.73231,0.14102,0.14402,0.48080,0.36469,0.63387,-5.19305,0.00000,Interaction,Pair: Moped + Pedestrian,990.00000,80.00000
+Baseline + pairs,no_collision,Pair: Bicycle + Pedestrian,-0.98494,0.13107,0.09139,0.37346,0.28885,0.48285,-7.51483,0.00000,Interaction,Pair: Bicycle + Pedestrian,3617.00000,383.00000
+Baseline + pairs,no_collision,Pair: Bicycle + Other road user,-0.48195,0.11586,0.11256,0.61758,0.49212,0.77503,-4.15956,0.00003,Interaction,Pair: Bicycle + Other road user,1130.00000,150.00000
+Baseline + pairs,no_collision,Pair: Pedestrian + Other road user,-0.13585,0.17182,0.12740,0.87298,0.62337,1.22253,-0.79063,0.42916,Interaction,Pair: Pedestrian + Other road user,936.00000,188.00000
+Baseline + pairs + order,no_collision,Region: Brussels-Capital Region,-1.02750,0.06813,0.03015,0.35790,0.31317,0.40903,-15.08231,0.00000,Region,Brussels-Capital Region,30022.00000,1461.00000
+Baseline + pairs + order,no_collision,Region: Walloon Region,-0.20344,0.07298,0.01807,0.81592,0.70717,0.94138,-2.78781,0.00531,Region,Walloon Region,81162.00000,7644.00000
+Baseline + pairs + order,no_collision,Road type: Motorway,0.08852,0.04975,0.02689,1.09256,0.99105,1.20446,1.77930,0.07519,Road type,Motorway,21860.00000,2459.00000
+Baseline + pairs + order,no_collision,Road type: Regional road,0.11052,0.01754,0.01367,1.11686,1.07912,1.15592,6.30135,0.00000,Road type,Regional road,133453.00000,13223.00000
+Baseline + pairs + order,no_collision,Road type: Unknown,0.19715,0.12538,0.09091,1.21793,0.95258,1.55721,1.57248,0.11584,Road type,Unknown,1502.00000,144.00000
+Baseline + pairs + order,no_collision,Intersection: At intersection,-0.13158,0.01972,0.01505,0.87671,0.84347,0.91126,-6.67186,0.00000,Intersection,At intersection,97077.00000,8166.00000
+Baseline + pairs + order,no_collision,"Lighting: Dawn, dusk",0.01941,0.03284,0.03125,1.01960,0.95604,1.08738,0.59098,0.55453,Lighting,"Dawn, dusk",13688.00000,1278.00000
+Baseline + pairs + order,no_collision,"Lighting: Night, no public lighting",0.62717,0.03970,0.03471,1.87230,1.73215,2.02379,15.79941,0.00000,Lighting,"Night, no public lighting",7175.00000,1178.00000
+Baseline + pairs + order,no_collision,"Lighting: Night, public lighting present and lit",0.29410,0.01835,0.01713,1.34192,1.29452,1.39106,16.02775,0.00000,Lighting,"Night, public lighting present and lit",56044.00000,6203.00000
+Baseline + pairs + order,no_collision,"Lighting: Night, public lighting present but not lit",0.48965,0.06241,0.05509,1.63175,1.44387,1.84407,7.84565,0.00000,Lighting,"Night, public lighting present but not lit",2912.00000,422.00000
+Baseline + pairs + order,no_collision,"Lighting: Unknown, undetermined",0.00106,0.06244,0.05837,1.00106,0.88574,1.13138,0.01690,0.98651,Lighting,"Unknown, undetermined",9918.00000,447.00000
+Baseline + pairs + order,no_collision,Weather: Fog (visibility under 100 m),0.19798,0.08569,0.08900,1.21894,1.03049,1.44185,2.31052,0.02086,Weather,Fog (visibility under 100 m),1193.00000,154.00000
+Baseline + pairs + order,no_collision,Weather: Hail,-0.20137,0.27500,0.25792,0.81761,0.47694,1.40161,-0.73227,0.46400,Weather,Hail,206.00000,17.00000
+Baseline + pairs + order,no_collision,"Weather: Other (thick smoke, ...)",-0.07513,0.09714,0.09533,0.92763,0.76681,1.12217,-0.77340,0.43929,Weather,"Other (thick smoke, ...)",1238.00000,129.00000
+Baseline + pairs + order,no_collision,Weather: Rain,-0.10792,0.03013,0.02958,0.89770,0.84622,0.95230,-3.58228,0.00034,Weather,Rain,29706.00000,2590.00000
+Baseline + pairs + order,no_collision,"Weather: Rain + Strong wind, gusts",0.29289,0.14552,0.14920,1.34029,1.00770,1.78265,2.01271,0.04414,Weather,"Rain + Strong wind, gusts",416.00000,56.00000
+Baseline + pairs + order,no_collision,Weather: Snowfall,-0.12495,0.11158,0.10763,0.88254,0.70918,1.09828,-1.11982,0.26279,Weather,Snowfall,1466.00000,120.00000
+Baseline + pairs + order,no_collision,"Weather: Strong wind, gusts",0.23347,0.10642,0.10368,1.26298,1.02520,1.55590,2.19387,0.02824,Weather,"Strong wind, gusts",814.00000,116.00000
+Baseline + pairs + order,no_collision,"Weather: Unknown, undetermined",-0.23190,0.04231,0.03989,0.79302,0.72991,0.86159,-5.48091,0.00000,Weather,"Unknown, undetermined",27763.00000,1469.00000
+Baseline + pairs + order,no_collision,Weather: Other / combined,0.17593,0.29527,0.31693,1.19236,0.66845,2.12689,0.59584,0.55128,Weather,Other / combined,94.00000,13.00000
+Baseline + pairs + order,no_collision,Road surface: Clean,-0.04570,0.05207,0.02505,0.95533,0.86265,1.05797,-0.87764,0.38014,Road surface,Clean,31155.00000,2768.00000
+Baseline + pairs + order,no_collision,"Road surface: Dirty (sand, gravel, leaves, ...)",-0.36516,0.08310,0.07989,0.69408,0.58977,0.81685,-4.39451,0.00001,Road surface,"Dirty (sand, gravel, leaves, ...)",1661.00000,189.00000
+Baseline + pairs + order,no_collision,Road surface: Dry + Clean,0.12657,0.05220,0.02756,1.13493,1.02456,1.25719,2.42475,0.01532,Road surface,Dry + Clean,20509.00000,2036.00000
+Baseline + pairs + order,no_collision,"Road surface: Dry + Dirty (sand, gravel, leaves, ...)",-0.35748,0.30728,0.32400,0.69944,0.38299,1.27735,-1.16337,0.24468,Road surface,"Dry + Dirty (sand, gravel, leaves, ...)",111.00000,11.00000
+Baseline + pairs + order,no_collision,"Road surface: Ice, snow",-0.17310,0.07043,0.07124,0.84106,0.73262,0.96555,-2.45786,0.01398,Road surface,"Ice, snow",3095.00000,291.00000
+Baseline + pairs + order,no_collision,"Road surface: Unknown, undetermined",-0.67324,0.05768,0.04791,0.51005,0.45553,0.57109,-11.67297,0.00000,Road surface,"Unknown, undetermined",24236.00000,1086.00000
+Baseline + pairs + order,no_collision,"Road surface: Wet, puddles",-0.07223,0.02700,0.02411,0.93032,0.88236,0.98089,-2.67461,0.00748,Road surface,"Wet, puddles",51883.00000,4819.00000
+Baseline + pairs + order,no_collision,"Road surface: Wet, puddles + Clean",0.14468,0.08971,0.06586,1.15567,0.96933,1.37782,1.61281,0.10679,Road surface,"Wet, puddles + Clean",3080.00000,295.00000
+Baseline + pairs + order,no_collision,"Road surface: Wet, puddles + Dirty (sand, gravel, leaves, ...)",0.10389,0.20898,0.19030,1.10948,0.73660,1.67111,0.49713,0.61910,Road surface,"Wet, puddles + Dirty (sand, gravel, leaves, ...)",249.00000,34.00000
+Baseline + pairs + order,no_collision,"Road surface: Wet, puddles + Ice or snow",0.27483,0.26914,0.26389,1.31630,0.77671,2.23076,1.02113,0.30719,Road surface,"Wet, puddles + Ice or snow",135.00000,19.00000
+Baseline + pairs + order,no_collision,Road surface: Other / combined,0.23690,0.44687,0.44379,1.26731,0.52784,3.04274,0.53013,0.59602,Road surface,Other / combined,55.00000,6.00000
+Baseline + pairs + order,no_collision,Year: 2018,-0.06330,0.02533,0.02440,0.93866,0.89320,0.98644,-2.49892,0.01246,Year,2018,38453.00000,3841.00000
+Baseline + pairs + order,no_collision,Year: 2019,-0.03449,0.02645,0.02441,0.96609,0.91728,1.01750,-1.30410,0.19220,Year,2019,37719.00000,3847.00000
+Baseline + pairs + order,no_collision,Year: 2020,-0.02062,0.02880,0.02577,0.97960,0.92582,1.03649,-0.71569,0.47418,Year,2020,30251.00000,3202.00000
+Baseline + pairs + order,no_collision,Year: 2021,-0.11244,0.02974,0.02534,0.89365,0.84304,0.94729,-3.78040,0.00016,Year,2021,34660.00000,3338.00000
+Baseline + pairs + order,no_collision,Year: 2022,-0.13347,0.03206,0.02483,0.87506,0.82177,0.93180,-4.16343,0.00003,Year,2022,37650.00000,3621.00000
+Baseline + pairs + order,no_collision,Year: 2023,-0.13061,0.03654,0.02502,0.87756,0.81691,0.94271,-3.57474,0.00035,Year,2023,36858.00000,3524.00000
+Baseline + pairs + order,no_collision,Year: 2024,-0.20122,0.04079,0.02565,0.81773,0.75490,0.88580,-4.93297,0.00000,Year,2024,35916.00000,3184.00000
+Baseline + pairs + order,no_collision,Month: Apr,0.14909,0.03807,0.03456,1.16078,1.07731,1.25071,3.91575,0.00009,Month,Apr,21137.00000,2200.00000
+Baseline + pairs + order,no_collision,Month: Aug,0.13625,0.03358,0.03356,1.14597,1.07298,1.22392,4.05802,0.00005,Month,Aug,23708.00000,2540.00000
+Baseline + pairs + order,no_collision,Month: Dec,0.01389,0.03286,0.03412,1.01398,0.95074,1.08143,0.42267,0.67253,Month,Dec,22288.00000,2044.00000
+Baseline + pairs + order,no_collision,Month: Feb,0.04806,0.03652,0.03470,1.04923,0.97676,1.12708,1.31604,0.18816,Month,Feb,20617.00000,1945.00000
+Baseline + pairs + order,no_collision,Month: Jul,0.19305,0.03775,0.03347,1.21295,1.12645,1.30609,5.11444,0.00000,Month,Jul,23502.00000,2628.00000
+Baseline + pairs + order,no_collision,Month: Jun,0.11581,0.03438,0.03286,1.12279,1.04962,1.20105,3.36860,0.00076,Month,Jun,28471.00000,2885.00000
+Baseline + pairs + order,no_collision,Month: Mar,0.03133,0.03487,0.03453,1.03182,0.96366,1.10480,0.89844,0.36895,Month,Mar,22235.00000,2061.00000
+Baseline + pairs + order,no_collision,Month: May,0.14312,0.03324,0.03313,1.15387,1.08109,1.23156,4.30542,0.00002,Month,May,26315.00000,2740.00000
+Baseline + pairs + order,no_collision,Month: Nov,-0.01415,0.03556,0.03369,0.98595,0.91957,1.05711,-0.39797,0.69065,Month,Nov,24430.00000,2195.00000
+Baseline + pairs + order,no_collision,Month: Oct,0.03397,0.03500,0.03271,1.03456,0.96596,1.10803,0.97062,0.33174,Month,Oct,27882.00000,2642.00000
+Baseline + pairs + order,no_collision,Month: Sep,0.06432,0.03112,0.03278,1.06643,1.00333,1.13350,2.06676,0.03876,Month,Sep,27926.00000,2747.00000
+Baseline + pairs + order,no_collision,Group involved: Van / light truck,0.21308,0.05472,0.05217,1.23748,1.11164,1.37757,3.89424,0.00010,Group involved,Van / light truck,23557.00000,2351.00000
+Baseline + pairs + order,no_collision,Group involved: Truck,1.05946,0.04843,0.04590,2.88482,2.62359,3.17206,21.87703,0.00000,Group involved,Truck,12595.00000,2178.00000
+Baseline + pairs + order,no_collision,Group involved: Bus,-0.05994,0.15797,0.11393,0.94182,0.69104,1.28363,-0.37941,0.70439,Group involved,Bus,4095.00000,367.00000
+Baseline + pairs + order,no_collision,Group involved: Motorcycle,1.01733,0.03302,0.03260,2.76581,2.59247,2.95074,30.80796,0.00000,Group involved,Motorcycle,19792.00000,3749.00000
+Baseline + pairs + order,no_collision,Group involved: Moped,0.20053,0.04378,0.04565,1.22205,1.12156,1.33155,4.58014,0.00000,Group involved,Moped,23258.00000,1985.00000
+Baseline + pairs + order,no_collision,Group involved: Bicycle,0.79973,0.03548,0.02600,2.22494,2.07548,2.38517,22.54097,0.00000,Group involved,Bicycle,71881.00000,7852.00000
+Baseline + pairs + order,no_collision,Group involved: Pedestrian,1.06451,0.11149,0.07069,2.89942,2.33030,3.60754,9.54832,0.00000,Group involved,Pedestrian,29897.00000,3820.00000
+Baseline + pairs + order,no_collision,Group involved: Other road user,0.88825,0.07470,0.06517,2.43087,2.09978,2.81417,11.89050,0.00000,Group involved,Other road user,6356.00000,871.00000
+Baseline + pairs + order,no_collision,Group involved: Unknown,0.56676,0.03763,0.02891,1.76255,1.63723,1.89747,15.06071,0.00000,Group involved,Unknown,31086.00000,2133.00000
+Baseline + pairs + order,no_collision,Group involved: Single road user (no second party),0.75742,0.03566,0.02066,2.13276,1.98879,2.28716,21.24027,0.00000,Group involved,Single road user (no second party),59804.00000,8558.00000
+Baseline + pairs + order,no_collision,Pair: Passenger car + Van / light truck,-0.08306,0.08136,0.07883,0.92029,0.78464,1.07940,-1.02091,0.30730,Interaction,Pair: Passenger car + Van / light truck,10297.00000,602.00000
+Baseline + pairs + order,no_collision,Pair: Passenger car + Truck,-0.35653,0.11821,0.07408,0.70010,0.55532,0.88263,-3.01621,0.00256,Interaction,Pair: Passenger car + Truck,6825.00000,821.00000
+Baseline + pairs + order,no_collision,Pair: Passenger car + Bus,0.40993,0.17766,0.15675,1.50671,1.06367,2.13430,2.30744,0.02103,Interaction,Pair: Passenger car + Bus,1486.00000,93.00000
+Baseline + pairs + order,no_collision,Pair: Passenger car + Motorcycle,0.47964,0.04854,0.05111,1.61550,1.46889,1.77675,9.88122,0.00000,Interaction,Pair: Passenger car + Motorcycle,11248.00000,1908.00000
+Baseline + pairs + order,no_collision,Pair: Passenger car + Moped,0.23309,0.07338,0.07068,1.26250,1.09338,1.45777,3.17668,0.00149,Interaction,Pair: Passenger car + Moped,13433.00000,1006.00000
+Baseline + pairs + order,no_collision,Pair: Passenger car + Bicycle,-0.32672,0.05375,0.04183,0.72128,0.64916,0.80142,-6.07824,0.00000,Interaction,Pair: Passenger car + Bicycle,40467.00000,3367.00000
+Baseline + pairs + order,no_collision,Pair: Passenger car + Pedestrian,-0.27145,0.11916,0.09500,0.76227,0.60350,0.96282,-2.27795,0.02273,Interaction,Pair: Passenger car + Pedestrian,20530.00000,2493.00000
+Baseline + pairs + order,no_collision,Pair: Passenger car + Other road user,-0.33052,0.13365,0.13282,0.71855,0.55295,0.93374,-2.47298,0.01340,Interaction,Pair: Passenger car + Other road user,2528.00000,223.00000
+Baseline + pairs + order,no_collision,Pair: Van / light truck + Truck,0.20056,0.11346,0.10280,1.22208,0.97841,1.52644,1.76763,0.07712,Interaction,Pair: Van / light truck + Truck,1066.00000,221.00000
+Baseline + pairs + order,no_collision,Pair: Van / light truck + Motorcycle,0.28905,0.09676,0.10112,1.33516,1.10452,1.61397,2.98738,0.00281,Interaction,Pair: Van / light truck + Motorcycle,1079.00000,201.00000
+Baseline + pairs + order,no_collision,Pair: Van / light truck + Moped,0.27361,0.11975,0.11708,1.31470,1.03966,1.66250,2.28480,0.02232,Interaction,Pair: Van / light truck + Moped,1340.00000,128.00000
+Baseline + pairs + order,no_collision,Pair: Van / light truck + Bicycle,-0.14643,0.09835,0.10117,0.86378,0.71234,1.04742,-1.48896,0.13650,Interaction,Pair: Van / light truck + Bicycle,4226.00000,492.00000
+Baseline + pairs + order,no_collision,Pair: Van / light truck + Pedestrian,0.13210,0.15022,0.11082,1.14122,0.85015,1.53194,0.87933,0.37922,Interaction,Pair: Van / light truck + Pedestrian,1638.00000,253.00000
+Baseline + pairs + order,no_collision,Pair: Truck + Bicycle,0.18577,0.08900,0.07963,1.20414,1.01140,1.43362,2.08740,0.03685,Interaction,Pair: Truck + Bicycle,1362.00000,385.00000
+Baseline + pairs + order,no_collision,Pair: Bus + Bicycle,0.37816,0.16979,0.17096,1.45960,1.04642,2.03594,2.22723,0.02593,Interaction,Pair: Bus + Bicycle,590.00000,74.00000
+Baseline + pairs + order,no_collision,Pair: Bus + Pedestrian,0.39868,0.18736,0.16910,1.48986,1.03195,2.15095,2.12788,0.03335,Interaction,Pair: Bus + Pedestrian,810.00000,114.00000
+Baseline + pairs + order,no_collision,Pair: Motorcycle + Bicycle,-0.64220,0.12018,0.12411,0.52613,0.41572,0.66588,-5.34361,0.00000,Interaction,Pair: Motorcycle + Bicycle,629.00000,87.00000
+Baseline + pairs + order,no_collision,Pair: Moped + Bicycle,-0.80574,0.14407,0.13400,0.44676,0.33685,0.59253,-5.59259,0.00000,Interaction,Pair: Moped + Bicycle,2423.00000,162.00000
+Baseline + pairs + order,no_collision,Pair: Moped + Pedestrian,-0.73274,0.14083,0.14401,0.48059,0.36467,0.63336,-5.20292,0.00000,Interaction,Pair: Moped + Pedestrian,990.00000,80.00000
+Baseline + pairs + order,no_collision,Pair: Bicycle + Pedestrian,-1.06765,0.13310,0.13312,0.34382,0.26487,0.44629,-8.02172,0.00000,Interaction,Pair: Bicycle + Pedestrian,3617.00000,383.00000
+Baseline + pairs + order,no_collision,Pair: Bicycle + Other road user,-0.48161,0.11582,0.11255,0.61779,0.49233,0.77522,-4.15843,0.00003,Interaction,Pair: Bicycle + Other road user,1130.00000,150.00000
+Baseline + pairs + order,no_collision,Pair: Pedestrian + Other road user,-0.13694,0.17165,0.12739,0.87202,0.62290,1.22077,-0.79782,0.42498,Interaction,Pair: Pedestrian + Other road user,936.00000,188.00000
+Baseline + pairs + order,no_collision,Order: Passenger car is road user 1 (Passenger car + Van / light truck),-0.02825,0.08857,0.08428,0.97214,0.81722,1.15644,-0.31897,0.74975,Interaction,Order: Passenger car is road user 1 (Passenger car + Van / light truck),4972.00000,288.00000
+Baseline + pairs + order,no_collision,Order: Passenger car is road user 1 (Passenger car + Truck),0.26086,0.09583,0.07622,1.29805,1.07577,1.56627,2.72209,0.00649,Interaction,Order: Passenger car is road user 1 (Passenger car + Truck),3680.00000,495.00000
+Baseline + pairs + order,no_collision,Order: Passenger car is road user 1 (Passenger car + Motorcycle),-0.07245,0.05588,0.05106,0.93012,0.83362,1.03778,-1.29640,0.19484,Interaction,Order: Passenger car is road user 1 (Passenger car + Motorcycle),6350.00000,1047.00000
+Baseline + pairs + order,no_collision,Order: Passenger car is road user 1 (Passenger car + Moped),0.01201,0.06675,0.06759,1.01208,0.88796,1.15356,0.17993,0.85721,Interaction,Order: Passenger car is road user 1 (Passenger car + Moped),8141.00000,619.00000
+Baseline + pairs + order,no_collision,Order: Passenger car is road user 1 (Passenger car + Bicycle),0.19196,0.03858,0.03953,1.21163,1.12339,1.30679,4.97608,0.00000,Interaction,Order: Passenger car is road user 1 (Passenger car + Bicycle),26748.00000,2373.00000
+Baseline + pairs + order,no_collision,Order: Passenger car is road user 1 (Passenger car + Pedestrian),0.41230,0.07915,0.06751,1.51029,1.29326,1.76373,5.20910,0.00000,Interaction,Order: Passenger car is road user 1 (Passenger car + Pedestrian),17231.00000,2217.00000
+Baseline + pairs + order,no_collision,Order: Passenger car is road user 1 (Passenger car + Other road user),0.25670,0.14287,0.14611,1.29266,0.97695,1.71039,1.79680,0.07237,Interaction,Order: Passenger car is road user 1 (Passenger car + Other road user),1455.00000,141.00000
+Baseline + pairs + order,no_collision,Order: Van / light truck is road user 1 (Van / light truck + Bicycle),0.13296,0.10447,0.10154,1.14221,0.93072,1.40176,1.27273,0.20311,Interaction,Order: Van / light truck is road user 1 (Van / light truck + Bicycle),2660.00000,325.00000
+Baseline + pairs + order,no_collision,Order: Moped is road user 1 (Moped + Bicycle),0.17399,0.18337,0.16434,1.19004,0.83076,1.70469,0.94886,0.34269,Interaction,Order: Moped is road user 1 (Moped + Bicycle),1244.00000,91.00000
+Baseline + pairs + order,no_collision,Order: Bicycle is road user 1 (Bicycle + Pedestrian),0.11040,0.12566,0.12741,1.11673,0.87294,1.42861,0.87859,0.37963,Interaction,Order: Bicycle is road user 1 (Bicycle + Pedestrian),2674.00000,292.00000

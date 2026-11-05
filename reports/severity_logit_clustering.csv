@@ -1,0 +1,11 @@
+model,spec,accidents,clusters,icc_outcome,icc_residual,median_se_ratio_robust_to_ordinary,max_se_ratio
+Baseline,full,289532,581,0.01561,0.00944,1.10734,3.79566
+Cyclists,full,71881,577,0.02466,0.01578,1.02108,1.78296
+Pedestrians,full,29897,572,0.03243,0.01910,1.01421,2.40331
+Motorcyclists,full,19792,578,0.04422,0.01845,1.01867,1.75860
+Mopeds,full,23258,568,0.01865,0.01397,1.01915,1.20742
+Baseline,no_collision,289532,581,0.01561,0.00987,1.10220,4.02252
+Cyclists,no_collision,71881,577,0.02466,0.01590,1.02319,2.08914
+Pedestrians,no_collision,29897,572,0.03243,0.01910,1.01421,2.40331
+Motorcyclists,no_collision,19792,578,0.04422,0.01964,1.01528,1.79685
+Mopeds,no_collision,23258,568,0.01865,0.01451,1.01624,1.18899
