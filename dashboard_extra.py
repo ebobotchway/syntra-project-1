@@ -594,9 +594,10 @@ def fig_logit_roadusers(res):
     return _layout(fig, 560)
 
 
-def fig_logit_predicted(res):
+def fig_logit_predicted(res, models=None):
     """Average adjusted predicted probability of a severe accident per category (six variables), per model, with 95% intervals."""
     p = res["severity_logit_predicted_by_category"]
+    models = models or MODELS5
     variables = ["Region", "Road type", "Intersection", "Lighting", "Year", "Month"]
     fig = make_subplots(rows=2, cols=3, subplot_titles=[f"<b>{v}</b>" for v in variables], horizontal_spacing=0.07, vertical_spacing=0.2)
     for i, var in enumerate(variables):
@@ -606,11 +607,11 @@ def fig_logit_predicted(res):
         if var == "Month":
             cats = MONTH_NAMES
         cats = [x for x in cats if not x.startswith("Unknown")]
-        for m, off in zip(MODELS5, np.linspace(-0.3, 0.3, 5)):
+        for m, off in zip(models, np.linspace(-0.3, 0.3, 5) if len(models) > 1 else [0.0]):
             d = part[part["model"] == m].set_index("category")
             sel = [x for x in cats if x in d.index]
             colour, symbol = MODEL_STYLE[m]
-            fig.add_trace(go.Scatter(x=[cats.index(x) + off for x in sel], y=d.loc[sel, "predicted_pct"], mode="markers", name=m, legendgroup=m, showlegend=(i == 0), marker=dict(size=6, color=colour, symbol=symbol),
+            fig.add_trace(go.Scatter(x=[cats.index(x) + off for x in sel], y=d.loc[sel, "predicted_pct"], mode="markers", name=m, legendgroup=m, showlegend=(i == 0 and len(models) > 1), marker=dict(size=6, color=colour, symbol=symbol),
                                      error_y=dict(type="data", symmetric=False, array=d.loc[sel, "ci_high_pct"] - d.loc[sel, "predicted_pct"], arrayminus=d.loc[sel, "predicted_pct"] - d.loc[sel, "ci_low_pct"], thickness=1.3, width=0, color=colour),
                                      hovertext=[f"<b>{m}</b>: {x}<br>{d.loc[x, 'predicted_pct']:.1f}% (95% interval {d.loc[x, 'ci_low_pct']:.1f}-{d.loc[x, 'ci_high_pct']:.1f}%)" for x in sel], hovertemplate="%{hovertext}<extra></extra>"), row=r, col=c)
         fig.update_xaxes(tickvals=list(range(len(cats))), ticktext=[x.replace("Night, public lighting present and lit", "Night, lit").replace("Night, public lighting present but not lit", "Night, not lit").replace("Night, no public lighting", "Night, no light").replace(" Region", "").replace("-Capital", "")[:16] for x in cats], tickangle=-30, row=r, col=c)
@@ -619,9 +620,11 @@ def fig_logit_predicted(res):
     return _layout(fig, 640)
 
 
-def fig_logit_scenarios(res):
+def fig_logit_scenarios(res, models=None):
     """Predicted probability of a severe accident in four typical situations (2024), per model."""
     sc = res["severity_logit_scenarios"]
+    if models:
+        sc = sc[sc["model"].isin(models)]
     rows = list(dict.fromkeys(sc["model"] + " | " + sc["evaluated_as"]))
     names = list(dict.fromkeys(sc["scenario"]))
     fig = make_subplots(rows=1, cols=4, subplot_titles=[f"<b>{n}</b>" for n in names], horizontal_spacing=0.03, shared_yaxes=True)
@@ -639,14 +642,15 @@ def fig_logit_scenarios(res):
                                      hovertext=[f"<b>{row}</b><br>{name}<br>{r['predicted_pct']:.1f}% (95% interval {r['ci_low_pct']:.1f}-{r['ci_high_pct']:.1f}%)"], hovertemplate="%{hovertext}<extra></extra>"), row=1, col=i)
         fig.update_xaxes(range=[0, 52], ticksuffix="%", row=1, col=i)
     fig.update_yaxes(autorange="reversed")
-    return _layout(fig, 480)
+    return _layout(fig, 480 if not models or len(rows) > 3 else 260)
 
 
-def fig_logit_calibration(res):
+def fig_logit_calibration(res, models=None):
     """Predicted against observed share of severe accidents in ten groups of accidents, per model (in-sample)."""
     cal, fit = res["severity_logit_calibration"], res["severity_logit_fit"]
-    fig = make_subplots(rows=1, cols=5, subplot_titles=[f"<b>{m}</b>" for m in MODELS5], horizontal_spacing=0.05)
-    for i, m in enumerate(MODELS5, start=1):
+    models = models or MODELS5
+    fig = make_subplots(rows=1, cols=len(models), subplot_titles=[f"<b>{m}</b>" for m in models], horizontal_spacing=0.05)
+    for i, m in enumerate(models, start=1):
         d = cal[cal["model"] == m]
         top = max(d["mean_predicted_pct"].max(), d["observed_pct"].max()) * 1.08
         colour, symbol = MODEL_STYLE[m]
@@ -657,7 +661,7 @@ def fig_logit_calibration(res):
         fig.add_annotation(text=f"AUC {f['auc']:.2f}<br>R2 {f['mcfadden_r2']:.3f}", xref=f"x{i if i > 1 else ''} domain", yref=f"y{i if i > 1 else ''} domain", x=0.04, y=0.96, showarrow=False, xanchor="left", yanchor="top", font=dict(size=11))
         fig.update_xaxes(range=[0, top], ticksuffix="%", row=1, col=i)
         fig.update_yaxes(range=[0, top], ticksuffix="%", row=1, col=i)
-    return _layout(fig, 360)
+    return _layout(fig, 360 if len(models) > 1 else 380)
 
 
 def fig_logit_interactions(res):
@@ -678,10 +682,17 @@ def fig_logit_interactions(res):
     return _layout(fig, 24 * len(order) + 140, margin=dict(l=10, r=10, t=40, b=10))
 
 
-def fig_logit_single(res, model):
+def fig_logit_single(res, model, variables=None):
     """ONE saved model (script 20, with collision type) as a forest plot: all terms grouped by variable in one panel, filled dots = significant at 5%."""
     c = res["severity_logit_coefficients"]
     c = c[(c["model"] == model) & (c["spec"] == "full")]
+    if variables:
+        c = c[c["variable"].isin(variables)]
+    if c.empty:  # e.g. the pedestrian model has no collision-type terms: nearly every accident is "with a pedestrian"
+        fig = go.Figure()
+        fig.add_annotation(text=f"The {model.lower()} model has no terms for this view (the variable is constant or carried by another term).", xref="paper", yref="paper", x=0.5, y=0.5, showarrow=False)
+        fig.update_xaxes(visible=False); fig.update_yaxes(visible=False)
+        return _layout(fig, 220)
     rows, ticks, y = [], [], 0
     for var in list(dict.fromkeys(c["variable"])):
         part = c[c["variable"] == var]
@@ -707,3 +718,21 @@ def fig_logit_single(res, model):
     fig.update_yaxes(tickvals=[t[0] for t in ticks], ticktext=[t[1] for t in ticks], autorange="reversed")
     fig.update_xaxes(type="log", range=[np.log10(low), np.log10(high)], tickvals=tx, ticktext=[f"{t:g}" for t in tx], title=f"{model}: adjusted odds ratio of a severe accident (log scale; filled = significant at 5%)")
     return _layout(fig, max(400, int(22 * y + 110)), margin=dict(l=10, r=10, t=10, b=10))
+
+
+SINGLE_VIEWS = [("place", "Region, road, light"), ("weather", "Weather, surface"), ("time", "Year, month"), ("collision", "Collision type"), ("users", "Road users"),
+                ("pred", "Predicted probabilities"), ("scen", "Four situations"), ("cal", "Calibration")]
+VIEW_VARIABLES = {"place": ["Region", "Road type", "Intersection", "Lighting"], "weather": ["Weather", "Road surface"], "time": ["Year", "Month"], "collision": ["Collision type"]}
+
+
+def fig_logit_model_view(res, model, view):
+    """The individual-model view: the same views as the five-model comparison, for one model (SINGLE_VIEWS)."""
+    if view in VIEW_VARIABLES:
+        return fig_logit_single(res, model, VIEW_VARIABLES[view])
+    if view == "users":
+        return fig_logit_single(res, model, ["Group involved"] if model == "Baseline" else ["Counterpart"])
+    if view == "pred":
+        return fig_logit_predicted(res, [model])
+    if view == "scen":
+        return fig_logit_scenarios(res, [model])
+    return fig_logit_calibration(res, [model])

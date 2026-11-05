@@ -218,8 +218,10 @@ def render_models(tab):
                                          "median_se_ratio_robust_to_ordinary": "robust / ordinary SE"}), width="stretch")
         st.markdown("**One model at a time**")
         one = st.radio("Model", extra.MODELS5, horizontal=True, key="study_models_one")
-        plot(extra.fig_logit_single(res, one))
-        st.caption("All terms of the chosen model, grouped by variable; filled dot = significant at 5%. The graphs below compare the five models.")
+        labels = dict(extra.SINGLE_VIEWS)
+        one_view = st.radio("Show", [k for k, _ in extra.SINGLE_VIEWS], format_func=labels.get, horizontal=True, key="study_models_one_view")
+        plot(extra.fig_logit_model_view(res, one, one_view))
+        st.caption("The chosen model only. Odds ratios: filled dot = significant at 5%. The graphs below compare the five models.")
         st.markdown("**Comparing the five models**")
         view = st.radio("Show", ["Region, road type, intersection, lighting", "Weather and road surface", "Year and month", "Collision type", "The road users in the accident",
                                  "Predicted probabilities", "Four typical situations", "Calibration", "Interactions between road users"], key="study_models_view")

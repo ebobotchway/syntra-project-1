@@ -130,7 +130,8 @@ figs["s5|scen"] = plain(dx.fig_logit_scenarios(res))
 figs["s5|cal"] = plain(dx.fig_logit_calibration(res))
 figs["s5|inter"] = plain(dx.fig_logit_interactions(res))
 for m in dx.MODELS5:
-    figs[f"s5one|{m}"] = plain(dx.fig_logit_single(res, m))
+    for view, _ in dx.SINGLE_VIEWS:
+        figs[f"s5one|{m}|{view}"] = plain(dx.fig_logit_model_view(res, m, view))
 fit5 = res["severity_logit_fit"]
 tables["s5fit"] = spec(fit5[fit5["spec"] == "full"][["model", "accidents", "events", "event_rate_pct", "parameters", "mcfadden_r2", "aic", "auc", "icc_outcome", "icc_residual", "median_se_ratio_robust_to_ordinary"]], digits=3)
 coef5 = res["severity_logit_coefficients"]
@@ -141,7 +142,7 @@ xs, ys = [], []  # the municipality borders once, as one line with gaps (None) b
 for f in outlines["features"]:
     x, y = dx._ring_xy(f["polys"])
     xs += x; ys += y
-extra = {"s5models": dx.MODELS5, "outline": {"x": xs, "y": ys}, "scopes": [[k, v] for k, v in scopes], "figs": figs, "hotspots": hotspots, "tables": tables}
+extra = {"s5models": dx.MODELS5, "s5singleviews": [list(v) for v in dx.SINGLE_VIEWS], "outline": {"x": xs, "y": ys}, "scopes": [[k, v] for k, v in scopes], "figs": figs, "hotspots": hotspots, "tables": tables}
 
 # --- 3. Put everything into the template ---
 template = open(template_file, encoding="utf-8").read()
