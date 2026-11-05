@@ -129,6 +129,8 @@ figs["s5|pred"] = plain(dx.fig_logit_predicted(res))
 figs["s5|scen"] = plain(dx.fig_logit_scenarios(res))
 figs["s5|cal"] = plain(dx.fig_logit_calibration(res))
 figs["s5|inter"] = plain(dx.fig_logit_interactions(res))
+for m in dx.MODELS5:
+    figs[f"s5one|{m}"] = plain(dx.fig_logit_single(res, m))
 fit5 = res["severity_logit_fit"]
 tables["s5fit"] = spec(fit5[fit5["spec"] == "full"][["model", "accidents", "events", "event_rate_pct", "parameters", "mcfadden_r2", "aic", "auc", "icc_outcome", "icc_residual", "median_se_ratio_robust_to_ordinary"]], digits=3)
 coef5 = res["severity_logit_coefficients"]

@@ -676,3 +676,34 @@ def fig_logit_interactions(res):
     fig.update_xaxes(type="log", tickvals=[0.5, 1, 2, 4, 8, 16], ticktext=["0.5", "1", "2", "4", "8", "16"], title="odds ratio of a severe accident against a car-only accident (log scale)")
     fig.update_layout(legend=dict(orientation="h", y=1.04))
     return _layout(fig, 24 * len(order) + 140, margin=dict(l=10, r=10, t=40, b=10))
+
+
+def fig_logit_single(res, model):
+    """ONE saved model (script 20, with collision type) as a forest plot: all terms grouped by variable in one panel, filled dots = significant at 5%."""
+    c = res["severity_logit_coefficients"]
+    c = c[(c["model"] == model) & (c["spec"] == "full")]
+    rows, ticks, y = [], [], 0
+    for var in list(dict.fromkeys(c["variable"])):
+        part = c[c["variable"] == var]
+        if var == "Month":
+            part = part.assign(_o=part["category"].map({m: i for i, m in enumerate(MONTH_NAMES)})).sort_values("_o")
+        ticks.append((y, f"<b>{var}</b>")); y += 1
+        for _, r in part.iterrows():
+            rows.append((y, r)); ticks.append((y, str(r["category"]))); y += 1
+        y += 0.6
+    d = pd.DataFrame([r for _, r in rows])
+    ys = [p for p, _ in rows]
+    sig = d["p_value"] < 0.05
+    colour = MODEL_STYLE[model][0]
+    fig = go.Figure()
+    fig.add_vline(x=1, line_color=GRAY, line_width=2)
+    fig.add_trace(go.Scatter(x=d["odds_ratio"], y=ys, mode="markers", showlegend=False,
+                             marker=dict(size=9, color=[colour if s_ else "rgba(0,0,0,0)" for s_ in sig], symbol=MODEL_STYLE[model][1], line=dict(color=colour, width=2)),
+                             error_x=dict(type="data", symmetric=False, array=d["or_ci_high"] - d["odds_ratio"], arrayminus=d["odds_ratio"] - d["or_ci_low"], thickness=1.5, width=0, color=colour),
+                             hovertext=[f"<b>{r['term']}</b><br>odds ratio {r['odds_ratio']:.2f} (95% interval {r['or_ci_low']:.2f}-{r['or_ci_high']:.2f})<br>p = {r['p_value']:.3g}; {int(r['accidents']):,} accidents, {int(r['events']):,} severe" for _, r in d.iterrows()],
+                             hovertemplate="%{hovertext}<extra></extra>"))
+    low, high = max(0.05, float(d["or_ci_low"].min()) * 0.9), float(d["or_ci_high"].max()) * 1.1
+    tx = [t for t in (0.1, 0.25, 0.5, 1, 2, 4, 8, 16, 32) if low <= t <= high]
+    fig.update_yaxes(tickvals=[t[0] for t in ticks], ticktext=[t[1] for t in ticks], autorange="reversed")
+    fig.update_xaxes(type="log", range=[np.log10(low), np.log10(high)], tickvals=tx, ticktext=[f"{t:g}" for t in tx], title=f"{model}: adjusted odds ratio of a severe accident (log scale; filled = significant at 5%)")
+    return _layout(fig, max(400, int(22 * y + 110)), margin=dict(l=10, r=10, t=10, b=10))

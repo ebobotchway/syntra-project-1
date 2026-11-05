@@ -151,6 +151,11 @@
   <p class="sub">Logistic models of accident severity (Severe = fatal, fatally injured or seriously injured), with standard errors clustered by municipality. Fixed study results; the filters on the left do not apply. To explore your own selection (years, region, road and light conditions, group comparisons, live models and exports) run the interactive Streamlit tool: <a href="https://github.com/ebobotchway/syntra-project-1" target="_blank" rel="noopener">code and instructions on GitHub</a>.</p>
   <h3>The five models</h3>
   <div class="card"><div class="table-wrap"><div id="table-s5fit"></div><p class="dl"><button type="button" class="download" id="dl-s5fit" hidden>Download CSV</button></p></div></div>
+  <h3>One model at a time</h3>
+  <fieldset class="ctl inline-ctl"><legend>Model</legend><div class="row" id="s5-one"></div></fieldset>
+  <p class="note">All terms of the chosen model, grouped by variable; filled dot = significant at 5%.</p>
+  <div class="card"><div class="scroll-x"><div class="inner" style="min-width:700px"><div id="chart-s5one"></div></div></div></div>
+  <h3 style="margin-top:18px">Comparing the five models</h3>
   <fieldset class="ctl inline-ctl"><legend>Show</legend><div class="row" id="s5-view"></div></fieldset>
   <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-s5"></div></div></div></div>
   <div class="card findings">
@@ -275,6 +280,9 @@ const EXTRA = /*__EXTRA__*/null;
   // ---- Step 5: the saved models ----
   const S5_VIEWS = [["place", "Region, road, light"], ["weather", "Weather, surface"], ["time", "Year, month"], ["collision", "Collision type"], ["users", "Road users"], ["pred", "Predicted probabilities"], ["scen", "Four situations"], ["cal", "Calibration"], ["inter", "Interactions"]];
   state.s5 = "place"; state.s5model = "Baseline";
+  state.s5one = "Baseline";
+  register("chart-s5one", () => EXTRA.figs["s5one|" + state.s5one]);
+  choice("s5-one", "s5one", EXTRA.s5models.map(m => [m, m]), state.s5one, v => { state.s5one = v; redraw(["chart-s5one"]); });
   register("chart-s5", () => EXTRA.figs["s5|" + state.s5]);
   choice("s5-view", "s5view", S5_VIEWS, state.s5, v => { state.s5 = v; redraw(["chart-s5"]); });
   table("table-s5fit", "dl-s5fit", "severity_logit_fit.csv", EXTRA.tables.s5fit);

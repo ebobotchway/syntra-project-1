@@ -216,6 +216,11 @@ def render_models(tab):
         fit = fit[fit["spec"] == "full"].set_index("model")[["accidents", "events", "event_rate_pct", "parameters", "mcfadden_r2", "aic", "auc", "icc_outcome", "icc_residual", "median_se_ratio_robust_to_ordinary"]].round(3)
         st.dataframe(fit.rename(columns={"event_rate_pct": "severe %", "mcfadden_r2": "McFadden R2", "auc": "AUC (in-sample)", "icc_outcome": "ICC outcome", "icc_residual": "ICC residuals",
                                          "median_se_ratio_robust_to_ordinary": "robust / ordinary SE"}), width="stretch")
+        st.markdown("**One model at a time**")
+        one = st.radio("Model", extra.MODELS5, horizontal=True, key="study_models_one")
+        plot(extra.fig_logit_single(res, one))
+        st.caption("All terms of the chosen model, grouped by variable; filled dot = significant at 5%. The graphs below compare the five models.")
+        st.markdown("**Comparing the five models**")
         view = st.radio("Show", ["Region, road type, intersection, lighting", "Weather and road surface", "Year and month", "Collision type", "The road users in the accident",
                                  "Predicted probabilities", "Four typical situations", "Calibration", "Interactions between road users"], key="study_models_view")
         if view.startswith("Region"):
