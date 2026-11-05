@@ -119,11 +119,27 @@ tables["s4b3"] = spec(res["severity_density_correlation"], "severity_density_cor
 tables["s4c1"] = spec(res["severity_regions_standardised"], "severity_regions_standardised.csv")
 tables["s4c2"] = spec(res["severity_regions_logistic"], "severity_regions_logistic.csv", digits=4)
 
+# step 5: the saved logistic models (script 20)
+figs["s5|place"] = plain(dx.fig_logit_forest(res, ["Region", "Road type", "Intersection", "Lighting"]))
+figs["s5|weather"] = plain(dx.fig_logit_forest(res, ["Weather", "Road surface"]))
+figs["s5|time"] = plain(dx.fig_logit_forest(res, ["Year", "Month"]))
+figs["s5|collision"] = plain(dx.fig_logit_forest(res, ["Collision type"]))
+figs["s5|users"] = plain(dx.fig_logit_roadusers(res))
+figs["s5|pred"] = plain(dx.fig_logit_predicted(res))
+figs["s5|scen"] = plain(dx.fig_logit_scenarios(res))
+figs["s5|cal"] = plain(dx.fig_logit_calibration(res))
+figs["s5|inter"] = plain(dx.fig_logit_interactions(res))
+fit5 = res["severity_logit_fit"]
+tables["s5fit"] = spec(fit5[fit5["spec"] == "full"][["model", "accidents", "events", "event_rate_pct", "parameters", "mcfadden_r2", "aic", "auc", "icc_outcome", "icc_residual", "median_se_ratio_robust_to_ordinary"]], digits=3)
+coef5 = res["severity_logit_coefficients"]
+for m in dx.MODELS5:
+    tables[f"s5coef|{m}"] = spec(coef5[(coef5["model"] == m) & (coef5["spec"] == "full")][["term", "odds_ratio", "or_ci_low", "or_ci_high", "p_value", "accidents", "events"]], digits=4)
+
 xs, ys = [], []  # the municipality borders once, as one line with gaps (None) between rings
 for f in outlines["features"]:
     x, y = dx._ring_xy(f["polys"])
     xs += x; ys += y
-extra = {"outline": {"x": xs, "y": ys}, "scopes": [[k, v] for k, v in scopes], "figs": figs, "hotspots": hotspots, "tables": tables}
+extra = {"s5models": dx.MODELS5, "outline": {"x": xs, "y": ys}, "scopes": [[k, v] for k, v in scopes], "figs": figs, "hotspots": hotspots, "tables": tables}
 
 # --- 3. Put everything into the template ---
 template = open(template_file, encoding="utf-8").read()

@@ -1,6 +1,6 @@
 <section id="sec-s2">
   <div class="sec-head"><span class="tag">2</span><h2>Severity</h2></div>
-  <p class="sub">Who experiences the most severe outcomes? Fixed results from my analysis scripts, not recalculated here: the years filter on the left does not apply to sections 2 to 4. The severity class belongs to the WHOLE accident, not to one road user: a car-pedestrian accident counts for both groups.</p>
+  <p class="sub">Who experiences the most severe outcomes? Fixed results from my analysis scripts, not recalculated here: the years filter on the left does not apply to sections 2 to 5. The severity class belongs to the WHOLE accident, not to one road user: a car-pedestrian accident counts for both groups.</p>
   <fieldset class="ctl inline-ctl"><legend>Period</legend><div class="row" id="s2-scope"></div></fieldset>
   <h3>Share of each group's accidents that are fatal, seriously injured or slightly injured</h3>
   <p class="note">Dot = share, line = 95% interval, gray line = all accidents. Pre, during and post Covid-19 are my own period names; the data states no cause.</p>
@@ -146,6 +146,28 @@
     <h3>Logistic regression</h3><div id="table-s4c2"></div><p class="dl"><button type="button" class="download" id="dl-s4c2" hidden>Download CSV</button></p>
   </div></details>
 </section>
+<section id="sec-s5">
+  <div class="sec-head"><span class="tag">5</span><h2>Statistical models</h2></div>
+  <p class="sub">Logistic models of accident severity (Severe = fatal, fatally injured or seriously injured), with standard errors clustered by municipality. Fixed study results; the filters on the left do not apply. To explore your own selection (years, region, road and light conditions, group comparisons, live models and exports) run the interactive Streamlit tool: <a href="https://github.com/ebobotchway/syntra-project-1" target="_blank" rel="noopener">code and instructions on GitHub</a>.</p>
+  <h3>The five models</h3>
+  <div class="card"><div class="table-wrap"><div id="table-s5fit"></div><p class="dl"><button type="button" class="download" id="dl-s5fit" hidden>Download CSV</button></p></div></div>
+  <fieldset class="ctl inline-ctl"><legend>Show</legend><div class="row" id="s5-view"></div></fieldset>
+  <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-s5"></div></div></div></div>
+  <div class="card findings">
+    <h3>Key findings</h3>
+    <p class="fixed">Fixed text for all years 2017-2024; it does not change with the controls.</p>
+    <ul>
+      <li>Baseline model (289,532 accidents, 28,532 severe): the odds of a severe accident are 3.44 times higher with a motorcycle involved and 3.32 times higher with a pedestrian (against a car-only accident), 2.94 with a truck and 1.77 with a bicycle.</li>
+      <li>Night without public lighting raises the odds (1.78 in the baseline; 2.04 for pedestrians and 2.01 for motorcyclists). Brussels has much lower odds than Flanders in every model (0.29 to 0.41), Wallonia somewhat lower (0.74 to 0.81).</li>
+      <li>In the group models a truck as counterpart is the strongest risk factor (odds 5.22 for pedestrians, 4.26 for cyclists, 2.63 for mopeds, 2.26 for motorcyclists, against a passenger car).</li>
+      <li>Accidents in the same municipality are correlated (ICC 0.016 in the baseline); the cluster-robust standard errors are on average 11% larger in the baseline and up to 3.8 times larger for region-level terms.</li>
+      <li>The road users in one accident do not simply add up: 22 pairs were tested jointly (p &lt; 10<sup>-180</sup>). Bicycle + pedestrian is far less severe than the two effects added (0.33), car + motorcycle more severe (1.48); the order of road user 1 and 2 also matters (p = 2 x 10<sup>-9</sup>), but their meaning is undocumented.</li>
+      <li>Predicted probability in a daytime urban situation in 2024: car-only accident 5.1%, bicycle against a car 8.6%, pedestrian 15.0%, motorcycle 15.5%.</li>
+    </ul>
+  </div>
+  <p class="care">Read with care: these are associations, not causes; speed, traffic, vehicle type and helmet use are not in the data. The class belongs to the whole accident. AUC is in-sample. "With a pedestrian" (collision type) is 99% the same as the pedestrian road-user term and is left out of the models; without collision type the pedestrian odds ratio is 2.54 instead of 3.32.</p>
+  <details><summary>Odds ratio table</summary><div class="table-wrap"><fieldset class="ctl inline-ctl"><legend>Model</legend><div class="row" id="s5-model"></div></fieldset><div id="table-s5coef"></div><p class="dl"><button type="button" class="download" id="dl-s5coef" hidden>Download CSV</button></p></div></details>
+</section>
 <!--EXTRA-SCRIPT-->
 <script>
 /* Steps 2-4: saved results (decision #110). The graphs were built in Python (dashboard_extra.py) and are embedded as Plotly figures;
@@ -190,7 +212,7 @@ const EXTRA = /*__EXTRA__*/null;
     csvStore[dlId] = { filename, text: [spec.headers.map(q).join(",")].concat(spec.rows.map(r => r.map(c => c === null ? "" : (typeof c === "number" ? String(c) : q(c))).join(","))).join("\n") };
     const b = el(dlId); b.hidden = !(downloads && csvStore[dlId]);
   }
-  document.querySelectorAll('#sec-s2 .download, #sec-s3 .download, #sec-s4 .download').forEach(b => b.addEventListener("click", async () => {
+  document.querySelectorAll('#sec-s2 .download, #sec-s3 .download, #sec-s4 .download, #sec-s5 .download').forEach(b => b.addEventListener("click", async () => {
     const item = csvStore[b.id]; if (!downloads || !item) return;
     try { await downloads.save({ filename: item.filename, data: item.text }); $("status").textContent = "Saved " + item.filename; }
     catch (e) { if (!e || e.code !== "declined") $("status").textContent = "Could not save " + item.filename + (e && e.code ? " (" + e.code + ")" : ""); }
@@ -250,10 +272,20 @@ const EXTRA = /*__EXTRA__*/null;
    ["chart-s4c1", "s4c1"], ["chart-s4c2", "s4c2"], ["chart-s4c3", "s4c3"], ["chart-s4c4", "s4c4"]].forEach(([id, key]) => register(id, () => EXTRA.figs[key]));
   ["s4a1", "s4a2", "s4b1", "s4b2", "s4b3", "s4c1", "s4c2"].forEach(k => table("table-" + k, "dl-" + k, EXTRA.tables[k].filename, EXTRA.tables[k]));
 
+  // ---- Step 5: the saved models ----
+  const S5_VIEWS = [["place", "Region, road, light"], ["weather", "Weather, surface"], ["time", "Year, month"], ["collision", "Collision type"], ["users", "Road users"], ["pred", "Predicted probabilities"], ["scen", "Four situations"], ["cal", "Calibration"], ["inter", "Interactions"]];
+  state.s5 = "place"; state.s5model = "Baseline";
+  register("chart-s5", () => EXTRA.figs["s5|" + state.s5]);
+  choice("s5-view", "s5view", S5_VIEWS, state.s5, v => { state.s5 = v; redraw(["chart-s5"]); });
+  table("table-s5fit", "dl-s5fit", "severity_logit_fit.csv", EXTRA.tables.s5fit);
+  const showCoef = () => table("table-s5coef", "dl-s5coef", "severity_logit_odds_ratios_" + state.s5model.toLowerCase() + ".csv", EXTRA.tables["s5coef|" + state.s5model]);
+  choice("s5-model", "s5model", EXTRA.s5models.map(m => [m, m]), state.s5model, v => { state.s5model = v; showCoef(); });
+  showCoef();
+
   // Redraw the drawn charts when the viewer's theme changes (the first script already redraws step 1), and once downloads are known.
   const redrawAll = () => redraw(Object.keys(registry));
   window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redrawAll);
   new MutationObserver(redrawAll).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-  if (window.claude && window.claude.use) window.claude.use("downloads").then(d => { downloads = d; document.querySelectorAll("#sec-s2 .download, #sec-s3 .download, #sec-s4 .download").forEach(b => { b.hidden = !(d && csvStore[b.id]); }); }).catch(() => {});
+  if (window.claude && window.claude.use) window.claude.use("downloads").then(d => { downloads = d; document.querySelectorAll("#sec-s2 .download, #sec-s3 .download, #sec-s4 .download, #sec-s5 .download").forEach(b => { b.hidden = !(d && csvStore[b.id]); }); }).catch(() => {});
 })();
 </script>

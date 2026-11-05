@@ -541,6 +541,7 @@ def fig_gap_adjusted(res):
 # Step 5: the saved logistic models (script 20)
 # --------------------------------------------------------------------------------------
 MONTH_NAMES = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+LOG_TICKS = [0.25, 0.5, 1, 2, 4, 8, 16]
 MODELS5 = ["Baseline", "Cyclists", "Pedestrians", "Motorcyclists", "Mopeds"]
 MODEL_STYLE = {"Baseline": ("#2a78d6", "circle"), "Cyclists": ("#eb6834", "square"), "Pedestrians": ("#1baf7a", "diamond"), "Motorcyclists": ("#eda100", "triangle-up"), "Mopeds": ("#e87ba4", "triangle-down")}
 
@@ -573,21 +574,21 @@ def fig_logit_forest(res, variables, models=None, height=None):
                                  error_x=dict(type="data", symmetric=False, array=np.array(hi) - np.array(xs), arrayminus=np.array(xs) - np.array(lo), thickness=1.4, width=0, color=colour),
                                  hovertext=hover, hovertemplate="%{hovertext}<extra></extra>"))
     fig.update_yaxes(tickvals=list(range(len(terms))), ticktext=[t.split(": ", 1)[1] if ": " in t else t for t in terms][::-1])
-    fig.update_xaxes(type="log", range=[np.log10(0.15), np.log10(25)], title="adjusted odds ratio of a severe accident (log scale; 1 = the reference category)")
+    fig.update_xaxes(type="log", range=[np.log10(0.15), np.log10(25)], tickvals=LOG_TICKS, ticktext=[f"{t:g}" for t in LOG_TICKS], title="adjusted odds ratio of a severe accident (log scale; 1 = the reference category)")
     fig.update_layout(legend=dict(orientation="h", y=1.02, x=0))
     return _layout(fig, height or max(320, 24 * len(terms) + 120), margin=dict(l=10, r=10, t=40, b=10))
 
 
 def fig_logit_roadusers(res):
     """The road-user terms: the baseline 'group involved' and the 'counterpart' of the four group models."""
-    fig = make_subplots(rows=1, cols=2, subplot_titles=["<b>Baseline: group involved (versus a car-only accident)</b>", "<b>Group models: the counterpart (versus a passenger car)</b>"], horizontal_spacing=0.22)
+    fig = make_subplots(rows=1, cols=2, subplot_titles=["<b>Baseline: group involved (vs car only)</b>", "<b>Group models: counterpart (vs passenger car)</b>"], horizontal_spacing=0.22)
     for col, (variable, models) in enumerate((("Group involved", ["Baseline"]), ("Counterpart", MODELS5[1:])), start=1):
         sub = fig_logit_forest(res, [variable], models)
         for tr in sub.data:
             tr.showlegend = (col == 2) or tr.name == "Baseline"
             fig.add_trace(tr, row=1, col=col)
         fig.update_yaxes(tickvals=sub.layout.yaxis.tickvals, ticktext=sub.layout.yaxis.ticktext, row=1, col=col)
-        fig.update_xaxes(type="log", range=[np.log10(0.15), np.log10(25)], row=1, col=col)
+        fig.update_xaxes(type="log", range=[np.log10(0.15), np.log10(25)], tickvals=LOG_TICKS, ticktext=[f"{t:g}" for t in LOG_TICKS], row=1, col=col)
         fig.add_vline(x=1, line_color=GRAY, line_width=2, row=1, col=col)
     fig.update_layout(legend=dict(orientation="h", y=-0.12))
     return _layout(fig, 560)
@@ -672,6 +673,6 @@ def fig_logit_interactions(res):
                                  marker=dict(size=9, color=colour if symbol == "square" else "rgba(0,0,0,0)", symbol=symbol, line=dict(color=colour, width=2)),
                                  error_x=dict(type="data", symmetric=False, array=d["ci_high"] - d["odds_ratio_vs_car_only"], arrayminus=d["odds_ratio_vs_car_only"] - d["ci_low"], thickness=1.5, width=0, color=colour),
                                  hovertext=[f"<b>{p}</b><br>{name}<br>odds ratio {o:.2f} (95% interval {lo:.2f}-{hi:.2f})" for p, o, lo, hi in zip(order, d["odds_ratio_vs_car_only"], d["ci_low"], d["ci_high"])], hovertemplate="%{hovertext}<extra></extra>"))
-    fig.update_xaxes(type="log", title="odds ratio of a severe accident against a car-only accident (log scale)")
+    fig.update_xaxes(type="log", tickvals=[0.5, 1, 2, 4, 8, 16], ticktext=["0.5", "1", "2", "4", "8", "16"], title="odds ratio of a severe accident against a car-only accident (log scale)")
     fig.update_layout(legend=dict(orientation="h", y=1.04))
     return _layout(fig, 24 * len(order) + 140, margin=dict(l=10, r=10, t=40, b=10))
