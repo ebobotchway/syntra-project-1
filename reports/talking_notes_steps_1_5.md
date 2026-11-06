@@ -61,15 +61,18 @@ Plan for about 25 minutes of talking and 10 minutes of questions. If the slot is
 
 ## Step 3. Where are vulnerable road users exposed? (4 minutes, cut first)
 
-**Show:** the cyclist map by municipality.
+**Show:** the cyclist map by municipality, then the "Municipalities: top 20 per road-user group" part of the page (buttons for group, rank by, period and region).
 
 **Say:**
 - "71,881 accidents involve cyclists, in 577 of the 581 municipalities."
 - "By count: Antwerpen 7,405, Gent 4,229, Brussel 2,478. By share, Haacht, Mortsel and Leuven are above 54%."
 - "Every municipality where cyclists are more than a third of the accidents is in Flanders. By region: Flanders 33.5%, Brussels 21.8%, Wallonia 7.0%."
 - "For pedestrians, motorcycles and mopeds I used 500-metre squares. Pedestrian and motorcycle hotspots are mostly in the Brussels area; moped hotspots are in Antwerp and Gent."
+- "I repeated the municipality view for the other groups. By number the big cities lead: pedestrians Antwerpen 2,687, Brussel 1,637; motorcycles Brussel 1,351, Antwerpen 1,029; mopeds Antwerpen 2,250, Gent 1,215."
+- "By share, other places lead. Pedestrians: the Brussels municipalities (Koekelberg 31.5%). Motorcycles: small Walloon municipalities (Stoumont 32.7%, but that is 37 of 113 accidents). Mopeds: Flemish municipalities (Hemiksem 20.3%)."
+- "A share needs at least 100 accidents in the municipality; below that a few accidents would decide the ranking."
 
-**If they push:** "Cities have more accidents because they have more people and vehicles; without population or cycling counts these are not rates." "Between 10% and 13% of accidents have no coordinates, more in Wallonia, so Walloon hotspots may be understated."
+**If they push:** "Cities have more accidents because they have more people and vehicles; without population or cycling counts these are not rates." "Why are small Ardennes municipalities at the top for motorcycles? I do not know. The data has no speed, road or traffic information, and the shares come from a few dozen accidents." "Between 10% and 13% of accidents have no coordinates, more in Wallonia, so Walloon hotspots may be understated."
 
 ## Step 4. Regions and concentration (5 minutes)
 
@@ -109,6 +112,8 @@ Plan for about 25 minutes of talking and 10 minutes of questions. If the slot is
 2. Compare cyclists against pedestrians.
 3. Point at the crude result (fatal share, risk ratio) and then at the adjusted result.
 4. Click one export, for example the Excel workbook.
+
+**Second demo option (1 minute):** open *Geography and hotspots*, choose Motorcycle, view Municipalities, and switch "Top 20 by" from number of accidents to share. Say: "Same table, different question: by number the cities win, by share small municipalities win."
 
 **Say:** "Everything on this page is recalculated from the accidents that match the filters in the sidebar: year, region, province, municipality, road and light conditions. If a group has fewer than 30 accidents the number is hidden; below 100 it is flagged as unreliable. The adjusted result is a model estimated live on your selection, and it needs at least 1,000 accidents and 100 severe ones."
 
@@ -161,6 +166,8 @@ One possible reason is that busy places have lower speeds and an isolated accide
 
 **What does "35% higher odds" mean?**
 Odds are fatal accidents compared with non-fatal accidents. If in Flanders the odds were 1 to 80, in Wallonia they would be about 1.35 to 80. It is not the same as 35% more accidents.
+
+**Why a minimum of 100 accidents for the share ranking?** With only a handful of accidents a share jumps around: 3 of 5 is 60%. A minimum of 100 accidents in the municipality keeps the ranking stable. It is the same rule for every group (#88, #161).
 
 **Why 500 metre squares?**
 It is small enough to find a street or crossroads and big enough to have a few accidents per square. The choice is #86.
@@ -243,6 +250,8 @@ Pick two or three from the log before class that you can explain. For example th
 | Region against Flanders (severe) | Brussels 0.39, Wallonia 0.81 |
 | Truck as counterpart | pedestrians 5.22, cyclists 4.26, mopeds 2.63, motorcyclists 2.26 |
 | Predicted severe, daytime urban 2024 | car-only 5.1%, bicycle against car 8.6%, pedestrian 15.0%, motorcycle 15.5% |
+| Municipality top by number | pedestrians Antwerpen 2,687; motorcycles Brussel 1,351; mopeds Antwerpen 2,250 |
+| Municipality top by share (100+ accidents) | pedestrians Koekelberg 31.5%; motorcycles Stoumont 32.7%; mopeds Hemiksem 20.3% |
 | Clusters and fit | 581 municipalities; ICC 0.016; AUC 0.65-0.68 |
 
 ## Words in plain language

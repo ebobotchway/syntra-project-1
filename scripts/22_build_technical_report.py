@@ -64,6 +64,26 @@ T["step3_top"] = md(top.rename(columns={"municipality": "Municipality", "region"
                     {"All accidents": "{:,.0f}", "Involving cyclists": "{:,.0f}", "Cyclist share": "{:.1f}%"})
 share = mu[mu["ranked_by_share"]].sort_values("cyclist_share_pct", ascending=False).head(5)[["municipality", "region", "accidents_total", "cyclist_share_pct"]]
 T["step3_share"] = md(share.rename(columns={"municipality": "Municipality", "region": "Region", "accidents_total": "All accidents", "cyclist_share_pct": "Cyclist share"}), {"All accidents": "{:,.0f}", "Cyclist share": "{:.1f}%"})
+# step 3, municipality view of the other three groups (script 24)
+rows3 = []
+for group, name in [("Pedestrians", "pedestrians"), ("Motorcycles", "motorcycles"), ("Mopeds", "mopeds")]:
+    g = read(f"geo_a_{name}_by_municipality")
+    g["group_share_pct"] = g["accidents_group"] / g["accidents_total"] * 100  # from the counts: the saved shares are already rounded (28.05 would print as 28.1)
+    by_count = g.sort_values("rank_count").head(5)
+    by_share = g[g["ranked_by_share"]].sort_values("group_share_pct", ascending=False).head(5)
+    region = g.groupby("region")[["accidents_group", "accidents_total"]].sum()
+    region_share = (region["accidents_group"] / region["accidents_total"] * 100).sort_values(ascending=False)
+    short = {"Brussels-Capital Region": "Brussels", "Flemish Region": "Flanders", "Walloon Region": "Wallonia"}
+    rows3.append({"Group": group, "Accidents (municipalities with at least one)": f"{g['accidents_group'].sum():,} ({int((g['accidents_group'] > 0).sum())})",
+                  "Top 5 by number": ", ".join(f"{r.municipality} {r.accidents_group:,}" for r in by_count.itertuples()),
+                  "Top 5 by share (100+ accidents)": ", ".join(f"{r.municipality} {r.group_share_pct:.1f}%" for r in by_share.itertuples()),
+                  "Share by region": ", ".join(f"{short[k]} {v:.1f}%" for k, v in region_share.items())})
+T["step3_other"] = md(pd.DataFrame(rows3))
+p3 = read("geo_a_pedestrians_by_municipality"); m3 = read("geo_a_motorcycles_by_municipality"); o3 = read("geo_a_mopeds_by_municipality")
+assert p3["accidents_group"].sum() == 29897 and m3["accidents_group"].sum() == 19792 and o3["accidents_group"].sum() == 23258
+assert p3.sort_values("rank_count").iloc[0]["municipality"] == "Antwerpen" and p3.sort_values("rank_count").iloc[0]["accidents_group"] == 2687
+assert m3.sort_values("rank_count").iloc[0]["municipality"] == "Brussel" and o3.sort_values("rank_count").iloc[0]["municipality"] == "Antwerpen"
+assert p3[p3.ranked_by_share].sort_values("group_share_pct", ascending=False).iloc[0]["municipality"] == "Koekelberg"
 # --- step 4 ---
 rp = read("severity_regional_regions_provinces")
 rp = rp[(rp["group"] == "All accidents") & rp["level"].isin(["Belgium", "Region", "Province"])].copy()

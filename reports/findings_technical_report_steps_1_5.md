@@ -105,7 +105,7 @@ Data: Belgian road accident open data 2017-2024, translated to English (289,532 
 
 ## 3. Step 3: geography of vulnerable road users
 
-**Method.** (a) Cyclists by municipality: the number of accidents involving cyclists and their share of all the municipality's accidents (shares for municipalities with 100+ accidents), mapped as a bubble map and a choropleth with five quantile classes. (b, c) Hotspots for pedestrians, motorcycles and mopeds in 500 m squares of the Lambert grid (#86), for all years and for 2022-2024 (when coordinates are most complete); the 20 busiest squares are ranked and named after the municipality where most of their accidents are. Accidents without usable coordinates are left out of the maps and counted separately.
+**Method.** (a) Cyclists by municipality: the number of accidents involving cyclists and their share of all the municipality's accidents (shares for municipalities with 100+ accidents), mapped as a bubble map and a choropleth with five quantile classes. (b, c) Hotspots for pedestrians, motorcycles and mopeds in 500 m squares of the Lambert grid (#86), for all years and for 2022-2024 (when coordinates are most complete); the 20 busiest squares are ranked and named after the municipality where most of their accidents are. Accidents without usable coordinates are left out of the maps and counted separately. (b, c, municipalities) The municipality view of (a) is repeated for pedestrians, motorcycles and mopeds with the same rules (#159): the top 20 by number and by share, a bubble map and a choropleth; a share needs 100+ accidents in the municipality (#161). The interactive tools take this further: the ranking, the maps and the table can be filtered by group, period, region and, in the Streamlit tool, by every sidebar filter (#160).
 
 **The ten municipalities with the most accidents involving cyclists** (71,881 accidents in 577 of the 581 municipalities).
 
@@ -136,12 +136,25 @@ Data: Belgian road accident open data 2017-2024, translated to English (289,532 
 - Cyclists are in 24.8% of all accidents; by region 33.5% in Flanders, 21.8% in Brussels and 7.0% in Wallonia. Wherever cyclists are more than a third of the accidents, the municipality is in Flanders.
 - Pedestrians: 17 of the 20 busiest squares are in the Brussels area, 2 in Antwerp and 1 in Liege; the busiest (Antwerp) has 82 accidents, only 0.31% of all located pedestrian accidents. Motorcycles: all 20 are in the Brussels area (busiest 41). Mopeds: 12 in Antwerp, 4 in Gent, 2 in Brussels, 1 in Charleroi, 1 in Knokke-Heist (busiest 45).
 - About two thirds of the hotspot squares come back in 2022-2024 (12, 16 and 12 of 20 for pedestrians, motorcycles and mopeds).
+- Municipalities, pedestrians, motorcycles and mopeds (all years, Belgium): the biggest cities lead by number, small municipalities lead by share. The top by share is dominated by the Brussels municipalities for pedestrians (Koekelberg 31.5%) and by small Walloon municipalities for motorcycles (Stoumont 32.7%, with 37 of 113 accidents); all five highest moped shares are in Flanders (Hemiksem 20.3%).
 
 **Limits.** Counts favour big cities; there are no population or traffic figures. Hotspots are where accidents are counted, which is mostly where many people and vehicles are. 10-13% of accidents have no coordinates (3-5% in 2022-2024), more in Wallonia, so Walloon hotspots may be understated. A different square size would give different ranks.
 
 ![Cyclist accidents per municipality](geo_a_bubble_map.png)
 
+**Pedestrians, motorcycles and mopeds by municipality (script 24).** Top 5 by number and by share; the full top 20, the maps and the table of all 581 municipalities per group are in `reports/geo_a_*_by_municipality.csv` and the charts `geo_a_*_ranked.png`.
+
+| Group | Accidents (municipalities with at least one) | Top 5 by number | Top 5 by share (100+ accidents) | Share by region |
+|---|---|---|---|---|
+| Pedestrians | 29,897 (572) | Antwerpen 2,687, Brussel 1,637, Gent 1,157, Luik 1,109, Charleroi 809 | Koekelberg 31.5%, Sint-Jans-Molenbeek 30.8%, Jette 30.1%, Sint-Agatha-Berchem 29.9%, Sint-Gillis 29.6% | Brussels 21.9%, Wallonia 10.8%, Flanders 8.2% |
+| Motorcycles | 19,792 (578) | Brussel 1,351, Antwerpen 1,029, Gent 427, Luik 416, Anderlecht 352 | Stoumont 32.7%, Froidchapelle 32.6%, Cerfontaine 29.4%, La Roche-en-Ardenne 28.0%, Bouillon 24.1% | Brussels 11.2%, Wallonia 8.3%, Flanders 5.4% |
+| Mopeds | 23,258 (568) | Antwerpen 2,250, Gent 1,215, Brugge 610, Brussel 588, Charleroi 444 | Hemiksem 20.3%, Lanaken 18.9%, Schilde 18.2%, Schelle 16.9%, Niel 16.6% | Flanders 9.5%, Wallonia 5.9%, Brussels 5.3% |
+
+Counts and shares are not rates: there are no population or traffic figures, and a share in a small municipality moves with a few accidents (the five highest motorcycle shares come from 113 to 203 accidents each).
+
 ![Pedestrian hotspots](geo_b_pedestrian_hotspots.png)
+
+![Motorcycle accidents by municipality: top 20](geo_a_motorcycle_ranked.png)
 
 ## 4. Step 4: regional severity, concentration and density
 
@@ -385,9 +398,9 @@ Adjusted odds ratios of a severe accident with cluster-robust 95% intervals; * =
 
 ## 6. The interactive tools and how they were checked
 
-**Streamlit tool (`app.py`).** One sidebar for all analyses (period, road users with an overlap switch, region, province and municipality, road type, intersection, lighting, weather and road surface), with the analyses overview and severity, compare groups (crude and adjusted), time, geography and hotspots, regions and concentration, statistical models (estimated live on the selection, with safeguards: at least 1,000 accidents and 100 severe ones) and the fixed study results (#132-#144). Every number is calculated from the filtered accidents. Exports: the filtered accident data as CSV, tables as CSV or one Excel workbook, charts as PNG or interactive HTML, and a ZIP package with a README that records the filters.
+**Streamlit tool (`app.py`).** One sidebar for all analyses (period, road users with an overlap switch, region, province and municipality, road type, intersection, lighting, weather and road surface), with the analyses overview and severity, compare groups (crude and adjusted), time, geography and hotspots (with a top 20 of municipalities by number or share for any group), regions and concentration, statistical models (estimated live on the selection, with safeguards: at least 1,000 accidents and 100 severe ones) and the fixed study results (#132-#144). Every number is calculated from the filtered accidents. Exports: the filtered accident data as CSV, tables as CSV or one Excel workbook, charts as PNG or interactive HTML, and a ZIP package with a README that records the filters.
 
-**Checks.** With no filters the tool reproduces the saved results of steps 1 to 3 exactly (severity counts and intervals for all groups, annual counts, seasonal index, the busiest pedestrian square of 82 accidents in Antwerpen, the municipality table). The live models reproduce the saved coefficients, robust standard errors, AUC and AIC of step 5 up to the rounding of the saved files, and the predicted probabilities to 0.0002. The app ran without errors in all analyses and in 18 filter scenarios including one year, one municipality, no groups chosen and a selection too small for a model. A private claude.ai page shows the saved results of steps 1-5 and was tested in headless Chrome (light and dark mode, phone width, strict security policy).
+**Checks.** With no filters the tool reproduces the saved results of steps 1 to 3 exactly (severity counts and intervals for all groups, annual counts, seasonal index, the busiest pedestrian square of 82 accidents in Antwerpen, the municipality table). The live models reproduce the saved coefficients, robust standard errors, AUC and AIC of step 5 up to the rounding of the saved files, and the predicted probabilities to 0.0002. The app ran without errors in all analyses and in 18 filter scenarios including one year, one municipality, no groups chosen and a selection too small for a model. A private claude.ai page shows the saved results of steps 1-5, with buttons for group, ranking, period and region in the municipality view, and was tested in headless Chrome (light and dark mode, phone width, strict security policy).
 
 ## 7. Limits, open questions and what was not done
 
@@ -399,7 +412,7 @@ Adjusted odds ratios of a severe accident with cluster-robust 95% intervals; * =
 
 ## Where to find things
 
-- Decisions and reasons: `beslissingslogboek.md` (#1-#154).
-- Code: `scripts/` (steps 8-23), the dashboard in `dashboard_*.py`, the interactive tool in `app.py`, `tool_*.py` and `logit_live.py`.
+- Decisions and reasons: `beslissingslogboek.md` (#1-#161).
+- Code: `scripts/` (steps 8-24), the dashboard in `dashboard_*.py`, the interactive tool in `app.py`, `tool_*.py` and `logit_live.py`.
 - Result tables and charts: `reports/`.
 - The short version of this report: `reports/findings_summary_steps_1_5.md`.

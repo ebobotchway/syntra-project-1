@@ -50,17 +50,20 @@ Report for the course reviewer. Data: Belgian road accident open data 2017-2024,
 
 ## Step 3. Where are vulnerable road users most exposed?
 
-**What I did.** I used the accident coordinates (Belgian Lambert 1972) and the Statbel municipality outlines (CC BY 4.0) to map cyclist accidents per municipality, and a 500 m square grid to find hotspots for pedestrians, motorcycles and mopeds (#86). Two impossible coordinates were treated as missing (#90).
+**What I did.** I used the accident coordinates (Belgian Lambert 1972) and the Statbel municipality outlines (CC BY 4.0) to map cyclist accidents per municipality (and the same for pedestrians, motorcycles and mopeds, #159), and a 500 m square grid to find hotspots for pedestrians, motorcycles and mopeds (#86). Two impossible coordinates were treated as missing (#90).
 
 **Results.**
 - 71,881 accidents involve cyclists, in 577 of the 581 municipalities. By count: Antwerpen 7,405 (37% of its accidents), Gent 4,229 (42%), Brussel 2,478 (25%), Leuven 1,773 (54%), Brugge 1,598 (37%).
 - By share (municipalities with 100+ accidents): Haacht 56.2%, Mortsel 54.4%, Leuven 54.3%, Hove 50.4%, Keerbergen 49.0%. Cyclist share by region: Flanders 33.5%, Brussels 21.8%, Wallonia 7.0%.
+- By municipality, the same view for the other groups. Pedestrians: Antwerpen 2,687, Brussel 1,637, Gent 1,157 by number; Koekelberg 31.5%, Sint-Jans-Molenbeek 30.8% and Jette 30.1% by share (all Brussels). Motorcycles: Brussel 1,351, Antwerpen 1,029, Gent 427; by share small Walloon municipalities lead (Stoumont 32.7% of 113 accidents). Mopeds: Antwerpen 2,250, Gent 1,215, Brugge 610; the five highest shares (Hemiksem 20.3%) are all in Flanders.
 - Pedestrians: 17 of the 20 busiest squares are in the Brussels area, 2 in Antwerp, 1 in Liege; the busiest has 82 accidents. Motorcycles: all 20 are in the Brussels area (busiest 41). Mopeds: 12 in Antwerp, 4 in Gent, 2 in Brussels, 1 in Charleroi, 1 in Knokke-Heist (busiest 45).
 - About two thirds of the hotspot squares come back in 2022-2024 (12, 16 and 12 of 20).
 
 **Read with care.** Counts favour big cities and there are no population or cycling figures, so these are not rates. Hotspots are where accidents are counted, which is mostly where many people and vehicles are. 10-13% of accidents have no coordinates (3-5% in 2022-2024), more in Wallonia, so Walloon hotspots may be understated.
 
 ![Cyclist accidents by municipality](geo_a_bubble_map.png)
+
+![Pedestrian accidents by municipality: top 20](geo_a_pedestrian_ranked.png)
 
 ## Step 4. Regional severity, and concentration against severity
 
@@ -112,7 +115,7 @@ Report for the course reviewer. Data: Belgian road accident open data 2017-2024,
 
 ## Where to find things
 
-- Decisions and reasons: `beslissingslogboek.md` (#1-#154).
-- Code: `scripts/` (steps 8-23), the dashboard code in `dashboard_*.py` and the interactive tool in `app.py` with `tool_*.py` and `logit_live.py`.
+- Decisions and reasons: `beslissingslogboek.md` (#1-#161).
+- Code: `scripts/` (steps 8-24), the dashboard code in `dashboard_*.py` and the interactive tool in `app.py` with `tool_*.py` and `logit_live.py`.
 - Result tables and charts: `reports/`.
-- Interactive tools: the Streamlit app (`streamlit run app.py`) lets you filter by year, region, road and light conditions and compare groups, estimate the models on your own selection and export tables, charts and data. A private claude.ai page shows the saved results of steps 1-5.
+- Interactive tools: the Streamlit app (`streamlit run app.py`) lets you filter by year, region, road and light conditions and compare groups, estimate the models on your own selection and export tables, charts and data. A private claude.ai page shows the saved results of steps 1-5, including the municipality top 20 per group with buttons for group, ranking, period and region.
