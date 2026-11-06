@@ -61,6 +61,29 @@
   </div>
   <p class="care">Read with care: hotspots are where accidents are COUNTED, which is mostly where many people and vehicles are; there are no traffic or population figures. 10-13% of accidents have no coordinates (3-5% in 2022-2024), more in Wallonia, so Walloon hotspots may be understated. Different square sizes would give different ranks.</p>
   <details><summary id="s3-hot-summary">The 20 busiest squares</summary><div class="table-wrap"><div id="table-s3b"></div><p class="dl"><button type="button" class="download" id="dl-s3b" hidden>Download CSV</button></p></div></details>
+
+  <h3 style="margin-top:30px">3b / 3c. Municipalities: top 20 per road-user group</h3>
+  <p class="note">The same municipality view as 3a, for pedestrians, motorcycles and mopeds (and cyclists, to compare). The ranking, the map and the table follow the buttons below. A municipality is ranked by share only with at least 100 accidents of any kind in the chosen period and region.</p>
+  <div class="row" style="gap:18px">
+    <fieldset class="ctl inline-ctl"><legend>Group</legend><div class="row" id="s3m-group"></div></fieldset>
+    <fieldset class="ctl inline-ctl"><legend>Rank by</legend><div class="row" id="s3m-by"></div></fieldset>
+  </div>
+  <div class="row" style="gap:18px">
+    <fieldset class="ctl inline-ctl"><legend>Period</legend><div class="row" id="s3m-period"></div></fieldset>
+    <fieldset class="ctl inline-ctl"><legend>Region</legend><div class="row" id="s3m-region"></div></fieldset>
+  </div>
+  <p class="note" id="s3m-note"></p>
+  <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-s3mbar"></div></div></div></div>
+  <fieldset class="ctl inline-ctl"><legend>Map</legend><div class="row" id="s3m-map"></div></fieldset>
+  <p class="note" id="s3m-map-note"></p>
+  <div class="card"><div class="scroll-x"><div class="inner" style="min-width:560px"><div id="chart-s3mmap"></div></div></div></div>
+  <div class="card findings">
+    <h3>Key findings</h3>
+    <p class="fixed">Fixed text for all years 2017-2024 and all of Belgium; it does not change with the period and region buttons.</p>
+    <ul id="s3m-findings"></ul>
+  </div>
+  <p class="care">Read with care: counts favour big cities and the data has no population or traffic figures, so these are not rates per inhabitant or per road user. A share in a small municipality moves with a few accidents; one year alone has few accidents per municipality, so few qualify for the share ranking.</p>
+  <details><summary id="s3m-summary">The top 20 municipalities</summary><div class="table-wrap"><div id="table-s3m"></div><p class="dl"><button type="button" class="download" id="dl-s3m" hidden>Download CSV</button></p></div></details>
 </section>
 
 <section id="sec-s4">
@@ -272,6 +295,126 @@ const EXTRA = /*__EXTRA__*/null;
   choice("s3-group", "s3group", GROUPS3.map(g => [g, g]), state.group, v => { state.group = v; hotspotChanged(); });
   choice("s3-years", "s3years", [["2017-2024", "2017-2024"], ["2022-2024", "2022-2024"]], state.years, v => { state.years = v; hotspotChanged(); });
   hotspotText();
+
+  // ---- Step 3b/3c: municipalities, top 20 per group (decisions #158-#161). The ranking and the maps are made here from the numbers per municipality, group and period. ----
+  const M = EXTRA.muni;
+  const MS = { group: "Pedestrian", by: "accidents", period: "2017-2024", region: "all", map: "bubble" };
+  const MRAMP = ["#86b6ef", "#5598e7", "#2a78d6", "#1c5cab", "#104281"], MBLUE = "#2a78d6", MGRAY = "#898781", MIN_SHARE = 100;
+  const MWORDS = { Pedestrian: ["pedestrian", "pedestrians"], Motorcycle: ["motorcycle", "motorcycles"], Moped: ["moped", "mopeds"], Bicycle: ["cyclist", "cyclists"] };
+  const MREGION = { "Flemish Region": "Flanders", "Walloon Region": "Wallonia", "Brussels-Capital Region": "Brussels" };
+  const MFINDINGS = {
+    Pedestrian: ["29,897 accidents involve pedestrians, in 572 of the 581 municipalities.", "By count: Antwerpen 2,687, Brussel 1,637, Gent 1,157, Luik 1,109, Charleroi 809.",
+                 "By share (municipalities with 100+ accidents): Koekelberg 31.5%, Sint-Jans-Molenbeek 30.8%, Jette 30.1%, Sint-Agatha-Berchem 29.9%, Sint-Gillis 29.6%; the top of the list is dominated by the Brussels municipalities.",
+                 "Pedestrian share by region: Brussels 21.9%, Wallonia 10.8%, Flanders 8.2%."],
+    Motorcycle: ["19,792 accidents involve motorcycles, in 578 of the 581 municipalities.", "By count: Brussel 1,351, Antwerpen 1,029, Gent 427, Luik 416, Anderlecht 352.",
+                 "By share (municipalities with 100+ accidents): Stoumont 32.7%, Froidchapelle 32.6%, Cerfontaine 29.4%, La Roche-en-Ardenne 28.0%, Bouillon 24.1%; these are small Walloon municipalities with 113 to 203 accidents, so a few accidents move the share.",
+                 "Motorcycle share by region: Brussels 11.2%, Wallonia 8.3%, Flanders 5.4%."],
+    Moped: ["23,258 accidents involve mopeds, in 568 of the 581 municipalities.", "By count: Antwerpen 2,250, Gent 1,215, Brugge 610, Brussel 588, Charleroi 444.",
+            "By share (municipalities with 100+ accidents): Hemiksem 20.3%, Lanaken 18.9%, Schilde 18.2%, Schelle 16.9%, Niel 16.6%; all five are in Flanders.",
+            "Moped share by region: Flanders 9.5%, Wallonia 5.9%, Brussels 5.3%."],
+    Bicycle: ["71,881 accidents involve cyclists, in 577 of the 581 municipalities (the full analysis is in 3a above).", "By count: Antwerpen 7,405, Gent 4,229, Brussel 2,478, Leuven 1,773, Brugge 1,598.",
+              "By share (municipalities with 100+ accidents): Haacht 56.2%, Mortsel 54.4%, Leuven 54.3%, Hove 50.4%, Keerbergen 49.0%.", "Cyclist share by region: Flanders 33.5%, Brussels 21.8%, Wallonia 7.0%."] };
+
+  function muniRows() {                                  // the municipalities of the chosen region, with the numbers of the chosen group and period
+    const g = M.g[MS.group][MS.period], tot = M.total[MS.period], rows = [];
+    for (let i = 0; i < M.nis.length; i++) {
+      if (MS.region !== "all" && M.region[i] !== MS.region) continue;
+      const a = g.a[i], t = tot[i];
+      rows.push({ i, name: M.name[i], region: M.region[i], a, s: g.s[i], t, share: t ? a / t * 100 : 0, ranked: t >= MIN_SHARE });
+    }
+    return rows;
+  }
+  function muniTop(rows) {
+    const d = rows.filter(r => r.a > 0 && (MS.by === "accidents" || r.ranked));
+    d.sort((p, q) => MS.by === "accidents" ? (q.a - p.a) || (q.share - p.share) : (q.share - p.share) || (q.a - p.a));
+    return d.slice(0, 20);
+  }
+  function quantEdges(values) {                          // five classes with about the same number of municipalities each (like numpy.quantile)
+    const v = values.slice().sort((a, b) => a - b); if (!v.length) return [];
+    const q = p => { const h = (v.length - 1) * p, lo = Math.floor(h), hi = Math.ceil(h); return v[lo] + (v[hi] - v[lo]) * (h - lo); };
+    const e = [0, 0.2, 0.4, 0.6, 0.8, 1].map(q);
+    return e.filter((x, i) => i === 0 || x !== e[i - 1]);
+  }
+  function classOf(edges, x) { let c = 0; for (let k = 1; k < edges.length - 1; k++) if (edges[k] < x) c++; return Math.min(c, edges.length - 2); }
+  const emptyFigure = (text, height) => ({ data: [], layout: { height, xaxis: { visible: false }, yaxis: { visible: false }, annotations: [{ text, showarrow: false, xref: "paper", yref: "paper", x: 0.5, y: 0.5 }] } });
+  const fmtInt = n => n.toLocaleString("en-US");
+
+  function muniBar() {
+    const rows = muniRows(), top = muniTop(rows), [one, many] = MWORDS[MS.group], isShare = MS.by === "share";
+    if (!top.length) return emptyFigure("No municipality qualifies for this choice (a share ranking needs 100 or more accidents in the municipality).", 320);
+    const d = top.slice().reverse();
+    const sumA = rows.reduce((p, r) => p + r.a, 0), sumT = rows.reduce((p, r) => p + r.t, 0), sel = sumT ? sumA / sumT * 100 : 0;
+    const x = d.map(r => isShare ? r.share : r.a);
+    const text = d.map(r => isShare ? r.share.toFixed(1) + "%  (" + fmtInt(r.a) + " of " + fmtInt(r.t) + ")" : fmtInt(r.a) + "  (" + r.share.toFixed(0) + "% of " + fmtInt(r.t) + ")");
+    const hover = d.map(r => "<b>" + r.name + "</b> (" + (MREGION[r.region] || r.region) + ")<br>" + fmtInt(r.a) + " accidents involve " + many + "<br>" + r.share.toFixed(1) + "% of its " + fmtInt(r.t) + " accidents"
+                                + (r.a >= 30 ? "<br>" + (r.s / r.a * 100).toFixed(1) + "% severe (" + fmtInt(r.s) + ")" : ""));
+    const layout = { height: 110 + 26 * d.length, margin: { l: 10, r: 10, t: 50, b: 10 }, xaxis: { range: [0, Math.max(...x) * 1.75], ticksuffix: isShare ? "%" : "", tickformat: isShare ? "~g" : ",d" }, yaxis: { tickfont: { size: 11 } },
+                     title: { text: "<b>Top " + d.length + " by " + (isShare ? one + " share (100+ accidents)" : "accidents involving " + many) + "</b>" + (isShare ? "<br><sup>" + (MS.region === "all" ? "Belgium" : MREGION[MS.region]) + ": " + sel.toFixed(1) + "% (gray line)</sup>" : ""), x: 0.01, xanchor: "left" }, showlegend: false };
+    if (isShare) layout.shapes = [{ type: "line", xref: "x", yref: "paper", x0: sel, x1: sel, y0: 0, y1: 1, line: { color: MGRAY, width: 2 } }];
+    return { data: [{ type: "bar", orientation: "h", y: d.map(r => r.name), x, marker: { color: MBLUE }, text, textposition: "outside", cliponaxis: false, hovertext: hover, hovertemplate: "%{hovertext}<extra></extra>" }], layout };
+  }
+
+  function muniMap() {
+    const rows = muniRows(), [one, many] = MWORDS[MS.group], inRegion = new Set(rows.map(r => r.i));
+    if (!rows.some(r => r.a > 0)) return emptyFigure("No accidents involve " + many + " in this choice.", 400);
+    const border = { type: "scatter", mode: "lines", fill: "toself", fillcolor: "rgba(137,135,129,0.10)", line: { color: "rgba(137,135,129,0.55)", width: 0.5 }, hoverinfo: "skip", showlegend: false, name: "municipality borders", x: [], y: [] };
+    const data = [border], hoverOf = r => "<b>" + r.name + "</b><br>" + fmtInt(r.a) + " accidents involve " + many + "<br>" + r.share.toFixed(1) + "% of " + fmtInt(r.t) + " accidents" + (r.ranked ? "" : "<br><i>too few accidents to rank by share</i>");
+    const layout = { height: 700, margin: { l: 0, r: 0, t: 10, b: 0 }, xaxis: { visible: false }, yaxis: { visible: false, scaleanchor: "x", scaleratio: 1 }, legend: { orientation: "h", y: -0.02, x: 0 } };
+    const fmtEdge = v => MS.by === "share" ? v.toFixed(1) + "%" : fmtInt(Math.round(v));
+    if (MS.map === "bubble") {
+      const shown = rows.filter(r => r.a > 0).sort((p, q) => q.a - p.a);
+      const edges = quantEdges(rows.filter(r => r.ranked && r.a > 0).map(r => r.share));
+      const scale = 60 / Math.sqrt(shown[0].a);
+      const parts = [];
+      for (let k = 0; k < edges.length - 1; k++) parts.push([MRAMP[k], fmtEdge(edges[k]).replace("%", "") + "-" + fmtEdge(edges[k + 1]) + " " + one + " share", r => r.ranked && classOf(edges, r.share) === k]);
+      parts.push([MGRAY, "fewer than 100 accidents (not ranked)", r => !r.ranked]);
+      parts.forEach(([colour, label, test]) => {
+        const sel = shown.filter(test);
+        data.push({ type: "scatter", mode: "markers", x: [null], y: [null], name: label, legendgroup: label, marker: { size: 12, color: colour } });
+        data.push({ type: "scatter", mode: "markers", x: sel.map(r => M.bx[r.i]), y: sel.map(r => M.by[r.i]), name: label, legendgroup: label, showlegend: false,
+                    marker: { size: sel.map(r => Math.sqrt(r.a) * scale), color: colour, opacity: 0.85, line: { color: "white", width: 0.6 } }, hovertext: sel.map(hoverOf), hovertemplate: "%{hovertext}<extra></extra>" });
+      });
+    } else {
+      const isShare = MS.by === "share", pool = rows.filter(r => isShare ? r.ranked : true);
+      const edges = quantEdges(pool.map(r => isShare ? r.share : r.a));
+      const parts = [];
+      for (let k = 0; k < edges.length - 1; k++) parts.push([MRAMP[k], fmtEdge(edges[k]).replace("%", "") + "-" + fmtEdge(edges[k + 1]), r => (!isShare || r.ranked) && classOf(edges, isShare ? r.share : r.a) === k]);
+      if (isShare) parts.push([MGRAY, "fewer than 100 accidents (not ranked)", r => !r.ranked]);
+      parts.forEach(([colour, label, test]) => {
+        const xs = [], ys = [];
+        rows.filter(test).forEach(r => { for (let j = M.start[r.i]; j < M.end[r.i]; j++) { xs.push(OUTLINE.x[j]); ys.push(OUTLINE.y[j]); } });
+        data.push({ type: "scatter", mode: "lines", fill: "toself", fillcolor: colour, line: { color: "rgba(255,255,255,0.7)", width: 0.4 }, x: xs, y: ys, name: label, hoverinfo: "skip" });
+      });
+      data.push({ type: "scatter", mode: "markers", x: rows.map(r => M.cx[r.i]), y: rows.map(r => M.cy[r.i]), marker: { size: 9, opacity: 0 }, showlegend: false, hovertext: rows.map(hoverOf), hovertemplate: "%{hovertext}<extra></extra>" });
+    }
+    return { data, layout };
+  }
+
+  function muniText() {
+    const rows = muniRows(), top = muniTop(rows), [one, many] = MWORDS[MS.group];
+    const nRanked = rows.filter(r => r.ranked).length, where = MS.region === "all" ? "Belgium" : MREGION[MS.region];
+    const period = MS.period === "2017-2024" ? "2017-2024" : MS.period;
+    el("s3m-note").textContent = where + ", " + period + ", accidents involving " + many + ". " + nRanked + " of " + rows.length + " municipalities have 100 or more accidents of any kind and can be ranked by share"
+      + (MS.by === "share" && nRanked < 20 ? ", so fewer than 20 are shown" : "") + ".";
+    el("s3m-map-note").textContent = MS.map === "bubble"
+      ? "Each bubble sits at the average position of the municipality's accidents (all years). Size = accidents involving " + many + "; colour = their share of all the municipality's accidents (5 quantile classes, municipalities with 100+ accidents)."
+      : "Colour = " + (MS.by === "share" ? one + " share of the municipality's accidents (municipalities with 100+ accidents)" : "accidents involving " + many) + ", in five classes with about the same number of municipalities each. Municipalities outside the chosen region stay light gray.";
+    el("s3m-summary").textContent = "The top " + top.length + " municipalities: " + many + ", " + (MS.by === "share" ? "by share" : "by number") + ", " + where + ", " + period;
+    const list = el("s3m-findings"); list.textContent = "";
+    MFINDINGS[MS.group].forEach(t => { const li = document.createElement("li"); li.textContent = t; list.appendChild(li); });
+    table("table-s3m", "dl-s3m", "municipalities_top20_" + MS.group.toLowerCase() + "_" + (MS.by === "share" ? "share" : "count") + "_" + period + "_" + (MS.region === "all" ? "belgium" : MREGION[MS.region].toLowerCase()) + ".csv",
+          { headers: ["rank", "municipality", "region", "accidents with the group", "all accidents", "share %", "severe", "severe %"],
+            rows: top.map((r, k) => [k + 1, r.name, MREGION[r.region] || r.region, r.a, r.t, +r.share.toFixed(2), r.s, r.a >= 30 ? +(r.s / r.a * 100).toFixed(2) : null]) });
+  }
+  register("chart-s3mbar", muniBar);
+  register("chart-s3mmap", muniMap);
+  const muniChanged = () => { muniText(); redraw(["chart-s3mbar", "chart-s3mmap"]); };
+  choice("s3m-group", "s3mgroup", [["Pedestrian", "Pedestrians"], ["Motorcycle", "Motorcycles"], ["Moped", "Mopeds"], ["Bicycle", "Cyclists"]], MS.group, v => { MS.group = v; muniChanged(); });
+  choice("s3m-by", "s3mby", [["accidents", "Number of accidents"], ["share", "Share of the municipality's accidents"]], MS.by, v => { MS.by = v; muniChanged(); });
+  choice("s3m-period", "s3mperiod", [["2017-2024", "All years"], ["2022-2024", "2022-2024"]].concat(M.periods.slice(2).map(y => [y, y])), MS.period, v => { MS.period = v; muniChanged(); });
+  choice("s3m-region", "s3mregion", [["all", "Belgium"], ["Flemish Region", "Flanders"], ["Walloon Region", "Wallonia"], ["Brussels-Capital Region", "Brussels"]], MS.region, v => { MS.region = v; muniChanged(); });
+  choice("s3m-map", "s3mmap", [["bubble", "Bubble map"], ["choropleth", "Choropleth"]], MS.map, v => { MS.map = v; muniChanged(); });
+  muniText();
 
   // ---- Step 4 ----
   [["chart-s4a1", "s4a1"], ["chart-s4a2", "s4a2"], ["chart-s4a3", "s4a3"], ["chart-s4a4", "s4a4"], ["chart-s4b1", "s4b1"], ["chart-s4b2", "s4b2"], ["chart-s4b3", "s4b3"],

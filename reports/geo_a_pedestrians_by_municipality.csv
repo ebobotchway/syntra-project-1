@@ -1,0 +1,582 @@
+municipality_nis_code,municipality,region,province,accidents_total,accidents_group,group_share_pct,ranked_by_share,rank_count,rank_share
+11002,Antwerpen,Flemish Region,Antwerp,19867,2687,13.52,True,1,59.00
+21004,Brussel,Brussels-Capital Region,,9949,1637,16.45,True,2,36.00
+44021,Gent,Flemish Region,East Flanders,10183,1157,11.36,True,3,95.00
+62063,Luik,Walloon Region,Liège,6260,1109,17.72,True,4,29.00
+52011,Charleroi,Walloon Region,Hainaut,5243,809,15.43,True,5,42.00
+21001,Anderlecht,Brussels-Capital Region,,3139,768,24.47,True,6,11.00
+21015,Schaarbeek,Brussels-Capital Region,,2450,611,24.94,True,7,9.00
+21012,Sint-Jans-Molenbeek,Brussels-Capital Region,,1930,595,30.83,True,8,2.00
+21009,Elsene,Brussels-Capital Region,,2755,543,19.71,True,9,22.00
+92094,Namen,Walloon Region,Namur,2582,423,16.38,True,10,37.00
+24062,Leuven,Flemish Region,Flemish Brabant,3267,378,11.57,True,11,89.00
+31005,Brugge,Flemish Region,West Flanders,4318,355,8.22,True,12,179.00
+21016,Ukkel,Brussels-Capital Region,,1401,348,24.84,True,13,10.00
+21013,Sint-Gillis,Brussels-Capital Region,,1176,348,29.59,True,13,5.00
+58001,La Louvière,Walloon Region,Hainaut,1562,312,19.97,True,15,18.00
+35013,Oostende,Flemish Region,West Flanders,1935,278,14.37,True,16,53.00
+63079,Verviers,Walloon Region,Liège,1186,248,20.91,True,17,16.00
+46021,Sint-Niklaas,Flemish Region,East Flanders,3025,247,8.17,True,18,181.00
+21007,Vorst,Brussels-Capital Region,,899,241,26.81,True,19,6.00
+34022,Kortrijk,Flemish Region,West Flanders,2675,237,8.86,True,20,153.00
+12025,Mechelen,Flemish Region,Antwerp,2099,236,11.24,True,21,96.00
+53053,Bergen,Walloon Region,Hainaut,1832,236,12.88,True,21,65.00
+62096,Seraing,Walloon Region,Liège,1252,232,18.53,True,23,25.00
+41002,Aalst,Flemish Region,East Flanders,2332,230,9.86,True,24,128.00
+71016,Genk,Flemish Region,Limburg,2402,211,8.78,True,25,159.00
+57096,Moeskroen,Walloon Region,Hainaut,1339,202,15.09,True,26,47.00
+57081,Doornik,Walloon Region,Hainaut,1987,199,10.02,True,27,122.00
+21018,Sint-Lambrechts-Woluwe,Brussels-Capital Region,,922,184,19.96,True,28,19.00
+21005,Etterbeek,Brussels-Capital Region,,913,184,20.15,True,28,17.00
+71022,Hasselt,Flemish Region,Limburg,2265,182,8.04,True,30,187.00
+31043,Knokke-Heist,Flemish Region,West Flanders,1438,174,12.10,True,31,79.00
+21010,Jette,Brussels-Capital Region,,571,172,30.12,True,32,3.00
+36015,Roeselare,Flemish Region,West Flanders,1886,154,8.17,True,33,180.00
+23088,Vilvoorde,Flemish Region,Flemish Brabant,1037,150,14.46,True,34,51.00
+21011,Koekelberg,Brussels-Capital Region,,470,148,31.49,True,35,1.00
+21006,Evere,Brussels-Capital Region,,643,148,23.02,True,35,13.00
+21019,Sint-Pieters-Woluwe,Brussels-Capital Region,,693,137,19.77,True,37,21.00
+25014,Eigenbrakel,Walloon Region,Walloon Brabant,831,126,15.16,True,38,46.00
+25112,Waver,Walloon Region,Walloon Brabant,996,124,12.45,True,39,71.00
+11008,Brasschaat,Flemish Region,Antwerp,1159,121,10.44,True,40,111.00
+52012,Châtelet,Walloon Region,Hainaut,757,121,15.98,True,40,39.00
+25110,Waterloo,Walloon Region,Walloon Brabant,791,121,15.30,True,40,44.00
+21014,Sint-Joost-ten-Node,Brussels-Capital Region,,472,120,25.42,True,43,7.00
+62051,Herstal,Walloon Region,Liège,968,119,12.29,True,44,74.00
+46014,Lokeren,Flemish Region,East Flanders,1589,112,7.05,True,45,225.00
+21003,Sint-Agatha-Berchem,Brussels-Capital Region,,368,110,29.89,True,46,4.00
+71053,Sint-Truiden,Flemish Region,Limburg,1191,110,9.24,True,46,141.00
+21002,Oudergem,Brussels-Capital Region,,609,107,17.57,True,48,31.00
+23094,Zaventem,Flemish Region,Flemish Brabant,1122,102,9.09,True,49,146.00
+13040,Turnhout,Flemish Region,Antwerp,1474,101,6.85,True,50,236.00
+23027,Halle,Flemish Region,Flemish Brabant,954,100,10.48,True,51,110.00
+45041,Ronse,Flemish Region,East Flanders,539,97,18.00,True,52,27.00
+42006,Dendermonde,Flemish Region,East Flanders,1356,97,7.15,True,52,219.00
+23016,Dilbeek,Flemish Region,Flemish Brabant,1050,96,9.14,True,54,142.00
+12021,Lier,Flemish Region,Antwerp,964,96,9.96,True,54,125.00
+31004,Blankenberge,Flemish Region,West Flanders,544,95,17.46,True,56,32.00
+62003,Ans,Walloon Region,Liège,766,93,12.14,True,57,78.00
+71004,Beringen,Flemish Region,Limburg,1055,91,8.63,True,58,166.00
+21008,Ganshoren,Brussels-Capital Region,,355,89,25.07,True,59,8.00
+41048,Ninove,Flemish Region,East Flanders,1082,89,8.23,True,59,178.00
+25072,Nijvel,Walloon Region,Walloon Brabant,767,88,11.47,True,61,90.00
+73083,Tongeren,Flemish Region,Limburg,847,88,10.39,True,61,112.00
+52015,Courcelles,Walloon Region,Hainaut,606,85,14.03,True,63,57.00
+43005,Eeklo,Flemish Region,East Flanders,863,84,9.73,True,64,129.00
+33011,Ieper,Flemish Region,West Flanders,1309,82,6.26,True,65,265.00
+51004,Aat,Walloon Region,Hainaut,779,82,10.53,True,65,108.00
+11029,Mortsel,Flemish Region,Antwerp,734,81,11.04,True,67,99.00
+73107,Maasmechelen,Flemish Region,Limburg,1088,80,7.35,True,68,212.00
+81001,Aarlen,Walloon Region,Luxembourg,657,79,12.02,True,69,80.00
+11040,Schoten,Flemish Region,Antwerp,1111,79,7.11,True,69,220.00
+41018,Geraardsbergen,Flemish Region,East Flanders,819,79,9.65,True,69,132.00
+23002,Asse,Flemish Region,Flemish Brabant,767,78,10.17,True,72,118.00
+61031,Hoei,Walloon Region,Liège,481,78,16.22,True,72,38.00
+24107,Tienen,Flemish Region,Flemish Brabant,698,77,11.03,True,74,100.00
+25105,Tubeke,Walloon Region,Walloon Brabant,431,77,17.87,True,74,28.00
+23077,Sint-Pieters-Leeuw,Flemish Region,Flemish Brabant,614,76,12.38,True,76,72.00
+34027,Menen,Flemish Region,West Flanders,794,72,9.07,True,77,147.00
+21017,Watermaal-Bosvoorde,Brussels-Capital Region,,307,71,23.13,True,78,12.00
+45035,Oudenaarde,Flemish Region,East Flanders,900,71,7.89,True,78,191.00
+23025,Grimbergen,Flemish Region,Flemish Brabant,985,71,7.21,True,78,217.00
+46003,Beveren,Flemish Region,East Flanders,1873,71,3.79,True,78,421.00
+92003,Andenne,Walloon Region,Namur,518,70,13.51,True,82,60.00
+42025,Wetteren,Flemish Region,East Flanders,1035,69,6.67,True,83,245.00
+35011,Middelkerke,Flemish Region,West Flanders,561,69,12.30,True,83,73.00
+44083,Deinze,Flemish Region,East Flanders,1030,68,6.60,True,85,253.00
+92137,Sambreville,Walloon Region,Namur,642,66,10.28,True,86,114.00
+72039,Houthalen-Helchteren,Flemish Region,Limburg,906,66,7.28,True,86,214.00
+11005,Boom,Flemish Region,Antwerp,565,66,11.68,True,86,84.00
+55086,Manage,Walloon Region,Hainaut,510,65,12.75,True,89,69.00
+23102,Wemmel,Flemish Region,Flemish Brabant,443,64,14.45,True,90,52.00
+38014,Koksijde,Flemish Region,West Flanders,506,63,12.45,True,91,70.00
+62038,Fléron,Walloon Region,Liège,312,62,19.87,True,92,20.00
+58002,Binche,Walloon Region,Hainaut,575,62,10.78,True,92,104.00
+34040,Waregem,Flemish Region,West Flanders,924,61,6.60,True,94,254.00
+11023,Kapellen,Flemish Region,Antwerp,546,61,11.17,True,94,97.00
+46025,Temse,Flemish Region,East Flanders,1138,61,5.36,True,94,324.00
+34013,Harelbeke,Flemish Region,West Flanders,820,61,7.44,True,94,210.00
+55040,Zinnik,Walloon Region,Hainaut,526,57,10.84,True,98,102.00
+24020,Diest,Flemish Region,Flemish Brabant,594,56,9.43,True,99,136.00
+63023,Eupen,Walloon Region,Liège,402,56,13.93,True,99,58.00
+25121,Ottignies-Louvain-la-Neuve,Walloon Region,Walloon Brabant,461,56,12.15,True,99,77.00
+62079,Oupeye,Walloon Region,Liège,483,56,11.59,True,99,86.00
+53065,Quaregnon,Walloon Region,Hainaut,330,55,16.67,True,103,34.00
+73006,Bilzen,Flemish Region,Limburg,625,55,8.80,True,103,158.00
+55004,’s Gravenbrakel,Walloon Region,Hainaut,387,55,14.21,True,103,55.00
+72020,Lommel,Flemish Region,Limburg,845,55,6.51,True,103,260.00
+13025,Mol,Flemish Region,Antwerp,882,54,6.12,True,107,270.00
+62093,Saint-Nicolas,Walloon Region,Liège,292,54,18.49,True,107,26.00
+63020,Dison,Walloon Region,Liège,281,53,18.86,True,109,24.00
+36008,Izegem,Flemish Region,West Flanders,765,53,6.93,True,109,230.00
+41081,Zottegem,Flemish Region,East Flanders,752,52,6.91,True,111,231.00
+11013,Edegem,Flemish Region,Antwerp,647,51,7.88,True,112,192.00
+83034,Marche-en-Famenne,Walloon Region,Luxembourg,529,51,9.64,True,112,133.00
+53028,Frameries,Walloon Region,Hainaut,241,51,21.16,True,112,15.00
+62108,Wezet,Walloon Region,Liège,549,50,9.11,True,115,145.00
+44019,Evergem,Flemish Region,East Flanders,897,50,5.57,True,115,308.00
+92142,Gembloux,Walloon Region,Namur,492,49,9.96,True,117,124.00
+62120,Flémalle,Walloon Region,Liège,559,49,8.77,True,117,160.00
+12014,Heist-op-den-Berg,Flemish Region,Antwerp,824,49,5.95,True,117,283.00
+11024,Kontich,Flemish Region,Antwerp,982,49,4.99,True,117,347.00
+62118,Grâce-Hollogne,Walloon Region,Liège,545,48,8.81,True,121,156.00
+25091,Rixensart,Walloon Region,Walloon Brabant,314,48,15.29,True,121,45.00
+57097,Komen-Waasten,Walloon Region,Hainaut,365,47,12.88,True,123,66.00
+53014,Boussu,Walloon Region,Hainaut,307,47,15.31,True,123,43.00
+13011,Herentals,Flemish Region,Antwerp,874,47,5.38,True,123,322.00
+23003,Beersel,Flemish Region,Flemish Brabant,435,47,10.80,True,123,103.00
+72043,Pelt,Flemish Region,Limburg,835,47,5.63,True,123,305.00
+63049,Malmedy,Walloon Region,Liège,326,46,14.11,True,128,56.00
+23062,Overijse,Flemish Region,Flemish Brabant,510,46,9.02,True,128,149.00
+52021,Fleurus,Walloon Region,Hainaut,510,46,9.02,True,128,149.00
+11039,Schilde,Flemish Region,Antwerp,395,46,11.65,True,128,85.00
+24001,Aarschot,Flemish Region,Flemish Brabant,846,46,5.44,True,128,318.00
+44034,Lochristi,Flemish Region,East Flanders,663,44,6.64,True,133,249.00
+44040,Melle,Flemish Region,East Flanders,465,44,9.46,True,133,135.00
+64074,Borgworm,Walloon Region,Liège,386,44,11.40,True,133,93.00
+44043,Merelbeke,Flemish Region,East Flanders,828,44,5.31,True,133,330.00
+11009,Brecht,Flemish Region,Antwerp,685,43,6.28,True,137,263.00
+42028,Zele,Flemish Region,East Flanders,675,43,6.37,True,137,261.00
+31022,Oostkamp,Flemish Region,West Flanders,858,42,4.90,True,139,353.00
+11055,Zoersel,Flemish Region,Antwerp,417,42,10.07,True,139,120.00
+11057,Malle,Flemish Region,Antwerp,368,42,11.41,True,139,92.00
+71070,Heusden-Zolder,Flemish Region,Limburg,799,42,5.26,True,139,333.00
+57064,Péruwelz,Walloon Region,Hainaut,469,41,8.74,True,143,162.00
+44084,Aalter,Flemish Region,East Flanders,996,40,4.02,True,144,409.00
+23047,Machelen,Flemish Region,Flemish Brabant,696,40,5.75,True,144,292.00
+11050,Wijnegem,Flemish Region,Antwerp,512,39,7.62,True,146,204.00
+24104,Tervuren,Flemish Region,Flemish Brabant,383,39,10.18,True,146,117.00
+71034,Leopoldsburg,Flemish Region,Limburg,458,39,8.52,True,146,168.00
+38008,De Panne,Flemish Region,West Flanders,262,39,14.89,True,146,48.00
+93014,Couvin,Walloon Region,Namur,344,38,11.05,True,150,98.00
+35029,De Haan,Flemish Region,West Flanders,328,38,11.59,True,150,87.00
+13008,Geel,Flemish Region,Antwerp,1109,38,3.43,True,150,436.00
+24134,Scherpenheuvel-Zichem,Flemish Region,Flemish Brabant,377,38,10.08,True,150,119.00
+23099,Kraainem,Flemish Region,Flemish Brabant,292,38,13.01,True,150,63.00
+38016,Nieuwpoort,Flemish Region,West Flanders,328,38,11.59,True,150,87.00
+63035,Herve,Walloon Region,Liège,540,37,6.85,True,156,237.00
+82003,Bastenaken,Walloon Region,Luxembourg,385,37,9.61,True,156,134.00
+35002,Bredene,Flemish Region,West Flanders,339,37,10.91,True,156,101.00
+37015,Tielt,Flemish Region,West Flanders,459,37,8.06,True,156,183.00
+91034,Dinant,Walloon Region,Namur,342,36,10.53,True,160,108.00
+62022,Chaudfontaine,Walloon Region,Liège,293,36,12.29,True,160,75.00
+43010,Maldegem,Flemish Region,East Flanders,906,36,3.97,True,160,410.00
+12026,Nijlen,Flemish Region,Antwerp,465,36,7.74,True,160,199.00
+52022,Fontaine-l’Evêque,Walloon Region,Hainaut,332,35,10.54,True,164,107.00
+11056,Zwijndrecht,Flemish Region,Antwerp,631,35,5.55,True,164,309.00
+81004,Aubange,Walloon Region,Luxembourg,298,35,11.74,True,164,82.00
+41011,Denderleeuw,Flemish Region,East Flanders,375,35,9.33,True,164,138.00
+11037,Rumst,Flemish Region,Antwerp,518,34,6.56,True,168,256.00
+12040,Willebroek,Flemish Region,Antwerp,564,34,6.03,True,168,275.00
+34041,Wevelgem,Flemish Region,West Flanders,641,34,5.30,True,168,331.00
+63072,Spa,Walloon Region,Liège,194,33,17.01,True,171,33.00
+53082,Colfontaine,Walloon Region,Hainaut,187,33,17.65,True,171,30.00
+62015,Beyne-Heusay,Walloon Region,Liège,172,33,19.19,True,171,23.00
+52010,Chapelle-lez-Herlaimont,Walloon Region,Hainaut,252,33,13.10,True,171,62.00
+85045,Virton,Walloon Region,Luxembourg,280,33,11.79,True,171,81.00
+72004,Bree,Flemish Region,Limburg,541,32,5.91,True,176,287.00
+23086,Ternat,Flemish Region,Flemish Brabant,344,32,9.30,True,176,140.00
+23096,Zemst,Flemish Region,Flemish Brabant,367,32,8.72,True,176,163.00
+62009,Aywaille,Walloon Region,Liège,353,32,9.07,True,176,148.00
+58004,Morlanwelz,Walloon Region,Hainaut,251,32,12.75,True,176,68.00
+25050,Terhulpen,Walloon Region,Walloon Brabant,142,31,21.83,True,181,14.00
+31033,Torhout,Flemish Region,West Flanders,595,31,5.21,True,181,337.00
+64034,Hannuit,Walloon Region,Liège,374,31,8.29,True,181,175.00
+11018,Hemiksem,Flemish Region,Antwerp,212,31,14.62,True,181,50.00
+91030,Ciney,Walloon Region,Namur,365,31,8.49,True,181,170.00
+61003,Amay,Walloon Region,Liège,304,30,9.87,True,186,127.00
+11001,Aartselaar,Flemish Region,Antwerp,724,30,4.14,True,186,398.00
+13049,Westerlo,Flemish Region,Antwerp,723,30,4.15,True,186,397.00
+11052,Wommelgem,Flemish Region,Antwerp,627,30,4.78,True,186,359.00
+34042,Zwevegem,Flemish Region,West Flanders,430,29,6.74,True,190,242.00
+51067,Edingen,Walloon Region,Hainaut,223,29,13.00,True,190,64.00
+32003,Diksmuide,Flemish Region,West Flanders,458,29,6.33,True,190,262.00
+42008,Hamme,Flemish Region,East Flanders,558,29,5.20,True,190,339.00
+23044,Liedekerke,Flemish Region,Flemish Brabant,183,29,15.85,True,190,40.00
+73042,Lanaken,Flemish Region,Limburg,461,28,6.07,True,195,271.00
+25031,Genepiën,Walloon Region,Walloon Brabant,370,28,7.57,True,195,208.00
+52018,Farciennes,Walloon Region,Hainaut,177,28,15.82,True,195,41.00
+13014,Hoogstraten,Flemish Region,Antwerp,571,28,4.90,True,195,352.00
+53070,Saint-Ghislain,Walloon Region,Hainaut,464,28,6.03,True,195,273.00
+51069,Lessen,Walloon Region,Hainaut,311,28,9.00,True,195,151.00
+52025,Gerpinnes,Walloon Region,Hainaut,273,27,9.89,True,201,126.00
+46020,Sint-Gillis-Waas,Flemish Region,East Flanders,473,27,5.71,True,201,297.00
+71011,Diepenbeek,Flemish Region,Limburg,506,27,5.34,True,201,327.00
+34023,Kuurne,Flemish Region,West Flanders,352,27,7.67,True,201,202.00
+52048,Montigny-le-Tilleul,Walloon Region,Hainaut,201,27,13.43,True,201,61.00
+43018,Zelzate,Flemish Region,East Flanders,434,27,6.22,True,201,267.00
+57094,Leuze-en-Hainaut,Walloon Region,Hainaut,326,27,8.28,True,201,176.00
+72021,Maaseik,Flemish Region,Limburg,489,27,5.52,True,201,310.00
+56001,Anderlues,Walloon Region,Hainaut,227,26,11.45,True,209,91.00
+41034,Lede,Flemish Region,East Flanders,331,26,7.85,True,209,193.00
+25015,Kasteelbrakel,Walloon Region,Walloon Brabant,242,26,10.74,True,209,105.00
+46024,Stekene,Flemish Region,East Flanders,521,26,4.99,True,209,346.00
+11044,Stabroek,Flemish Region,Antwerp,356,26,7.30,True,209,213.00
+23050,Meise,Flemish Region,Flemish Brabant,457,26,5.69,True,209,300.00
+62032,Esneux,Walloon Region,Liège,268,25,9.33,True,215,139.00
+23045,Londerzeel,Flemish Region,Flemish Brabant,357,25,7.00,True,215,227.00
+12009,Duffel,Flemish Region,Antwerp,389,24,6.17,True,217,268.00
+63084,Welkenraedt,Walloon Region,Liège,233,24,10.30,True,217,113.00
+42003,Berlare,Flemish Region,East Flanders,367,24,6.54,True,217,257.00
+41082,Erpe-Mere,Flemish Region,East Flanders,510,24,4.71,True,217,365.00
+33021,Poperinge,Flemish Region,West Flanders,458,24,5.24,True,217,334.00
+12041,Puurs-Sint-Amands,Flemish Region,Antwerp,533,24,4.50,True,217,375.00
+91114,Rochefort,Walloon Region,Namur,345,23,6.67,True,223,245.00
+12002,Berlaar,Flemish Region,Antwerp,260,23,8.85,True,223,154.00
+56016,Chimay,Walloon Region,Hainaut,367,23,6.27,True,223,264.00
+25048,Geldenaken,Walloon Region,Walloon Brabant,286,23,8.04,True,223,184.00
+56078,Thuin,Walloon Region,Hainaut,278,23,8.27,True,223,177.00
+11007,Borsbeek,Flemish Region,Antwerp,336,23,6.85,True,223,238.00
+31040,Zedelgem,Flemish Region,West Flanders,641,23,3.59,True,223,432.00
+11053,Wuustwezel,Flemish Region,Antwerp,457,22,4.81,True,230,358.00
+38025,Veurne,Flemish Region,West Flanders,383,22,5.74,True,230,294.00
+56022,Erquelinnes,Walloon Region,Hainaut,241,22,9.13,True,230,144.00
+23103,Wezembeek-Oppem,Flemish Region,Flemish Brabant,150,22,14.67,True,230,49.00
+46013,Kruibeke,Flemish Region,East Flanders,577,22,3.81,True,230,417.00
+13013,Herselt,Flemish Region,Antwerp,312,22,7.05,True,230,224.00
+12029,Putte,Flemish Region,Antwerp,358,22,6.15,True,230,269.00
+13004,Beerse,Flemish Region,Antwerp,328,22,6.71,True,230,244.00
+62099,Soumagne,Walloon Region,Liège,372,22,5.91,True,230,288.00
+92035,Eghezée,Walloon Region,Namur,375,21,5.60,True,239,307.00
+44085,Lievegem,Flemish Region,East Flanders,497,21,4.23,True,239,390.00
+41027,Herzele,Flemish Region,East Flanders,371,21,5.66,True,239,301.00
+11022,Kalmthout,Flemish Region,Antwerp,497,21,4.23,True,239,390.00
+13019,Lille,Flemish Region,Antwerp,369,21,5.69,True,239,299.00
+13023,Merksplas,Flemish Region,Antwerp,237,21,8.86,True,239,152.00
+71057,Tessenderlo,Flemish Region,Limburg,386,21,5.44,True,239,317.00
+71066,Zonhoven,Flemish Region,Limburg,535,21,3.93,True,239,414.00
+23052,Merchtem,Flemish Region,Flemish Brabant,271,21,7.75,True,239,198.00
+24033,Haacht,Flemish Region,Flemish Brabant,256,20,7.81,True,248,194.00
+23081,Steenokkerzeel,Flemish Region,Flemish Brabant,263,20,7.60,True,248,205.00
+11016,Essen,Flemish Region,Antwerp,355,20,5.63,True,248,304.00
+42011,Lebbeke,Flemish Region,East Flanders,437,20,4.58,True,248,371.00
+13037,Rijkevorsel,Flemish Region,Antwerp,268,20,7.46,True,248,209.00
+85011,Florenville,Walloon Region,Luxembourg,176,20,11.36,True,248,94.00
+11035,Ranst,Flemish Region,Antwerp,691,20,2.89,True,248,458.00
+12035,Sint-Katelijne-Waver,Flemish Region,Antwerp,348,20,5.75,True,248,292.00
+13017,Kasterlee,Flemish Region,Antwerp,334,20,5.99,True,248,279.00
+23101,Sint-Genesius-Rode,Flemish Region,Flemish Brabant,206,20,9.71,True,248,130.00
+31006,Damme,Flemish Region,West Flanders,436,20,4.59,True,248,369.00
+24038,Herent,Flemish Region,Flemish Brabant,319,19,5.96,True,259,282.00
+83012,Durbuy,Walloon Region,Luxembourg,356,19,5.34,True,259,326.00
+24066,Lubbeek,Flemish Region,Flemish Brabant,186,19,10.22,True,259,115.00
+25119,Lasne,Walloon Region,Walloon Brabant,262,19,7.25,True,259,216.00
+72041,Dilsen-Stokkem,Flemish Region,Limburg,384,19,4.95,True,259,350.00
+13003,Balen,Flemish Region,Antwerp,390,19,4.87,True,259,355.00
+11004,Boechout,Flemish Region,Antwerp,316,19,6.01,True,259,277.00
+36007,Ingelmunster,Flemish Region,West Flanders,224,19,8.48,True,259,171.00
+13036,Retie,Flemish Region,Antwerp,247,19,7.69,True,259,200.00
+24059,Landen,Flemish Region,Flemish Brabant,224,19,8.48,True,259,171.00
+31003,Beernem,Flemish Region,West Flanders,432,19,4.40,True,259,383.00
+63073,Stavelot,Walloon Region,Liège,220,19,8.64,True,259,165.00
+45059,Brakel,Flemish Region,East Flanders,259,18,6.95,True,271,229.00
+84077,Libramont-Chevigny,Walloon Region,Luxembourg,305,18,5.90,True,271,289.00
+53068,Quiévrain,Walloon Region,Hainaut,109,18,16.51,True,271,35.00
+23033,Hoeilaart,Flemish Region,Flemish Brabant,274,18,6.57,True,271,255.00
+36019,Staden,Flemish Region,West Flanders,268,18,6.72,True,271,243.00
+25023,Court-Saint-Etienne,Walloon Region,Walloon Brabant,224,18,8.04,True,271,186.00
+25037,Graven,Walloon Region,Walloon Brabant,231,18,7.79,True,271,195.00
+44048,Nazareth,Flemish Region,East Flanders,522,18,3.45,True,271,435.00
+93022,Florennes,Walloon Region,Namur,303,18,5.94,True,271,284.00
+23098,Drogenbos,Flemish Region,Flemish Brabant,140,18,12.86,True,271,67.00
+44013,Destelbergen,Flemish Region,East Flanders,535,18,3.36,True,271,440.00
+62119,Blegny,Walloon Region,Liège,263,18,6.84,True,271,239.00
+12005,Bonheiden,Flemish Region,Antwerp,250,18,7.20,True,271,218.00
+24094,Rotselaar,Flemish Region,Flemish Brabant,317,17,5.36,True,284,323.00
+24055,Kortenberg,Flemish Region,Flemish Brabant,224,17,7.59,True,284,206.00
+12007,Bornem,Flemish Region,Antwerp,420,17,4.05,True,284,407.00
+45068,Kruisem,Flemish Region,East Flanders,432,17,3.94,True,284,413.00
+24048,Keerbergen,Flemish Region,Flemish Brabant,196,17,8.67,True,284,164.00
+63076,Theux,Walloon Region,Liège,327,17,5.20,True,284,338.00
+62100,Sprimont,Walloon Region,Liège,368,17,4.62,True,284,368.00
+92087,Mettet,Walloon Region,Namur,371,17,4.58,True,284,370.00
+11030,Niel,Flemish Region,Antwerp,145,17,11.72,True,284,83.00
+83028,Hotton,Walloon Region,Luxembourg,157,16,10.19,True,293,116.00
+13001,Arendonk,Flemish Region,Antwerp,237,16,6.75,True,293,241.00
+51008,Beloeil,Walloon Region,Hainaut,354,16,4.52,True,293,373.00
+41024,Haaltert,Flemish Region,East Flanders,383,16,4.18,True,293,395.00
+23038,Kampenhout,Flemish Region,Flemish Brabant,268,16,5.97,True,293,280.00
+25107,Villers-la-Ville,Walloon Region,Walloon Brabant,191,16,8.38,True,293,174.00
+52075,Les Bons Villers,Walloon Region,Hainaut,159,16,10.06,True,293,121.00
+35005,Gistel,Flemish Region,West Flanders,352,16,4.55,True,293,372.00
+24009,Bertem,Flemish Region,Flemish Brabant,281,16,5.69,True,293,298.00
+53020,Dour,Walloon Region,Hainaut,208,16,7.69,True,293,200.00
+56086,Ham-sur-Heure-Nalinnes,Walloon Region,Hainaut,175,16,9.14,True,293,142.00
+62011,Bitsingen,Walloon Region,Liège,199,16,8.04,True,293,185.00
+42023,Waasmunster,Flemish Region,East Flanders,354,16,4.52,True,293,373.00
+73009,Borgloon,Flemish Region,Limburg,256,16,6.25,True,293,266.00
+72030,Peer,Flemish Region,Limburg,359,16,4.46,True,293,377.00
+72042,Oudsbergen,Flemish Region,Limburg,547,16,2.93,True,293,455.00
+57027,Estaimpuis,Walloon Region,Hainaut,218,15,6.88,True,309,232.00
+92140,Jemeppe-sur-Sambre,Walloon Region,Namur,394,15,3.81,True,309,419.00
+56005,Beaumont,Walloon Region,Hainaut,273,15,5.49,True,309,314.00
+63088,Plombières,Walloon Region,Liège,140,15,10.71,True,309,106.00
+23060,Opwijk,Flemish Region,Flemish Brabant,193,15,7.77,True,309,196.00
+63061,Raeren,Walloon Region,Liège,190,15,7.89,True,309,190.00
+84009,Bertrix,Walloon Region,Luxembourg,198,15,7.58,True,309,207.00
+63013,Bütgenbach,Walloon Region,Liège,105,15,14.29,True,309,54.00
+33029,Wervik,Flemish Region,West Flanders,397,15,3.78,True,309,423.00
+25123,Rebecq,Walloon Region,Walloon Brabant,175,15,8.57,True,309,167.00
+43002,Assenede,Flemish Region,East Flanders,427,15,3.51,True,309,434.00
+34002,Anzegem,Flemish Region,West Flanders,249,15,6.02,True,309,276.00
+13031,Oud-Turnhout,Flemish Region,Antwerp,339,14,4.13,True,321,401.00
+63058,Pepinster,Walloon Region,Liège,159,14,8.81,True,321,157.00
+24135,Tielt-Winge,Flemish Region,Flemish Brabant,248,14,5.65,True,321,303.00
+24109,Tremelo,Flemish Region,Flemish Brabant,145,14,9.66,True,321,131.00
+13046,Vosselaar,Flemish Region,Antwerp,211,14,6.64,True,321,250.00
+42004,Buggenhout,Flemish Region,East Flanders,276,14,5.07,True,321,342.00
+11038,Schelle,Flemish Region,Antwerp,177,14,7.91,True,321,189.00
+42010,Laarne,Flemish Region,East Flanders,334,14,4.19,True,321,394.00
+52055,Pont-à-Celles,Walloon Region,Hainaut,322,14,4.35,True,321,386.00
+31012,Jabbeke,Flemish Region,West Flanders,385,14,3.64,True,321,429.00
+61072,Wanze,Walloon Region,Liège,232,14,6.03,True,321,273.00
+92101,Profondeville,Walloon Region,Namur,325,14,4.31,True,321,388.00
+33037,Zonnebeke,Flemish Region,West Flanders,380,14,3.68,True,321,425.00
+63040,Kelmis,Walloon Region,Liège,114,14,12.28,True,321,76.00
+32011,Kortemark,Flemish Region,West Flanders,290,14,4.83,True,321,356.00
+44020,Gavere,Flemish Region,East Flanders,240,13,5.42,True,336,321.00
+37007,Meulebeke,Flemish Region,West Flanders,230,13,5.65,True,336,302.00
+62122,Trooz,Walloon Region,Liège,130,13,10.00,True,336,123.00
+92048,Fosses-la-Ville,Walloon Region,Namur,227,13,5.73,True,336,295.00
+55085,Seneffe,Walloon Region,Hainaut,385,13,3.38,True,336,439.00
+55050,Ecaussinnes,Walloon Region,Hainaut,189,13,6.88,True,336,233.00
+63067,Sankt Vith,Walloon Region,Liège,226,13,5.75,True,336,291.00
+34003,Avelgem,Flemish Region,West Flanders,183,13,7.10,True,336,221.00
+73040,Kortessem,Flemish Region,Limburg,170,13,7.65,True,336,203.00
+61080,Engis,Walloon Region,Liège,179,13,7.26,True,336,215.00
+44064,Sint-Martens-Latem,Flemish Region,East Flanders,236,13,5.51,True,336,311.00
+85046,Habay,Walloon Region,Luxembourg,189,13,6.88,True,336,233.00
+13010,Grobbendonk,Flemish Region,Antwerp,352,13,3.69,True,336,424.00
+63038,Jalhay,Walloon Region,Liège,242,12,4.96,True,349,349.00
+71024,Herk-de-Stad,Flemish Region,Limburg,225,12,5.33,True,349,328.00
+82032,Vielsalm,Walloon Region,Luxembourg,218,12,5.50,True,349,312.00
+71020,Halen,Flemish Region,Limburg,204,12,5.88,True,349,290.00
+73066,Riemst,Flemish Region,Limburg,273,12,4.40,True,349,384.00
+71069,Ham,Flemish Region,Limburg,296,12,4.05,True,349,406.00
+13029,Olen,Flemish Region,Antwerp,317,12,3.79,True,349,422.00
+24130,Zoutleeuw,Flemish Region,Flemish Brabant,137,12,8.76,True,349,161.00
+62006,Awans,Walloon Region,Liège,218,12,5.50,True,349,312.00
+44073,Wachtebeke,Flemish Region,East Flanders,225,12,5.33,True,349,328.00
+62060,Juprelle,Walloon Region,Liège,181,12,6.63,True,349,251.00
+23104,Lennik,Flemish Region,Flemish Brabant,147,12,8.16,True,349,182.00
+23105,Affligem,Flemish Region,Flemish Brabant,253,12,4.74,True,349,363.00
+37002,Dentergem,Flemish Region,West Flanders,136,12,8.82,True,349,155.00
+72038,Hechtel-Eksel,Flemish Region,Limburg,377,12,3.18,True,349,450.00
+91013,Beauraing,Walloon Region,Namur,259,12,4.63,True,349,366.00
+23097,Roosdaal,Flemish Region,Flemish Brabant,141,12,8.51,True,349,169.00
+52074,Aiseau-Presles,Walloon Region,Hainaut,128,12,9.38,True,349,137.00
+44081,Zulte,Flemish Region,East Flanders,251,11,4.38,True,367,385.00
+33039,Heuvelland,Flemish Region,West Flanders,266,11,4.14,True,367,400.00
+64065,Saint-Georges-sur-Meuse,Walloon Region,Liège,160,11,6.88,True,367,235.00
+93088,Walcourt,Walloon Region,Namur,385,11,2.86,True,367,459.00
+93056,Philippeville,Walloon Region,Namur,338,11,3.25,True,367,447.00
+37017,Wielsbeke,Flemish Region,West Flanders,216,11,5.09,True,367,341.00
+55035,Le Roeulx,Walloon Region,Hainaut,245,11,4.49,True,367,376.00
+13035,Ravels,Flemish Region,Antwerp,249,11,4.42,True,367,381.00
+13021,Meerhout,Flemish Region,Antwerp,196,11,5.61,True,367,306.00
+57062,Pecq,Walloon Region,Hainaut,161,11,6.83,True,367,240.00
+72018,Kinrooi,Flemish Region,Limburg,248,11,4.44,True,367,378.00
+25084,Perwijs,Walloon Region,Walloon Brabant,268,11,4.10,True,367,404.00
+71037,Lummen,Flemish Region,Limburg,425,11,2.59,True,367,464.00
+36012,Moorslede,Flemish Region,West Flanders,201,11,5.47,True,367,315.00
+44052,Oosterzele,Flemish Region,East Flanders,333,11,3.30,True,367,444.00
+11054,Zandhoven,Flemish Region,Antwerp,462,11,2.38,True,367,469.00
+51009,Bernissart,Walloon Region,Hainaut,309,10,3.24,True,383,448.00
+73032,Hoeselt,Flemish Region,Limburg,141,10,7.09,True,383,222.00
+24043,Holsbeek,Flemish Region,Flemish Brabant,129,10,7.75,True,383,197.00
+25124,Walhain,Walloon Region,Walloon Brabant,153,10,6.54,True,383,258.00
+13012,Herenthout,Flemish Region,Antwerp,165,10,6.06,True,383,272.00
+61043,Nandrin,Walloon Region,Liège,126,10,7.94,True,383,188.00
+82037,Gouvy,Walloon Region,Luxembourg,142,10,7.04,True,383,226.00
+34009,Deerlijk,Flemish Region,West Flanders,358,10,2.79,True,383,461.00
+24008,Bekkevoort,Flemish Region,Flemish Brabant,184,10,5.43,True,383,319.00
+23024,Gooik,Flemish Region,Flemish Brabant,153,10,6.54,True,383,258.00
+51014,Chièvres,Walloon Region,Hainaut,118,10,8.47,True,383,173.00
+35006,Ichtegem,Flemish Region,West Flanders,311,10,3.22,True,383,449.00
+24045,Huldenberg,Flemish Region,Flemish Brabant,151,9,5.96,True,395,281.00
+24014,Boortmeerbeek,Flemish Region,Flemish Brabant,220,9,4.09,True,395,405.00
+72037,Hamont-Achel,Flemish Region,Limburg,218,9,4.13,True,395,402.00
+91141,Yvoir,Walloon Region,Namur,166,9,5.42,True,395,320.00
+92141,La Bruyère,Walloon Region,Namur,218,9,4.13,True,395,402.00
+84043,Neufchâteau,Walloon Region,Luxembourg,204,9,4.41,True,395,382.00
+71067,Zutendaal,Flemish Region,Limburg,189,9,4.76,True,395,360.00
+33040,Langemark-Poelkapelle,Flemish Region,West Flanders,172,9,5.23,True,395,335.00
+71002,As,Flemish Region,Limburg,212,9,4.25,True,395,389.00
+42026,Wichelen,Flemish Region,East Flanders,203,9,4.43,True,395,379.00
+36006,Hooglede,Flemish Region,West Flanders,244,8,3.28,True,405,445.00
+37010,Oostrozebeke,Flemish Region,West Flanders,158,8,5.06,True,405,344.00
+62121,Neupré,Walloon Region,Liège,163,8,4.91,True,405,351.00
+83031,La Roche-en-Ardenne,Walloon Region,Luxembourg,164,8,4.88,True,405,354.00
+85007,Chiny,Walloon Region,Luxembourg,98,8,8.16,False,405,
+63046,Limburg,Walloon Region,Liège,113,8,7.08,True,405,223.00
+24086,Oud-Heverlee,Flemish Region,Flemish Brabant,190,8,4.21,True,405,392.00
+73001,Alken,Flemish Region,Limburg,238,8,3.36,True,405,441.00
+24011,Bierbeek,Flemish Region,Flemish Brabant,161,8,4.97,True,405,348.00
+92045,Floreffe,Walloon Region,Namur,210,8,3.81,True,405,418.00
+62026,Comblain-au-Pont,Walloon Region,Liège,108,8,7.41,True,405,211.00
+53044,Jurbeke,Walloon Region,Hainaut,173,8,4.62,True,405,367.00
+56044,Lobbes,Walloon Region,Hainaut,153,8,5.23,True,405,336.00
+13016,Hulshout,Flemish Region,Antwerp,140,8,5.71,True,405,296.00
+58003,Estinnes,Walloon Region,Hainaut,190,8,4.21,True,405,392.00
+11025,Lint,Flemish Region,Antwerp,74,8,10.81,False,405,
+91064,Havelange,Walloon Region,Namur,105,7,6.67,True,421,245.00
+91005,Anhée,Walloon Region,Namur,145,7,4.83,True,421,356.00
+72003,Bocholt,Flemish Region,Limburg,273,7,2.56,True,421,466.00
+71045,Nieuwerkerken,Flemish Region,Limburg,90,7,7.78,False,421,
+63086,Trois-Ponts,Walloon Region,Liège,105,7,6.67,True,421,245.00
+64021,Crisnée,Walloon Region,Liège,106,7,6.60,True,421,252.00
+45060,Kluisbergen,Flemish Region,East Flanders,131,7,5.34,True,421,325.00
+93090,Viroinval,Walloon Region,Namur,100,7,7.00,True,421,228.00
+25018,Chaumont-Gistoux,Walloon Region,Walloon Brabant,173,7,4.05,True,421,408.00
+61024,Hamoir,Walloon Region,Liège,81,7,8.64,False,421,
+25044,Itter,Walloon Region,Walloon Brabant,181,7,3.87,True,421,416.00
+57018,Celles,Walloon Region,Hainaut,118,7,5.93,True,421,286.00
+53084,Quévy,Walloon Region,Hainaut,190,7,3.68,True,421,425.00
+32006,Houthulst,Flemish Region,West Flanders,184,7,3.80,True,421,420.00
+36010,Ledegem,Flemish Region,West Flanders,147,7,4.76,True,421,360.00
+44045,Moerbeke,Flemish Region,East Flanders,168,7,4.17,True,421,396.00
+37011,Pittem,Flemish Region,West Flanders,161,7,4.35,True,421,386.00
+43007,Kaprijke,Flemish Region,East Flanders,269,7,2.60,True,421,463.00
+11021,Hove,Flemish Region,Antwerp,133,7,5.26,True,421,332.00
+13006,Dessel,Flemish Region,Antwerp,138,7,5.07,True,421,342.00
+35014,Oudenburg,Flemish Region,West Flanders,263,6,2.28,True,441,471.00
+63048,Lontzen,Walloon Region,Liège,117,6,5.13,True,441,340.00
+82014,Houffalize,Walloon Region,Luxembourg,194,6,3.09,True,441,452.00
+83013,Erezée,Walloon Region,Luxembourg,100,6,6.00,True,441,278.00
+64056,Oerle,Walloon Region,Liège,86,6,6.98,False,441,
+84010,Bouillon,Walloon Region,Luxembourg,203,6,2.96,True,441,453.00
+25120,Orp-Jauche,Walloon Region,Walloon Brabant,126,6,4.76,True,441,360.00
+57003,Antoing,Walloon Region,Hainaut,164,6,3.66,True,441,428.00
+25068,Mont-Saint-Guibert,Walloon Region,Walloon Brabant,184,6,3.26,True,441,446.00
+24133,Linter,Flemish Region,Flemish Brabant,82,6,7.32,False,441,
+37020,Ardooie,Flemish Region,West Flanders,315,6,1.90,True,441,484.00
+63012,Büllingen,Walloon Region,Liège,99,6,6.06,False,441,
+23039,Kapelle-op-den-Bos,Flemish Region,Flemish Brabant,110,6,5.45,True,441,316.00
+63003,Aubel,Walloon Region,Liège,101,6,5.94,True,441,284.00
+23100,Linkebeek,Flemish Region,Flemish Brabant,39,6,15.38,False,441,
+92006,Assesse,Walloon Region,Namur,232,6,2.59,True,441,465.00
+24007,Begijnendijk,Flemish Region,Flemish Brabant,179,6,3.35,True,441,442.00
+13053,Laakdal,Flemish Region,Antwerp,300,6,2.00,True,441,481.00
+92097,Ohey,Walloon Region,Namur,90,6,6.67,False,441,
+63080,Weismes,Walloon Region,Liège,145,6,4.14,True,441,399.00
+23023,Galmaarden,Flemish Region,Flemish Brabant,90,6,6.67,False,441,
+63087,Burg-Reuland,Walloon Region,Liège,147,5,3.40,True,462,438.00
+44012,De Pinte,Flemish Region,East Flanders,251,5,1.99,True,462,482.00
+24041,Hoegaarden,Flemish Region,Flemish Brabant,70,5,7.14,False,462,
+13044,Vorselaar,Flemish Region,Antwerp,151,5,3.31,True,462,443.00
+45065,Zwalm,Flemish Region,East Flanders,170,5,2.94,True,462,454.00
+45064,Maarkedal,Flemish Region,East Flanders,140,5,3.57,True,462,433.00
+32030,Lo-Reninge,Flemish Region,West Flanders,75,5,6.67,False,462,
+84033,Léglise,Walloon Region,Luxembourg,138,5,3.62,True,462,430.00
+56088,Sivry-Rance,Walloon Region,Hainaut,95,5,5.26,False,462,
+45063,Lierde,Flemish Region,East Flanders,136,5,3.68,True,462,427.00
+85009,Etalle,Walloon Region,Luxembourg,139,5,3.60,True,462,431.00
+25117,Chastre,Walloon Region,Walloon Brabant,51,5,9.80,False,462,
+71017,Gingelom,Flemish Region,Limburg,126,5,3.97,True,462,411.00
+85024,Meix-devant-Virton,Walloon Region,Luxembourg,44,5,11.36,False,462,
+61012,Clavier,Walloon Region,Liège,89,5,5.62,False,462,
+25043,Incourt,Walloon Region,Walloon Brabant,106,5,4.72,True,462,364.00
+91143,Vresse-sur-Semois,Walloon Region,Namur,80,5,6.25,False,462,
+37012,Ruiselede,Flemish Region,West Flanders,70,5,7.14,False,462,
+73022,Heers,Flemish Region,Limburg,100,5,5.00,True,462,345.00
+84050,Paliseul,Walloon Region,Luxembourg,113,5,4.42,True,462,380.00
+13002,Baarle-Hertog,Flemish Region,Antwerp,20,4,20.00,False,482,
+93018,Doische,Walloon Region,Namur,82,4,4.88,False,482,
+92114,Sombreffe,Walloon Region,Namur,174,4,2.30,True,482,470.00
+93010,Cerfontaine,Walloon Region,Namur,187,4,2.14,True,482,476.00
+83044,Rendeux,Walloon Region,Luxembourg,62,4,6.45,False,482,
+91072,Houyet,Walloon Region,Namur,142,4,2.82,True,482,460.00
+37018,Wingene,Flemish Region,West Flanders,224,4,1.79,True,482,487.00
+91142,Hastière,Walloon Region,Namur,137,4,2.92,True,482,456.00
+24137,Glabbeek,Flemish Region,Flemish Brabant,95,4,4.21,False,482,
+81003,Attert,Walloon Region,Luxembourg,43,4,9.30,False,482,
+85034,Saint-Léger,Walloon Region,Luxembourg,52,4,7.69,False,482,
+81015,Messancy,Walloon Region,Luxembourg,217,4,1.84,True,482,485.00
+57095,Mont-de-l’Enclus,Walloon Region,Hainaut,81,4,4.94,False,482,
+61039,Marchin,Walloon Region,Liège,69,4,5.80,False,482,
+56029,Froidchapelle,Walloon Region,Hainaut,138,4,2.90,True,482,457.00
+61068,Villers-Le-Bouillet,Walloon Region,Liège,223,4,1.79,True,482,486.00
+51065,Frasnes-lez-Anvaing,Walloon Region,Hainaut,208,4,1.92,True,482,483.00
+61081,Tinlot,Walloon Region,Liège,93,4,4.30,False,482,
+62027,Dalhem,Walloon Region,Liège,145,4,2.76,True,482,462.00
+51017,Elzele,Walloon Region,Hainaut,103,4,3.88,True,482,415.00
+61041,Modave,Walloon Region,Liège,127,4,3.15,True,482,451.00
+63004,Baelen,Walloon Region,Liège,101,4,3.96,True,482,412.00
+45061,Wortegem-Petegem,Flemish Region,East Flanders,117,4,3.42,True,482,437.00
+41063,Sint-Lievens-Houtem,Flemish Region,East Flanders,187,4,2.14,True,482,476.00
+43014,Sint-Laureins,Flemish Region,East Flanders,182,4,2.20,True,482,474.00
+73098,Wellen,Flemish Region,Limburg,99,3,3.03,False,507,
+64047,Lijsem,Walloon Region,Liège,66,3,4.55,False,507,
+25122,Ramillies,Walloon Region,Walloon Brabant,89,3,3.37,False,507,
+56049,Merbes-le-Château,Walloon Region,Hainaut,84,3,3.57,False,507,
+84059,Saint-Hubert,Walloon Region,Luxembourg,123,3,2.44,True,507,467.00
+23032,Herne,Flemish Region,Flemish Brabant,96,3,3.12,False,507,
+84075,Wellin,Walloon Region,Luxembourg,81,3,3.70,False,507,
+25005,Bevekom,Walloon Region,Walloon Brabant,81,3,3.70,False,507,
+91015,Bièvre,Walloon Region,Namur,77,3,3.90,False,507,
+63089,Thimister-Clermont,Walloon Region,Liège,172,3,1.74,True,507,491.00
+23064,Pepingen,Flemish Region,Flemish Brabant,73,3,4.11,False,507,
+61019,Ferrières,Walloon Region,Liège,132,3,2.27,True,507,472.00
+64076,Faimes,Walloon Region,Liège,77,3,3.90,False,507,
+31042,Zuienkerke,Flemish Region,West Flanders,170,3,1.76,True,507,490.00
+53083,Honnelles,Walloon Region,Hainaut,45,3,6.67,False,507,
+83049,Tenneville,Walloon Region,Luxembourg,91,3,3.30,False,507,
+63057,Olne,Walloon Region,Liège,52,3,5.77,False,507,
+24016,Boutersem,Flemish Region,Flemish Brabant,136,3,2.21,True,507,473.00
+73109,Voeren,Flemish Region,Limburg,78,3,3.85,False,507,
+51019,Vloesberg,Walloon Region,Hainaut,54,3,5.56,False,507,
+34025,Lendelede,Flemish Region,West Flanders,125,3,2.40,True,507,468.00
+23009,Bever,Flemish Region,Flemish Brabant,19,3,15.79,False,507,
+61079,Anthisnes,Walloon Region,Liège,80,3,3.75,False,507,
+91120,Somme-Leuze,Walloon Region,Namur,146,3,2.05,True,507,479.00
+24054,Kortenaken,Flemish Region,Flemish Brabant,97,3,3.09,False,507,
+32010,Koekelare,Flemish Region,West Flanders,148,3,2.03,True,507,480.00
+53039,Hensies,Walloon Region,Hainaut,140,3,2.14,True,507,475.00
+83040,Nassogne,Walloon Region,Luxembourg,144,3,2.08,True,507,478.00
+53046,Lens,Walloon Region,Hainaut,95,3,3.16,False,507,
+64025,Fexhe-le-Haut-Clocher,Walloon Region,Liège,77,2,2.60,False,536,
+91103,Onhaye,Walloon Region,Namur,78,2,2.56,False,536,
+91059,Hamois,Walloon Region,Namur,173,2,1.16,True,536,496.00
+91054,Gedinne,Walloon Region,Namur,90,2,2.22,False,536,
+64015,Braives,Walloon Region,Liège,135,2,1.48,True,536,494.00
+64008,Berloz,Walloon Region,Liège,55,2,3.64,False,536,
+64029,Geer,Walloon Region,Liège,65,2,3.08,False,536,
+64075,Wasseiges,Walloon Region,Liège,34,2,5.88,False,536,
+61048,Ouffet,Walloon Region,Liège,64,2,3.12,False,536,
+61010,Burdinne,Walloon Region,Liège,63,2,3.17,False,536,
+38002,Alveringem,Flemish Region,West Flanders,126,2,1.59,True,536,492.00
+57093,Brunehaut,Walloon Region,Hainaut,113,2,1.77,True,536,488.00
+57072,Rumes,Walloon Region,Hainaut,60,2,3.33,False,536,
+25118,Hélécine,Walloon Region,Walloon Brabant,63,2,3.17,False,536,
+56051,Momignies,Walloon Region,Hainaut,96,2,2.08,False,536,
+24028,Geetbets,Flemish Region,Flemish Brabant,99,2,2.02,False,536,
+61063,Verlaine,Walloon Region,Liège,93,2,2.15,False,536,
+83055,Manhay,Walloon Region,Luxembourg,129,2,1.55,True,536,493.00
+51068,Opzullik,Walloon Region,Hainaut,211,2,0.95,True,536,499.00
+36011,Lichtervelde,Flemish Region,West Flanders,273,2,0.73,True,536,502.00
+92138,Fernelmont,Walloon Region,Namur,255,2,0.78,True,536,501.00
+82038,Sainte-Ode,Walloon Region,Luxembourg,61,2,3.28,False,536,
+63075,Stoumont,Walloon Region,Liège,113,2,1.77,True,536,488.00
+92054,Gesves,Walloon Region,Namur,148,2,1.35,True,536,495.00
+63001,Amel,Walloon Region,Liège,110,1,0.91,True,560,500.00
+63045,Lierneux,Walloon Region,Liège,86,1,1.16,False,560,
+33016,Mesen,Flemish Region,West Flanders,10,1,10.00,False,560,
+61028,Héron,Walloon Region,Liège,141,1,0.71,True,560,503.00
+85047,Rouvroy,Walloon Region,Luxembourg,43,1,2.33,False,560,
+85039,Tintigny,Walloon Region,Luxembourg,84,1,1.19,False,560,
+85026,Musson,Walloon Region,Luxembourg,57,1,1.75,False,560,
+84068,Tellin,Walloon Region,Luxembourg,104,1,0.96,True,560,498.00
+51012,Brugelette,Walloon Region,Hainaut,98,1,1.02,False,560,
+81013,Martelange,Walloon Region,Luxembourg,49,1,2.04,False,560,
+64023,Donceel,Walloon Region,Liège,48,1,2.08,False,560,
+33041,Vleteren,Flemish Region,West Flanders,80,1,1.25,False,560,
+82036,Vaux-sur-Sûre,Walloon Region,Luxembourg,102,1,0.98,True,560,497.00
+45062,Horebeke,Flemish Region,East Flanders,35,0,0.00,False,573,
+34043,Spiere-Helkijn,Flemish Region,West Flanders,27,0,0.00,False,573,
+64063,Remicourt,Walloon Region,Liège,96,0,0.00,False,573,
+82009,Fauvillers,Walloon Region,Luxembourg,44,0,0.00,False,573,
+84016,Daverdisse,Walloon Region,Luxembourg,14,0,0.00,False,573,
+84029,Herbeumont,Walloon Region,Luxembourg,28,0,0.00,False,573,
+84035,Libin,Walloon Region,Luxembourg,149,0,0.00,True,573,504.00
+82005,Bertogne,Walloon Region,Luxembourg,63,0,0.00,False,573,
+73028,Herstappe,Flemish Region,Limburg,4,0,0.00,False,573,

@@ -92,7 +92,7 @@ def render_geography(tab):
     with tab:
         st.subheader("Where are vulnerable road users most exposed?")
         st.caption(FIXED_NOTE + " Municipality outlines: Statbel statistical sectors 2023, CC BY 4.0 (outlines joined and simplified).")
-        part_a, part_b = st.tabs(["3a  Cyclists by municipality", "3b/3c  Hotspots: pedestrians, motorcycles, mopeds"])
+        part_a, part_b, part_c = st.tabs(["3a  Cyclists by municipality", "3b/3c  Hotspots: pedestrians, motorcycles, mopeds", "3b/3c  Municipalities: top 20 per group"])
         with part_a:
             st.markdown("**Accidents involving cyclists, 2017-2024**")
             plot(extra.fig_cyclists_ranked(res))
@@ -133,6 +133,40 @@ def render_geography(tab):
                        "10-13% of accidents have no coordinates (3-5% in 2022-2024), more in Wallonia, so Walloon hotspots may be understated. Different square sizes would give different ranks.")
             with st.expander(f"The 20 busiest squares: {group.lower()}s, {scope}"):
                 table(top, f"hotspots_{group.lower()}_{scope}", "Rank = by accidents involving the group in the square. 'Municipality' = the most common municipality among the square's accidents.")
+
+
+        with part_c:
+            MUNICIPALITY_FINDINGS = {
+                "Pedestrian": ["29,897 accidents involve pedestrians, in 572 of the 581 municipalities.",
+                               "By count: Antwerpen 2,687, Brussel 1,637, Gent 1,157, Luik 1,109, Charleroi 809.",
+                               "By share (municipalities with 100+ accidents): Koekelberg 31.5%, Sint-Jans-Molenbeek 30.8%, Jette 30.1%, Sint-Agatha-Berchem 29.9%, Sint-Gillis 29.6%; the top of the list is dominated by the Brussels municipalities.",
+                               "Pedestrian share by region: Brussels 21.9%, Wallonia 10.8%, Flanders 8.2%."],
+                "Motorcycle": ["19,792 accidents involve motorcycles, in 578 of the 581 municipalities.",
+                               "By count: Brussel 1,351, Antwerpen 1,029, Gent 427, Luik 416, Anderlecht 352.",
+                               "By share (municipalities with 100+ accidents): Stoumont 32.7%, Froidchapelle 32.6%, Cerfontaine 29.4%, La Roche-en-Ardenne 28.0%, Bouillon 24.1%; these are small Walloon municipalities with 113 to 203 accidents, so a few accidents move the share.",
+                               "Motorcycle share by region: Brussels 11.2%, Wallonia 8.3%, Flanders 5.4%."],
+                "Moped": ["23,258 accidents involve mopeds, in 568 of the 581 municipalities.",
+                          "By count: Antwerpen 2,250, Gent 1,215, Brugge 610, Brussel 588, Charleroi 444.",
+                          "By share (municipalities with 100+ accidents): Hemiksem 20.3%, Lanaken 18.9%, Schilde 18.2%, Schelle 16.9%, Niel 16.6%; all five are in Flanders.",
+                          "Moped share by region: Flanders 9.5%, Wallonia 5.9%, Brussels 5.3%."]}
+            c1, c2, c3 = st.columns(3)
+            group = c1.radio("Group", ["Pedestrian", "Motorcycle", "Moped"], horizontal=True, key="muni_group")
+            region = c2.radio("Region", ["Belgium", "Flemish Region", "Walloon Region", "Brussels-Capital Region"], horizontal=True, key="muni_region",
+                              format_func=lambda r: extra.REGION_SHORT.get(r, r), help="Applies to the ranked charts; the maps always show the whole country.")
+            kind = c3.radio("Map", ["Bubble map", "Choropleth (two maps)"], horizontal=True, key="muni_map")
+            t = extra.group_municipality_table(res, group)
+            st.markdown(f"**Accidents involving {extra.GROUP_WORDS[group][1]}, 2017-2024**")
+            plot(extra.fig_group_ranked(t, group, None if region == "Belgium" else region))
+            if kind == "Bubble map":
+                st.caption(f"Each bubble sits at the average position of the municipality's accidents. Size = accidents involving {extra.GROUP_WORDS[group][1]}; colour = their share of all its accidents (5 quantile classes, municipalities with 100+ accidents).")
+                plot(extra.fig_group_bubble(t, outl, positions(), group))
+            else:
+                st.caption("Five classes with about the same number of municipalities each; the legend gives the exact limits. Gray = fewer than 100 accidents, not ranked by share.")
+                plot(extra.fig_group_choropleth(t, outl, group))
+            findings(MUNICIPALITY_FINDINGS[group])
+            st.caption("Read with care: counts favour big cities and the data has no population or traffic figures, so these are not rates per inhabitant or per road user. A share in a small municipality moves with a few accidents.")
+            with st.expander(f"Table (all 581 municipalities): {extra.GROUP_WORDS[group][1]}"):
+                table(t.round(2), f"geo_{extra.GROUP_WORDS[group][1]}_by_municipality")
 
 
 # --------------------------------------------------------------------------------------

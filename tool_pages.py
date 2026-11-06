@@ -282,10 +282,25 @@ def page_geography(ctx):
         metric_label = st.selectbox("Colour the map by", ["Accidents involving the group", "The group's share of all the municipality's accidents (%)", "Severe share of the group's accidents (%, 30+ accidents)"], key="geo_metric")
         metric = {"Accidents involving the group": "accidents", "The group's share of all the municipality's accidents (%)": "share of all accidents %",
                   "Severe share of the group's accidents (%, 30+ accidents)": "severe %"}[metric_label]
-        st.caption("Five classes with about the same number of municipalities each; gray = outside the selection or too few accidents for a share. Municipality outlines: Statbel, CC BY 4.0.")
-        page.chart("Municipality map", tc.fig_municipality_map(table, data["outlines"], metric, group))
+        st.caption("Five classes with about the same number of municipalities each; gray = outside the selection or too few accidents for a share (a share map needs 100+ accidents in the municipality, a severe share 30+ accidents of the group). Municipality outlines: Statbel, CC BY 4.0.")
+        map_table = table.copy()
+        if metric == "share of all accidents %":  # the same rule as the ranking: a share needs 100+ accidents in the municipality (#161)
+            map_table.loc[map_table["all accidents"] < ts.MIN_ALL_FOR_SHARE, "share of all accidents %"] = np.nan
+        page.chart("Municipality map", tc.fig_municipality_map(map_table, data["outlines"], metric, group))
+        by_label = st.radio("Top 20 by", ["Number of accidents", "Share of the municipality's accidents (100+ accidents)"], horizontal=True, key="geo_top_by")
+        by = "accidents" if by_label.startswith("Number") else "share"
+        top = ts.top_municipalities(table, by)
+        n_ranked = int((table["all accidents"] >= ts.MIN_ALL_FOR_SHARE).sum())
+        selection_share = table["accidents"].sum() / table["all accidents"].sum() * 100
+        st.markdown(f"**Top 20 municipalities by {'number of accidents' if by == 'accidents' else 'share'}: {group.lower()}s**")
+        if by == "share":
+            st.caption(f"Only municipalities with at least {ts.MIN_ALL_FOR_SHARE} accidents of any kind in the selection are ranked by share: {n_ranked} of {len(table)} qualify"
+                       + (f", so fewer than 20 can be shown." if n_ranked < 20 else ".") + " The gray line is the share in the whole selection.")
+        page.chart("Top 20 municipalities", tc.fig_municipality_top(top, group, by, selection_share))
+        with st.expander("The top 20 as a table", expanded=False):
+            page.table("Top 20 municipalities", top[["rank", "municipality", "region", "accidents", "all accidents", "share of all accidents %", "severe", "severe %", "note"]])
         ranking = table[table["accidents"] > 0].sort_values(metric if metric in table else "accidents", ascending=False)
-        with st.expander("Ranking and table", expanded=True):
+        with st.expander("All municipalities in the selection", expanded=False):
             page.table("Municipality table", ranking[["municipality", "region", "accidents", "all accidents", "share of all accidents %", "severe", "severe %", "severe low", "severe high", "note"]])
         st.caption("Counts favour big municipalities, and there are no population or traffic figures: these are not rates per inhabitant or per road user.")
     elif view == "Provinces and regions":

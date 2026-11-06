@@ -142,7 +142,32 @@ xs, ys = [], []  # the municipality borders once, as one line with gaps (None) b
 for f in outlines["features"]:
     x, y = dx._ring_xy(f["polys"])
     xs += x; ys += y
-extra = {"s5models": dx.MODELS5, "s5singleviews": [list(v) for v in dx.SINGLE_VIEWS], "outline": {"x": xs, "y": ys}, "scopes": [[k, v] for k, v in scopes], "figs": figs, "hotspots": hotspots, "tables": tables}
+# step 3b/3c, municipality view (script 24): the numbers per municipality, group and period; the page ranks and draws them in the browser, so the buttons can combine freely
+periods_tbl = pd.read_csv(PROJECT / "reports" / "geo_municipality_periods.csv", dtype={"municipality_nis_code": str})
+base_tbl = res["geo_a_cyclists_by_municipality"].set_index("municipality_nis_code")
+feature_order = [f["nis"] for f in outlines["features"]]
+pos_tbl = positions.set_index("municipality_nis_code")
+starts, ends, at = [], [], 0
+for f in outlines["features"]:                               # where each municipality's rings start and end in the shared outline lists
+    x, _ = dx._ring_xy(f["polys"])
+    starts.append(at); at += len(x); ends.append(at)
+assert at == len(xs), "outline ranges do not match the shared outline"
+period_keys = ["2017-2024", "2022-2024"] + [str(y) for y in range(2017, 2025)]
+muni_groups = ["All accidents", "Bicycle", "Pedestrian", "Motorcycle", "Moped"]
+by_key = {k: v.set_index("municipality_nis_code") for k, v in periods_tbl.groupby(["group", "period"])}
+def ints(group, period, column):
+    return [int(v) for v in by_key[(group, period)].loc[feature_order, column]]
+muni = {
+    "nis": feature_order, "name": [base_tbl.loc[n, "municipality"] for n in feature_order], "region": [base_tbl.loc[n, "region"] for n in feature_order],
+    "bx": [round(float(pos_tbl.loc[n, "bubble_x"]), 1) for n in feature_order], "by": [round(float(pos_tbl.loc[n, "bubble_y"]), 1) for n in feature_order],
+    "cx": [round(float(f["x"]), 1) for f in outlines["features"]], "cy": [round(float(f["y"]), 1) for f in outlines["features"]],
+    "start": starts, "end": ends, "periods": period_keys,
+    "total": {p: ints("All accidents", p, "accidents") for p in period_keys},
+    "g": {g: {p: {"a": ints(g, p, "accidents"), "s": ints(g, p, "severe")} for p in period_keys} for g in muni_groups[1:]},
+}
+assert sum(muni["total"]["2017-2024"]) == 289532 and sum(muni["g"]["Pedestrian"]["2017-2024"]["a"]) == 29897
+
+extra = {"muni": muni, "s5models": dx.MODELS5, "s5singleviews": [list(v) for v in dx.SINGLE_VIEWS], "outline": {"x": xs, "y": ys}, "scopes": [[k, v] for k, v in scopes], "figs": figs, "hotspots": hotspots, "tables": tables}
 
 # --- 3. Put everything into the template ---
 template = open(template_file, encoding="utf-8").read()

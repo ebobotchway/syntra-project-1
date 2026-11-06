@@ -23,7 +23,7 @@ NAMED = ["Passenger car", "Bicycle", "Pedestrian", "Van / light truck", "Moped",
 GROUPS5 = ["All accidents", "Bicycle", "Pedestrian", "Motorcycle", "Moped"]
 ROAD_TYPES = ["Motorway", "Regional road", "Municipal road"]
 SCOPE_LABELS = {"pooled_2017_2024": "All years 2017-2024", "pre_2017_2019": "Pre 2017-2019", "during_2020_2021": "During 2020-2021", "post_2022_2024": "Post 2022-2024"}
-RESULT_FILES = ["severity_a_fatal", "severity_b_serious", "severity_c_slight", "severity_d_distribution", "geo_a_cyclists_by_municipality", "geo_hotspots_pedestrian",
+RESULT_FILES = ["severity_a_fatal", "severity_b_serious", "severity_c_slight", "severity_d_distribution", "geo_a_cyclists_by_municipality", "geo_a_pedestrians_by_municipality", "geo_a_motorcycles_by_municipality", "geo_a_mopeds_by_municipality", "geo_hotspots_pedestrian",
                 "geo_hotspots_motorcycle", "geo_hotspots_moped", "geo_coverage", "severity_regional_regions_provinces", "severity_regional_roadtype",
                 "severity_by_square_concentration", "severity_by_municipality_density", "severity_density_correlation", "severity_municipality_density_table",
                 "severity_regions_within_density", "severity_regions_within_density_roadtype", "severity_regions_standardised", "severity_regions_logistic",
@@ -171,58 +171,76 @@ def fig_severity_distribution(res, scope):
 # --------------------------------------------------------------------------------------
 # Step 3: cyclists by municipality
 # --------------------------------------------------------------------------------------
-def fig_cyclists_ranked(res):
-    """Top 20 municipalities by number of cyclist accidents and by cyclist share (municipalities with at least 100 accidents)."""
-    t = res["geo_a_cyclists_by_municipality"]
-    national = t["accidents_cyclists"].sum() / t["accidents_total"].sum() * 100
-    panels = ((t.sort_values("accidents_cyclists", ascending=False).head(20), "accidents_cyclists", "Top 20 by accidents involving cyclists"),
-              (t[t["ranked_by_share"]].sort_values("cyclist_share_pct", ascending=False).head(20), "cyclist_share_pct", f"Top 20 by cyclist share (100+ accidents)<br><sup>Belgium: {national:.1f}% (gray line)</sup>"))
+GROUP_WORDS = {"Bicycle": ("cyclist", "cyclists"), "Pedestrian": ("pedestrian", "pedestrians"), "Motorcycle": ("motorcycle", "motorcycles"), "Moped": ("moped", "mopeds")}
+GROUP_FILES = {"Bicycle": "geo_a_cyclists_by_municipality", "Pedestrian": "geo_a_pedestrians_by_municipality", "Motorcycle": "geo_a_motorcycles_by_municipality", "Moped": "geo_a_mopeds_by_municipality"}
+
+
+def group_municipality_table(res, group):
+    """The saved municipality table of one group with the same column names for every group (accidents_group, group_share_pct)."""
+    t = res[GROUP_FILES[group]]
+    return t.rename(columns={"accidents_cyclists": "accidents_group", "cyclist_share_pct": "group_share_pct"})
+
+
+def fig_group_ranked(t, group, region=None):
+    """Top 20 municipalities by number of accidents involving the group and by its share (municipalities with at least 100 accidents); region = None or a region name."""
+    one, many = GROUP_WORDS[group]
+    if region:
+        t = t[t["region"] == region]
+    national = t["accidents_group"].sum() / t["accidents_total"].sum() * 100
+    where = "Belgium" if not region else REGION_SHORT.get(region, region)
+    panels = ((t.sort_values("accidents_group", ascending=False).head(20), "accidents_group", f"Top 20 by accidents involving {many}"),
+              (t[t["ranked_by_share"]].sort_values("group_share_pct", ascending=False).head(20), "group_share_pct", f"Top 20 by {one} share (100+ accidents)<br><sup>{where}: {national:.1f}% (gray line)</sup>"))
     fig = make_subplots(rows=1, cols=2, subplot_titles=[f"<b>{p[2]}</b>" for p in panels], horizontal_spacing=0.28)
     for i, (d, column, _) in enumerate(panels, start=1):
         d = d.iloc[::-1]  # the biggest at the top
-        is_share = column == "cyclist_share_pct"
-        text = [f"{r[column]:.1f}%  ({r['accidents_cyclists']:,} of {r['accidents_total']:,})" if is_share else f"{r[column]:,}  ({r['cyclist_share_pct']:.0f}% of {r['accidents_total']:,})" for _, r in d.iterrows()]
-        hover = [f"<b>{r['municipality']}</b> ({r['region']})<br>{r['accidents_cyclists']:,} accidents involve cyclists<br>{r['cyclist_share_pct']:.1f}% of its {r['accidents_total']:,} accidents" for _, r in d.iterrows()]
+        is_share = column == "group_share_pct"
+        text = [f"{r[column]:.1f}%  ({r['accidents_group']:,} of {r['accidents_total']:,})" if is_share else f"{r[column]:,}  ({r['group_share_pct']:.0f}% of {r['accidents_total']:,})" for _, r in d.iterrows()]
+        hover = [f"<b>{r['municipality']}</b> ({r['region']})<br>{r['accidents_group']:,} accidents involve {many}<br>{r['group_share_pct']:.1f}% of its {r['accidents_total']:,} accidents" for _, r in d.iterrows()]
         fig.add_trace(go.Bar(y=d["municipality"], x=d[column], orientation="h", marker_color=BLUE, text=text, textposition="outside", cliponaxis=False, hovertext=hover, hovertemplate="%{hovertext}<extra></extra>", showlegend=False), row=1, col=i)
-        fig.update_xaxes(range=[0, d[column].max() * 1.75], ticksuffix="%" if is_share else "", tickformat="~g" if is_share else ",d", row=1, col=i)
+        if len(d):
+            fig.update_xaxes(range=[0, d[column].max() * 1.75], ticksuffix="%" if is_share else "", tickformat="~g" if is_share else ",d", row=1, col=i)
     fig.add_vline(x=national, line_color=GRAY, line_width=2, row=1, col=2)
     fig.update_yaxes(tickfont=dict(size=11))
     return _layout(fig, 640)
 
 
-def fig_cyclists_bubble(res, outlines, positions):
-    """A bubble per municipality at the average position of its accidents: size = cyclist accidents, colour = cyclist share (5 quantile classes)."""
-    t = res["geo_a_cyclists_by_municipality"].merge(positions[["municipality_nis_code", "bubble_x", "bubble_y"]], on="municipality_nis_code")
-    t = t[t["accidents_cyclists"] > 0].sort_values("accidents_cyclists", ascending=False)  # big bubbles first, small on top
+def fig_group_bubble(t, outlines, positions, group):
+    """A bubble per municipality at the average position of its accidents: size = accidents with the group, colour = its share (5 quantile classes)."""
+    one, many = GROUP_WORDS[group]
+    t = t.merge(positions[["municipality_nis_code", "bubble_x", "bubble_y"]], on="municipality_nis_code")
+    t = t[t["accidents_group"] > 0].sort_values("accidents_group", ascending=False)  # big bubbles first, small on top
     ranked = t[t["ranked_by_share"]]
-    edges, _ = _quantile_classes(ranked["cyclist_share_pct"].values)
-    classes = np.clip(np.digitize(t["cyclist_share_pct"].values, edges[1:-1], right=True), 0, len(edges) - 2)
+    edges, _ = _quantile_classes(ranked["group_share_pct"].values)
+    classes = np.clip(np.digitize(t["group_share_pct"].values, edges[1:-1], right=True), 0, len(edges) - 2)
     fig = go.Figure([outline_trace(outlines)])
-    scale = 60 / np.sqrt(t["accidents_cyclists"].max())
-    groups = [(k, RAMP[k], f"{edges[k]:.0f}-{edges[k + 1]:.0f}% cyclist share", (classes == k) & t["ranked_by_share"].values) for k in range(len(edges) - 1)]
+    scale = 60 / np.sqrt(t["accidents_group"].max())
+    fmt = (lambda a: f"{a:.0f}") if group == "Bicycle" else (lambda a: f"{a:.1f}")
+    groups = [(k, RAMP[k], f"{fmt(edges[k])}-{fmt(edges[k + 1])}% {one} share", (classes == k) & t["ranked_by_share"].values) for k in range(len(edges) - 1)]
     groups.append((-1, GRAY, "fewer than 100 accidents (not ranked)", ~t["ranked_by_share"].values))
     for _, colour, label, mask in groups:
         d = t[mask]
         fig.add_trace(go.Scatter(x=[None], y=[None], mode="markers", name=label, legendgroup=label, marker=dict(size=12, color=colour)))  # the legend entry: a clear dot of fixed size
-        fig.add_trace(go.Scatter(x=d["bubble_x"], y=d["bubble_y"], mode="markers", name=label, legendgroup=label, showlegend=False, marker=dict(size=np.sqrt(d["accidents_cyclists"]) * scale, color=colour, opacity=0.85, line=dict(color="white", width=0.6)),
-                                 hovertext=[f"<b>{r['municipality']}</b><br>{r['accidents_cyclists']:,} accidents involve cyclists<br>{r['cyclist_share_pct']:.1f}% of {r['accidents_total']:,} accidents" for _, r in d.iterrows()], hovertemplate="%{hovertext}<extra></extra>"))
+        fig.add_trace(go.Scatter(x=d["bubble_x"], y=d["bubble_y"], mode="markers", name=label, legendgroup=label, showlegend=False, marker=dict(size=np.sqrt(d["accidents_group"]) * scale, color=colour, opacity=0.85, line=dict(color="white", width=0.6)),
+                                 hovertext=[f"<b>{r['municipality']}</b><br>{r['accidents_group']:,} accidents involve {many}<br>{r['group_share_pct']:.1f}% of {r['accidents_total']:,} accidents" for _, r in d.iterrows()], hovertemplate="%{hovertext}<extra></extra>"))
     fig.update_layout(legend=dict(orientation="h", y=-0.02, x=0))
     _equal_axes(fig, 1, 1)
     return _layout(fig, 700, margin=dict(l=0, r=0, t=10, b=0))
 
 
-def fig_cyclists_choropleth(res, outlines):
-    """Two maps: accidents involving cyclists (all municipalities) and cyclist share (municipalities with 100+ accidents), 5 quantile classes each."""
-    t = res["geo_a_cyclists_by_municipality"].set_index("municipality_nis_code")
+def fig_group_choropleth(t, outlines, group):
+    """Two maps: accidents involving the group (all municipalities) and its share (municipalities with 100+ accidents), 5 quantile classes each."""
+    one, many = GROUP_WORDS[group]
+    t = t.set_index("municipality_nis_code")
     feats = outlines["features"]
-    count = np.array([t.loc[f["nis"], "accidents_cyclists"] for f in feats], float)
-    share = np.array([t.loc[f["nis"], "cyclist_share_pct"] for f in feats], float)
+    count = np.array([t.loc[f["nis"], "accidents_group"] for f in feats], float)
+    share = np.array([t.loc[f["nis"], "group_share_pct"] for f in feats], float)
     ranked = np.array([bool(t.loc[f["nis"], "ranked_by_share"]) for f in feats])
-    fig = make_subplots(rows=1, cols=2, subplot_titles=["<b>Accidents involving cyclists</b>", "<b>Cyclist share of the municipality's accidents</b>"], horizontal_spacing=0.02)
+    fig = make_subplots(rows=1, cols=2, subplot_titles=[f"<b>Accidents involving {many}</b>", f"<b>{one.capitalize()} share of the municipality's accidents</b>"], horizontal_spacing=0.02)
     for col, (values, mask, unit) in enumerate(((count, np.ones(len(feats), bool), "accidents"), (share, ranked, "%")), start=1):
         edges, _ = _quantile_classes(values[mask])  # the class limits come from the municipalities that count ...
         classes = np.clip(np.digitize(values, edges[1:-1], right=True), 0, len(edges) - 2)  # ... and are then applied to every municipality
-        parts = [(RAMP[k], f"{edges[k]:,.0f}-{edges[k + 1]:,.0f}" if unit == "accidents" else f"{edges[k]:.0f}-{edges[k + 1]:.0f}%", mask & (classes == k)) for k in range(len(edges) - 1)]
+        digits = 0 if group == "Bicycle" else 1
+        parts = [(RAMP[k], f"{edges[k]:,.0f}-{edges[k + 1]:,.0f}" if unit == "accidents" else f"{edges[k]:.{digits}f}-{edges[k + 1]:.{digits}f}%", mask & (classes == k)) for k in range(len(edges) - 1)]
         if unit == "%":
             parts.append((GRAY, "fewer than 100 accidents (not ranked)", ~mask))
         for colour, label, selected in parts:
@@ -232,11 +250,23 @@ def fig_cyclists_choropleth(res, outlines):
                     x, y = _ring_xy(f["polys"]); xs += x; ys += y
             fig.add_trace(go.Scatter(x=xs, y=ys, mode="lines", fill="toself", fillcolor=colour, line=dict(color="rgba(255,255,255,0.7)", width=0.4), name=label, legendgroup=f"{col}-{label}", hoverinfo="skip"), row=1, col=col)
         fig.add_trace(go.Scatter(x=[f["x"] for f in feats], y=[f["y"] for f in feats], mode="markers", marker=dict(size=9, opacity=0), showlegend=False,
-                                 hovertext=[f"<b>{f['name']}</b><br>{count[i]:,.0f} accidents involve cyclists<br>{share[i]:.1f}% of {t.loc[f['nis'], 'accidents_total']:,} accidents" + ("" if ranked[i] else "<br><i>too few accidents to rank by share</i>") for i, f in enumerate(feats)],
+                                 hovertext=[f"<b>{f['name']}</b><br>{count[i]:,.0f} accidents involve {many}<br>{share[i]:.1f}% of {t.loc[f['nis'], 'accidents_total']:,} accidents" + ("" if ranked[i] else "<br><i>too few accidents to rank by share</i>") for i, f in enumerate(feats)],
                                  hovertemplate="%{hovertext}<extra></extra>"), row=1, col=col)
     _equal_axes(fig, 1, 2)
     fig.update_layout(legend=dict(orientation="h", y=-0.02))
     return _layout(fig, 560, margin=dict(l=0, r=0, t=50, b=0))
+
+
+def fig_cyclists_ranked(res):
+    return fig_group_ranked(group_municipality_table(res, "Bicycle"), "Bicycle")
+
+
+def fig_cyclists_bubble(res, outlines, positions):
+    return fig_group_bubble(group_municipality_table(res, "Bicycle"), outlines, positions, "Bicycle")
+
+
+def fig_cyclists_choropleth(res, outlines):
+    return fig_group_choropleth(group_municipality_table(res, "Bicycle"), outlines, "Bicycle")
 
 
 # --------------------------------------------------------------------------------------

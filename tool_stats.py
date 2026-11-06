@@ -176,6 +176,21 @@ def municipality_table(sub, group_mask):
     return out.reset_index()
 
 
+MIN_ALL_FOR_SHARE = 100  # a municipality is ranked by share only with at least 100 accidents of any kind in the selection (#88, #161)
+
+
+def top_municipalities(table, by, n=20):
+    """The n municipalities with most accidents involving the group (by='accidents') or the highest share of all their accidents (by='share', 100+ accidents in the selection)."""
+    d = table[table["accidents"] > 0]
+    if by == "share":
+        d = d[d["all accidents"] >= MIN_ALL_FOR_SHARE].sort_values(["share of all accidents %", "accidents"], ascending=False)
+    else:
+        d = d.sort_values(["accidents", "share of all accidents %"], ascending=False)
+    d = d.head(n).copy()
+    d.insert(0, "rank", range(1, len(d) + 1))
+    return d
+
+
 CELL = 500  # metres: the squares of the hotspot analysis (#86)
 
 

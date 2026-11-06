@@ -262,6 +262,24 @@ def fig_municipality_map(table, outlines, metric, group):
     return dx._layout(fig, 640, margin=dict(l=0, r=0, t=10, b=0))
 
 
+def fig_municipality_top(top, group, by, belgium_share=None):
+    """Horizontal bars of the top municipalities (biggest at the top), labelled with count and share; by = 'accidents' or 'share'."""
+    if top.empty:
+        return empty_figure("No municipality qualifies in this selection (a share ranking needs 100 or more accidents in the municipality).")
+    d = top.iloc[::-1]
+    is_share = by == "share"
+    column = "share of all accidents %" if is_share else "accidents"
+    text = [f"{r[column]:.1f}%  ({r['accidents']:,} of {r['all accidents']:,})" if is_share else f"{r[column]:,}  ({r['share of all accidents %']:.0f}% of {r['all accidents']:,})" for _, r in d.iterrows()]
+    hover = [f"<b>{r['municipality']}</b> ({r['region']})<br>{r['accidents']:,} accidents involve {group.lower()}s<br>{r['share of all accidents %']:.1f}% of its {r['all accidents']:,} accidents"
+             + (f"<br>{r['severe %']:.1f}% severe ({r['severe']:,})" if pd.notna(r.get("severe %")) else "") for _, r in d.iterrows()]
+    fig = go.Figure(go.Bar(y=d["municipality"], x=d[column], orientation="h", marker_color=dx.BLUE, text=text, textposition="outside", cliponaxis=False, hovertext=hover, hovertemplate="%{hovertext}<extra></extra>"))
+    if is_share and belgium_share is not None:
+        fig.add_vline(x=belgium_share, line_color=dx.GRAY, line_width=2, annotation_text=f"selection {belgium_share:.1f}%", annotation_position="top")
+    fig.update_xaxes(range=[0, d[column].max() * 1.7], ticksuffix="%" if is_share else "", tickformat="~g" if is_share else ",d")
+    fig.update_yaxes(tickfont=dict(size=11))
+    return dx._layout(fig, 90 + 26 * len(d), margin=dict(l=10, r=10, t=30, b=10))
+
+
 def fig_province_map(area_table, provinces, outcome, group):
     """The provinces (and Brussels) of the selection coloured by the share with the chosen outcome (five quantile classes), for one group."""
     key = OUTCOME_KEYS[outcome]
