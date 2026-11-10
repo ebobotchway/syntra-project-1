@@ -1,0 +1,1057 @@
+road_user_group,year,month,accidents
+Passenger car,2017,1,2208
+Passenger car,2017,2,2164
+Passenger car,2017,3,2525
+Passenger car,2017,4,2161
+Passenger car,2017,5,2619
+Passenger car,2017,6,2660
+Passenger car,2017,7,2166
+Passenger car,2017,8,2230
+Passenger car,2017,9,2472
+Passenger car,2017,10,2683
+Passenger car,2017,11,2648
+Passenger car,2017,12,2274
+Passenger car,2018,1,2219
+Passenger car,2018,2,2065
+Passenger car,2018,3,2254
+Passenger car,2018,4,2272
+Passenger car,2018,5,2646
+Passenger car,2018,6,2556
+Passenger car,2018,7,2212
+Passenger car,2018,8,2129
+Passenger car,2018,9,2351
+Passenger car,2018,10,2715
+Passenger car,2018,11,2610
+Passenger car,2018,12,2346
+Passenger car,2019,1,2163
+Passenger car,2019,2,2145
+Passenger car,2019,3,2232
+Passenger car,2019,4,2121
+Passenger car,2019,5,2364
+Passenger car,2019,6,2451
+Passenger car,2019,7,2155
+Passenger car,2019,8,2094
+Passenger car,2019,9,2449
+Passenger car,2019,10,2423
+Passenger car,2019,11,2480
+Passenger car,2019,12,2311
+Passenger car,2020,1,2147
+Passenger car,2020,2,2073
+Passenger car,2020,3,1384
+Passenger car,2020,4,757
+Passenger car,2020,5,1425
+Passenger car,2020,6,1772
+Passenger car,2020,7,1897
+Passenger car,2020,8,1830
+Passenger car,2020,9,2203
+Passenger car,2020,10,1938
+Passenger car,2020,11,1402
+Passenger car,2020,12,1706
+Passenger car,2021,1,1593
+Passenger car,2021,2,1482
+Passenger car,2021,3,1696
+Passenger car,2021,4,1639
+Passenger car,2021,5,1958
+Passenger car,2021,6,2428
+Passenger car,2021,7,1945
+Passenger car,2021,8,1957
+Passenger car,2021,9,2436
+Passenger car,2021,10,2549
+Passenger car,2021,11,2097
+Passenger car,2021,12,2053
+Passenger car,2022,1,1868
+Passenger car,2022,2,1917
+Passenger car,2022,3,2037
+Passenger car,2022,4,2032
+Passenger car,2022,5,2476
+Passenger car,2022,6,2489
+Passenger car,2022,7,1840
+Passenger car,2022,8,1938
+Passenger car,2022,9,2336
+Passenger car,2022,10,2280
+Passenger car,2022,11,2147
+Passenger car,2022,12,2198
+Passenger car,2023,1,1984
+Passenger car,2023,2,1755
+Passenger car,2023,3,2012
+Passenger car,2023,4,2011
+Passenger car,2023,5,2231
+Passenger car,2023,6,2447
+Passenger car,2023,7,1908
+Passenger car,2023,8,1899
+Passenger car,2023,9,2282
+Passenger car,2023,10,2329
+Passenger car,2023,11,2237
+Passenger car,2023,12,1952
+Passenger car,2024,1,1775
+Passenger car,2024,2,1760
+Passenger car,2024,3,1926
+Passenger car,2024,4,1818
+Passenger car,2024,5,2094
+Passenger car,2024,6,2266
+Passenger car,2024,7,1879
+Passenger car,2024,8,1849
+Passenger car,2024,9,2131
+Passenger car,2024,10,2275
+Passenger car,2024,11,2060
+Passenger car,2024,12,1781
+Bicycle,2017,1,408
+Bicycle,2017,2,485
+Bicycle,2017,3,717
+Bicycle,2017,4,596
+Bicycle,2017,5,862
+Bicycle,2017,6,939
+Bicycle,2017,7,631
+Bicycle,2017,8,669
+Bicycle,2017,9,760
+Bicycle,2017,10,809
+Bicycle,2017,11,683
+Bicycle,2017,12,430
+Bicycle,2018,1,509
+Bicycle,2018,2,467
+Bicycle,2018,3,511
+Bicycle,2018,4,717
+Bicycle,2018,5,946
+Bicycle,2018,6,925
+Bicycle,2018,7,785
+Bicycle,2018,8,697
+Bicycle,2018,9,860
+Bicycle,2018,10,950
+Bicycle,2018,11,736
+Bicycle,2018,12,498
+Bicycle,2019,1,499
+Bicycle,2019,2,663
+Bicycle,2019,3,634
+Bicycle,2019,4,660
+Bicycle,2019,5,794
+Bicycle,2019,6,862
+Bicycle,2019,7,825
+Bicycle,2019,8,820
+Bicycle,2019,9,978
+Bicycle,2019,10,800
+Bicycle,2019,11,757
+Bicycle,2019,12,564
+Bicycle,2020,1,612
+Bicycle,2020,2,538
+Bicycle,2020,3,463
+Bicycle,2020,4,507
+Bicycle,2020,5,837
+Bicycle,2020,6,879
+Bicycle,2020,7,816
+Bicycle,2020,8,797
+Bicycle,2020,9,1032
+Bicycle,2020,10,783
+Bicycle,2020,11,582
+Bicycle,2020,12,522
+Bicycle,2021,1,464
+Bicycle,2021,2,464
+Bicycle,2021,3,668
+Bicycle,2021,4,634
+Bicycle,2021,5,784
+Bicycle,2021,6,1132
+Bicycle,2021,7,729
+Bicycle,2021,8,735
+Bicycle,2021,9,1123
+Bicycle,2021,10,953
+Bicycle,2021,11,687
+Bicycle,2021,12,524
+Bicycle,2022,1,567
+Bicycle,2022,2,623
+Bicycle,2022,3,838
+Bicycle,2022,4,797
+Bicycle,2022,5,1147
+Bicycle,2022,6,1118
+Bicycle,2022,7,896
+Bicycle,2022,8,894
+Bicycle,2022,9,993
+Bicycle,2022,10,1019
+Bicycle,2022,11,817
+Bicycle,2022,12,564
+Bicycle,2023,1,557
+Bicycle,2023,2,598
+Bicycle,2023,3,652
+Bicycle,2023,4,711
+Bicycle,2023,5,1033
+Bicycle,2023,6,1243
+Bicycle,2023,7,752
+Bicycle,2023,8,815
+Bicycle,2023,9,1150
+Bicycle,2023,10,969
+Bicycle,2023,11,696
+Bicycle,2023,12,531
+Bicycle,2024,1,555
+Bicycle,2024,2,579
+Bicycle,2024,3,751
+Bicycle,2024,4,695
+Bicycle,2024,5,839
+Bicycle,2024,6,1022
+Bicycle,2024,7,787
+Bicycle,2024,8,853
+Bicycle,2024,9,959
+Bicycle,2024,10,963
+Bicycle,2024,11,687
+Bicycle,2024,12,500
+Truck,2017,1,141
+Truck,2017,2,144
+Truck,2017,3,181
+Truck,2017,4,140
+Truck,2017,5,189
+Truck,2017,6,183
+Truck,2017,7,112
+Truck,2017,8,144
+Truck,2017,9,183
+Truck,2017,10,197
+Truck,2017,11,158
+Truck,2017,12,138
+Truck,2018,1,133
+Truck,2018,2,132
+Truck,2018,3,146
+Truck,2018,4,157
+Truck,2018,5,167
+Truck,2018,6,157
+Truck,2018,7,128
+Truck,2018,8,119
+Truck,2018,9,110
+Truck,2018,10,173
+Truck,2018,11,143
+Truck,2018,12,117
+Truck,2019,1,119
+Truck,2019,2,128
+Truck,2019,3,141
+Truck,2019,4,142
+Truck,2019,5,144
+Truck,2019,6,158
+Truck,2019,7,134
+Truck,2019,8,165
+Truck,2019,9,141
+Truck,2019,10,152
+Truck,2019,11,156
+Truck,2019,12,134
+Truck,2020,1,139
+Truck,2020,2,133
+Truck,2020,3,115
+Truck,2020,4,61
+Truck,2020,5,112
+Truck,2020,6,124
+Truck,2020,7,129
+Truck,2020,8,98
+Truck,2020,9,151
+Truck,2020,10,114
+Truck,2020,11,102
+Truck,2020,12,95
+Truck,2021,1,97
+Truck,2021,2,116
+Truck,2021,3,133
+Truck,2021,4,128
+Truck,2021,5,120
+Truck,2021,6,183
+Truck,2021,7,104
+Truck,2021,8,126
+Truck,2021,9,129
+Truck,2021,10,140
+Truck,2021,11,138
+Truck,2021,12,107
+Truck,2022,1,95
+Truck,2022,2,124
+Truck,2022,3,129
+Truck,2022,4,142
+Truck,2022,5,147
+Truck,2022,6,140
+Truck,2022,7,105
+Truck,2022,8,127
+Truck,2022,9,136
+Truck,2022,10,144
+Truck,2022,11,113
+Truck,2022,12,96
+Truck,2023,1,117
+Truck,2023,2,108
+Truck,2023,3,138
+Truck,2023,4,98
+Truck,2023,5,133
+Truck,2023,6,160
+Truck,2023,7,116
+Truck,2023,8,119
+Truck,2023,9,155
+Truck,2023,10,106
+Truck,2023,11,132
+Truck,2023,12,112
+Truck,2024,1,81
+Truck,2024,2,107
+Truck,2024,3,112
+Truck,2024,4,123
+Truck,2024,5,105
+Truck,2024,6,147
+Truck,2024,7,123
+Truck,2024,8,98
+Truck,2024,9,129
+Truck,2024,10,156
+Truck,2024,11,117
+Truck,2024,12,105
+Van / light truck,2017,1,250
+Van / light truck,2017,2,228
+Van / light truck,2017,3,252
+Van / light truck,2017,4,213
+Van / light truck,2017,5,287
+Van / light truck,2017,6,273
+Van / light truck,2017,7,224
+Van / light truck,2017,8,237
+Van / light truck,2017,9,265
+Van / light truck,2017,10,277
+Van / light truck,2017,11,264
+Van / light truck,2017,12,228
+Van / light truck,2018,1,229
+Van / light truck,2018,2,216
+Van / light truck,2018,3,250
+Van / light truck,2018,4,240
+Van / light truck,2018,5,298
+Van / light truck,2018,6,290
+Van / light truck,2018,7,214
+Van / light truck,2018,8,211
+Van / light truck,2018,9,236
+Van / light truck,2018,10,293
+Van / light truck,2018,11,258
+Van / light truck,2018,12,193
+Van / light truck,2019,1,226
+Van / light truck,2019,2,245
+Van / light truck,2019,3,222
+Van / light truck,2019,4,222
+Van / light truck,2019,5,263
+Van / light truck,2019,6,274
+Van / light truck,2019,7,251
+Van / light truck,2019,8,251
+Van / light truck,2019,9,290
+Van / light truck,2019,10,254
+Van / light truck,2019,11,270
+Van / light truck,2019,12,240
+Van / light truck,2020,1,227
+Van / light truck,2020,2,234
+Van / light truck,2020,3,172
+Van / light truck,2020,4,135
+Van / light truck,2020,5,191
+Van / light truck,2020,6,233
+Van / light truck,2020,7,215
+Van / light truck,2020,8,238
+Van / light truck,2020,9,262
+Van / light truck,2020,10,264
+Van / light truck,2020,11,168
+Van / light truck,2020,12,224
+Van / light truck,2021,1,181
+Van / light truck,2021,2,193
+Van / light truck,2021,3,227
+Van / light truck,2021,4,221
+Van / light truck,2021,5,264
+Van / light truck,2021,6,294
+Van / light truck,2021,7,222
+Van / light truck,2021,8,236
+Van / light truck,2021,9,310
+Van / light truck,2021,10,315
+Van / light truck,2021,11,276
+Van / light truck,2021,12,253
+Van / light truck,2022,1,223
+Van / light truck,2022,2,250
+Van / light truck,2022,3,246
+Van / light truck,2022,4,249
+Van / light truck,2022,5,321
+Van / light truck,2022,6,308
+Van / light truck,2022,7,206
+Van / light truck,2022,8,248
+Van / light truck,2022,9,268
+Van / light truck,2022,10,304
+Van / light truck,2022,11,261
+Van / light truck,2022,12,248
+Van / light truck,2023,1,233
+Van / light truck,2023,2,220
+Van / light truck,2023,3,255
+Van / light truck,2023,4,230
+Van / light truck,2023,5,278
+Van / light truck,2023,6,288
+Van / light truck,2023,7,243
+Van / light truck,2023,8,245
+Van / light truck,2023,9,277
+Van / light truck,2023,10,266
+Van / light truck,2023,11,242
+Van / light truck,2023,12,250
+Van / light truck,2024,1,218
+Van / light truck,2024,2,223
+Van / light truck,2024,3,245
+Van / light truck,2024,4,234
+Van / light truck,2024,5,255
+Van / light truck,2024,6,296
+Van / light truck,2024,7,230
+Van / light truck,2024,8,227
+Van / light truck,2024,9,262
+Van / light truck,2024,10,272
+Van / light truck,2024,11,233
+Van / light truck,2024,12,214
+Unknown,2017,1,160
+Unknown,2017,2,184
+Unknown,2017,3,230
+Unknown,2017,4,190
+Unknown,2017,5,245
+Unknown,2017,6,272
+Unknown,2017,7,184
+Unknown,2017,8,189
+Unknown,2017,9,239
+Unknown,2017,10,266
+Unknown,2017,11,259
+Unknown,2017,12,194
+Unknown,2018,1,183
+Unknown,2018,2,169
+Unknown,2018,3,215
+Unknown,2018,4,283
+Unknown,2018,5,334
+Unknown,2018,6,323
+Unknown,2018,7,263
+Unknown,2018,8,255
+Unknown,2018,9,343
+Unknown,2018,10,365
+Unknown,2018,11,289
+Unknown,2018,12,217
+Unknown,2019,1,239
+Unknown,2019,2,217
+Unknown,2019,3,210
+Unknown,2019,4,229
+Unknown,2019,5,276
+Unknown,2019,6,283
+Unknown,2019,7,271
+Unknown,2019,8,285
+Unknown,2019,9,300
+Unknown,2019,10,308
+Unknown,2019,11,296
+Unknown,2019,12,281
+Unknown,2020,1,292
+Unknown,2020,2,252
+Unknown,2020,3,148
+Unknown,2020,4,109
+Unknown,2020,5,268
+Unknown,2020,6,368
+Unknown,2020,7,338
+Unknown,2020,8,327
+Unknown,2020,9,424
+Unknown,2020,10,263
+Unknown,2020,11,195
+Unknown,2020,12,224
+Unknown,2021,1,198
+Unknown,2021,2,190
+Unknown,2021,3,254
+Unknown,2021,4,232
+Unknown,2021,5,309
+Unknown,2021,6,438
+Unknown,2021,7,326
+Unknown,2021,8,341
+Unknown,2021,9,471
+Unknown,2021,10,481
+Unknown,2021,11,325
+Unknown,2021,12,314
+Unknown,2022,1,248
+Unknown,2022,2,281
+Unknown,2022,3,393
+Unknown,2022,4,338
+Unknown,2022,5,514
+Unknown,2022,6,534
+Unknown,2022,7,357
+Unknown,2022,8,375
+Unknown,2022,9,432
+Unknown,2022,10,533
+Unknown,2022,11,368
+Unknown,2022,12,290
+Unknown,2023,1,298
+Unknown,2023,2,288
+Unknown,2023,3,328
+Unknown,2023,4,325
+Unknown,2023,5,433
+Unknown,2023,6,508
+Unknown,2023,7,326
+Unknown,2023,8,388
+Unknown,2023,9,517
+Unknown,2023,10,492
+Unknown,2023,11,442
+Unknown,2023,12,379
+Unknown,2024,1,351
+Unknown,2024,2,358
+Unknown,2024,3,363
+Unknown,2024,4,380
+Unknown,2024,5,438
+Unknown,2024,6,509
+Unknown,2024,7,392
+Unknown,2024,8,442
+Unknown,2024,9,523
+Unknown,2024,10,613
+Unknown,2024,11,593
+Unknown,2024,12,604
+Pedestrian,2017,1,382
+Pedestrian,2017,2,370
+Pedestrian,2017,3,357
+Pedestrian,2017,4,264
+Pedestrian,2017,5,366
+Pedestrian,2017,6,342
+Pedestrian,2017,7,250
+Pedestrian,2017,8,252
+Pedestrian,2017,9,305
+Pedestrian,2017,10,398
+Pedestrian,2017,11,433
+Pedestrian,2017,12,436
+Pedestrian,2018,1,405
+Pedestrian,2018,2,324
+Pedestrian,2018,3,346
+Pedestrian,2018,4,297
+Pedestrian,2018,5,365
+Pedestrian,2018,6,343
+Pedestrian,2018,7,276
+Pedestrian,2018,8,258
+Pedestrian,2018,9,323
+Pedestrian,2018,10,380
+Pedestrian,2018,11,393
+Pedestrian,2018,12,374
+Pedestrian,2019,1,359
+Pedestrian,2019,2,383
+Pedestrian,2019,3,331
+Pedestrian,2019,4,277
+Pedestrian,2019,5,351
+Pedestrian,2019,6,336
+Pedestrian,2019,7,275
+Pedestrian,2019,8,250
+Pedestrian,2019,9,338
+Pedestrian,2019,10,401
+Pedestrian,2019,11,394
+Pedestrian,2019,12,475
+Pedestrian,2020,1,399
+Pedestrian,2020,2,348
+Pedestrian,2020,3,204
+Pedestrian,2020,4,86
+Pedestrian,2020,5,178
+Pedestrian,2020,6,219
+Pedestrian,2020,7,210
+Pedestrian,2020,8,187
+Pedestrian,2020,9,301
+Pedestrian,2020,10,279
+Pedestrian,2020,11,190
+Pedestrian,2020,12,303
+Pedestrian,2021,1,265
+Pedestrian,2021,2,257
+Pedestrian,2021,3,255
+Pedestrian,2021,4,207
+Pedestrian,2021,5,279
+Pedestrian,2021,6,305
+Pedestrian,2021,7,241
+Pedestrian,2021,8,217
+Pedestrian,2021,9,362
+Pedestrian,2021,10,382
+Pedestrian,2021,11,316
+Pedestrian,2021,12,374
+Pedestrian,2022,1,292
+Pedestrian,2022,2,308
+Pedestrian,2022,3,290
+Pedestrian,2022,4,256
+Pedestrian,2022,5,360
+Pedestrian,2022,6,354
+Pedestrian,2022,7,217
+Pedestrian,2022,8,218
+Pedestrian,2022,9,325
+Pedestrian,2022,10,355
+Pedestrian,2022,11,343
+Pedestrian,2022,12,406
+Pedestrian,2023,1,348
+Pedestrian,2023,2,302
+Pedestrian,2023,3,300
+Pedestrian,2023,4,281
+Pedestrian,2023,5,313
+Pedestrian,2023,6,354
+Pedestrian,2023,7,227
+Pedestrian,2023,8,266
+Pedestrian,2023,9,339
+Pedestrian,2023,10,324
+Pedestrian,2023,11,392
+Pedestrian,2023,12,370
+Pedestrian,2024,1,287
+Pedestrian,2024,2,286
+Pedestrian,2024,3,310
+Pedestrian,2024,4,238
+Pedestrian,2024,5,325
+Pedestrian,2024,6,309
+Pedestrian,2024,7,249
+Pedestrian,2024,8,219
+Pedestrian,2024,9,320
+Pedestrian,2024,10,355
+Pedestrian,2024,11,363
+Pedestrian,2024,12,323
+Other road user,2017,1,47
+Other road user,2017,2,52
+Other road user,2017,3,59
+Other road user,2017,4,54
+Other road user,2017,5,56
+Other road user,2017,6,74
+Other road user,2017,7,56
+Other road user,2017,8,53
+Other road user,2017,9,61
+Other road user,2017,10,84
+Other road user,2017,11,52
+Other road user,2017,12,52
+Other road user,2018,1,50
+Other road user,2018,2,46
+Other road user,2018,3,46
+Other road user,2018,4,74
+Other road user,2018,5,66
+Other road user,2018,6,63
+Other road user,2018,7,65
+Other road user,2018,8,64
+Other road user,2018,9,62
+Other road user,2018,10,57
+Other road user,2018,11,54
+Other road user,2018,12,58
+Other road user,2019,1,46
+Other road user,2019,2,73
+Other road user,2019,3,54
+Other road user,2019,4,68
+Other road user,2019,5,72
+Other road user,2019,6,95
+Other road user,2019,7,69
+Other road user,2019,8,83
+Other road user,2019,9,84
+Other road user,2019,10,83
+Other road user,2019,11,51
+Other road user,2019,12,60
+Other road user,2020,1,53
+Other road user,2020,2,44
+Other road user,2020,3,31
+Other road user,2020,4,31
+Other road user,2020,5,53
+Other road user,2020,6,60
+Other road user,2020,7,64
+Other road user,2020,8,60
+Other road user,2020,9,80
+Other road user,2020,10,49
+Other road user,2020,11,54
+Other road user,2020,12,40
+Other road user,2021,1,32
+Other road user,2021,2,38
+Other road user,2021,3,58
+Other road user,2021,4,60
+Other road user,2021,5,58
+Other road user,2021,6,83
+Other road user,2021,7,72
+Other road user,2021,8,70
+Other road user,2021,9,100
+Other road user,2021,10,97
+Other road user,2021,11,74
+Other road user,2021,12,41
+Other road user,2022,1,47
+Other road user,2022,2,63
+Other road user,2022,3,76
+Other road user,2022,4,81
+Other road user,2022,5,94
+Other road user,2022,6,106
+Other road user,2022,7,73
+Other road user,2022,8,77
+Other road user,2022,9,86
+Other road user,2022,10,92
+Other road user,2022,11,56
+Other road user,2022,12,67
+Other road user,2023,1,53
+Other road user,2023,2,57
+Other road user,2023,3,61
+Other road user,2023,4,61
+Other road user,2023,5,94
+Other road user,2023,6,85
+Other road user,2023,7,81
+Other road user,2023,8,82
+Other road user,2023,9,101
+Other road user,2023,10,95
+Other road user,2023,11,79
+Other road user,2023,12,55
+Other road user,2024,1,47
+Other road user,2024,2,48
+Other road user,2024,3,72
+Other road user,2024,4,86
+Other road user,2024,5,74
+Other road user,2024,6,84
+Other road user,2024,7,68
+Other road user,2024,8,75
+Other road user,2024,9,95
+Other road user,2024,10,85
+Other road user,2024,11,81
+Other road user,2024,12,74
+Moped,2017,1,165
+Moped,2017,2,177
+Moped,2017,3,220
+Moped,2017,4,211
+Moped,2017,5,270
+Moped,2017,6,304
+Moped,2017,7,207
+Moped,2017,8,247
+Moped,2017,9,301
+Moped,2017,10,336
+Moped,2017,11,260
+Moped,2017,12,160
+Moped,2018,1,185
+Moped,2018,2,163
+Moped,2018,3,187
+Moped,2018,4,228
+Moped,2018,5,278
+Moped,2018,6,294
+Moped,2018,7,258
+Moped,2018,8,242
+Moped,2018,9,293
+Moped,2018,10,319
+Moped,2018,11,268
+Moped,2018,12,209
+Moped,2019,1,179
+Moped,2019,2,197
+Moped,2019,3,203
+Moped,2019,4,210
+Moped,2019,5,262
+Moped,2019,6,306
+Moped,2019,7,237
+Moped,2019,8,223
+Moped,2019,9,288
+Moped,2019,10,298
+Moped,2019,11,284
+Moped,2019,12,220
+Moped,2020,1,220
+Moped,2020,2,184
+Moped,2020,3,135
+Moped,2020,4,80
+Moped,2020,5,146
+Moped,2020,6,183
+Moped,2020,7,211
+Moped,2020,8,257
+Moped,2020,9,276
+Moped,2020,10,235
+Moped,2020,11,168
+Moped,2020,12,204
+Moped,2021,1,138
+Moped,2021,2,127
+Moped,2021,3,220
+Moped,2021,4,218
+Moped,2021,5,283
+Moped,2021,6,358
+Moped,2021,7,231
+Moped,2021,8,245
+Moped,2021,9,340
+Moped,2021,10,336
+Moped,2021,11,239
+Moped,2021,12,208
+Moped,2022,1,194
+Moped,2022,2,210
+Moped,2022,3,251
+Moped,2022,4,237
+Moped,2022,5,308
+Moped,2022,6,328
+Moped,2022,7,228
+Moped,2022,8,272
+Moped,2022,9,323
+Moped,2022,10,307
+Moped,2022,11,293
+Moped,2022,12,227
+Moped,2023,1,204
+Moped,2023,2,188
+Moped,2023,3,249
+Moped,2023,4,271
+Moped,2023,5,303
+Moped,2023,6,338
+Moped,2023,7,207
+Moped,2023,8,256
+Moped,2023,9,326
+Moped,2023,10,326
+Moped,2023,11,278
+Moped,2023,12,203
+Moped,2024,1,166
+Moped,2024,2,200
+Moped,2024,3,242
+Moped,2024,4,242
+Moped,2024,5,283
+Moped,2024,6,287
+Moped,2024,7,233
+Moped,2024,8,234
+Moped,2024,9,341
+Moped,2024,10,315
+Moped,2024,11,252
+Moped,2024,12,205
+Motorcycle,2017,1,70
+Motorcycle,2017,2,124
+Motorcycle,2017,3,283
+Motorcycle,2017,4,273
+Motorcycle,2017,5,330
+Motorcycle,2017,6,293
+Motorcycle,2017,7,289
+Motorcycle,2017,8,283
+Motorcycle,2017,9,268
+Motorcycle,2017,10,301
+Motorcycle,2017,11,162
+Motorcycle,2017,12,89
+Motorcycle,2018,1,120
+Motorcycle,2018,2,113
+Motorcycle,2018,3,149
+Motorcycle,2018,4,263
+Motorcycle,2018,5,335
+Motorcycle,2018,6,303
+Motorcycle,2018,7,307
+Motorcycle,2018,8,284
+Motorcycle,2018,9,306
+Motorcycle,2018,10,342
+Motorcycle,2018,11,173
+Motorcycle,2018,12,142
+Motorcycle,2019,1,81
+Motorcycle,2019,2,162
+Motorcycle,2019,3,181
+Motorcycle,2019,4,260
+Motorcycle,2019,5,277
+Motorcycle,2019,6,319
+Motorcycle,2019,7,259
+Motorcycle,2019,8,279
+Motorcycle,2019,9,293
+Motorcycle,2019,10,244
+Motorcycle,2019,11,169
+Motorcycle,2019,12,115
+Motorcycle,2020,1,92
+Motorcycle,2020,2,123
+Motorcycle,2020,3,127
+Motorcycle,2020,4,85
+Motorcycle,2020,5,277
+Motorcycle,2020,6,241
+Motorcycle,2020,7,262
+Motorcycle,2020,8,245
+Motorcycle,2020,9,309
+Motorcycle,2020,10,153
+Motorcycle,2020,11,153
+Motorcycle,2020,12,81
+Motorcycle,2021,1,64
+Motorcycle,2021,2,150
+Motorcycle,2021,3,184
+Motorcycle,2021,4,160
+Motorcycle,2021,5,199
+Motorcycle,2021,6,297
+Motorcycle,2021,7,211
+Motorcycle,2021,8,220
+Motorcycle,2021,9,298
+Motorcycle,2021,10,223
+Motorcycle,2021,11,120
+Motorcycle,2021,12,101
+Motorcycle,2022,1,106
+Motorcycle,2022,2,121
+Motorcycle,2022,3,193
+Motorcycle,2022,4,247
+Motorcycle,2022,5,307
+Motorcycle,2022,6,275
+Motorcycle,2022,7,258
+Motorcycle,2022,8,264
+Motorcycle,2022,9,237
+Motorcycle,2022,10,260
+Motorcycle,2022,11,137
+Motorcycle,2022,12,98
+Motorcycle,2023,1,109
+Motorcycle,2023,2,114
+Motorcycle,2023,3,110
+Motorcycle,2023,4,200
+Motorcycle,2023,5,300
+Motorcycle,2023,6,298
+Motorcycle,2023,7,228
+Motorcycle,2023,8,223
+Motorcycle,2023,9,359
+Motorcycle,2023,10,220
+Motorcycle,2023,11,115
+Motorcycle,2023,12,100
+Motorcycle,2024,1,92
+Motorcycle,2024,2,115
+Motorcycle,2024,3,188
+Motorcycle,2024,4,185
+Motorcycle,2024,5,231
+Motorcycle,2024,6,313
+Motorcycle,2024,7,247
+Motorcycle,2024,8,248
+Motorcycle,2024,9,233
+Motorcycle,2024,10,224
+Motorcycle,2024,11,131
+Motorcycle,2024,12,90
+Bus,2017,1,53
+Bus,2017,2,47
+Bus,2017,3,56
+Bus,2017,4,46
+Bus,2017,5,59
+Bus,2017,6,47
+Bus,2017,7,36
+Bus,2017,8,32
+Bus,2017,9,53
+Bus,2017,10,52
+Bus,2017,11,45
+Bus,2017,12,40
+Bus,2018,1,49
+Bus,2018,2,36
+Bus,2018,3,47
+Bus,2018,4,48
+Bus,2018,5,38
+Bus,2018,6,49
+Bus,2018,7,30
+Bus,2018,8,34
+Bus,2018,9,64
+Bus,2018,10,59
+Bus,2018,11,50
+Bus,2018,12,40
+Bus,2019,1,57
+Bus,2019,2,52
+Bus,2019,3,41
+Bus,2019,4,48
+Bus,2019,5,53
+Bus,2019,6,52
+Bus,2019,7,32
+Bus,2019,8,47
+Bus,2019,9,59
+Bus,2019,10,57
+Bus,2019,11,36
+Bus,2019,12,47
+Bus,2020,1,47
+Bus,2020,2,49
+Bus,2020,3,26
+Bus,2020,4,15
+Bus,2020,5,23
+Bus,2020,6,32
+Bus,2020,7,34
+Bus,2020,8,21
+Bus,2020,9,42
+Bus,2020,10,38
+Bus,2020,11,19
+Bus,2020,12,16
+Bus,2021,1,31
+Bus,2021,2,26
+Bus,2021,3,45
+Bus,2021,4,34
+Bus,2021,5,40
+Bus,2021,6,54
+Bus,2021,7,30
+Bus,2021,8,22
+Bus,2021,9,51
+Bus,2021,10,51
+Bus,2021,11,44
+Bus,2021,12,31
+Bus,2022,1,27
+Bus,2022,2,41
+Bus,2022,3,61
+Bus,2022,4,40
+Bus,2022,5,47
+Bus,2022,6,55
+Bus,2022,7,38
+Bus,2022,8,27
+Bus,2022,9,54
+Bus,2022,10,69
+Bus,2022,11,44
+Bus,2022,12,41
+Bus,2023,1,38
+Bus,2023,2,35
+Bus,2023,3,46
+Bus,2023,4,40
+Bus,2023,5,35
+Bus,2023,6,60
+Bus,2023,7,33
+Bus,2023,8,26
+Bus,2023,9,48
+Bus,2023,10,34
+Bus,2023,11,54
+Bus,2023,12,42
+Bus,2024,1,33
+Bus,2024,2,46
+Bus,2024,3,41
+Bus,2024,4,46
+Bus,2024,5,57
+Bus,2024,6,57
+Bus,2024,7,43
+Bus,2024,8,31
+Bus,2024,9,51
+Bus,2024,10,50
+Bus,2024,11,46
+Bus,2024,12,47
+All accidents,2017,1,2718
+All accidents,2017,2,2746
+All accidents,2017,3,3313
+All accidents,2017,4,2865
+All accidents,2017,5,3571
+All accidents,2017,6,3677
+All accidents,2017,7,2911
+All accidents,2017,8,3008
+All accidents,2017,9,3336
+All accidents,2017,10,3650
+All accidents,2017,11,3386
+All accidents,2017,12,2844
+All accidents,2018,1,2816
+All accidents,2018,2,2577
+All accidents,2018,3,2929
+All accidents,2018,4,3137
+All accidents,2018,5,3711
+All accidents,2018,6,3598
+All accidents,2018,7,3141
+All accidents,2018,8,2992
+All accidents,2018,9,3392
+All accidents,2018,10,3810
+All accidents,2018,11,3405
+All accidents,2018,12,2945
+All accidents,2019,1,2774
+All accidents,2019,2,2865
+All accidents,2019,3,2925
+All accidents,2019,4,2902
+All accidents,2019,5,3294
+All accidents,2019,6,3501
+All accidents,2019,7,3094
+All accidents,2019,8,3120
+All accidents,2019,9,3481
+All accidents,2019,10,3401
+All accidents,2019,11,3319
+All accidents,2019,12,3043
+All accidents,2020,1,2896
+All accidents,2020,2,2744
+All accidents,2020,3,1910
+All accidents,2020,4,1289
+All accidents,2020,5,2380
+All accidents,2020,6,2807
+All accidents,2020,7,2880
+All accidents,2020,8,2802
+All accidents,2020,9,3448
+All accidents,2020,10,2739
+All accidents,2020,11,2043
+All accidents,2020,12,2313
+All accidents,2021,1,2099
+All accidents,2021,2,2055
+All accidents,2021,3,2523
+All accidents,2021,4,2372
+All accidents,2021,5,2927
+All accidents,2021,6,3741
+All accidents,2021,7,2855
+All accidents,2021,8,2917
+All accidents,2021,9,3727
+All accidents,2021,10,3727
+All accidents,2021,11,2955
+All accidents,2021,12,2762
+All accidents,2022,1,2526
+All accidents,2022,2,2645
+All accidents,2022,3,2986
+All accidents,2022,4,2983
+All accidents,2022,5,3821
+All accidents,2022,6,3778
+All accidents,2022,7,2903
+All accidents,2022,8,3011
+All accidents,2022,9,3492
+All accidents,2022,10,3557
+All accidents,2022,11,3077
+All accidents,2022,12,2871
+All accidents,2023,1,2692
+All accidents,2023,2,2465
+All accidents,2023,3,2792
+All accidents,2023,4,2854
+All accidents,2023,5,3438
+All accidents,2023,6,3839
+All accidents,2023,7,2840
+All accidents,2023,8,2925
+All accidents,2023,9,3678
+All accidents,2023,10,3467
+All accidents,2023,11,3143
+All accidents,2023,12,2725
+All accidents,2024,1,2500
+All accidents,2024,2,2520
+All accidents,2024,3,2857
+All accidents,2024,4,2735
+All accidents,2024,5,3173
+All accidents,2024,6,3530
+All accidents,2024,7,2878
+All accidents,2024,8,2933
+All accidents,2024,9,3372
+All accidents,2024,10,3531
+All accidents,2024,11,3102
+All accidents,2024,12,2785

@@ -2,8 +2,9 @@
 The Plotly charts of the hotspot deep dive. Every chart is built from the SAVED result tables in results/ and data/ (nothing is recalculated here).
 Used by app.py (Streamlit) and build_html.py (the HTML page). Coordinates are Belgian Lambert 1972 (EPSG:31370, metres).
 
-Heat maps:  accidents per year per grid cell (log colour scale, because a few city cells have hundreds a year and most have less than one),
-            severe share per grid cell (cells with fewer than 30 accidents stay empty),
+Heat maps:  accidents per year per 5 x 5 km square (log colour scale, because a few city squares have hundreds a year and most have less than one),
+            accidents per 100,000 residents of the square per year (log scale; squares with 1,000+ residents and 30+ accidents),
+            severe share per square (squares with fewer than 30 accidents stay empty),
             accidents per 100,000 residents per year per municipality (5 quantile classes; 30-99 accidents faded and flagged).
 """
 import json
@@ -20,7 +21,8 @@ RESULTS, DATA = HERE / "results", HERE / "data"
 BLUE, ORANGE, GRAY = "#2a78d6", "#eb6834", "#898781"
 RAMP = ["#86b6ef", "#5598e7", "#2a78d6", "#1c5cab", "#104281"]                         # blue: counts and rates (low to high)
 WARM = [[0, "#fdeadf"], [0.25, "#f8c3a2"], [0.5, "#eb6834"], [0.75, "#b8431a"], [1, "#6e260c"]]  # warm: severity
-CELL_SIZES = {"5 km2 cells": 5 ** 0.5 * 1000, "5 x 5 km squares": 5000.0}
+CELL_SIZES = {"5 x 5 km squares": 5000.0}  # the 5 km2 cells of the first version were removed (#182)
+MIN_CELL_RESIDENTS = 1000  # a rate per square needs 1,000 residents and 30 accidents (#184)
 GROUPS = ["Vulnerable (any of the four)", "Pedestrian", "Bicycle", "Motorcycle", "Moped"]
 GROUP_LABELS = {"Vulnerable (any of the four)": "All four vulnerable groups", "Pedestrian": "Pedestrians", "Bicycle": "Cyclists", "Motorcycle": "Motorcycles", "Moped": "Mopeds"}
 GROUP_WORDS = {"Vulnerable (any of the four)": "vulnerable road users", "Pedestrian": "pedestrians", "Bicycle": "cyclists", "Motorcycle": "motorcycles", "Moped": "mopeds"}
@@ -125,9 +127,12 @@ def extent_of(cells):
 
 
 def heat_values(cells, measure):
-    """The numbers shown for a measure: 'per_year' = accidents per year; 'severe' = severe share in % (only from 30 accidents)."""
-    c = cells.copy()
-    if measure == "severe":
+    """The numbers shown for a measure: 'per_year' = accidents per year; 'severe' = severe share in % (only from 30 accidents);
+    'rate' = accidents per 100,000 residents of the square per year (only squares with 1,000+ residents and 30+ accidents)."""
+    c = cells.copy().rename(columns={"average residents": "avg_residents"})
+    if measure == "rate":
+        c["value"] = np.where(c["rate_ok"], c["rate"], np.nan)
+    elif measure == "severe":
         c["value"] = np.where(c["accidents"] >= MIN_SHARE, c["severe"] / c["accidents"] * 100, np.nan)
     else:
         c["value"] = c["per_year"]
@@ -141,10 +146,17 @@ def heat_trace(c, side, extent, measure, zmax_count=None, showscale=True, xaxis=
     hover = np.full(z.shape, "", dtype=object)
     for r in c.itertuples():
         hover[r.cy - cy0, r.cx - cx0] = (f"{r.accidents:,} accidents ({r.per_year:.1f} a year)<br>{r.severe:,} severe ({r.severe / r.accidents * 100:.1f}%), {r.fatal:,} fatal"
-                                         + ("" if r.accidents >= MIN_SHARE else "<br><i>fewer than 30 accidents: no share</i>"))
+                                         + (f"<br>{r.avg_residents:,.0f} residents on average, {r.rate:.0f} per 100,000 residents per year" if r.avg_residents > 0 else "<br>no residents")
+                                         + ("" if r.accidents >= MIN_SHARE else "<br><i>fewer than 30 accidents: no share or rate</i>"))
     kw = dict(x0=(cx0 + 0.5) * side, dx=side, y0=(cy0 + 0.5) * side, dy=side, hoverongaps=False, text=hover, hovertemplate="%{text}<extra></extra>")
     if xaxis:
         kw.update(xaxis=xaxis, yaxis=yaxis)
+    if measure == "rate":
+        top = zmax_count or float(np.nanmax(z))
+        lo = 10.0
+        ticks = [t for t in (10, 30, 100, 300, 1000) if lo <= t <= top * 1.05]
+        return go.Heatmap(z=np.log10(np.clip(z, lo, None)), zmin=np.log10(lo), zmax=np.log10(top), colorscale=[[0, "#cde2fb"], [0.25, "#86b6ef"], [0.5, "#2a78d6"], [0.75, "#104281"], [1, "#0d366b"]],
+                          showscale=showscale, colorbar=dict(title="per 100,000<br>residents<br>per year", tickvals=[np.log10(t) for t in ticks], ticktext=[f"{t:g}" for t in ticks], thickness=12, len=0.6), **kw)
     if measure == "severe":
         top = 40.0
         return go.Heatmap(z=np.clip(z, 0, top), zmin=0, zmax=top, colorscale=WARM, showscale=showscale,
@@ -156,10 +168,10 @@ def heat_trace(c, side, extent, measure, zmax_count=None, showscale=True, xaxis=
                       showscale=showscale, colorbar=dict(title="accidents<br>per year", tickvals=[np.log10(t) for t in ticks], ticktext=[f"{t:g}" for t in ticks], thickness=12, len=0.6), **kw)
 
 
-def hotspot_markers(top, name="20 busiest cells", xaxis=None, yaxis=None, show_legend=True):
+def hotspot_markers(top, name="20 marked squares", xaxis=None, yaxis=None, show_legend=True):
     kw = dict(xaxis=xaxis, yaxis=yaxis) if xaxis else {}
     return go.Scatter(x=top["centre_x_m"], y=top["centre_y_m"], mode="markers", name=name, showlegend=show_legend, marker=dict(symbol="square-open", size=9, color="#0b0b0b", line=dict(width=1.4)),
-                      hovertext=[f"<b>Rank {r['rank']}: {r['municipality']}</b><br>{r['accidents']:,} accidents ({r['per_year']:.1f} a year)"
+                      hovertext=[f"<b>Rank {r['rank']}: {r['municipality']}</b><br>{r['accidents']:,} accidents ({r['per_year']:.1f} a year)<br>{r['average residents']:,.0f} residents, {r['rate']:.0f} per 100,000 per year"
                                  + (f"<br>{r['severe %']:.1f}% severe, {r['fatal %']:.1f}% fatal" if not pd.isna(r["severe %"]) else "") for _, r in top.iterrows()],
                       hovertemplate="%{hovertext}<extra></extra>", **kw)
 
@@ -172,9 +184,9 @@ def fig_heatmap(cells, top, outlines, size, measure, group, period):
         return empty_figure("No accidents with coordinates in this selection.")
     cv = heat_values(c, measure)
     if cv.empty:
-        return empty_figure("No cell has 30 or more accidents in this selection, so no severe share can be shown.")
-    t = top[(top["size"] == size) & (top["group"] == group) & (top["period"] == period)]
-    fig = go.Figure([outline_trace(outlines), heat_trace(cv, side, extent_of(c), measure), hotspot_markers(t)])
+        return empty_figure("No square qualifies in this selection (a severe share or a rate needs 30 or more accidents; a rate also 1,000 residents).")
+    t = top[(top["size"] == size) & (top["group"] == group) & (top["period"] == period) & (top["ranking"] == ("rate" if measure == "rate" else "accidents"))]
+    fig = go.Figure([outline_trace(outlines), heat_trace(cv, side, extent_of(c), measure, zmax_count=float(cv["value"].max()) if measure == "rate" else None), hotspot_markers(t, "20 highest rates" if measure == "rate" else "20 busiest squares")])
     fig.update_layout(legend=dict(orientation="h", y=-0.02))
     equal_axes(fig, 1, 1)
     return layout(fig, 640, margin=dict(l=0, r=0, t=10, b=0))
@@ -187,7 +199,9 @@ def fig_heatmap_periods(cells, top, outlines, size, measure, group):
     if c_all.empty:
         return empty_figure("No accidents with coordinates in this selection.")
     extent = extent_of(c_all)
-    zmax = float(c_all[c_all["period"].isin(THREE)]["per_year"].max())
+    zmax = float(heat_values(c_all[c_all["period"].isin(THREE)], measure)["value"].max()) if measure != "severe" else None
+    if measure != "severe" and np.isnan(zmax):
+        return empty_figure("No square qualifies in this selection (a rate needs 30 or more accidents and 1,000 residents).")
     fig = make_subplots(rows=1, cols=3, subplot_titles=[f"<b>{p}</b>" for p in THREE], horizontal_spacing=0.01)
     for col, period in enumerate(THREE, start=1):
         c = c_all[c_all["period"] == period]
@@ -196,8 +210,8 @@ def fig_heatmap_periods(cells, top, outlines, size, measure, group):
         fig.add_trace(outline, row=1, col=col)
         if not cv.empty:
             fig.add_trace(heat_trace(cv, side, extent, measure, zmax_count=zmax, showscale=(col == 3)), row=1, col=col)
-        t = top[(top["size"] == size) & (top["group"] == group) & (top["period"] == period)]
-        fig.add_trace(hotspot_markers(t, show_legend=(col == 1)), row=1, col=col)
+        t = top[(top["size"] == size) & (top["group"] == group) & (top["period"] == period) & (top["ranking"] == ("rate" if measure == "rate" else "accidents"))]
+        fig.add_trace(hotspot_markers(t, "20 highest rates" if measure == "rate" else "20 busiest squares", show_legend=(col == 1)), row=1, col=col)
     equal_axes(fig, 1, 3)
     fig.update_layout(legend=dict(orientation="h", y=-0.02))
     return layout(fig, 520, margin=dict(l=0, r=0, t=50, b=0))
@@ -205,13 +219,13 @@ def fig_heatmap_periods(cells, top, outlines, size, measure, group):
 
 # ---------------------------------------------------------------- severity of the hotspots
 def fig_hotspot_severity(summary, size, group):
-    """Severe, fatal and serious share in the 20 hotspot cells against all other cells, per period (dots with 95% intervals)."""
+    """Severe, fatal and serious share in the 20 hotspot squares against all other squares, per period (dots with 95% intervals)."""
     s = summary[(summary["size"] == size) & (summary["group"] == group) & (summary["period"].isin(THREE))]
     measures = [("severe", "Severe (fatal + serious)"), ("fatal", "Fatal (class 1 + 2)"), ("serious", "Seriously injured (class 3)")]
     fig = make_subplots(rows=1, cols=3, subplot_titles=[f"<b>{m[1]}</b>" for m in measures], horizontal_spacing=0.08)
     for i, (key, _) in enumerate(measures, start=1):
-        for label, colour, offset in (("20 hotspot cells", ORANGE, -0.1), ("all other cells", BLUE, 0.1)):
-            d = s[s["cells"] == label].set_index("period").reindex(THREE)
+        for label, colour, offset in (("20 hotspot squares", ORANGE, -0.1), ("all other squares", BLUE, 0.1)):
+            d = s[s["squares"] == label].set_index("period").reindex(THREE)
             x = [k + offset for k in range(3)]
             value = d[f"{key} %"].to_numpy(float)
             err_hi, err_lo = d[f"{key} high"].to_numpy(float) - value, value - d[f"{key} low"].to_numpy(float)

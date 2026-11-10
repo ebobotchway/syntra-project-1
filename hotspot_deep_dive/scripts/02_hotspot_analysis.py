@@ -3,9 +3,10 @@ Step 2 of the hotspot deep dive: hotspots of accidents with vulnerable road user
 
 For the groups  pedestrians, cyclists, motorcycles, mopeds and "vulnerable (any of the four)"  and the periods  pre 2017-2019, during 2020-2021, post 2022-2024  (and all years), it calculates:
 
-  A. GRID CELLS (two sizes, decision #170): cells of 5 km2 in area (side 2,236 m) and squares of 5 km x 5 km (25 km2).
-     Per cell: accidents (and per year), severe, fatal and serious accidents (only accidents with usable coordinates).
-  B. HOTSPOTS: the 20 cells with the most accidents per group, period and cell size, with their severity, and the severity of these 20 cells against all other cells.
+  A. GRID CELLS: squares of 5 km x 5 km (25 km2; the 5 km2 cells of the first version were removed, decision #182).
+     Per square: accidents (and per year), severe, fatal and serious accidents (only accidents with usable coordinates), the residents of the square and the accidents per 100,000 residents per year (#183, #184).
+  B. HOTSPOTS: the 20 squares with the most accidents per group and period, with their severity, and the severity of these 20 squares against all other squares;
+     and the 20 squares with the highest rate per 100,000 residents (squares with 1,000+ residents and 30+ accidents).
   C. MUNICIPALITIES (decision #171): accidents per 100,000 residents per year, using the residents of each year (Statbel), with their severity.
 
 Decisions applied: #33 an accident counts for a group if the group is road user 1 OR 2 (once per accident; "vulnerable" = any of the four, also once);
@@ -25,10 +26,11 @@ import pandas as pd
 HERE = Path(__file__).resolve().parent.parent
 DATA, RESULTS = HERE / "data", HERE / "results"
 
-CELL_SIZES = {"5 km2 cells": 5 ** 0.5 * 1000, "5 x 5 km squares": 5000.0}  # side in metres: sqrt(5 km2) = 2,236.07 m and 5,000 m
+CELL_SIZES = {"5 x 5 km squares": 5000.0}  # side in metres
 GROUPS = {"Pedestrian": ["08"], "Bicycle": ["03"], "Motorcycle": ["07"], "Moped": ["06"], "Vulnerable (any of the four)": ["08", "03", "07", "06"]}
 PERIODS = {"Pre Covid-19 (2017-2019)": range(2017, 2020), "During Covid-19 (2020-2021)": range(2020, 2022), "Post Covid-19 (2022-2024)": range(2022, 2025), "All years (2017-2024)": range(2017, 2025)}
-MIN_SHARE, MIN_RATE = 30, 100  # decision #175
+MIN_SHARE, MIN_RATE = 30, 100  # decision #175 (adapted in #177)
+MIN_CELL_RESIDENTS = 1000  # decision #184: a rate per square needs 1,000 residents and 30 accidents
 
 header = pd.read_csv(sys.argv[1], nrows=0).columns
 df = pd.read_csv(sys.argv[1], dtype={c: str for c in header if c.endswith("_code")})
@@ -63,6 +65,24 @@ def severity_columns(t, total_col="accidents"):
     return t
 
 
+# ---------------------------------------------------------------------------------------------------------- residents per municipality and per square
+population = pd.read_csv(DATA / "population_by_municipality.csv", dtype={"municipality_nis_code": str})
+pop_wide = population.pivot(index="municipality_nis_code", columns="year", values="residents")
+growth = pop_wide.div(pop_wide[2023], axis=0)  # the residents of a municipality in a year / in 2023
+pieces = pd.read_csv(DATA / "cell_residents_2023.csv", dtype={"municipality_nis_code": str})  # script 01b: residents of 2023 per square and municipality
+
+
+def square_resident_years(years):
+    """Residents of every 5 x 5 km square added up over the years of a period: the 2023 residents of each piece (square x municipality) times the growth of its municipality in each year (#183)."""
+    factor = growth[list(years)].sum(axis=1)  # sum over the years of the growth factors
+    pieces["ry"] = pieces["residents_2023"] * pieces["municipality_nis_code"].map(factor)
+    return pieces.groupby(["cx", "cy"])["ry"].sum()
+
+
+# check: the residents of all squares, added up over all years, equal the residents of all municipalities added up over all years
+assert np.isclose(square_resident_years(range(2017, 2025)).sum(), population["residents"].sum(), rtol=1e-6), "the residents of the squares do not add up to the residents of the municipalities"
+print(f"Residents: {int(population['residents'].sum()):,} resident-years in 2017-2024; the squares add up to the same number")
+
 # ---------------------------------------------------------------------------------------------------------- A and B: grid cells and hotspots
 cells_all, top_all, summary_all = [], [], []
 for size_name, side in CELL_SIZES.items():
@@ -78,21 +98,28 @@ for size_name, side in CELL_SIZES.items():
             assert cells["accidents"].sum() == len(sub)
             n_years = len(years)
             cells["per_year"] = cells["accidents"] / n_years
+            ry = square_resident_years(years)
+            cells["resident_years"] = [float(ry.get((x, y), 0.0)) for x, y in zip(cells["cx"], cells["cy"])]
+            cells["average residents"] = cells["resident_years"] / n_years
+            cells["rate"] = np.where(cells["resident_years"] > 0, cells["accidents"] / cells["resident_years"].where(cells["resident_years"] > 0) * 100_000, np.nan)  # per 100,000 residents per year
+            cells["rate_ok"] = (cells["average residents"] >= MIN_CELL_RESIDENTS) & (cells["accidents"] >= MIN_SHARE)
             cells.insert(0, "period", period); cells.insert(0, "group", group); cells.insert(0, "size", size_name)
             cells_all.append(cells)
-            # the 20 hotspots: the 20 cells with the most accidents; the municipality is the most common one among the cell's accidents
-            top = cells.head(20).copy()
-            top.insert(3, "rank", range(1, len(top) + 1))
-            key = sub.groupby(["cx", "cy"])["municipality"].agg(lambda s: s.mode().iat[0])
-            top["municipality"] = [key.loc[(r.cx, r.cy)] for r in top.itertuples()]
-            top["centre_x_m"], top["centre_y_m"] = (top["cx"] + 0.5) * side, (top["cy"] + 0.5) * side
-            top["share_of_located_pct"] = top["accidents"] / len(sub) * 100
-            top = severity_columns(top)
-            top_all.append(top)
-            # the severity of the 20 hotspots against all other cells
+            # the 20 hotspots: the 20 squares with the most accidents, and the 20 with the highest rate; the municipality is the most common one among the square's accidents
+            key = sub.groupby(["cx", "cy"])["municipality"].agg(lambda s_: s_.mode().iat[0])
+            for ranking, chosen in (("accidents", cells.head(20)), ("rate", cells[cells["rate_ok"]].sort_values(["rate", "accidents"], ascending=[False, False]).head(20))):
+                top = chosen.copy()
+                top.insert(3, "rank", range(1, len(top) + 1))
+                top.insert(4, "ranking", ranking)
+                top["municipality"] = [key.loc[(r.cx, r.cy)] for r in top.itertuples()]
+                top["centre_x_m"], top["centre_y_m"] = (top["cx"] + 0.5) * side, (top["cy"] + 0.5) * side
+                top["share_of_located_pct"] = top["accidents"] / len(sub) * 100
+                top = severity_columns(top)
+                top_all.append(top)
+            # the severity of the 20 hotspots against all other squares
             is_hot = cells.index < 20
-            for label, part in (("20 hotspot cells", cells[is_hot]), ("all other cells", cells[~is_hot]), ("all cells", cells)):
-                summary_all.append({"size": size_name, "group": group, "period": period, "cells": label, "number of cells": len(part), "accidents": int(part["accidents"].sum()),
+            for label, part in (("20 hotspot squares", cells[is_hot]), ("all other squares", cells[~is_hot]), ("all squares", cells)):
+                summary_all.append({"size": size_name, "group": group, "period": period, "squares": label, "number of squares": len(part), "accidents": int(part["accidents"].sum()),
                                     "severe": int(part["severe"].sum()), "fatal": int(part["fatal"].sum()), "serious": int(part["serious"].sum())})
         print(f"  {group}: done")
 
@@ -114,7 +141,6 @@ coverage["left out %"] = (1 - coverage["with coordinates"] / coverage["accidents
 coverage.to_csv(RESULTS / "coordinate_coverage.csv", index=False, float_format="%.2f")
 
 # ---------------------------------------------------------------------------------------------------------- C: municipality rates per 100,000 residents
-population = pd.read_csv(DATA / "population_by_municipality.csv", dtype={"municipality_nis_code": str})
 base = df.groupby("municipality_nis_code").agg(municipality=("municipality", "first"), region=("region", "first"))
 assert len(base) == 581 and set(base.index) == set(population["municipality_nis_code"])
 rows = []
@@ -143,10 +169,15 @@ v = "Vulnerable (any of the four)"
 for size_name in CELL_SIZES:
     print(f"\n{size_name}, {v}: top 3 hotspots per period")
     for period in PERIODS:
-        t = top_table[(top_table["size"] == size_name) & (top_table["group"] == v) & (top_table["period"] == period)].head(3)
+        t = top_table[(top_table["size"] == size_name) & (top_table["group"] == v) & (top_table["period"] == period) & (top_table["ranking"] == "accidents")].head(3)
         print(f"  {period}: " + "; ".join(f"{r.municipality} {r.accidents:,} ({r.per_year:.0f} a year)" for r in t.itertuples()))
+for size_name in CELL_SIZES:
+    print(f"\n{size_name}, {v}: top 3 squares by rate per 100,000 residents per year")
+    for period in PERIODS:
+        t = top_table[(top_table["size"] == size_name) & (top_table["group"] == v) & (top_table["period"] == period) & (top_table["ranking"] == "rate")].head(3)
+        print(f"  {period}: " + "; ".join(f"{r['municipality']} {r['rate']:.0f} ({int(r['accidents']):,} accidents, {int(r['average residents']):,} residents)" for _, r in t.iterrows()))
 print("\nSeverity, hotspot cells against other cells (severe %):")
-piv = summary[summary["group"] == v].pivot_table(index=["size", "period"], columns="cells", values="severe %")
+piv = summary[summary["group"] == v].pivot_table(index=["size", "period"], columns="squares", values="severe %")
 print(piv.round(1).to_string())
 print("\nMunicipalities with 100+ accidents (rate shown):")
 print(municipalities.groupby(["group", "period"])["rate reliable"].sum().unstack().to_string())
