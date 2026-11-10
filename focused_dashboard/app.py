@@ -151,13 +151,13 @@ elif analysis == ANALYSES[1]:
         combined["slight"], combined["slight %"] = c["count"], c["share_pct"]
         show_table(combined.reset_index(), f"severity_{scope}")
 
-# ================================================================ 3b / 3c vulnerable road users
+# ================================================================ 3 vulnerable road users
 elif analysis == ANALYSES[2]:
     res, outl = results(), outlines()
     group = st.sidebar.radio("Road-user group", charts.GROUPS4, format_func=GROUP_LABELS.get, key="group")
     view = st.sidebar.radio("View", ["Hotspots (500 m squares)", "Municipalities (top 20)"], key="view")
     many = charts.GROUP_WORDS[group][1]
-    st.header("Step 3b/3c: where are vulnerable road users most exposed?")
+    st.header("Step 3: where are vulnerable road users most exposed?")
     if view.startswith("Hotspots"):
         scope = st.sidebar.radio("Years", ["2017-2024", "2022-2024"], key="hotspot_years", help="2022-2024 has the fewest missing coordinates.")
         cov = res["geo_coverage"]
@@ -208,10 +208,10 @@ elif analysis == ANALYSES[2]:
         st.caption("Read with care: counts favour big cities and the data has no population or traffic figures, so these are not rates per inhabitant or per road user. "
                    "A share in a small municipality moves with a few accidents; one year alone has few accidents per municipality, so few qualify for the share ranking.")
 
-# ================================================================ 4a regional severity and the province map
+# ================================================================ 4 regional severity and the province map
 else:
     res = results()
-    st.header("Step 4a: regional severity")
+    st.header("Step 4: regional severity")
     st.caption("Fixed results for all accidents 2017-2024; the severity class belongs to the whole accident. This analysis has no filters.")
     st.markdown("**Fatal and serious share per region and province** (dot = share, line = 95% interval, gray line = Belgium; Brussels has no province)")
     plot(charts.fig_regional_overview(res))
