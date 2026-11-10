@@ -1,0 +1,21 @@
+group,period,accidents,with coordinates,left out %
+Pedestrian,Pre Covid-19 (2017-2019),12409,10484,15.51
+Pedestrian,During Covid-19 (2020-2021),6364,5312,16.53
+Pedestrian,Post Covid-19 (2022-2024),11124,10667,4.11
+Pedestrian,All years (2017-2024),29897,26463,11.49
+Bicycle,Pre Covid-19 (2017-2019),25446,21590,15.15
+Bicycle,During Covid-19 (2020-2021),17265,14219,17.64
+Bicycle,Post Covid-19 (2022-2024),29170,28129,3.57
+Bicycle,All years (2017-2024),71881,63938,11.05
+Motorcycle,Pre Covid-19 (2017-2019),8241,6938,15.81
+Motorcycle,During Covid-19 (2020-2021),4375,3507,19.84
+Motorcycle,Post Covid-19 (2022-2024),7176,6820,4.96
+Motorcycle,All years (2017-2024),19792,17265,12.77
+Moped,Pre Covid-19 (2017-2019),8689,7477,13.95
+Moped,During Covid-19 (2020-2021),5242,4405,15.97
+Moped,Post Covid-19 (2022-2024),9327,9032,3.16
+Moped,All years (2017-2024),23258,20914,10.08
+Vulnerable (any of the four),Pre Covid-19 (2017-2019),51917,44116,15.03
+Vulnerable (any of the four),During Covid-19 (2020-2021),31473,26013,17.35
+Vulnerable (any of the four),Post Covid-19 (2022-2024),53237,51250,3.73
+Vulnerable (any of the four),All years (2017-2024),136627,121379,11.16

@@ -8,3 +8,6 @@ __pycache__/
 data/external/
 !focused_dashboard/data/*.csv
 !focused_dashboard/results/*.csv
+hotspot_deep_dive/raw_population/
+!hotspot_deep_dive/data/*.csv
+!hotspot_deep_dive/results/*.csv
