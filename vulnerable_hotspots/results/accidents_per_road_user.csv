@@ -1,0 +1,11 @@
+rank,road_user_group,accidents,percent_of_all_accidents
+1,Passenger car,203159,70.17
+2,Bicycle,71881,24.83
+3,Unknown,31086,10.74
+4,Pedestrian,29897,10.33
+5,Van / light truck,23557,8.14
+6,Moped,23258,8.03
+7,Motorcycle,19792,6.84
+8,Truck,12595,4.35
+9,Other road user,6356,2.2
+10,Bus,4095,1.41

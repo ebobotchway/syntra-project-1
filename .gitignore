@@ -11,3 +11,6 @@ data/external/
 hotspot_deep_dive/raw_population/
 !hotspot_deep_dive/data/*.csv
 !hotspot_deep_dive/results/*.csv
+vulnerable_hotspots/raw_population/
+!vulnerable_hotspots/data/*.csv
+!vulnerable_hotspots/results/*.csv
