@@ -6,6 +6,7 @@ Where accidents with pedestrians, cyclists, motorcycles and mopeds concentrate (
 
 - How it was made: [PROCEDURE.md](PROCEDURE.md)
 - How every number was calculated: [REPORT_how_the_output_was_calculated.md](REPORT_how_the_output_was_calculated.md) (also as Word)
+- The technical underpinnings of the five steps, in plain language: [TECHNICAL_UNDERPINNINGS.md](TECHNICAL_UNDERPINNINGS.md) (also as Word, and as a private claude.ai doc: https://claude.ai/artifact/2x8sbvyQGKZiB4L6bzAFMG)
 - Pictures: `images/`; saved results: `results/`
 - This page is not published; the page published earlier (https://claude.ai/artifact/CDg8GqzbHpEPuQE7U2E9Jx) is the hotspot deep dive without step 1.
 
