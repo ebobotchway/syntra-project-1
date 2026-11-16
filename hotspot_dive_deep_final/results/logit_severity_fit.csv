@@ -1,2 +1,2 @@
 rows,different accidents,severe accidents,severe %,clusters (municipalities),log-likelihood,McFadden R2,AUC,AIC,highest VIF
-124616,117750,15334,12.30500,581,-44775.28316,0.03661,0.63895,89570.56632,1.25352
+124616,117750,15334,12.30500,581,-44784.41898,0.03641,0.63789,89588.83796,1.25366

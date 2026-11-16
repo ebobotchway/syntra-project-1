@@ -41,7 +41,7 @@ Step 4 uses *severe* as its headline measure (the same definition as the logisti
 
 ### 0.4 Uncertainty: the 95% Wilson interval (#74)
 
-A share such as "6.4% of the accidents in the hotspots are severe" is a *sample proportion*, so it carries uncertainty. The interval used is the **Wilson score interval**. In words: it asks "which true shares are still plausible given k events out of n accidents?" and returns the range of those shares at the 95% level. Compared with the simple textbook interval (share ± 1.96 standard errors) it behaves well for small counts and for shares near 0%, and it never leaves the 0-100% range, which matters because many fatal shares are around 1%.
+A share such as "7.1% of the accidents in the hotspots are severe" is a *sample proportion*, so it carries uncertainty. The interval used is the **Wilson score interval**. In words: it asks "which true shares are still plausible given k events out of n accidents?" and returns the range of those shares at the 95% level. Compared with the simple textbook interval (share ± 1.96 standard errors) it behaves well for small counts and for shares near 0%, and it never leaves the 0-100% range, which matters because many fatal shares are around 1%.
 
 *Assumption:* accidents are independent draws. This is slightly optimistic: accidents in the same city resemble each other, and one accident can count for two groups.
 
@@ -94,11 +94,11 @@ Pre Covid-19 = 2017-2019 (3 years), during = 2020-2021 (2 years), post = 2022-20
 1. **Two grids (#170).** The map of Belgium is divided into square cells aligned to the Belgian Lambert 1972 coordinate system: *5 km2 cells* (side = sqrt(5) x 1,000 m = 2,236.07 m) and *5 x 5 km squares* (side 5,000 m). The cell of an accident is `(floor(x / side), floor(y / side))`, so each accident falls in exactly one cell. Two sizes are used on purpose: they show how much the result depends on the size of the cell.
 2. **Counting.** For each group (pedestrians, cyclists, motorcycles, mopeds, and the combined group), each period and each grid: the number of accidents with coordinates in each cell, plus the severe, fatal and serious accidents in it. Cells without accidents are simply absent. 5,013 5 km2 cells and 1,274 5 x 5 km squares contain at least one accident of the combined group in 2017-2024.
 3. **Accidents per year.** The count divided by the number of years of the period (section 0.7). This is the quantity that is coloured.
-4. **Hotspots.** The **20 cells with the most accidents** (ties: lowest column, then lowest row). Each hotspot is named after the municipality that holds most of its accidents (a cell can cover several municipalities). The 20 hotspot cells of the combined group hold 20,733 accidents in 5 km2 cells (17% of the located accidents) and 38,228 in 5 x 5 km squares (31%).
+4. **Hotspots.** The **40 cells with the most accidents** (ties: lowest column, then lowest row). Each hotspot is named after the municipality that holds most of its accidents (a cell can cover several municipalities). The 40 hotspot cells of the combined group hold 30,597 accidents in 5 km2 cells (25% of the located accidents) and 50,322 in 5 x 5 km squares (41%).
 5. **The colour scale.** The number of accidents per cell is extremely skewed: a few city cells have more than 250 accidents a year, most cells have less than one. A straight colour scale would show only the cities. So the colour follows the **logarithm** of the accidents per year (a floor of 0.1 a year; ticks at 0.1, 0.3, 1, 3, 10, 30, 100, 300): each step in colour means "about three times as many accidents". The second measure, the **severe share per cell**, uses a linear scale from 0% to 40% and is only drawn for cells with 30 or more accidents (section 0.5).
 6. **Why heat maps and not smoothing.** The first alternatives considered for hotspots were a smoothed density surface and clustering (#85). A grid count has no tuning parameters other than the cell size, gives exact counts per cell, and can be reproduced and explained. The price: the result depends on the cell size and on where the grid starts (a concentration that is split across two cells looks weaker; this is the "modifiable areal unit problem" of all grid maps).
 
-**Checked.** The counts of the cells add up to the located accidents of the group and period (the script stops if not); the totals equal the main project's totals; the heat maps on the HTML page are built in the browser from the same cell lists as the Python figures and the Streamlit app, and the top-20 table has 20 rows and the same numbers.
+**Checked.** The counts of the cells add up to the located accidents of the group and period (the script stops if not); the totals equal the main project's totals; the heat maps on the HTML page are built in the browser from the same cell lists as the Python figures and the Streamlit app, and the top-40 table has 40 rows and the same numbers.
 
 **Limits.** Hotspots are where accidents are *counted*, which is mostly where many people and vehicles are; a hotspot is not a place of high risk (step 5 and the report discuss this). Only accidents with coordinates are shown (88.8%); a different grid origin or cell size would give different cells, although the two sizes tell the same big story (the big cities).
 
@@ -112,9 +112,9 @@ Pre Covid-19 = 2017-2019 (3 years), during = 2020-2021 (2 years), post = 2022-20
 2. **The same colour scale** in the three maps (the upper end is the maximum over the three periods), so the same colour means the same number of accidents a year in every panel.
 3. **Accidents per year**, not totals, because the periods are 3, 2 and 3 years long.
 
-**Colours of the marked cells (#203).** The 20 hotspot cells of each period are drawn as hollow squares whose colour shows how persistent the cell is: **red** if the very same grid cell is among the 20 busiest in all three periods, **orange** if it is in two periods, **black** if it is in only one. A cell is identified by its grid column and row, so "the same" means the same cell, not only the same municipality name; the municipality of each marker is shown when you hover over it. The single-period heat map uses the same colours (computed from the three periods; a gray marker can only appear in the all-years view, for a cell that is in the all-years top 20 but in none of the three periods' top 20).
+**Colours of the marked cells (#203).** The 40 hotspot cells of each period are drawn as hollow squares whose colour shows how persistent the cell is: **red** if the very same grid cell is among the 40 busiest in all three periods, **orange** if it is in two periods, **black** if it is in only one. A cell is identified by its grid column and row, so "the same" means the same cell, not only the same municipality name; the municipality of each marker is shown when you hover over it. The single-period heat map uses the same colours (computed from the three periods; a gray marker can only appear in the all-years view, for a cell that is in the all-years top 40 but in none of the three periods' top 40).
 
-**Persistence of the hotspots.** To summarise "do the hotspots move?" in one number, the 20 hotspot cells of the pre period are compared with the 20 of the post period: **how many cells are in both lists**. For the combined group this is 17 of 20 for the 5 km2 cells and 18 of 20 for the 5 x 5 km squares. The hotspots hardly move: the pandemic lowered counts everywhere but did not change where accidents concentrate.
+**Persistence of the hotspots.** To summarise "do the hotspots move?" in one number, the 40 hotspot cells of the pre period are compared with the 40 of the post period: **how many cells are in both lists**. For the combined group this is 37 of 40 for the 5 km2 cells and 34 of 40 for the 5 x 5 km squares. The hotspots hardly move: the pandemic lowered counts everywhere but did not change where accidents concentrate.
 
 ### 3.3 The weakness of this step: coordinates are missing unevenly over time
 
@@ -136,11 +136,11 @@ Because far fewer accidents lack coordinates after 2021, the **located** acciden
 
 **The model.** A **comparison of two shares**.
 
-1. **Two groups of cells.** For each group, period and grid, the located accidents are divided into those in the **20 hotspot cells** (the 20 busiest) and those in **all other cells**.
+1. **Two groups of cells.** For each group, period and grid, the located accidents are divided into those in the **40 hotspot cells** (the 40 busiest) and those in **all other cells**.
 2. **The share.** In each group of cells the share of accidents that are severe (classes 1-3), fatal (1-2) and serious (3): `k / n`, with its 95% Wilson interval (section 0.4). A share is only given for 30 or more accidents (always met here).
 3. **The comparison.** The two shares and their intervals are drawn next to each other for each period; the intervals do not overlap when the difference is clear.
 
-**Result in words.** In 2017-2024 for the combined group, **6.44%** of the accidents in the 20 hotspot 5 km2 cells are severe (interval 6.11-6.78%) against **13.42%** (13.21-13.63%) in all other cells; for the 5 x 5 km squares it is 7.63% against 14.34%. Fatal: 0.40% against 1.56% (5 km2 cells). The same pattern holds in each period and for each group.
+**Result in words.** In 2017-2024 for the combined group, **7.09%** of the accidents in the 40 hotspot 5 km2 cells are severe (interval 6.81-7.38%) against **13.96%** (13.74-14.19%) in all other cells; for the 5 x 5 km squares it is 8.29% against 15.02%. Fatal: 0.42% against 1.68% (5 km2 cells). The same pattern holds in each period and for each group.
 
 **Why the comparison is fair (and where it is not).**
 
@@ -149,7 +149,7 @@ Because far fewer accidents lack coordinates after 2021, the **located** acciden
 - It is an **association**: the hotspots are in city centres where speeds are lower and traffic is slower, but speed is not in the data, so the report does not claim that speed is the reason.
 - The accident class belongs to the whole accident (section 0.1).
 - The accidents of a hotspot cell are not independent (they share the same streets), so the Wilson intervals are somewhat too narrow; the differences are large enough (about double) not to depend on that.
-- The 20 hotspot cells are few cells with many accidents; "all other cells" is thousands of cells with few accidents each. The comparison is between *accidents in busy places* and *accidents in the rest*, not between cells.
+- The 40 hotspot cells are few cells with many accidents; "all other cells" is thousands of cells with few accidents each. The comparison is between *accidents in busy places* and *accidents in the rest*, not between cells.
 
 **Checked.** The two groups of cells together are all the located accidents of the group and period (by construction, the "all cells" line of the table is the sum); the table and chart on the page and in the app show the same numbers as the saved table.
 
@@ -163,7 +163,7 @@ Because far fewer accidents lack coordinates after 2021, the **located** acciden
 
 **The variables and why.**
 
-- *Hotspot* (asked for): 1 when the accident is in one of the 20 busiest 5 x 5 km squares of its own group and period.
+- *Hotspot* (asked for): 1 when the accident is in one of the 40 busiest 5 x 5 km squares of its own group and period.
 - *Period* (asked for): pre Covid-19 is the reference; during and post are dummies.
 - *Group* (asked for): cyclists (the largest group) are the reference; pedestrians, motorcycles, mopeds are dummies. An accident counts for a group if road user 1 or 2 is of it (section 0.2), so an accident with two groups has a row in both groups.
 - *Built-up area* and *light condition* (the two extra variables you accepted): kept to two so the model stays simple; both are known in the data, strongly linked to severity, and easy to explain. Night merges "public lighting present and lit", "present but not lit" and "none"; unknown values are left out.
@@ -174,7 +174,7 @@ Because far fewer accidents lack coordinates after 2021, the **located** acciden
 
 **Fit measures.** AUC (the chance that a random severe accident gets a higher predicted probability than a random non-severe one), McFadden R2 `1 - logL / logL0`, AIC, and variance inflation factors (each below 1.3, so no overlap problem).
 
-**Result in words.** 124,616 rows (117,750 accidents; 12.3% severe). The odds of a severe accident in a hotspot square are 0.55 times those elsewhere (0.49 to 0.63): 8.4% against 14.1% in percentage points, 5.7 points less (4.7 to 6.7). Outside built-up areas the odds are 1.74 times those inside, at night 1.41 times those in daylight; motorcycles 1.69, pedestrians 1.38 and mopeds 0.72 times those of cyclists; after Covid-19 0.90 times those before it; during Covid-19 and at dawn/dusk there is no clear difference. AUC 0.64 and McFadden R2 0.037: a descriptive, not a predictive, model.
+**Result in words.** 124,616 rows (117,750 accidents; 12.3% severe). The odds of a severe accident in a hotspot square are 0.59 times those elsewhere (0.53 to 0.65): 9.2% against 14.6% in percentage points, 5.4 points less (4.5 to 6.3). Outside built-up areas the odds are 1.74 times those inside, at night 1.40 times those in daylight; motorcycles 1.66, pedestrians 1.37 and mopeds 0.72 times those of cyclists; after Covid-19 0.89 times those before it; during Covid-19 and at dawn/dusk there is no clear difference. AUC 0.64 and McFadden R2 0.036: a descriptive, not a predictive, model.
 
 **Assumptions and limits.**
 
@@ -185,7 +185,7 @@ Because far fewer accidents lack coordinates after 2021, the **located** acciden
 - *Severity belongs to the whole accident* (section 0.1), not to one road user.
 - Accident and hotspot choice are not independent of the group, which is why the hotspot is defined per group and period.
 
-**Checked.** The script asserts the severe total (28,532) and the group totals; the hotspot lists have 20 squares per group and period; the rows used are listed per group and period (`results/logit_selection.csv`); the app and the page show the saved odds ratios.
+**Checked.** The script asserts the severe total (28,532) and the group totals; the hotspot lists have 40 squares per group and period; the rows used are listed per group and period (`results/logit_selection.csv`); the app and the page show the saved odds ratios.
 
 ## 5. Step 5: accidents per resident (rates per municipality)
 
@@ -237,8 +237,8 @@ Belgium's rate for the combined group is 152 accidents per 100,000 residents per
 |---|---|---|
 | All | Script totals stop the run if wrong (289,532 accidents; 28,532 severe; group totals) | passed |
 | 1 | Browser calculation of 1a and 1b against the Python tables | equal to 10^-6 in several scenarios |
-| 2 | Cell counts add up to the located accidents; top-20 table has 20 rows and the same numbers in Python, the app and the page | passed |
-| 3 | Same grid and colour scale in the three panels; persistence counted from the saved top-20 lists | passed |
+| 2 | Cell counts add up to the located accidents; top-40 table has 40 rows and the same numbers in Python, the app and the page | passed |
+| 3 | Same grid and colour scale in the three panels; persistence counted from the saved top-40 lists | passed |
 | 4 | The two groups of cells together equal the "all cells" line (the located accidents); page and app show the saved table | passed |
 | 5 | Resident totals equal the Belgian totals per year; municipality counts add up to the accidents of the group; page equals the saved table | passed |
 | App and page | The Streamlit app was run through every view, group, grid, measure, period and ranking (155 combinations) and the step 1 filters; the HTML page was opened in a browser and every control was used | no errors |
@@ -254,7 +254,7 @@ Belgium's rate for the combined group is 152 accidents per 100,000 residents per
 ## 9. Glossary
 
 - **Grid cell:** one square of the map grid; an accident belongs to exactly one cell.
-- **Hotspot:** here, one of the 20 cells with the most accidents; where accidents are counted, not a risk measure.
+- **Hotspot:** here, one of the 40 cells with the most accidents; where accidents are counted, not a risk measure.
 - **Accidents per year:** the count of a period divided by the number of years of the period.
 - **Log colour scale:** a colour scale where equal steps mean equal *ratios*, used because a few cells have hundreds of accidents and most have less than one.
 - **Wilson interval:** a 95% interval for a share that stays valid for small counts and for shares near 0%.

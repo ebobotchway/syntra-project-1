@@ -60,7 +60,7 @@ Step 1 of the focused dashboard has two parts: 1a "who is involved" (accidents p
 
 ## 2b. Change made later: persistence colours of the hotspot markers (#202-#204)
 
-In the three-period heat maps (and in the single-period heat map) the 20 marked cells are coloured by **how many of the three periods the same cell is among the 20 busiest**: red = all 3, orange = 2, black = 1 (gray = none of the three, only possible in the all-years view). Steps: (1) `persistence()` in `charts.py` counts for every cell in how many of the three periods' top-20 lists it appears (a cell is its grid column and row); (2) `hotspot_markers()` draws one trace per class, so each colour has a legend entry; (3) the same logic is in `template.html` (`persistence()`, `markerTraces()`, keyed on the cell centre) and in `scripts/03_plot_heatmaps.py`, which also draws a legend; (4) captions in `app.py`, the page and the report explain the colours. Nothing else changed: the scripts 01 and 02, the saved results and all numbers are the same.
+In the three-period heat maps (and in the single-period heat map) the 40 marked cells are coloured by **how many of the three periods the same cell is among the 40 busiest**: red = all 3, orange = 2, black = 1 (gray = none of the three, only possible in the all-years view). Steps: (1) `persistence()` in `charts.py` counts for every cell in how many of the three periods' top-40 lists it appears (a cell is its grid column and row); (2) `hotspot_markers()` draws one trace per class, so each colour has a legend entry; (3) the same logic is in `template.html` (`persistence()`, `markerTraces()`, keyed on the cell centre) and in `scripts/03_plot_heatmaps.py`, which also draws a legend; (4) captions in `app.py`, the page and the report explain the colours. Nothing else changed: the scripts 01 and 02, the saved results and all numbers are the same.
 
 ## 3. Get the residents: `scripts/01_prepare_population.py`
 
@@ -82,7 +82,7 @@ Result: `data/population_by_municipality.csv` (581 municipalities x 8 years).
 1. **Definitions copied from the main project:** an accident counts for a group if the group is road user 1 or 2 (#33); severe = classes 1 to 3 (#116); coordinates outside Belgium are missing (#90); Wilson intervals (#74); periods pre 2017-2019, during 2020-2021, post 2022-2024 (#38).
 2. **Grid.** Cell side = sqrt(5) x 1,000 m = 2,236 m for the 5 km2 cells and 5,000 m for the squares; the cell of an accident is `floor(x / side), floor(y / side)`.
 3. **Per cell** (for each size, group and period): accidents, accidents per year (divided by the number of years, because the periods are 3, 2 and 3 years long), severe, fatal and serious accidents.
-4. **Hotspots:** the 20 busiest cells, with their municipality and severity; and the severity of those 20 cells against all other cells.
+4. **Hotspots:** the 40 busiest cells, with their municipality and severity; and the severity of those 40 cells against all other cells.
 5. **Per municipality** (using all accidents, with or without coordinates): accidents divided by the residents of each year, per 100,000.
 6. **Checks (in the script):** the totals equal the main project (289,532 accidents; 28,532 severe; 29,897 pedestrian, 71,881 cyclist, 19,792 motorcycle, 23,258 moped accidents); the cell counts add up to the located accidents; the municipality counts add up to the accidents of the group.
 
@@ -90,17 +90,17 @@ Result: `data/population_by_municipality.csv` (581 municipalities x 8 years).
 python -I scripts/02_hotspot_analysis.py "../OPENDATA_MAP_2017-2024_en_flagged.csv.gz"
 ```
 
-Results in `results/`: `grid_cells.csv`, `hotspots_top20.csv`, `hotspot_severity_summary.csv`, `coordinate_coverage.csv`, `municipality_rates.csv`.
+Results in `results/`: `grid_cells.csv`, `hotspots_top40.csv`, `hotspot_severity_summary.csv`, `coordinate_coverage.csv`, `municipality_rates.csv`.
 
 ## 4b. Change made later: a logistic regression for severity in step 4 (`scripts/05_logistic_model.py`, #205-#209)
 
-You asked for a binary logistic regression in step 4: severity (fatal + serious injury) = 1, otherwise 0, explained by hotspot, period, group and two more variables. Choices (all asked first): extra variables **built-up area** (inside/outside) and **light condition** (daylight, dawn/dusk, night); hotspot = the accident is in one of the **20 busiest 5 x 5 km squares of its own group and period**; group = the four groups, an accident counts in a group if road user 1 or 2 is of that group, so an accident with two groups is a row in both.
+You asked for a binary logistic regression in step 4: severity (fatal + serious injury) = 1, otherwise 0, explained by hotspot, period, group and two more variables. Choices (all asked first): extra variables **built-up area** (inside/outside) and **light condition** (daylight, dawn/dusk, night); hotspot = the accident is in one of the **40 busiest 5 x 5 km squares of its own group and period**; group = the four groups, an accident counts in a group if road user 1 or 2 is of that group, so an accident with two groups is a row in both.
 
-1. **Script:** `python -I scripts/05_logistic_model.py "../OPENDATA_MAP_2017-2024_en_flagged.csv.gz"` reads the accidents, links each accident to its 5 x 5 km square, marks the hotspot squares from `results/hotspots_top20.csv`, leaves out accidents without coordinates or with unknown built-up area or light, builds the design matrix (reference categories: pre Covid-19, cyclists, inside built-up area, daylight) and fits the model.
+1. **Script:** `python -I scripts/05_logistic_model.py "../OPENDATA_MAP_2017-2024_en_flagged.csv.gz"` reads the accidents, links each accident to its 5 x 5 km square, marks the hotspot squares from `results/hotspots_top40.csv`, leaves out accidents without coordinates or with unknown built-up area or light, builds the design matrix (reference categories: pre Covid-19, cyclists, inside built-up area, daylight) and fits the model.
 2. **Standard errors:** cluster-robust by municipality (not by accident as first proposed: municipality clusters also cover the double rows and the resemblance of accidents in one municipality).
 3. **Results** in `results/`: `logit_severity_model.csv` (coefficients and odds ratios), `logit_severity_fit.csv`, `logit_hotspot_adjusted.csv` (hotspot effect in percentage points), `logit_severity_descriptives.csv`, `logit_selection.csv`.
 4. **Shown in:** block 4b of view 4 of the Streamlit app (forest plot, table, the percentage-point effect, the selection and the plain shares) and the same block in section 3 of the HTML page; the report (section 5b) and the technical underpinnings (section 4b) explain the calculation. The block does not follow the group and cell-size filters: it is one model. A term that is not significant at 5% (p of 0.05 or more) is drawn as a hollow gray dot (#210).
-5. **Result:** the odds of a severe accident in a hotspot square are 0.55 times those elsewhere (95% interval 0.49 to 0.63) with the other variables held equal; 8.4% against 14.1% severe in percentage points.
+5. **Result:** the odds of a severe accident in a hotspot square are 0.59 times those elsewhere (95% interval 0.53 to 0.65) with the other variables held equal; 9.2% against 14.6% severe in percentage points. (Top 20 at first: 0.55; the hotspot lists were enlarged to 40 later, #211.)
 
 ## 5. What the first results showed, and what I did about it
 
@@ -113,7 +113,7 @@ Two things I noticed in the numbers before building any chart:
 
 One module builds every chart from the saved tables (nothing is recalculated):
 
-- `fig_heatmap` and `fig_heatmap_periods`: the heat map of accidents per year (log colour scale, because a few city cells have hundreds a year and most have less than one) or of the severe share (linear, cells with 30+ accidents), with the 20 busiest cells marked; and the three periods side by side on the same grid and colour scale.
+- `fig_heatmap` and `fig_heatmap_periods`: the heat map of accidents per year (log colour scale, because a few city cells have hundreds a year and most have less than one) or of the severe share (linear, cells with 30+ accidents), with the 40 busiest cells marked; and the three periods side by side on the same grid and colour scale.
 - `fig_hotspot_severity`: severe, fatal and serious share in the hotspot cells against the other cells, with 95% intervals.
 - `fig_rate_map` and `fig_rate_ranking`: municipalities coloured by accidents per 100,000 residents per year (5 quantile classes), and the top 20 by rate or by number.
 
@@ -153,7 +153,7 @@ The page uses the same design as the focused dashboard. `build_html.py` packs th
 python build_html.py
 ```
 
-**Test:** I opened the page in headless Chrome, clicked through every control and looked at the screenshots: no console errors; the 20-cell table has 20 rows; the page shows the same numbers as the saved results (Brussel 383.8 and Knokke-Heist 367.6 accidents per 100,000 residents per year for all four groups).
+**Test:** I opened the page in headless Chrome, clicked through every control and looked at the screenshots: no console errors; the 40-cell table has 40 rows; the page shows the same numbers as the saved results (Brussel 383.8 and Knokke-Heist 367.6 accidents per 100,000 residents per year for all four groups).
 
 ## 10. The reports
 

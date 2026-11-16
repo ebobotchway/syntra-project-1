@@ -2,7 +2,7 @@
 Step 4b of the final analysis: a simple binary logistic regression for the severity of accidents with vulnerable road users.
 
   Dependent variable : severe = 1 when the accident class is 1, 2 or 3 (fatal + serious injury), 0 otherwise                       (#116)
-  Explanatory        : hotspot  (1 = the accident is in one of the 20 busiest 5 x 5 km squares of ITS OWN group and period)
+  Explanatory        : hotspot  (1 = the accident is in one of the 40 busiest 5 x 5 km squares of ITS OWN group and period)
                        period   (pre 2017-2019 = reference, during 2020-2021, post 2022-2024)
                        group    (bicycle = reference, pedestrian, motorcycle, moped)
                        built-up area (inside = reference, outside)                                                                  extra variable 1
@@ -97,10 +97,10 @@ assert int(df["severe"].sum()) == 28532
 side = 5000.0
 df["cx"], df["cy"] = np.floor(df["x_coord"] / side).fillna(-1).astype(int), np.floor(df["y_coord"] / side).fillna(-1).astype(int)
 
-top = pd.read_csv(RESULTS / "hotspots_top20.csv")
+top = pd.read_csv(RESULTS / "hotspots_top40.csv")
 top = top[top["size"] == SIZE]
 hot_cells = {(g, p): set(zip(t["cx"], t["cy"])) for (g, p), t in top.groupby(["group", "period"])}
-assert all(len(v) == 20 for v in hot_cells.values())
+assert all(len(v) == 40 for v in hot_cells.values())
 
 pieces, flow = [], []
 for group, codes in GROUPS.items():
@@ -131,7 +131,7 @@ def add(name, label, mask, block):
     TERMS.append((name, label, block))
 
 
-add("hotspot", "In a hotspot square (top 20 of own group and period)", data["hotspot"] == 1, "Hotspot")
+add("hotspot", "In a hotspot square (top 40 of own group and period)", data["hotspot"] == 1, "Hotspot")
 for p in list(PERIODS)[1:]:
     add(f"period={p}", f"{p} (against Pre Covid-19)", data["period"] == p, "Period")
 for g in list(GROUPS)[1:]:

@@ -1,6 +1,6 @@
 variable,category,rows,severe,severe %
-Hotspot,Not a hotspot square,82518,12059,14.614
-Hotspot,Hotspot square,42098,3275,7.779
+Hotspot,Not a hotspot square,69543,10629,15.284
+Hotspot,Hotspot square,55073,4705,8.543
 Period,During Covid-19 (2020-2021),26733,3303,12.356
 Period,Post Covid-19 (2022-2024),52631,6175,11.733
 Period,Pre Covid-19 (2017-2019),45252,5856,12.941

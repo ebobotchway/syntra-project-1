@@ -61,8 +61,8 @@ This step is taken unchanged from the focused dashboard and comes first. **What 
 
 1. **Cell size.** A cell of 5 km2 has a side of sqrt(5) x 1,000 = 2,236.07 m; the other grid has sides of 5,000 m. Both are aligned to multiples of the side in Belgian Lambert 1972: the cell of an accident is `(floor(x / side), floor(y / side))`. 5,013 5 km2 cells and 1,274 5 x 5 km squares contain at least one accident of the four groups.
 2. **Counting.** For each size, group and period: the accidents with coordinates per cell, the severe, fatal and serious accidents per cell, and accidents per year = accidents / years of the period. The sum over the cells equals the number of located accidents of the group and period (checked in the script).
-3. **Hotspots.** The 20 cells with the most accidents (ties: lowest column, then row). The municipality of a hotspot is the most common municipality among its accidents (a cell can cover several municipalities).
-4. **Severity of the hotspots.** For each group, period and size the severity of the 20 hotspot cells is compared with all other cells together: severe, fatal and serious shares with 95% Wilson intervals (the same method as step 2 of the main project, #74). A share is only given for 30 or more accidents.
+3. **Hotspots.** The 40 cells with the most accidents (ties: lowest column, then row). The municipality of a hotspot is the most common municipality among its accidents (a cell can cover several municipalities).
+4. **Severity of the hotspots.** For each group, period and size the severity of the 40 hotspot cells is compared with all other cells together: severe, fatal and serious shares with 95% Wilson intervals (the same method as step 2 of the main project, #74). A share is only given for 30 or more accidents.
 5. **Heat maps.** Accidents per year per cell on a **log colour scale** (a few city cells have hundreds of accidents a year, most cells less than one), and the severe share per cell on a linear scale from 0 to 40% (cells with 30 or more accidents). In the three-period view the three maps share the same grid and the same colour scale.
 
 The busiest cells for all four groups together (accidents per year; 5 km2 cells and 5 x 5 km squares):
@@ -76,37 +76,37 @@ The busiest cells for all four groups together (accidents per year; 5 km2 cells 
 | 5 x 5 km squares | During (2020-2021) | Brussel 604 | Antwerpen 459 | Brussel 396 | Elsene 288 | Antwerpen 284 |
 | 5 x 5 km squares | Post (2022-2024) | Brussel 656 | Antwerpen 620 | Anderlecht 499 | Antwerpen 386 | Antwerpen 352 |
 
-**Do the hotspots move?** In the three-period heat maps the 20 marked cells of each period are drawn in a colour that shows how persistent the cell is: **red** = the same cell is among the 20 busiest in all three periods, **orange** = in two periods, **black** = in one period (#203). The same colours are used in the single-period heat map (where a gray square would be a cell that is in no period's top 20, possible in the all-years view only). Number of the 20 busiest cells of the pre period that are still among the 20 busiest of the post period:
+**Do the hotspots move?** In the three-period heat maps the 40 marked cells of each period are drawn in a colour that shows how persistent the cell is: **red** = the same cell is among the 40 busiest in all three periods, **orange** = in two periods, **black** = in one period (#203). The same colours are used in the single-period heat map (where a gray square would be a cell that is in no period's top 20, possible in the all-years view only). Number of the 40 busiest cells of the pre period that are still among the 40 busiest of the post period:
 
 | Cell size | All four vulnerable groups | Pedestrians | Cyclists | Motorcycles | Mopeds |
 |---|---|---|---|---|---|
-| 5 km2 cells | 17 of 20 | 18 of 20 | 19 of 20 | 15 of 20 | 12 of 20 |
-| 5 x 5 km squares | 18 of 20 | 17 of 20 | 19 of 20 | 16 of 20 | 19 of 20 |
+| 5 km2 cells | 37 of 40 | 34 of 40 | 36 of 40 | 32 of 40 | 33 of 40 |
+| 5 x 5 km squares | 34 of 40 | 38 of 40 | 37 of 40 | 30 of 40 | 32 of 40 |
 
 ## 5. The severity of the hotspots
 
-Share of the accidents involving vulnerable road users that are severe, in the 20 hotspot cells and in all other cells, with 95% Wilson intervals (all four groups together):
+Share of the accidents involving vulnerable road users that are severe, in the 40 hotspot cells and in all other cells, with 95% Wilson intervals (all four groups together):
 
-| Cell size | Period | Accidents in 20 hotspot cells | Severe % hotspots (95% interval) | Accidents in all other cells | Severe % other cells (95% interval) | Fatal % hotspots / others |
+| Cell size | Period | Accidents in 40 hotspot cells | Severe % hotspots (95% interval) | Accidents in all other cells | Severe % other cells (95% interval) | Fatal % hotspots / others |
 |---|---|---|---|---|---|---|
-| 5 km2 cells | Pre (2017-2019) | 7,824 | 7.3% (6.7-7.9) | 36,292 | 14.1% (13.7-14.5) | 0.45% / 1.68% |
-| 5 km2 cells | During (2020-2021) | 4,635 | 5.7% (5.0-6.4) | 21,378 | 13.7% (13.3-14.2) | 0.28% / 1.63% |
-| 5 km2 cells | Post (2022-2024) | 8,376 | 6.1% (5.6-6.6) | 42,874 | 12.7% (12.4-13.0) | 0.36% / 1.43% |
-| 5 km2 cells | All years (2017-2024) | 20,733 | 6.4% (6.1-6.8) | 100,646 | 13.4% (13.2-13.6) | 0.40% / 1.56% |
-| 5 x 5 km squares | Pre (2017-2019) | 14,370 | 8.2% (7.8-8.7) | 29,746 | 15.1% (14.7-15.6) | 0.55% / 1.91% |
-| 5 x 5 km squares | During (2020-2021) | 8,341 | 7.2% (6.6-7.7) | 17,672 | 14.7% (14.2-15.2) | 0.44% / 1.83% |
-| 5 x 5 km squares | Post (2022-2024) | 15,602 | 7.2% (6.8-7.6) | 35,648 | 13.6% (13.2-13.9) | 0.45% / 1.60% |
-| 5 x 5 km squares | All years (2017-2024) | 38,228 | 7.6% (7.4-7.9) | 83,151 | 14.3% (14.1-14.6) | 0.47% / 1.77% |
+| 5 km2 cells | Pre (2017-2019) | 11,544 | 7.7% (7.2-8.2) | 32,572 | 14.7% (14.3-15.1) | 0.46% / 1.82% |
+| 5 km2 cells | During (2020-2021) | 6,768 | 6.5% (5.9-7.1) | 19,245 | 14.3% (13.8-14.8) | 0.38% / 1.74% |
+| 5 km2 cells | Post (2022-2024) | 12,380 | 6.8% (6.4-7.3) | 38,870 | 13.2% (12.8-13.5) | 0.40% / 1.52% |
+| 5 km2 cells | All years (2017-2024) | 30,597 | 7.1% (6.8-7.4) | 90,782 | 14.0% (13.7-14.2) | 0.42% / 1.68% |
+| 5 x 5 km squares | Pre (2017-2019) | 18,895 | 9.0% (8.6-9.4) | 25,221 | 15.8% (15.3-16.2) | 0.62% / 2.10% |
+| 5 x 5 km squares | During (2020-2021) | 10,925 | 7.9% (7.4-8.4) | 15,088 | 15.4% (14.9-16.0) | 0.52% / 2.02% |
+| 5 x 5 km squares | Post (2022-2024) | 20,690 | 7.9% (7.5-8.3) | 30,560 | 14.2% (13.8-14.6) | 0.52% / 1.75% |
+| 5 x 5 km squares | All years (2017-2024) | 50,322 | 8.3% (8.1-8.5) | 71,057 | 15.0% (14.8-15.3) | 0.55% / 1.93% |
 
 By group (5 km2 cells, 2017-2024):
 
 | Group | Severe % hotspots | Severe % other cells | Fatal % hotspots | Fatal % other cells |
 |---|---|---|---|---|
-| All four vulnerable groups | 6.4% | 13.4% | 0.40% | 1.56% |
-| Pedestrians | 7.6% | 14.9% | 0.68% | 2.41% |
-| Cyclists | 6.1% | 12.0% | 0.23% | 1.03% |
-| Motorcycles | 7.0% | 21.7% | 0.42% | 3.22% |
-| Mopeds | 5.5% | 9.2% | 0.19% | 0.65% |
+| All four vulnerable groups | 7.1% | 14.0% | 0.42% | 1.68% |
+| Pedestrians | 8.4% | 15.6% | 0.80% | 2.60% |
+| Cyclists | 6.5% | 12.5% | 0.28% | 1.11% |
+| Motorcycles | 8.5% | 22.3% | 0.63% | 3.36% |
+| Mopeds | 5.6% | 9.5% | 0.13% | 0.72% |
 
 Accidents in the hotspots are much less often severe than elsewhere, in every period and for every group. This is an association: hotspots are in cities, where speeds are lower; speed is not in the data.
 
@@ -116,7 +116,7 @@ The comparison above looks at one factor at a time. A **binary logistic regressi
 
 **The model** (one model for the four groups together, 5 x 5 km squares):
 
-- **Hotspot:** 1 when the accident is in one of the 20 busiest squares of its own group and period (the lists of `results/hotspots_top20.csv`), otherwise 0.
+- **Hotspot:** 1 when the accident is in one of the 40 busiest squares of its own group and period (the lists of `results/hotspots_top40.csv`), otherwise 0.
 - **Period:** pre Covid-19 (reference), during, post.
 - **Group:** cyclists (reference), pedestrians, motorcycles, mopeds. An accident counts in a group when road user 1 or 2 is of that group (#33), so an accident with two groups is a row in both.
 - **Built-up area** (extra variable 1): inside (reference) or outside.
@@ -143,19 +143,19 @@ The comparison above looks at one factor at a time. A **binary logistic regressi
 
 | Variable | Term (against the reference) | Odds ratio | 95% interval | p value |
 |---|---|---|---|---|
-| Hotspot | In a hotspot square (top 20 of own group and period) | 0.55 | 0.49 to 0.63 | <0.001 |
-| Period | During Covid-19 (2020-2021) (against Pre Covid-19) | 0.96 | 0.92 to 1.01 | 0.136 |
+| Hotspot | In a hotspot square (top 40 of own group and period) | 0.59 | 0.53 to 0.65 | <0.001 |
+| Period | During Covid-19 (2020-2021) (against Pre Covid-19) | 0.96 | 0.91 to 1.01 | 0.111 |
 | Period | Post Covid-19 (2022-2024) (against Pre Covid-19) | 0.89 | 0.85 to 0.94 | <0.001 |
-| Group | Pedestrian (against Bicycle) | 1.38 | 1.28 to 1.48 | <0.001 |
-| Group | Motorcycle (against Bicycle) | 1.69 | 1.59 to 1.80 | <0.001 |
-| Group | Moped (against Bicycle) | 0.72 | 0.67 to 0.77 | <0.001 |
-| Built-up area | Outside built-up area (against inside) | 1.74 | 1.64 to 1.84 | <0.001 |
-| Light condition | Dawn, dusk (against daylight) | 0.94 | 0.87 to 1.03 | 0.178 |
-| Light condition | Night (against daylight) | 1.41 | 1.35 to 1.47 | <0.001 |
+| Group | Pedestrian (against Bicycle) | 1.37 | 1.27 to 1.48 | <0.001 |
+| Group | Motorcycle (against Bicycle) | 1.66 | 1.56 to 1.77 | <0.001 |
+| Group | Moped (against Bicycle) | 0.72 | 0.68 to 0.77 | <0.001 |
+| Built-up area | Outside built-up area (against inside) | 1.74 | 1.63 to 1.85 | <0.001 |
+| Light condition | Dawn, dusk (against daylight) | 0.95 | 0.87 to 1.03 | 0.227 |
+| Light condition | Night (against daylight) | 1.40 | 1.34 to 1.47 | <0.001 |
 
-**The hotspot effect in percentage points.** Setting the hotspot term to 1 and to 0 for every row (all other variables as observed) and averaging the predicted probabilities gives **8.4%** severe if every accident were in a hotspot square against **14.1%** if none were: **-5.7 points** (95% interval -6.7 to -4.7, from 1,000 simulated coefficient sets).
+**The hotspot effect in percentage points.** Setting the hotspot term to 1 and to 0 for every row (all other variables as observed) and averaging the predicted probabilities gives **9.2%** severe if every accident were in a hotspot square against **14.6%** if none were: **-5.4 points** (95% interval -6.3 to -4.5, from 1,000 simulated coefficient sets).
 
-**Fit.** AUC 0.64, McFadden R2 0.037, highest variance inflation factor 1.25 (no problem with overlap between variables). The model is simple on purpose and only moderately predictive: it describes differences between groups of accidents; it cannot say which single accident will be severe.
+**Fit.** AUC 0.64, McFadden R2 0.036, highest variance inflation factor 1.25 (no problem with overlap between variables). The model is simple on purpose and only moderately predictive: it describes differences between groups of accidents; it cannot say which single accident will be severe.
 
 **Reading it.** After holding period, group, built-up area and light equal, accidents in hotspot squares still have clearly lower odds of being severe, so the lower severity in the hotspots is not just that hotspots have more cyclists or more daylight accidents. Outside built-up areas and at night the odds are higher. An odds ratio is not a risk ratio (12% of the rows are severe), and speed, traffic volume and road layout are not in the data, so this remains an association.
 

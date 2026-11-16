@@ -2,7 +2,7 @@
 Step 3 of the hotspot deep dive: the heat maps as pictures (PNG) for the report.
 
 For each group (5) it draws, from the saved results of script 02 (no recalculation):
-  heat_<group>_<size>_accidents.png   accidents per year per grid cell, the three periods side by side (same grid, same colour scale, log scale), the 20 busiest cells ringed
+  heat_<group>_<size>_accidents.png   accidents per year per grid cell, the three periods side by side (same grid, same colour scale, log scale), the 40 busiest cells ringed
   heat_<group>_<size>_severe.png      the severe share per grid cell (cells with 30+ accidents)
   rates_<group>.png                   accidents per 100,000 residents per year per municipality, the three periods side by side (100+ accidents full colour, 30-99 faded)
 Municipality outlines: Statbel, CC BY 4.0 (data/municipality_outlines.json).
@@ -34,7 +34,7 @@ plt.rcParams["font.family"] = ["Helvetica Neue", "Arial", "DejaVu Sans"]
 COUNT_CMAP = LinearSegmentedColormap.from_list("counts", ["#cde2fb", "#86b6ef", "#2a78d6", "#104281", "#0d366b"])
 WARM_CMAP = LinearSegmentedColormap.from_list("warm", ["#fdeadf", "#f8c3a2", "#eb6834", "#b8431a", "#6e260c"])
 FILE = {g: g.split(" ")[0].lower() for g in charts.GROUPS}
-RING = charts.PERSIST_COLOURS  # the ring colour of a hotspot cell: in how many of the three periods it is among the 20 busiest (#203)
+RING = charts.PERSIST_COLOURS  # the ring colour of a hotspot cell: in how many of the three periods it is among the 40 busiest (#203)
 FILE_SIZE = {"5 km2 cells": "5km2", "5 x 5 km squares": "5x5km"}
 
 
@@ -85,9 +85,9 @@ def grid_figure(group, size, measure):
         cbar.set_ticks(ticks); cbar.set_ticklabels([f"{t_:g}" for t_ in ticks])
         title = f"Where do accidents with {charts.GROUP_WORDS[group]} concentrate? {size}, accidents per year"
     fig.text(0.02, 0.975, title, fontsize=13, fontweight="bold", color=INK, ha="left", va="top")
-    fig.text(0.02, 0.93, "Squares = the 20 busiest cells of the period; red = the same cell is in the top 20 of all 3 periods, orange = of 2 periods, black = of 1 period. Only accidents with coordinates. Same grid and colour scale. Outlines: Statbel, CC BY 4.0.", fontsize=8, color=INK_2, ha="left", va="top")
+    fig.text(0.02, 0.93, "Squares = the 40 busiest cells of the period; red = the same cell is in the top 40 of all 3 periods, orange = of 2 periods, black = of 1 period. Only accidents with coordinates. Same grid and colour scale. Outlines: Statbel, CC BY 4.0.", fontsize=8, color=INK_2, ha="left", va="top")
     from matplotlib.patches import Patch
-    fig.legend(handles=[Patch(facecolor="none", edgecolor=RING[n], linewidth=1.6, label=label) for n, label in ((3, "in the top 20 of all 3 periods"), (2, "in the top 20 of 2 periods"), (1, "in the top 20 of 1 period"))],
+    fig.legend(handles=[Patch(facecolor="none", edgecolor=RING[n], linewidth=1.6, label=label) for n, label in ((3, "in the top 40 of all 3 periods"), (2, "in the top 40 of 2 periods"), (1, "in the top 40 of 1 period"))],
                loc="upper right", bbox_to_anchor=(0.99, 0.985), frameon=False, fontsize=8.5, labelcolor=INK_2, ncol=3)
     fig.subplots_adjust(left=0.01, right=0.99, top=0.86, bottom=0.12, wspace=0.03)
     fig.savefig(OUT / f"heat_{FILE[group]}_{FILE_SIZE[size]}_{measure if measure == 'severe' else 'accidents'}.png", facecolor=SURFACE)

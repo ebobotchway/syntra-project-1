@@ -5,7 +5,7 @@ For the groups  pedestrians, cyclists, motorcycles, mopeds and "vulnerable (any 
 
   A. GRID CELLS (two sizes, decision #170): cells of 5 km2 in area (side 2,236 m) and squares of 5 km x 5 km (25 km2).
      Per cell: accidents (and per year), severe, fatal and serious accidents (only accidents with usable coordinates).
-  B. HOTSPOTS: the 20 cells with the most accidents per group, period and cell size, with their severity, and the severity of these 20 cells against all other cells.
+  B. HOTSPOTS: the 40 cells with the most accidents per group, period and cell size, with their severity, and the severity of these 40 cells against all other cells.
   C. MUNICIPALITIES (decision #171): accidents per 100,000 residents per year, using the residents of each year (Statbel), with their severity.
 
 Decisions applied: #33 an accident counts for a group if the group is road user 1 OR 2 (once per accident; "vulnerable" = any of the four, also once);
@@ -25,6 +25,7 @@ import pandas as pd
 HERE = Path(__file__).resolve().parent.parent
 DATA, RESULTS = HERE / "data", HERE / "results"
 
+N_HOT = 40  # number of hotspot cells per group, period and cell size (20 at first, 40 since decision #211)
 CELL_SIZES = {"5 km2 cells": 5 ** 0.5 * 1000, "5 x 5 km squares": 5000.0}  # side in metres: sqrt(5 km2) = 2,236.07 m and 5,000 m
 GROUPS = {"Pedestrian": ["08"], "Bicycle": ["03"], "Motorcycle": ["07"], "Moped": ["06"], "Vulnerable (any of the four)": ["08", "03", "07", "06"]}
 PERIODS = {"Pre Covid-19 (2017-2019)": range(2017, 2020), "During Covid-19 (2020-2021)": range(2020, 2022), "Post Covid-19 (2022-2024)": range(2022, 2025), "All years (2017-2024)": range(2017, 2025)}
@@ -80,8 +81,8 @@ for size_name, side in CELL_SIZES.items():
             cells["per_year"] = cells["accidents"] / n_years
             cells.insert(0, "period", period); cells.insert(0, "group", group); cells.insert(0, "size", size_name)
             cells_all.append(cells)
-            # the 20 hotspots: the 20 cells with the most accidents; the municipality is the most common one among the cell's accidents
-            top = cells.head(20).copy()
+            # the 40 hotspots: the 40 cells with the most accidents; the municipality is the most common one among the cell's accidents
+            top = cells.head(N_HOT).copy()
             top.insert(3, "rank", range(1, len(top) + 1))
             key = sub.groupby(["cx", "cy"])["municipality"].agg(lambda s: s.mode().iat[0])
             top["municipality"] = [key.loc[(r.cx, r.cy)] for r in top.itertuples()]
@@ -89,9 +90,9 @@ for size_name, side in CELL_SIZES.items():
             top["share_of_located_pct"] = top["accidents"] / len(sub) * 100
             top = severity_columns(top)
             top_all.append(top)
-            # the severity of the 20 hotspots against all other cells
-            is_hot = cells.index < 20
-            for label, part in (("20 hotspot cells", cells[is_hot]), ("all other cells", cells[~is_hot]), ("all cells", cells)):
+            # the severity of the 40 hotspots against all other cells
+            is_hot = cells.index < N_HOT
+            for label, part in (("40 hotspot cells", cells[is_hot]), ("all other cells", cells[~is_hot]), ("all cells", cells)):
                 summary_all.append({"size": size_name, "group": group, "period": period, "cells": label, "number of cells": len(part), "accidents": int(part["accidents"].sum()),
                                     "severe": int(part["severe"].sum()), "fatal": int(part["fatal"].sum()), "serious": int(part["serious"].sum())})
         print(f"  {group}: done")
@@ -99,7 +100,7 @@ for size_name, side in CELL_SIZES.items():
 cells_table = pd.concat(cells_all, ignore_index=True)
 cells_table.to_csv(RESULTS / "grid_cells.csv", index=False, float_format="%.4f")
 top_table = pd.concat(top_all, ignore_index=True)
-top_table.to_csv(RESULTS / "hotspots_top20.csv", index=False, float_format="%.3f")
+top_table.to_csv(RESULTS / "hotspots_top40.csv", index=False, float_format="%.3f")
 summary = severity_columns(pd.DataFrame(summary_all))
 summary.to_csv(RESULTS / "hotspot_severity_summary.csv", index=False, float_format="%.3f")
 

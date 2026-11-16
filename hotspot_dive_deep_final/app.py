@@ -132,11 +132,11 @@ elif view == VIEWS[1]:
     cov = coverage()
     cov = cov[(cov["group"] == group) & (cov["period"] == period)].iloc[0]
     st.caption(f"{measure_label} per {size[:-1] if size.endswith('s') else size}, {words}, {period}. {int(cov['with coordinates']):,} of {int(cov['accidents']):,} accidents involving {words} have usable coordinates "
-               f"({100 - cov['left out %']:.1f}%); the others are not on the map. The squares mark the 20 busiest cells (hover for rank, municipality and severity); colour = in how many of the three periods the same cell is among the 20 busiest: red = all 3, orange = 2, black = 1, gray = none of the three (only possible in the all-years view).")
+               f"({100 - cov['left out %']:.1f}%); the others are not on the map. The squares mark the 40 busiest cells (hover for rank, municipality and severity); colour = in how many of the three periods the same cell is among the 40 busiest: red = all 3, orange = 2, black = 1, gray = none of the three (only possible in the all-years view).")
     plot(charts.fig_heatmap(cells(), top(), outlines(), size, measure, group, period))
     t = top()
     t = t[(t["size"] == size) & (t["group"] == group) & (t["period"] == period)]
-    with st.expander("The 20 busiest cells, with their severity", expanded=True):
+    with st.expander("The 40 busiest cells, with their severity", expanded=True):
         show_table(t[["rank", "municipality", "accidents", "per_year", "severe", "severe %", "severe low", "severe high", "fatal", "fatal %", "serious", "serious %", "share_of_located_pct", "centre_x_m", "centre_y_m"]],
                    f"hotspots_{group}_{size}_{period}".replace(" ", "_"))
     findings(fx.HEATMAPS)
@@ -148,7 +148,7 @@ elif view == VIEWS[2]:
     measure_label = st.sidebar.radio("Measure", list(MEASURES), key="measure")
     measure = MEASURES[measure_label]
     st.header("3  Compare the three periods")
-    st.caption(f"{measure_label}, {words}. The three maps use the same grid and the same colour scale. The squares mark the 20 busiest cells of each period, in the same colour when the same cell is in the top 20 of all 3 periods (red), of 2 periods (orange) or of 1 period (black).")
+    st.caption(f"{measure_label}, {words}. The three maps use the same grid and the same colour scale. The squares mark the 40 busiest cells of each period, in the same colour when the same cell is in the top 40 of all 3 periods (red), of 2 periods (orange) or of 1 period (black).")
     plot(charts.fig_heatmap_periods(cells(), top(), outlines(), size, measure, group))
     c = cells()
     c = c[(c["size"] == size) & (c["group"] == group) & c["period"].isin(charts.THREE)]
@@ -166,7 +166,7 @@ elif view == VIEWS[2]:
 elif view == VIEWS[3]:
     size = st.sidebar.radio("Cell size", list(charts.CELL_SIZES), key="size")
     st.header("4  How severe are the hotspots?")
-    st.caption(f"Share of the accidents involving {words} that are severe (fatal + serious injury), fatal, or serious, in the 20 hotspot cells against all other cells. Dot = share, line = 95% Wilson interval.")
+    st.caption(f"Share of the accidents involving {words} that are severe (fatal + serious injury), fatal, or serious, in the 40 hotspot cells against all other cells. Dot = share, line = 95% Wilson interval.")
     plot(charts.fig_hotspot_severity(summary(), size, group))
     s = summary()
     s = s[(s["size"] == size) & (s["group"] == group)]
@@ -180,7 +180,7 @@ elif view == VIEWS[3]:
     st.subheader("4b  Logistic regression: what goes with a severe accident?")
     lg = charts.load_logit()
     fit, adj, sel = lg["severity_fit"].iloc[0], lg["hotspot_adjusted"].iloc[0], lg["selection"]
-    st.caption(f"One model for the four groups together (it does not follow the group or cell-size filters). Dependent variable: severe (fatal + serious injury) = 1, otherwise 0. Explanatory variables: hotspot (accident in one of the 20 busiest 5 x 5 km squares of its own group and period), period, group, built-up area and light condition. "
+    st.caption(f"One model for the four groups together (it does not follow the group or cell-size filters). Dependent variable: severe (fatal + serious injury) = 1, otherwise 0. Explanatory variables: hotspot (accident in one of the 40 busiest 5 x 5 km squares of its own group and period), period, group, built-up area and light condition. "
                f"{int(fit['rows']):,} rows ({int(fit['different accidents']):,} accidents; an accident with two groups is a row in both), {int(fit['severe accidents']):,} severe ({fit['severe %']:.1f}%). Standard errors are cluster-robust by municipality ({int(fit['clusters (municipalities)'])} clusters)." + " Filled dots are significant at the 5% level (p below 0.05); a hollow gray dot is not significant (its interval includes 1).")
     plot(charts.fig_logit_forest(lg["severity_model"]))
     show_table(charts.odds_ratio_table(lg["severity_model"]), "logit_severity_odds_ratios", decimals=3)

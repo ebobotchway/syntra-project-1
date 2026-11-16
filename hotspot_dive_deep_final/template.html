@@ -189,14 +189,14 @@ footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line);
     <p class="sub" id="s1-sub"></p>
     <fieldset class="ctl inline-ctl"><legend>Period</legend><div class="row" id="c-period"></div></fieldset>
     <div class="card"><div class="scroll-x"><div class="inner" style="min-width:560px"><div id="chart-h1"></div></div></div></div>
-    <p class="note">The squares mark the 20 busiest cells of the period (hover for rank, municipality and severity). Colour = in how many of the three periods (pre, during, post Covid-19) the same cell is among the 20 busiest: red = all 3, orange = 2, black = 1, gray = none of the three (only possible in the all-years view). Accidents per year use a log colour scale: a few city cells have hundreds a year, most have less than one. Severe share: only cells with 30 or more accidents are coloured.</p>
+    <p class="note">The squares mark the 40 busiest cells of the period (hover for rank, municipality and severity). Colour = in how many of the three periods (pre, during, post Covid-19) the same cell is among the 40 busiest: red = all 3, orange = 2, black = 1, gray = none of the three (only possible in the all-years view). Accidents per year use a log colour scale: a few city cells have hundreds a year, most have less than one. Severe share: only cells with 30 or more accidents are coloured.</p>
     <div class="card findings">
       <h3>Key findings</h3>
       <p class="fixed">Fixed text for all four vulnerable groups together; it does not change with the filters.</p>
       <ul id="f-heat"></ul>
     </div>
     <p class="care" id="care-1"></p>
-    <details open><summary id="s1-summary">The 20 busiest cells</summary><div class="table-wrap"><div id="table-top"></div><p class="dl"><button type="button" class="download" id="dl-top" hidden>Download CSV</button></p></div></details>
+    <details open><summary id="s1-summary">The 40 busiest cells</summary><div class="table-wrap"><div id="table-top"></div><p class="dl"><button type="button" class="download" id="dl-top" hidden>Download CSV</button></p></div></details>
   </section>
 
   <section id="sec-2">
@@ -604,9 +604,9 @@ const D = /*__DATA__*/null;
     }
     return tr;
   }
-  // Colours of the 20 marked cells: in how many of the three periods (pre, during, post) the cell is among the 20 busiest (#203)
+  // Colours of the 40 marked cells: in how many of the three periods (pre, during, post) the cell is among the 40 busiest (#203)
   const PERSIST_COLOURS = { 3: "#d62728", 2: "#ff9f1c", 1: "#0b0b0b", 0: "#898781" };
-  const PERSIST_LABELS = { 3: "in the top 20 of all 3 periods", 2: "in the top 20 of 2 periods", 1: "in the top 20 of 1 period", 0: "in no period's top 20 (all-years view only)" };
+  const PERSIST_LABELS = { 3: "in the top 40 of all 3 periods", 2: "in the top 40 of 2 periods", 1: "in the top 40 of 1 period", 0: "in no period's top 40 (all-years view only)" };
   const persistMemo = {};
   function persistence(size, group) {                          // "x|y" of the cell centre -> 1, 2 or 3
     const key = size + "|" + group;
@@ -709,19 +709,19 @@ const D = /*__DATA__*/null;
   function text1() {
     const cov = D.cov[state.group + "|" + state.period], label = state.measure === "severe" ? "Severe share" : "Accidents per year";
     $("s1-sub").textContent = label + " per " + state.size.replace(/s$/, "") + ", " + words() + ", " + state.period + ". " + fmtInt(cov[1]) + " of " + fmtInt(cov[0]) + " accidents involving " + words() + " have usable coordinates (" + (cov[1] / cov[0] * 100).toFixed(1) + "%); the others are not on the map.";
-    $("s1-summary").textContent = "The 20 busiest cells: " + words() + ", " + state.size + ", " + state.period;
+    $("s1-summary").textContent = "The 40 busiest cells: " + words() + ", " + state.size + ", " + state.period;
     const t = topOf(state.size, state.group, state.period) || [];
     table("table-top", "dl-top", "hotspots_" + state.group.split(" ")[0].toLowerCase() + "_" + state.size.split(" ")[0] + "_" + state.period.split(" ")[0].toLowerCase() + ".csv",
       { headers: ["rank", "municipality", "accidents", "per year", "severe", "severe %", "fatal", "fatal %", "share of located %"],
         rows: t.map(r => [r.rank, r.m, r.a, +r.py.toFixed(1), r.s, r.sev === null ? null : +r.sev.toFixed(2), r.f, r.fat === null ? null : +r.fat.toFixed(2), +r.share.toFixed(2)]) });
   }
   function text2() {
-    $("s2-sub").textContent = (state.measure === "severe" ? "Severe share" : "Accidents per year") + ", " + words() + ", " + state.size + ". Same grid and same colour scale in the three maps; the squares mark the 20 busiest cells of each period, in the same colour when the same cell is in the top 20 of all 3 periods (red), of 2 periods (orange) or of 1 period (black).";
+    $("s2-sub").textContent = (state.measure === "severe" ? "Severe share" : "Accidents per year") + ", " + words() + ", " + state.size + ". Same grid and same colour scale in the three maps; the squares mark the 40 busiest cells of each period, in the same colour when the same cell is in the top 40 of all 3 periods (red), of 2 periods (orange) or of 1 period (black).";
     const parts = D.periods.slice(0, 3).map(p => { const cov = D.cov[state.group + "|" + p]; return p.split(" (")[0] + ": " + (100 - cov[1] / cov[0] * 100).toFixed(0) + "% of the accidents lack coordinates"; });
     $("s2-note").textContent = parts.join("; ") + ". Counts per year in the first two maps are therefore understated compared with the third; the severe share and the resident rates (section 4) are less affected.";
   }
   function text3() {
-    $("s3-sub").textContent = "Share of the accidents involving " + words() + " that are severe (fatal + serious injury), fatal, or serious, in the 20 hotspot cells against all other cells (" + state.size + "). Dot = share, line = 95% Wilson interval.";
+    $("s3-sub").textContent = "Share of the accidents involving " + words() + " that are severe (fatal + serious injury), fatal, or serious, in the 40 hotspot cells against all other cells (" + state.size + "). Dot = share, line = 95% Wilson interval.";
     table("table-sev", "dl-sev", "hotspot_severity_" + state.group.split(" ")[0].toLowerCase() + "_" + state.size.split(" ")[0] + ".csv", D.sevTables[state.size + "|" + state.group]);
   }
   function text4() {

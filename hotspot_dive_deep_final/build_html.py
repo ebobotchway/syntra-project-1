@@ -76,7 +76,7 @@ fit, adj = lg["severity_fit"].iloc[0], lg["hotspot_adjusted"].iloc[0]
 logit = {"fig": plain(charts.fig_logit_forest(lg["severity_model"])),
          "table": spec(charts.odds_ratio_table(lg["severity_model"]), 3),
          "selection": spec(lg["selection"]), "desc": spec(lg["severity_descriptives"], 3),
-         "sub": f"One model for the four groups together (it does not follow the group or cell-size filters). Dependent variable: severe (fatal + serious injury) = 1, otherwise 0. Explanatory variables: hotspot (accident in one of the 20 busiest 5 x 5 km squares of its own group and period), period, group, built-up area and light condition. "
+         "sub": f"One model for the four groups together (it does not follow the group or cell-size filters). Dependent variable: severe (fatal + serious injury) = 1, otherwise 0. Explanatory variables: hotspot (accident in one of the 40 busiest 5 x 5 km squares of its own group and period), period, group, built-up area and light condition. "
                 f"{int(fit['rows']):,} rows ({int(fit['different accidents']):,} accidents; an accident with two groups is a row in both), {int(fit['severe accidents']):,} severe ({fit['severe %']:.1f}%). Standard errors are cluster-robust by municipality ({int(fit['clusters (municipalities)'])} clusters). Filled dots are significant at the 5% level (p below 0.05); a hollow gray dot is not significant (its interval includes 1).",
          "none": f"{adj['severe % if none in a hotspot']:.1f}%", "all": f"{adj['severe % if all in a hotspot']:.1f}%",
          "diff": f"{adj['difference (percentage points)']:.1f} points ({adj['difference low']:.1f} to {adj['difference high']:.1f})",

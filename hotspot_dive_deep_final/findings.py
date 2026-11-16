@@ -18,23 +18,23 @@ CARE_1 = "Read with care: these are raw counts and 'Covid-19' is my own label fo
 
 HEATMAPS = [
     "Hotspots are in the big cities. With 5 km2 cells, the busiest cell for vulnerable road users is in Brussel (264 accidents a year before Covid-19) or Antwerpen (269 a year after Covid-19); Sint-Gillis is third in the pre and post periods.",
-    "The hotspots hardly move: 17 of the 20 busiest 5 km2 cells before Covid-19 are still among the 20 busiest after it (18 of 20 for pedestrians, 19 for cyclists, 15 for motorcycles, 12 for mopeds). With 5 x 5 km squares it is 18 of 20 for all four groups together.",
+    "The hotspots hardly move: 37 of the 40 busiest 5 km2 cells before Covid-19 are still among the 40 busiest after it (34 of 40 for pedestrians, 36 for cyclists, 32 for motorcycles, 33 for mopeds). With 5 x 5 km squares it is 34 of 40 for all four groups together.",
     "During Covid-19 (2020-2021) the located accidents per year fall from 14,705 to 13,006 and rise to 17,083 afterwards. Part of that rise is better coordinates: 15% of the accidents lacked coordinates before Covid-19, 17% during it and only 3.7% after it.",
 ]
 SEVERITY = [
-    "Accidents in the 20 hotspot cells are much less often severe than accidents elsewhere: 6.4% against 13.4% (5 km2 cells, 2017-2024); the fatal share is 0.40% against 1.56%.",
-    "The same holds in every period: severe share 7.3% (pre), 5.7% (during) and 6.1% (post) in the hotspots against 14.1%, 13.7% and 12.7% in all other cells.",
-    "It holds for every group: severe share in the hotspots against other cells is 7.6% against 14.9% for pedestrians, 6.1% against 12.0% for cyclists, 7.0% against 21.7% for motorcycles and 5.5% against 9.2% for mopeds.",
-    "5 x 5 km squares give the same picture (7.6% against 14.3%), a bit less strong because a bigger cell contains more of the surroundings.",
+    "Accidents in the 40 hotspot cells are much less often severe than accidents elsewhere: 7.1% against 14.0% (5 km2 cells, 2017-2024); the fatal share is 0.42% against 1.68%.",
+    "The same holds in every period: severe share 7.7% (pre), 6.5% (during) and 6.8% (post) in the hotspots against 14.7%, 14.3% and 13.2% in all other cells.",
+    "It holds for every group: severe share in the hotspots against other cells is 8.4% against 15.6% for pedestrians, 6.5% against 12.5% for cyclists, 8.5% against 22.3% for motorcycles and 5.6% against 9.5% for mopeds.",
+    "5 x 5 km squares give the same picture (8.3% against 15.0%), a bit less strong because a bigger cell contains more of the surroundings.",
 ]
 LOGIT = [
-    "Being in a hotspot square lowers the odds of a severe accident: odds ratio 0.55 (95% interval 0.49 to 0.63), with period, group, built-up area and light condition held equal. Raw: 7.8% severe in hotspot squares against 14.6% elsewhere.",
-    "As percentage points: if every accident were in a hotspot square the model gives 8.4% severe, if none were 14.1%: 5.7 points lower (95% interval 4.7 to 6.7).",
-    "Outside built-up areas the odds of a severe accident are 1.74 times those inside (1.64 to 1.84); at night (public lighting or not) they are 1.41 times those in daylight (1.35 to 1.47); dawn and dusk do not differ from daylight (0.94, 0.87 to 1.03).",
-    "Against cyclists, motorcycles have 1.69 times the odds (1.59 to 1.80), pedestrians 1.38 (1.28 to 1.48) and mopeds 0.72 (0.67 to 0.77). After Covid-19 the odds are 0.90 times those before it (0.85 to 0.95); during Covid-19 they do not differ clearly (0.96, 0.92 to 1.01).",
-    "The model is simple and only moderately predictive (AUC 0.64, McFadden R2 0.037): it describes differences between groups of accidents and cannot say which single accident will be severe.",
+    "Being in a hotspot square lowers the odds of a severe accident: odds ratio 0.59 (95% interval 0.53 to 0.65), with period, group, built-up area and light condition held equal. Raw: 8.5% severe in hotspot squares against 15.3% elsewhere.",
+    "As percentage points: if every accident were in a hotspot square the model gives 9.2% severe, if none were 14.6%: 5.4 points lower (95% interval 4.5 to 6.3).",
+    "Outside built-up areas the odds of a severe accident are 1.74 times those inside (1.63 to 1.85); at night (public lighting or not) they are 1.40 times those in daylight (1.34 to 1.47); dawn and dusk do not differ from daylight (0.95, 0.87 to 1.03).",
+    "Against cyclists, motorcycles have 1.66 times the odds (1.56 to 1.77), pedestrians 1.37 (1.27 to 1.48) and mopeds 0.72 (0.68 to 0.77). After Covid-19 the odds are 0.89 times those before it (0.85 to 0.94); during Covid-19 they do not differ clearly (0.96, 0.91 to 1.01).",
+    "The model is simple and only moderately predictive (AUC 0.64, McFadden R2 0.036): it describes differences between groups of accidents and cannot say which single accident will be severe.",
 ]
-LOGIT_CARE = ("Read with care: an odds ratio is not a risk ratio (severe accidents are 12% of the rows, so odds ratios look further from 1 than risk ratios). 'Hotspot' means a top-20 square of the accident's own group and period, so it is a busy place, not a dangerous one. "
+LOGIT_CARE = ("Read with care: an odds ratio is not a risk ratio (severe accidents are 12% of the rows, so odds ratios look further from 1 than risk ratios). 'Hotspot' means a top-40 square of the accident's own group and period, so it is a busy place, not a dangerous one. "
               "Speed, traffic volume and road layout are not in the data; the hotspot effect probably carries the lower speeds of city centres. One accident with two vulnerable groups is a row in both groups; standard errors are cluster-robust by municipality. Associations, not causes.")
 RATES = [
     "Per resident, the picture changes: for all four groups the highest rates (per 100,000 residents per year, 2017-2024) are Brussel 384, Knokke-Heist 368, Wijnegem 349, Eeklo 321, Wommelgem 306 and Gent 304, against 148 for Belgium; Antwerpen, first by number of accidents (12,043), has 284.",
