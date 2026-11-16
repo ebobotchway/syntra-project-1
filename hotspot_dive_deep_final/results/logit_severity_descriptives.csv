@@ -1,0 +1,15 @@
+variable,category,rows,severe,severe %
+Hotspot,Not a hotspot square,82518,12059,14.614
+Hotspot,Hotspot square,42098,3275,7.779
+Period,During Covid-19 (2020-2021),26733,3303,12.356
+Period,Post Covid-19 (2022-2024),52631,6175,11.733
+Period,Pre Covid-19 (2017-2019),45252,5856,12.941
+Group,Bicycle,61653,6838,11.091
+Group,Moped,20415,1788,8.758
+Group,Motorcycle,17063,3314,19.422
+Group,Pedestrian,25485,3394,13.318
+Built-up area,Inside built-up area,94395,9631,10.203
+Built-up area,Outside built-up area,30221,5703,18.871
+Light condition,"Dawn, dusk",6531,720,11.024
+Light condition,Daylight,96782,11407,11.786
+Light condition,Night,21303,3207,15.054

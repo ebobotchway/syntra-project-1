@@ -217,6 +217,21 @@ footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line);
     </div>
     <p class="care">Read with care: severity is the class of the whole accident, not the harm to one road user. Hotspot cells are cities with lower speeds and more stop-and-go traffic, but speed is not in the data: an association, not a cause.</p>
     <details><summary>Table</summary><div class="table-wrap"><div id="table-sev"></div><p class="dl"><button type="button" class="download" id="dl-sev" hidden>Download CSV</button></p></div></details>
+
+    <h3 style="margin-top:36px">4b&nbsp; Logistic regression: what goes with a severe accident?</h3>
+    <p class="sub" id="lg-sub"></p>
+    <div class="card"><div class="scroll-x"><div class="inner"><div id="chart-lg"></div></div></div></div>
+    <div class="table-wrap"><div id="table-lg"></div><p class="dl"><button type="button" class="download" id="dl-lg" hidden>Download CSV</button></p></div>
+    <p class="note"><b>Severe % if none in a hotspot:</b> <span id="lg-none"></span> &nbsp;·&nbsp; <b>if all in a hotspot:</b> <span id="lg-all"></span> &nbsp;·&nbsp; <b>difference (95% interval):</b> <span id="lg-diff"></span></p>
+    <p class="note" id="lg-fit"></p>
+    <details><summary>Which accidents were used</summary><div class="table-wrap"><div id="table-lgsel"></div><p class="dl"><button type="button" class="download" id="dl-lgsel" hidden>Download CSV</button></p></div><p class="note">Accidents without usable coordinates (the square is unknown) and accidents with unknown built-up area or light condition are left out.</p></details>
+    <details><summary>Plain severe share per category (no model)</summary><div class="table-wrap"><div id="table-lgdesc"></div><p class="dl"><button type="button" class="download" id="dl-lgdesc" hidden>Download CSV</button></p></div></details>
+    <div class="card findings">
+      <h3>Key findings</h3>
+      <p class="fixed">Fixed text; it does not change with the filters.</p>
+      <ul id="f-lg"></ul>
+    </div>
+    <p class="care" id="care-lg"></p>
   </section>
 
   <section id="sec-4">
@@ -723,6 +738,7 @@ const D = /*__DATA__*/null;
   register("chart-h1", heatSingle);
   register("chart-h2", heatPeriods);
   register("chart-h3", () => D.figs[state.size + "|" + state.group]);
+  register("chart-lg", () => D.logit.fig);
   register("chart-h4map", rateMap);
   register("chart-h4rank", rateRank);
   const all = ["chart-h1", "chart-h2", "chart-h3", "chart-h4map", "chart-h4rank"];
@@ -732,6 +748,10 @@ const D = /*__DATA__*/null;
   choice("c-period", "cperiod", D.periods.map(p => [p, p]), state.period, v => { state.period = v; text1(); redraw(["chart-h1"]); });
   choice("c-period4", "cperiod4", D.periods.map(p => [p, p]), state.period4, v => { state.period4 = v; text4(); redraw(["chart-h4map", "chart-h4rank"]); });
   choice("c-rank", "crank", [["rate", "Accidents per 100,000 residents"], ["count", "Number of accidents"]], state.rank, v => { state.rank = v; redraw(["chart-h4rank"]); });
+  const L = D.logit;
+  $("lg-sub").textContent = L.sub; $("lg-none").textContent = L.none; $("lg-all").textContent = L.all; $("lg-diff").textContent = L.diff; $("lg-fit").textContent = L.fit;
+  table("table-lg", "dl-lg", "logit_severity_odds_ratios.csv", L.table); table("table-lgsel", "dl-lgsel", "logit_severity_selection.csv", L.selection); table("table-lgdesc", "dl-lgdesc", "logit_severity_descriptives.csv", L.desc);
+  fillList("f-lg", D.findings.logit); $("care-lg").textContent = D.findings.logitCare;
   fillList("f-heat", D.findings.heat); fillList("f-sev", D.findings.sev); fillList("f-rate", D.findings.rate);
   $("care-1").textContent = D.findings.care; $("care-4").textContent = D.findings.care;
   textAll();

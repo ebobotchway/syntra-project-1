@@ -99,9 +99,13 @@ lost = {p: 100 - cov[(cov["group"] == V) & (cov["period"] == p)].iloc[0]["with c
 located = {p: cells[(cells["size"] == SIZE5) & (cells["group"] == V) & (cells["period"] == p)]["accidents"].sum() / charts.YEARS_IN[p] for p in P}
 allacc = {p: t["accidents"].sum() / charts.YEARS_IN[p] for p in P for t in [charts.municipality_table(mun, V, p)]}
 
+lg = charts.load_logit()
+lm, lf, la, ls = lg["severity_model"], lg["severity_fit"].iloc[0], lg["hotspot_adjusted"].iloc[0], lg["selection"]
+t_lg = md([[r["variable"], r["label"], f"{r['odds ratio']:.2f}", f"{r['OR low']:.2f} to {r['OR high']:.2f}", "<0.001" if r["p value"] < 0.001 else f"{r['p value']:.3f}"] for _, r in lm[lm["term"] != "Intercept"].iterrows()], ["Variable", "Term (against the reference)", "Odds ratio", "95% interval", "p value"])
+t_lg_sel = md([[r.group, r.period, f"{r.accidents:,}", f"{r._4:,}", f"{r._5:,}"] for r in ls.itertuples()], ["Group", "Period", "Accidents", "With coordinates", "Used (built-up area and light known)"])
 text = f"""# How the output was calculated: hotspots of accidents with vulnerable road users, before, during and after Covid-19
 
-Report for the hotspot deep dive with step 1 of the focused dashboard added (`hotspot_dive_deep_final/`). It explains, in the order of the calculation, where every number in the Streamlit app, the HTML page and the pictures comes from, so that each number can be reproduced and explained. Scripts: `scripts/01` to `scripts/04`. Decisions and their reasons: `beslissingslogboek.md`, entries #169-#178. All numbers in this report are read from the saved tables in `results/` and `data/` by `scripts/04_build_report.py`.
+Report for the hotspot deep dive with step 1 of the focused dashboard added (`hotspot_dive_deep_final/`). It explains, in the order of the calculation, where every number in the Streamlit app, the HTML page and the pictures comes from, so that each number can be reproduced and explained. Scripts: `scripts/01` to `scripts/05`. Decisions and their reasons: `beslissingslogboek.md`, entries #169-#178 and #205-#209 (the regression). All numbers in this report are read from the saved tables in `results/` and `data/` by `scripts/04_build_report.py`.
 
 ## 1. The question and what was decided
 
@@ -168,6 +172,32 @@ By group (5 km2 cells, 2017-2024):
 {t_grp}
 
 Accidents in the hotspots are much less often severe than elsewhere, in every period and for every group. This is an association: hotspots are in cities, where speeds are lower; speed is not in the data.
+
+### 5b. A logistic regression for severity (script `05`)
+
+The comparison above looks at one factor at a time. A **binary logistic regression** looks at several at once: it models the chance that an accident is severe (fatal + serious injury = 1, otherwise 0) and gives, for each explanatory variable, an **odds ratio**: the odds of a severe accident in that category divided by the odds in the reference category, with the other variables held equal. An odds ratio of 1 means no difference; below 1 means less often severe, above 1 more often.
+
+**The model** (one model for the four groups together, 5 x 5 km squares):
+
+- **Hotspot:** 1 when the accident is in one of the 20 busiest squares of its own group and period (the lists of `results/hotspots_top20.csv`), otherwise 0.
+- **Period:** pre Covid-19 (reference), during, post.
+- **Group:** cyclists (reference), pedestrians, motorcycles, mopeds. An accident counts in a group when road user 1 or 2 is of that group (#33), so an accident with two groups is a row in both.
+- **Built-up area** (extra variable 1): inside (reference) or outside.
+- **Light condition** (extra variable 2): daylight (reference), dawn/dusk, night (with or without public lighting).
+
+**The rows.** {int(lf['rows']):,} rows ({int(lf['different accidents']):,} different accidents), {int(lf['severe accidents']):,} severe ({lf['severe %']:.1f}%). Only accidents with usable coordinates are used (the square must be known), and accidents with unknown built-up area or light condition are left out:
+
+{t_lg_sel}
+
+**Estimation.** Maximum likelihood by Newton-Raphson with step-halving (the same code as the main project's `logit_live.py`). Because one accident can be two rows and accidents in one municipality resemble each other, the standard errors are **cluster-robust by municipality** ({int(lf['clusters (municipalities)'])} clusters); intervals are coefficient plus or minus 1.96 standard errors, then exponentiated.
+
+{t_lg}
+
+**The hotspot effect in percentage points.** Setting the hotspot term to 1 and to 0 for every row (all other variables as observed) and averaging the predicted probabilities gives **{la['severe % if all in a hotspot']:.1f}%** severe if every accident were in a hotspot square against **{la['severe % if none in a hotspot']:.1f}%** if none were: **{la['difference (percentage points)']:.1f} points** (95% interval {la['difference low']:.1f} to {la['difference high']:.1f}, from 1,000 simulated coefficient sets).
+
+**Fit.** AUC {lf['AUC']:.2f}, McFadden R2 {lf['McFadden R2']:.3f}, highest variance inflation factor {lf['highest VIF']:.2f} (no problem with overlap between variables). The model is simple on purpose and only moderately predictive: it describes differences between groups of accidents; it cannot say which single accident will be severe.
+
+**Reading it.** After holding period, group, built-up area and light equal, accidents in hotspot squares still have clearly lower odds of being severe, so the lower severity in the hotspots is not just that hotspots have more cyclists or more daylight accidents. Outside built-up areas and at night the odds are higher. An odds ratio is not a risk ratio (12% of the rows are severe), and speed, traffic volume and road layout are not in the data, so this remains an association.
 
 ## 6. The residents and the rates per municipality (scripts `01` and `02`, part C)
 

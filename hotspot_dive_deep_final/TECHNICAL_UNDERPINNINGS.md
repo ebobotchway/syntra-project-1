@@ -155,6 +155,38 @@ Because far fewer accidents lack coordinates after 2021, the **located** acciden
 
 **Limits.** No correction for road type or speed (a comparison that controlled for those would need a regression, as in the main project's step 5). The result does not mean that cities are "safe": the hotspots have the most severe accidents in absolute numbers simply because they have the most accidents.
 
+## 4b. Step 4, second part: a logistic regression for severity
+
+**Question.** Do accidents in hotspot squares remain less often severe once period, road-user group, built-up area and light condition are held equal?
+
+**The model.** A **binary logistic regression**. For accident row *i* the severe outcome `y_i` is 1 for accident classes 1-3 (fatal + serious injury) and 0 otherwise. The model states `log(p_i / (1 - p_i)) = b0 + b1 hotspot_i + b2 during_i + b3 post_i + b4 pedestrian_i + b5 motorcycle_i + b6 moped_i + b7 outside_i + b8 dawn_i + b9 night_i`, where `p_i` is the probability of a severe accident. `exp(b)` is an **odds ratio**: the factor by which the odds `p / (1 - p)` are multiplied when the variable goes from the reference to that category, other variables equal.
+
+**The variables and why.**
+
+- *Hotspot* (asked for): 1 when the accident is in one of the 20 busiest 5 x 5 km squares of its own group and period.
+- *Period* (asked for): pre Covid-19 is the reference; during and post are dummies.
+- *Group* (asked for): cyclists (the largest group) are the reference; pedestrians, motorcycles, mopeds are dummies. An accident counts for a group if road user 1 or 2 is of it (section 0.2), so an accident with two groups has a row in both groups.
+- *Built-up area* and *light condition* (the two extra variables you accepted): kept to two so the model stays simple; both are known in the data, strongly linked to severity, and easy to explain. Night merges "public lighting present and lit", "present but not lit" and "none"; unknown values are left out.
+
+**Estimation.** Maximum likelihood by **Newton-Raphson with step-halving** (the same code as the main project's step 5): coefficients are updated with the inverse of the Hessian times the score, and a step is halved while it lowers the log-likelihood. **Standard errors** use the cluster-robust sandwich estimator by municipality (581 clusters) with the small-sample factor `G/(G-1) * (N-1)/(N-k)`. This also covers the double rows and the fact that accidents in one municipality resemble each other. 95% intervals are `b +/- 1.96 se`, exponentiated.
+
+**The hotspot effect in percentage points.** The **average adjusted prediction**: predict `p_i` for every row with hotspot set to 1, then to 0 (everything else as observed), and average each; the difference is the effect in percentage points. Its interval comes from 1,000 coefficient sets drawn from the multivariate normal distribution with the cluster-robust covariance.
+
+**Fit measures.** AUC (the chance that a random severe accident gets a higher predicted probability than a random non-severe one), McFadden R2 `1 - logL / logL0`, AIC, and variance inflation factors (each below 1.3, so no overlap problem).
+
+**Result in words.** 124,616 rows (117,750 accidents; 12.3% severe). The odds of a severe accident in a hotspot square are 0.55 times those elsewhere (0.49 to 0.63): 8.4% against 14.1% in percentage points, 5.7 points less (4.7 to 6.7). Outside built-up areas the odds are 1.74 times those inside, at night 1.41 times those in daylight; motorcycles 1.69, pedestrians 1.38 and mopeds 0.72 times those of cyclists; after Covid-19 0.90 times those before it; during Covid-19 and at dawn/dusk there is no clear difference. AUC 0.64 and McFadden R2 0.037: a descriptive, not a predictive, model.
+
+**Assumptions and limits.**
+
+- *Log-odds are linear in the variables, without interactions*: a hotspot is assumed to lower the odds by the same factor for every group, period and place. Interactions are not tested (the model is meant to be simple).
+- *Only located accidents* are used (the square must be known); the share without coordinates differs by period (section 0.6), so the hotspot lists and the rows are not equally complete in each period.
+- *Hotspot is defined by the number of accidents* in the accident's own group and period, so it means "a busy place", not "a dangerous place"; it probably carries lower speeds and slow traffic in city centres, which are not in the data.
+- *Odds ratios are not risk ratios*: with 12% severe, they look further from 1 than the ratio of the shares.
+- *Severity belongs to the whole accident* (section 0.1), not to one road user.
+- Accident and hotspot choice are not independent of the group, which is why the hotspot is defined per group and period.
+
+**Checked.** The script asserts the severe total (28,532) and the group totals; the hotspot lists have 20 squares per group and period; the rows used are listed per group and period (`results/logit_selection.csv`); the app and the page show the saved odds ratios.
+
 ## 5. Step 5: accidents per resident (rates per municipality)
 
 **Question.** Counts favour big places. Which places stand out when the number of residents is taken into account?
@@ -216,7 +248,7 @@ Belgium's rate for the combined group is 152 accidents per 100,000 residents per
 - **Causes.** Every result is an association; the Covid-19 periods are my own definition.
 - **Exposure.** Residents are used as the denominator, not traffic or distance travelled (the data have neither).
 - **A correction of the grid counts for missing coordinates** (section 3.3) and **rates per grid cell** (later versions of the analysis do the second).
-- **Adjustment for road type, speed or conditions in step 4** (that would be the logistic models of the main project's step 5).
+- **A fuller regression in step 4**: the logistic model in section 4b is deliberately simple (two extra variables, no interactions, no road type or speed).
 - **Smoothing** (kernel density) or **clustering** of the hotspots.
 
 ## 9. Glossary

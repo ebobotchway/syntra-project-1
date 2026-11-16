@@ -92,6 +92,16 @@ python -I scripts/02_hotspot_analysis.py "../OPENDATA_MAP_2017-2024_en_flagged.c
 
 Results in `results/`: `grid_cells.csv`, `hotspots_top20.csv`, `hotspot_severity_summary.csv`, `coordinate_coverage.csv`, `municipality_rates.csv`.
 
+## 4b. Change made later: a logistic regression for severity in step 4 (`scripts/05_logistic_model.py`, #205-#209)
+
+You asked for a binary logistic regression in step 4: severity (fatal + serious injury) = 1, otherwise 0, explained by hotspot, period, group and two more variables. Choices (all asked first): extra variables **built-up area** (inside/outside) and **light condition** (daylight, dawn/dusk, night); hotspot = the accident is in one of the **20 busiest 5 x 5 km squares of its own group and period**; group = the four groups, an accident counts in a group if road user 1 or 2 is of that group, so an accident with two groups is a row in both.
+
+1. **Script:** `python -I scripts/05_logistic_model.py "../OPENDATA_MAP_2017-2024_en_flagged.csv.gz"` reads the accidents, links each accident to its 5 x 5 km square, marks the hotspot squares from `results/hotspots_top20.csv`, leaves out accidents without coordinates or with unknown built-up area or light, builds the design matrix (reference categories: pre Covid-19, cyclists, inside built-up area, daylight) and fits the model.
+2. **Standard errors:** cluster-robust by municipality (not by accident as first proposed: municipality clusters also cover the double rows and the resemblance of accidents in one municipality).
+3. **Results** in `results/`: `logit_severity_model.csv` (coefficients and odds ratios), `logit_severity_fit.csv`, `logit_hotspot_adjusted.csv` (hotspot effect in percentage points), `logit_severity_descriptives.csv`, `logit_selection.csv`.
+4. **Shown in:** block 4b of view 4 of the Streamlit app (forest plot, table, the percentage-point effect, the selection and the plain shares) and the same block in section 3 of the HTML page; the report (section 5b) and the technical underpinnings (section 4b) explain the calculation. The block does not follow the group and cell-size filters: it is one model.
+5. **Result:** the odds of a severe accident in a hotspot square are 0.55 times those elsewhere (95% interval 0.49 to 0.63) with the other variables held equal; 8.4% against 14.1% severe in percentage points.
+
 ## 5. What the first results showed, and what I did about it
 
 Two things I noticed in the numbers before building any chart:
@@ -171,7 +181,9 @@ The page of this folder is **not published** (you did not ask for it). The page 
 | `scripts/01_prepare_population.py` | residents per municipality and year |
 | `scripts/02_hotspot_analysis.py` | cells, hotspots, severity, municipality rates |
 | `scripts/03_plot_heatmaps.py` | the PNG heat maps |
-| `scripts/04_build_report.py` | the calculation report (with the step 1 section) |
+| `scripts/05_logistic_model.py` | The logistic regression of severity (step 4b); run after script 02 |
+| `scripts/05_logistic_model.py` | the logistic regression of severity (step 4b); run before script 04 |
+| `scripts/04_build_report.py` | the calculation report (with the step 1 section and 5b) |
 | `charts.py`, `findings.py`, `app.py`, `step1_logic.py`, `step1_charts.py` | the Plotly charts, the texts, the Streamlit app, step 1 (copied from the focused dashboard) |
 | `template.html`, `build_html.py`, `hotspot_deep_dive.html` | the HTML page |
 | `data/`, `results/`, `images/` | inputs, saved results, pictures |

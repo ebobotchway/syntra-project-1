@@ -70,6 +70,18 @@ for size in charts.CELL_SIZES:
         s = summary[(summary["size"] == size) & (summary["group"] == group)]
         sev_tables[f"{size}|{group}"] = spec(s[["period", "cells", "number of cells", "accidents", "severe", "severe %", "severe low", "severe high", "fatal", "fatal %", "serious", "serious %"]])
 
+# 2b. The logistic regression (script 05): the odds-ratio chart, the tables and the numbers behind the text
+lg = charts.load_logit()
+fit, adj = lg["severity_fit"].iloc[0], lg["hotspot_adjusted"].iloc[0]
+logit = {"fig": plain(charts.fig_logit_forest(lg["severity_model"])),
+         "table": spec(charts.odds_ratio_table(lg["severity_model"]), 3),
+         "selection": spec(lg["selection"]), "desc": spec(lg["severity_descriptives"], 3),
+         "sub": f"One model for the four groups together (it does not follow the group or cell-size filters). Dependent variable: severe (fatal + serious injury) = 1, otherwise 0. Explanatory variables: hotspot (accident in one of the 20 busiest 5 x 5 km squares of its own group and period), period, group, built-up area and light condition. "
+                f"{int(fit['rows']):,} rows ({int(fit['different accidents']):,} accidents; an accident with two groups is a row in both), {int(fit['severe accidents']):,} severe ({fit['severe %']:.1f}%). Standard errors are cluster-robust by municipality ({int(fit['clusters (municipalities)'])} clusters).",
+         "none": f"{adj['severe % if none in a hotspot']:.1f}%", "all": f"{adj['severe % if all in a hotspot']:.1f}%",
+         "diff": f"{adj['difference (percentage points)']:.1f} points ({adj['difference low']:.1f} to {adj['difference high']:.1f})",
+         "fit": f"Fit: AUC {fit['AUC']:.2f}, McFadden R2 {fit['McFadden R2']:.3f}, highest VIF {fit['highest VIF']:.2f}. The average adjusted prediction sets the hotspot term to 1 and to 0 for every row (other variables as observed) and averages the predicted probabilities; the interval uses 1,000 simulated coefficient sets."}
+
 # 3. Municipalities: accidents, severe, fatal and resident-years per group and period, in the order of the outline features
 feature_order = [f["nis"] for f in outlines["features"]]
 base = mun.drop_duplicates("municipality_nis_code").set_index("municipality_nis_code")
@@ -89,7 +101,7 @@ data = {"groups": charts.GROUPS, "labels": charts.GROUP_LABELS, "words": charts.
         "cells": cell_data, "top": top_data, "extent": extent, "zmaxPeriods": zmax_periods,
         "cov": {f"{r['group']}|{r['period']}": [int(r["accidents"]), int(r["with coordinates"])] for _, r in coverage.iterrows()},
         "figs": figs, "sevTables": sev_tables, "muni": muni, "outline": {"x": xs, "y": ys},
-        "findings": {"heat": fx.HEATMAPS, "sev": fx.SEVERITY, "rate": fx.RATES, "care": fx.CARE}}
+        "logit": logit, "findings": {"heat": fx.HEATMAPS, "sev": fx.SEVERITY, "logit": fx.LOGIT, "logitCare": fx.LOGIT_CARE, "rate": fx.RATES, "care": fx.CARE}}
 
 template = (HERE / "template.html").read_text(encoding="utf-8")
 assert template.count("/*__DATA__*/null") == 1, "the data placeholder was not found exactly once"

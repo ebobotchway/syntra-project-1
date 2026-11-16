@@ -175,6 +175,28 @@ elif view == VIEWS[3]:
     findings(fx.SEVERITY)
     st.caption("Read with care: severity is the class of the whole accident, not the harm to one road user. Hotspot cells are cities with lower speeds and more stop-and-go traffic, but speed is not in the data: an association, not a cause.")
 
+    # ---- 4b logistic regression (script 05): always the 5 x 5 km squares, all four groups in one model
+    st.divider()
+    st.subheader("4b  Logistic regression: what goes with a severe accident?")
+    lg = charts.load_logit()
+    fit, adj, sel = lg["severity_fit"].iloc[0], lg["hotspot_adjusted"].iloc[0], lg["selection"]
+    st.caption(f"One model for the four groups together (it does not follow the group or cell-size filters). Dependent variable: severe (fatal + serious injury) = 1, otherwise 0. Explanatory variables: hotspot (accident in one of the 20 busiest 5 x 5 km squares of its own group and period), period, group, built-up area and light condition. "
+               f"{int(fit['rows']):,} rows ({int(fit['different accidents']):,} accidents; an accident with two groups is a row in both), {int(fit['severe accidents']):,} severe ({fit['severe %']:.1f}%). Standard errors are cluster-robust by municipality ({int(fit['clusters (municipalities)'])} clusters).")
+    plot(charts.fig_logit_forest(lg["severity_model"]))
+    show_table(charts.odds_ratio_table(lg["severity_model"]), "logit_severity_odds_ratios", decimals=3)
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Severe % if none in a hotspot", f"{adj['severe % if none in a hotspot']:.1f}%")
+    c2.metric("Severe % if all in a hotspot", f"{adj['severe % if all in a hotspot']:.1f}%")
+    c3.metric("Difference (95% interval)", f"{adj['difference (percentage points)']:.1f} points", f"{adj['difference low']:.1f} to {adj['difference high']:.1f}", delta_color="off")
+    st.caption(f"Fit: AUC {fit['AUC']:.2f}, McFadden R2 {fit['McFadden R2']:.3f}, highest VIF {fit['highest VIF']:.2f}. The average adjusted prediction sets the hotspot term to 1 and to 0 for every row (other variables as observed) and averages the predicted probabilities; the interval uses 1,000 simulated coefficient sets.")
+    with st.expander("Which accidents were used", expanded=False):
+        show_table(sel, "logit_severity_selection")
+        st.caption("Accidents without usable coordinates (the square is unknown) and accidents with unknown built-up area or light condition are left out.")
+    with st.expander("Plain severe share per category (no model)", expanded=False):
+        show_table(lg["severity_descriptives"], "logit_severity_descriptives")
+    findings(fx.LOGIT)
+    st.caption(fx.LOGIT_CARE)
+
 # ================================================================ 5 residents: rates per 100,000
 else:
     period = st.sidebar.radio("Period", charts.PERIODS, key="period")

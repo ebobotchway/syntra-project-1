@@ -27,6 +27,15 @@ SEVERITY = [
     "It holds for every group: severe share in the hotspots against other cells is 7.6% against 14.9% for pedestrians, 6.1% against 12.0% for cyclists, 7.0% against 21.7% for motorcycles and 5.5% against 9.2% for mopeds.",
     "5 x 5 km squares give the same picture (7.6% against 14.3%), a bit less strong because a bigger cell contains more of the surroundings.",
 ]
+LOGIT = [
+    "Being in a hotspot square lowers the odds of a severe accident: odds ratio 0.55 (95% interval 0.49 to 0.63), with period, group, built-up area and light condition held equal. Raw: 7.8% severe in hotspot squares against 14.6% elsewhere.",
+    "As percentage points: if every accident were in a hotspot square the model gives 8.4% severe, if none were 14.1%: 5.7 points lower (95% interval 4.7 to 6.7).",
+    "Outside built-up areas the odds of a severe accident are 1.74 times those inside (1.64 to 1.84); at night (public lighting or not) they are 1.41 times those in daylight (1.35 to 1.47); dawn and dusk do not differ from daylight (0.94, 0.87 to 1.03).",
+    "Against cyclists, motorcycles have 1.69 times the odds (1.59 to 1.80), pedestrians 1.38 (1.28 to 1.48) and mopeds 0.72 (0.67 to 0.77). After Covid-19 the odds are 0.90 times those before it (0.85 to 0.95); during Covid-19 they do not differ clearly (0.96, 0.92 to 1.01).",
+    "The model is simple and only moderately predictive (AUC 0.64, McFadden R2 0.037): it describes differences between groups of accidents and cannot say which single accident will be severe.",
+]
+LOGIT_CARE = ("Read with care: an odds ratio is not a risk ratio (severe accidents are 12% of the rows, so odds ratios look further from 1 than risk ratios). 'Hotspot' means a top-20 square of the accident's own group and period, so it is a busy place, not a dangerous one. "
+              "Speed, traffic volume and road layout are not in the data; the hotspot effect probably carries the lower speeds of city centres. One accident with two vulnerable groups is a row in both groups; standard errors are cluster-robust by municipality. Associations, not causes.")
 RATES = [
     "Per resident, the picture changes: for all four groups the highest rates (per 100,000 residents per year, 2017-2024) are Brussel 384, Knokke-Heist 368, Wijnegem 349, Eeklo 321, Wommelgem 306 and Gent 304, against 148 for Belgium; Antwerpen, first by number of accidents (12,043), has 284.",
     "Only 9 of the 20 municipalities with most accidents are also among the 20 with the highest rate (15 for pedestrians, 9 for cyclists, 19 for motorcycles, 12 for mopeds).",

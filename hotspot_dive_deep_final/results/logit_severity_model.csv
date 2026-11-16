@@ -1,0 +1,11 @@
+term,variable,label,coefficient,std error,odds ratio,OR low,OR high,p value
+Intercept,,Intercept (baseline log-odds),-2.07572,0.03308,,,,0.00000
+hotspot,Hotspot,In a hotspot square (top 20 of own group and period),-0.59174,0.06362,0.55336,0.48849,0.62685,0.00000
+period=During Covid-19 (2020-2021),Period,During Covid-19 (2020-2021) (against Pre Covid-19),-0.03719,0.02496,0.96349,0.91749,1.01180,0.13623
+period=Post Covid-19 (2022-2024),Period,Post Covid-19 (2022-2024) (against Pre Covid-19),-0.11136,0.02779,0.89462,0.84720,0.94470,0.00006
+group=Pedestrian,Group,Pedestrian (against Bicycle),0.32094,0.03722,1.37842,1.28145,1.48273,0.00000
+group=Motorcycle,Group,Motorcycle (against Bicycle),0.52348,0.03167,1.68790,1.58630,1.79600,0.00000
+group=Moped,Group,Moped (against Bicycle),-0.33007,0.03368,0.71887,0.67295,0.76793,0.00000
+built_up=outside,Built-up area,Outside built-up area (against inside),0.55221,0.02965,1.73709,1.63902,1.84102,0.00000
+"light=Dawn, dusk",Light condition,"Dawn, dusk (against daylight)",-0.05807,0.04314,0.94358,0.86709,1.02683,0.17823
+light=Night,Light condition,Night (against daylight),0.34037,0.02226,1.40546,1.34545,1.46815,0.00000

@@ -1,0 +1,13 @@
+group,period,accidents,with coordinates,with built-up area and light known (used)
+Bicycle,Pre Covid-19 (2017-2019),25446,21590,20927
+Bicycle,During Covid-19 (2020-2021),17265,14219,13802
+Bicycle,Post Covid-19 (2022-2024),29170,28129,26924
+Pedestrian,Pre Covid-19 (2017-2019),12409,10484,10137
+Pedestrian,During Covid-19 (2020-2021),6364,5312,5134
+Pedestrian,Post Covid-19 (2022-2024),11124,10667,10214
+Motorcycle,Pre Covid-19 (2017-2019),8241,6938,6864
+Motorcycle,During Covid-19 (2020-2021),4375,3507,3478
+Motorcycle,Post Covid-19 (2022-2024),7176,6820,6721
+Moped,Pre Covid-19 (2017-2019),8689,7477,7324
+Moped,During Covid-19 (2020-2021),5242,4405,4319
+Moped,Post Covid-19 (2022-2024),9327,9032,8772

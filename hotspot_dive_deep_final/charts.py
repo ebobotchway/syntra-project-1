@@ -53,6 +53,11 @@ def load_municipalities():
     return pd.read_csv(RESULTS / "municipality_rates.csv", dtype={"municipality_nis_code": str})
 
 
+def load_logit():
+    """The saved results of script 05: odds ratios, fit measures, the adjusted hotspot effect, the plain shares and the row selection."""
+    return {name: pd.read_csv(RESULTS / f"logit_{name}.csv") for name in ("severity_model", "severity_fit", "hotspot_adjusted", "severity_descriptives", "selection")}
+
+
 def load_outlines():
     return json.loads((DATA / "municipality_outlines.json").read_text(encoding="utf-8"))
 
@@ -247,6 +252,30 @@ def fig_hotspot_severity(summary, size, group):
         fig.update_yaxes(ticksuffix="%", rangemode="tozero", row=1, col=i)
     fig.update_layout(legend=dict(orientation="h", y=-0.2))
     return layout(fig, 430, margin=dict(l=10, r=10, t=60, b=10))
+
+
+# ---------------------------------------------------------------- logistic regression: odds ratios of severity
+def odds_ratio_table(model):
+    """The odds-ratio table for display: the p value as text ('<0.001' instead of 0.000)."""
+    m = model[model["term"] != "Intercept"][["variable", "label", "odds ratio", "OR low", "OR high", "p value"]].rename(columns={"OR low": "95% low", "OR high": "95% high"}).copy()
+    m["p value"] = ["<0.001" if p < 0.001 else f"{p:.3f}" for p in m["p value"]]
+    return m
+
+
+def fig_logit_forest(model):
+    """Odds ratios (dot) with 95% intervals (line) on a log axis; 1 = no difference from the reference category. The hotspot term is orange, the other terms blue."""
+    m = model[model["term"] != "Intercept"].iloc[::-1]  # reversed: the first term ends up at the top
+    colours = [ORANGE if v == "Hotspot" else BLUE for v in m["variable"]]
+    labels = [f"{l}" for l in m["label"]]
+    fig = go.Figure(go.Scatter(x=m["odds ratio"], y=labels, mode="markers", marker=dict(color=colours, size=11),
+                               error_x=dict(type="data", symmetric=False, array=m["OR high"] - m["odds ratio"], arrayminus=m["odds ratio"] - m["OR low"], thickness=2, width=0, color=GRAY),
+                               hovertext=[f"<b>{l}</b><br>odds ratio {o:.2f} (95% CI {lo:.2f} to {hi:.2f}), p {p:.3f}" if p >= 0.001 else f"<b>{l}</b><br>odds ratio {o:.2f} (95% CI {lo:.2f} to {hi:.2f}), p < 0.001"
+                                          for l, o, lo, hi, p in zip(labels, m["odds ratio"], m["OR low"], m["OR high"], m["p value"])],
+                               hovertemplate="%{hovertext}<extra></extra>", showlegend=False))
+    fig.add_vline(x=1, line_dash="dash", line_color=GRAY)
+    fig.update_xaxes(type="log", tickvals=[0.5, 0.7, 1, 1.5, 2], ticktext=["0.5", "0.7", "1", "1.5", "2"], title="Odds ratio of a severe accident (log scale); 1 = same as the reference")
+    fig.update_yaxes(automargin=True)
+    return layout(fig, 430, margin=dict(l=10, r=10, t=20, b=10))
 
 
 # ---------------------------------------------------------------- municipalities: rates per 100,000 residents

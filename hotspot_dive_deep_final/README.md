@@ -28,6 +28,7 @@ Open `hotspot_deep_dive.html` in a browser (it needs internet for the chart libr
 python -I scripts/01_prepare_population.py "../data/external/statbel_sectors_2023/sh_statbel_statistical_sectors_31370_20230101.shp/sh_statbel_statistical_sectors_31370_20230101.shp"
 python -I scripts/02_hotspot_analysis.py "../OPENDATA_MAP_2017-2024_en_flagged.csv.gz"
 python -I scripts/03_plot_heatmaps.py
+python -I scripts/05_logistic_model.py "../OPENDATA_MAP_2017-2024_en_flagged.csv.gz"   # logistic regression of severity (step 4b); run before script 04
 python -I scripts/04_build_report.py
 python build_html.py
 ```

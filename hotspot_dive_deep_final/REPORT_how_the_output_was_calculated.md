@@ -1,6 +1,6 @@
 # How the output was calculated: hotspots of accidents with vulnerable road users, before, during and after Covid-19
 
-Report for the hotspot deep dive with step 1 of the focused dashboard added (`hotspot_dive_deep_final/`). It explains, in the order of the calculation, where every number in the Streamlit app, the HTML page and the pictures comes from, so that each number can be reproduced and explained. Scripts: `scripts/01` to `scripts/04`. Decisions and their reasons: `beslissingslogboek.md`, entries #169-#178. All numbers in this report are read from the saved tables in `results/` and `data/` by `scripts/04_build_report.py`.
+Report for the hotspot deep dive with step 1 of the focused dashboard added (`hotspot_dive_deep_final/`). It explains, in the order of the calculation, where every number in the Streamlit app, the HTML page and the pictures comes from, so that each number can be reproduced and explained. Scripts: `scripts/01` to `scripts/05`. Decisions and their reasons: `beslissingslogboek.md`, entries #169-#178 and #205-#209 (the regression). All numbers in this report are read from the saved tables in `results/` and `data/` by `scripts/04_build_report.py`.
 
 ## 1. The question and what was decided
 
@@ -109,6 +109,55 @@ By group (5 km2 cells, 2017-2024):
 | Mopeds | 5.5% | 9.2% | 0.19% | 0.65% |
 
 Accidents in the hotspots are much less often severe than elsewhere, in every period and for every group. This is an association: hotspots are in cities, where speeds are lower; speed is not in the data.
+
+### 5b. A logistic regression for severity (script `05`)
+
+The comparison above looks at one factor at a time. A **binary logistic regression** looks at several at once: it models the chance that an accident is severe (fatal + serious injury = 1, otherwise 0) and gives, for each explanatory variable, an **odds ratio**: the odds of a severe accident in that category divided by the odds in the reference category, with the other variables held equal. An odds ratio of 1 means no difference; below 1 means less often severe, above 1 more often.
+
+**The model** (one model for the four groups together, 5 x 5 km squares):
+
+- **Hotspot:** 1 when the accident is in one of the 20 busiest squares of its own group and period (the lists of `results/hotspots_top20.csv`), otherwise 0.
+- **Period:** pre Covid-19 (reference), during, post.
+- **Group:** cyclists (reference), pedestrians, motorcycles, mopeds. An accident counts in a group when road user 1 or 2 is of that group (#33), so an accident with two groups is a row in both.
+- **Built-up area** (extra variable 1): inside (reference) or outside.
+- **Light condition** (extra variable 2): daylight (reference), dawn/dusk, night (with or without public lighting).
+
+**The rows.** 124,616 rows (117,750 different accidents), 15,334 severe (12.3%). Only accidents with usable coordinates are used (the square must be known), and accidents with unknown built-up area or light condition are left out:
+
+| Group | Period | Accidents | With coordinates | Used (built-up area and light known) |
+|---|---|---|---|---|
+| Bicycle | Pre Covid-19 (2017-2019) | 25,446 | 21,590 | 20,927 |
+| Bicycle | During Covid-19 (2020-2021) | 17,265 | 14,219 | 13,802 |
+| Bicycle | Post Covid-19 (2022-2024) | 29,170 | 28,129 | 26,924 |
+| Pedestrian | Pre Covid-19 (2017-2019) | 12,409 | 10,484 | 10,137 |
+| Pedestrian | During Covid-19 (2020-2021) | 6,364 | 5,312 | 5,134 |
+| Pedestrian | Post Covid-19 (2022-2024) | 11,124 | 10,667 | 10,214 |
+| Motorcycle | Pre Covid-19 (2017-2019) | 8,241 | 6,938 | 6,864 |
+| Motorcycle | During Covid-19 (2020-2021) | 4,375 | 3,507 | 3,478 |
+| Motorcycle | Post Covid-19 (2022-2024) | 7,176 | 6,820 | 6,721 |
+| Moped | Pre Covid-19 (2017-2019) | 8,689 | 7,477 | 7,324 |
+| Moped | During Covid-19 (2020-2021) | 5,242 | 4,405 | 4,319 |
+| Moped | Post Covid-19 (2022-2024) | 9,327 | 9,032 | 8,772 |
+
+**Estimation.** Maximum likelihood by Newton-Raphson with step-halving (the same code as the main project's `logit_live.py`). Because one accident can be two rows and accidents in one municipality resemble each other, the standard errors are **cluster-robust by municipality** (581 clusters); intervals are coefficient plus or minus 1.96 standard errors, then exponentiated.
+
+| Variable | Term (against the reference) | Odds ratio | 95% interval | p value |
+|---|---|---|---|---|
+| Hotspot | In a hotspot square (top 20 of own group and period) | 0.55 | 0.49 to 0.63 | <0.001 |
+| Period | During Covid-19 (2020-2021) (against Pre Covid-19) | 0.96 | 0.92 to 1.01 | 0.136 |
+| Period | Post Covid-19 (2022-2024) (against Pre Covid-19) | 0.89 | 0.85 to 0.94 | <0.001 |
+| Group | Pedestrian (against Bicycle) | 1.38 | 1.28 to 1.48 | <0.001 |
+| Group | Motorcycle (against Bicycle) | 1.69 | 1.59 to 1.80 | <0.001 |
+| Group | Moped (against Bicycle) | 0.72 | 0.67 to 0.77 | <0.001 |
+| Built-up area | Outside built-up area (against inside) | 1.74 | 1.64 to 1.84 | <0.001 |
+| Light condition | Dawn, dusk (against daylight) | 0.94 | 0.87 to 1.03 | 0.178 |
+| Light condition | Night (against daylight) | 1.41 | 1.35 to 1.47 | <0.001 |
+
+**The hotspot effect in percentage points.** Setting the hotspot term to 1 and to 0 for every row (all other variables as observed) and averaging the predicted probabilities gives **8.4%** severe if every accident were in a hotspot square against **14.1%** if none were: **-5.7 points** (95% interval -6.7 to -4.7, from 1,000 simulated coefficient sets).
+
+**Fit.** AUC 0.64, McFadden R2 0.037, highest variance inflation factor 1.25 (no problem with overlap between variables). The model is simple on purpose and only moderately predictive: it describes differences between groups of accidents; it cannot say which single accident will be severe.
+
+**Reading it.** After holding period, group, built-up area and light equal, accidents in hotspot squares still have clearly lower odds of being severe, so the lower severity in the hotspots is not just that hotspots have more cyclists or more daylight accidents. Outside built-up areas and at night the odds are higher. An odds ratio is not a risk ratio (12% of the rows are severe), and speed, traffic volume and road layout are not in the data, so this remains an association.
 
 ## 6. The residents and the rates per municipality (scripts `01` and `02`, part C)
 
