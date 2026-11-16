@@ -132,7 +132,7 @@ elif view == VIEWS[1]:
     cov = coverage()
     cov = cov[(cov["group"] == group) & (cov["period"] == period)].iloc[0]
     st.caption(f"{measure_label} per {size[:-1] if size.endswith('s') else size}, {words}, {period}. {int(cov['with coordinates']):,} of {int(cov['accidents']):,} accidents involving {words} have usable coordinates "
-               f"({100 - cov['left out %']:.1f}%); the others are not on the map. Black squares = the 20 busiest cells (hover for rank, municipality and severity).")
+               f"({100 - cov['left out %']:.1f}%); the others are not on the map. The squares mark the 20 busiest cells (hover for rank, municipality and severity); colour = in how many of the three periods the same cell is among the 20 busiest: red = all 3, orange = 2, black = 1, gray = none of the three (only possible in the all-years view).")
     plot(charts.fig_heatmap(cells(), top(), outlines(), size, measure, group, period))
     t = top()
     t = t[(t["size"] == size) & (t["group"] == group) & (t["period"] == period)]
@@ -148,7 +148,7 @@ elif view == VIEWS[2]:
     measure_label = st.sidebar.radio("Measure", list(MEASURES), key="measure")
     measure = MEASURES[measure_label]
     st.header("3  Compare the three periods")
-    st.caption(f"{measure_label}, {words}. The three maps use the same grid and the same colour scale. Black squares = the 20 busiest cells of each period.")
+    st.caption(f"{measure_label}, {words}. The three maps use the same grid and the same colour scale. The squares mark the 20 busiest cells of each period, in the same colour when the same cell is in the top 20 of all 3 periods (red), of 2 periods (orange) or of 1 period (black).")
     plot(charts.fig_heatmap_periods(cells(), top(), outlines(), size, measure, group))
     c = cells()
     c = c[(c["size"] == size) & (c["group"] == group) & c["period"].isin(charts.THREE)]

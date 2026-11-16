@@ -153,7 +153,7 @@ The busiest cells for all four groups together (accidents per year; 5 km2 cells 
 
 {t_top}
 
-**Do the hotspots move?** Number of the 20 busiest cells of the pre period that are still among the 20 busiest of the post period:
+**Do the hotspots move?** In the three-period heat maps the 20 marked cells of each period are drawn in a colour that shows how persistent the cell is: **red** = the same cell is among the 20 busiest in all three periods, **orange** = in two periods, **black** = in one period (#203). The same colours are used in the single-period heat map (where a gray square would be a cell that is in no period's top 20, possible in the all-years view only). Number of the 20 busiest cells of the pre period that are still among the 20 busiest of the post period:
 
 {t_persist}
 

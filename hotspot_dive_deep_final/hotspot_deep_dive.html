@@ -189,7 +189,7 @@ footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line);
     <p class="sub" id="s1-sub"></p>
     <fieldset class="ctl inline-ctl"><legend>Period</legend><div class="row" id="c-period"></div></fieldset>
     <div class="card"><div class="scroll-x"><div class="inner" style="min-width:560px"><div id="chart-h1"></div></div></div></div>
-    <p class="note">Black squares = the 20 busiest cells (hover for rank, municipality and severity). Accidents per year use a log colour scale: a few city cells have hundreds a year, most have less than one. Severe share: only cells with 30 or more accidents are coloured.</p>
+    <p class="note">The squares mark the 20 busiest cells of the period (hover for rank, municipality and severity). Colour = in how many of the three periods (pre, during, post Covid-19) the same cell is among the 20 busiest: red = all 3, orange = 2, black = 1, gray = none of the three (only possible in the all-years view). Accidents per year use a log colour scale: a few city cells have hundreds a year, most have less than one. Severe share: only cells with 30 or more accidents are coloured.</p>
     <div class="card findings">
       <h3>Key findings</h3>
       <p class="fixed">Fixed text for all four vulnerable groups together; it does not change with the filters.</p>
@@ -589,12 +589,32 @@ const D = {"groups":["Vulnerable (any of the four)","Pedestrian","Bicycle","Moto
     }
     return tr;
   }
-  function markerTrace(size, group, period, opts) {
-    const rows = topOf(size, group, period) || [];
-    const tr = { type: "scatter", mode: "markers", name: "20 busiest cells", showlegend: opts.legend !== false, x: rows.map(r => r.x), y: rows.map(r => r.y), marker: { symbol: "square-open", size: 9, color: "#0b0b0b", line: { width: 1.4 } },
-                 hovertext: rows.map(r => "<b>Rank " + r.rank + ": " + r.m + "</b><br>" + fmtInt(r.a) + " accidents (" + r.py.toFixed(1) + " a year)" + (r.sev === null ? "" : "<br>" + r.sev.toFixed(1) + "% severe, " + r.fat.toFixed(1) + "% fatal")), hovertemplate: "%{hovertext}<extra></extra>" };
-    if (opts.axis) { tr.xaxis = "x" + opts.axis; tr.yaxis = "y" + opts.axis; }
-    return tr;
+  // Colours of the 20 marked cells: in how many of the three periods (pre, during, post) the cell is among the 20 busiest (#203)
+  const PERSIST_COLOURS = { 3: "#d62728", 2: "#ff9f1c", 1: "#0b0b0b", 0: "#898781" };
+  const PERSIST_LABELS = { 3: "in the top 20 of all 3 periods", 2: "in the top 20 of 2 periods", 1: "in the top 20 of 1 period", 0: "in no period's top 20 (all-years view only)" };
+  const persistMemo = {};
+  function persistence(size, group) {                          // "x|y" of the cell centre -> 1, 2 or 3
+    const key = size + "|" + group;
+    if (!persistMemo[key]) {
+      const counts = {};
+      D.periods.slice(0, 3).forEach(p => (topOf(size, group, p) || []).forEach(r => { const k = r.x + "|" + r.y; counts[k] = (counts[k] || 0) + 1; }));
+      persistMemo[key] = counts;
+    }
+    return persistMemo[key];
+  }
+  function markerTraces(size, group, period, opts) {           // one trace per persistence class, so each colour has its own legend entry
+    const rows = topOf(size, group, period) || [], persist = persistence(size, group), out = [];
+    [3, 2, 1, 0].forEach(n => {
+      const sel = rows.filter(r => (persist[r.x + "|" + r.y] || 0) === n);
+      if (!sel.length) return;
+      const tr = { type: "scatter", mode: "markers", name: PERSIST_LABELS[n], legendgroup: "persist" + n, showlegend: !(opts.seen && opts.seen.has(n)), x: sel.map(r => r.x), y: sel.map(r => r.y),
+                   marker: { symbol: "square-open", size: 10, color: PERSIST_COLOURS[n], line: { width: 2 } },
+                   hovertext: sel.map(r => "<b>Rank " + r.rank + ": " + r.m + "</b><br>" + fmtInt(r.a) + " accidents (" + r.py.toFixed(1) + " a year)<br>" + PERSIST_LABELS[n] + (r.sev === null ? "" : "<br>" + r.sev.toFixed(1) + "% severe, " + r.fat.toFixed(1) + "% fatal")), hovertemplate: "%{hovertext}<extra></extra>" };
+      if (opts.axis) { tr.xaxis = "x" + opts.axis; tr.yaxis = "y" + opts.axis; }
+      if (opts.seen) opts.seen.add(n);
+      out.push(tr);
+    });
+    return out;
   }
   const borderTrace = axis => { const t = { type: "scatter", mode: "lines", fill: "toself", fillcolor: "rgba(137,135,129,0.10)", line: { color: "rgba(137,135,129,0.55)", width: 0.5 }, hoverinfo: "skip", showlegend: false, name: "municipality borders", x: [], y: [] }; if (axis) { t.xaxis = "x" + axis; t.yaxis = "y" + axis; } return t; };
   const hasData = (size, group, period, measure) => { const c = cellsOf(size, group, period); return c && c.a.length && (measure !== "severe" || c.a.some(a => a >= MIN_SHARE)); };
@@ -602,12 +622,12 @@ const D = {"groups":["Vulnerable (any of the four)","Pedestrian","Bicycle","Moto
   function heatSingle() {
     const { size, group, period, measure } = state;
     if (!hasData(size, group, period, measure)) return emptyFigure(measure === "severe" ? "No cell has 30 or more accidents in this selection, so no severe share can be shown." : "No accidents with coordinates in this selection.", 300);
-    return { data: [borderTrace(), heatTrace(size, group, period, measure, {}), markerTrace(size, group, period, {})],
+    return { data: [borderTrace(), heatTrace(size, group, period, measure, {}), ...markerTraces(size, group, period, {})],
              layout: { height: 640, margin: { l: 0, r: 0, t: 10, b: 0 }, xaxis: { visible: false }, yaxis: { visible: false, scaleanchor: "x", scaleratio: 1 }, legend: { orientation: "h", y: -0.02 } } };
   }
   function heatPeriods() {
     const { size, group, measure } = state, data = [], layout = { height: 520, margin: { l: 0, r: 0, t: 50, b: 0 }, legend: { orientation: "h", y: -0.02 }, annotations: [] };
-    const zmax = D.zmaxPeriods[size + "|" + group];
+    const zmax = D.zmaxPeriods[size + "|" + group], seen = new Set();
     D.periods.slice(0, 3).forEach((p, i) => {
       const n = i + 1, ax = n === 1 ? "" : String(n), d0 = i * 0.335;
       layout["xaxis" + ax] = { visible: false, domain: [d0, d0 + 0.325], anchor: "y" + ax };
@@ -615,7 +635,7 @@ const D = {"groups":["Vulnerable (any of the four)","Pedestrian","Bicycle","Moto
       layout.annotations.push({ text: "<b>" + p + "</b>", showarrow: false, xref: "paper", yref: "paper", x: d0 + 0.1625, y: 1.07, xanchor: "center" });
       data.push(borderTrace(n));
       if (hasData(size, group, p, measure)) data.push(heatTrace(size, group, p, measure, { axis: n, zmax, showscale: i === 2 }));
-      data.push(markerTrace(size, group, p, { axis: n, legend: i === 0 }));
+      markerTraces(size, group, p, { axis: n, seen }).forEach(tr => data.push(tr));
     });
     return { data, layout };
   }
@@ -681,7 +701,7 @@ const D = {"groups":["Vulnerable (any of the four)","Pedestrian","Bicycle","Moto
         rows: t.map(r => [r.rank, r.m, r.a, +r.py.toFixed(1), r.s, r.sev === null ? null : +r.sev.toFixed(2), r.f, r.fat === null ? null : +r.fat.toFixed(2), +r.share.toFixed(2)]) });
   }
   function text2() {
-    $("s2-sub").textContent = (state.measure === "severe" ? "Severe share" : "Accidents per year") + ", " + words() + ", " + state.size + ". Same grid and same colour scale in the three maps; black squares = the 20 busiest cells of each period.";
+    $("s2-sub").textContent = (state.measure === "severe" ? "Severe share" : "Accidents per year") + ", " + words() + ", " + state.size + ". Same grid and same colour scale in the three maps; the squares mark the 20 busiest cells of each period, in the same colour when the same cell is in the top 20 of all 3 periods (red), of 2 periods (orange) or of 1 period (black).";
     const parts = D.periods.slice(0, 3).map(p => { const cov = D.cov[state.group + "|" + p]; return p.split(" (")[0] + ": " + (100 - cov[1] / cov[0] * 100).toFixed(0) + "% of the accidents lack coordinates"; });
     $("s2-note").textContent = parts.join("; ") + ". Counts per year in the first two maps are therefore understated compared with the third; the severe share and the resident rates (section 4) are less affected.";
   }

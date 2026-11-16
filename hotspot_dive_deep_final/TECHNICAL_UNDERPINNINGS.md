@@ -112,6 +112,8 @@ Pre Covid-19 = 2017-2019 (3 years), during = 2020-2021 (2 years), post = 2022-20
 2. **The same colour scale** in the three maps (the upper end is the maximum over the three periods), so the same colour means the same number of accidents a year in every panel.
 3. **Accidents per year**, not totals, because the periods are 3, 2 and 3 years long.
 
+**Colours of the marked cells (#203).** The 20 hotspot cells of each period are drawn as hollow squares whose colour shows how persistent the cell is: **red** if the very same grid cell is among the 20 busiest in all three periods, **orange** if it is in two periods, **black** if it is in only one. A cell is identified by its grid column and row, so "the same" means the same cell, not only the same municipality name; the municipality of each marker is shown when you hover over it. The single-period heat map uses the same colours (computed from the three periods; a gray marker can only appear in the all-years view, for a cell that is in the all-years top 20 but in none of the three periods' top 20).
+
 **Persistence of the hotspots.** To summarise "do the hotspots move?" in one number, the 20 hotspot cells of the pre period are compared with the 20 of the post period: **how many cells are in both lists**. For the combined group this is 17 of 20 for the 5 km2 cells and 18 of 20 for the 5 x 5 km squares. The hotspots hardly move: the pandemic lowered counts everywhere but did not change where accidents concentrate.
 
 ### 3.3 The weakness of this step: coordinates are missing unevenly over time

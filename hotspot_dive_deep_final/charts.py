@@ -156,12 +156,34 @@ def heat_trace(c, side, extent, measure, zmax_count=None, showscale=True, xaxis=
                       showscale=showscale, colorbar=dict(title="accidents<br>per year", tickvals=[np.log10(t) for t in ticks], ticktext=[f"{t:g}" for t in ticks], thickness=12, len=0.6), **kw)
 
 
-def hotspot_markers(top, name="20 busiest cells", xaxis=None, yaxis=None, show_legend=True):
+# Colours of the 20 marked cells: how many of the three periods (pre, during, post) the cell is among the 20 busiest (#203)
+PERSIST_COLOURS = {3: "#d62728", 2: "#ff9f1c", 1: "#0b0b0b", 0: "#898781"}
+PERSIST_LABELS = {3: "in the top 20 of all 3 periods", 2: "in the top 20 of 2 periods", 1: "in the top 20 of 1 period", 0: "in no period's top 20 (all-years view only)"}
+
+
+def persistence(top, size, group):
+    """For every cell that is in the top 20 of at least one of the three periods: in how many of the three periods it is. Returns {(cx, cy): 1, 2 or 3}."""
+    t = top[(top["size"] == size) & (top["group"] == group) & top["period"].isin(THREE)]
+    return t.groupby(["cx", "cy"]).size().to_dict()
+
+
+def hotspot_markers(top, persist, xaxis=None, yaxis=None, seen=None):
+    """The marked cells as hollow squares, one trace per persistence class (so each colour has its own legend entry); `seen` collects the classes already in the legend."""
     kw = dict(xaxis=xaxis, yaxis=yaxis) if xaxis else {}
-    return go.Scatter(x=top["centre_x_m"], y=top["centre_y_m"], mode="markers", name=name, showlegend=show_legend, marker=dict(symbol="square-open", size=9, color="#0b0b0b", line=dict(width=1.4)),
-                      hovertext=[f"<b>Rank {r['rank']}: {r['municipality']}</b><br>{r['accidents']:,} accidents ({r['per_year']:.1f} a year)"
-                                 + (f"<br>{r['severe %']:.1f}% severe, {r['fatal %']:.1f}% fatal" if not pd.isna(r["severe %"]) else "") for _, r in top.iterrows()],
-                      hovertemplate="%{hovertext}<extra></extra>", **kw)
+    seen = seen if seen is not None else set()
+    top = top.assign(_n=[persist.get((r.cx, r.cy), 0) for r in top.itertuples()])
+    traces = []
+    for n in (3, 2, 1, 0):
+        d = top[top["_n"] == n]
+        if d.empty:
+            continue
+        traces.append(go.Scatter(x=d["centre_x_m"], y=d["centre_y_m"], mode="markers", name=PERSIST_LABELS[n], legendgroup=f"persist{n}", showlegend=n not in seen,
+                                 marker=dict(symbol="square-open", size=10, color=PERSIST_COLOURS[n], line=dict(width=2)),
+                                 hovertext=[f"<b>Rank {r['rank']}: {r['municipality']}</b><br>{r['accidents']:,} accidents ({r['per_year']:.1f} a year)<br>{PERSIST_LABELS[n]}"
+                                            + (f"<br>{r['severe %']:.1f}% severe, {r['fatal %']:.1f}% fatal" if not pd.isna(r["severe %"]) else "") for _, r in d.iterrows()],
+                                 hovertemplate="%{hovertext}<extra></extra>", **kw))
+        seen.add(n)
+    return traces
 
 
 def fig_heatmap(cells, top, outlines, size, measure, group, period):
@@ -174,7 +196,7 @@ def fig_heatmap(cells, top, outlines, size, measure, group, period):
     if cv.empty:
         return empty_figure("No cell has 30 or more accidents in this selection, so no severe share can be shown.")
     t = top[(top["size"] == size) & (top["group"] == group) & (top["period"] == period)]
-    fig = go.Figure([outline_trace(outlines), heat_trace(cv, side, extent_of(c), measure), hotspot_markers(t)])
+    fig = go.Figure([outline_trace(outlines), heat_trace(cv, side, extent_of(c), measure), *hotspot_markers(t, persistence(top, size, group))])
     fig.update_layout(legend=dict(orientation="h", y=-0.02))
     equal_axes(fig, 1, 1)
     return layout(fig, 640, margin=dict(l=0, r=0, t=10, b=0))
@@ -189,6 +211,7 @@ def fig_heatmap_periods(cells, top, outlines, size, measure, group):
     extent = extent_of(c_all)
     zmax = float(c_all[c_all["period"].isin(THREE)]["per_year"].max())
     fig = make_subplots(rows=1, cols=3, subplot_titles=[f"<b>{p}</b>" for p in THREE], horizontal_spacing=0.01)
+    persist, seen = persistence(top, size, group), set()
     for col, period in enumerate(THREE, start=1):
         c = c_all[c_all["period"] == period]
         cv = heat_values(c, measure)
@@ -197,7 +220,8 @@ def fig_heatmap_periods(cells, top, outlines, size, measure, group):
         if not cv.empty:
             fig.add_trace(heat_trace(cv, side, extent, measure, zmax_count=zmax, showscale=(col == 3)), row=1, col=col)
         t = top[(top["size"] == size) & (top["group"] == group) & (top["period"] == period)]
-        fig.add_trace(hotspot_markers(t, show_legend=(col == 1)), row=1, col=col)
+        for trace in hotspot_markers(t, persist, seen=seen):
+            fig.add_trace(trace, row=1, col=col)
     equal_axes(fig, 1, 3)
     fig.update_layout(legend=dict(orientation="h", y=-0.02))
     return layout(fig, 520, margin=dict(l=0, r=0, t=50, b=0))

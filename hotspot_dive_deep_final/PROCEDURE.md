@@ -58,6 +58,10 @@ Step 1 of the focused dashboard has two parts: 1a "who is involved" (accidents p
 
 **What did not change:** the scripts 01 to 03, `charts.py`, the saved results, the pictures and the findings of the hotspot analysis are exactly those of version 1.
 
+## 2b. Change made later: persistence colours of the hotspot markers (#202-#204)
+
+In the three-period heat maps (and in the single-period heat map) the 20 marked cells are coloured by **how many of the three periods the same cell is among the 20 busiest**: red = all 3, orange = 2, black = 1 (gray = none of the three, only possible in the all-years view). Steps: (1) `persistence()` in `charts.py` counts for every cell in how many of the three periods' top-20 lists it appears (a cell is its grid column and row); (2) `hotspot_markers()` draws one trace per class, so each colour has a legend entry; (3) the same logic is in `template.html` (`persistence()`, `markerTraces()`, keyed on the cell centre) and in `scripts/03_plot_heatmaps.py`, which also draws a legend; (4) captions in `app.py`, the page and the report explain the colours. Nothing else changed: the scripts 01 and 02, the saved results and all numbers are the same.
+
 ## 3. Get the residents: `scripts/01_prepare_population.py`
 
 1. **Find the data.** The earlier analysis had no population figures. Statbel (the Belgian statistical office) publishes the population of every municipality on 1 January, one file per year (CC BY 4.0). I checked that the files for 2017 to 2024 exist with the same address pattern.

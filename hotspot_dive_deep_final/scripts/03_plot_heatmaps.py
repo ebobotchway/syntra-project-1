@@ -34,6 +34,7 @@ plt.rcParams["font.family"] = ["Helvetica Neue", "Arial", "DejaVu Sans"]
 COUNT_CMAP = LinearSegmentedColormap.from_list("counts", ["#cde2fb", "#86b6ef", "#2a78d6", "#104281", "#0d366b"])
 WARM_CMAP = LinearSegmentedColormap.from_list("warm", ["#fdeadf", "#f8c3a2", "#eb6834", "#b8431a", "#6e260c"])
 FILE = {g: g.split(" ")[0].lower() for g in charts.GROUPS}
+RING = charts.PERSIST_COLOURS  # the ring colour of a hotspot cell: in how many of the three periods it is among the 20 busiest (#203)
 FILE_SIZE = {"5 km2 cells": "5km2", "5 x 5 km squares": "5x5km"}
 
 
@@ -66,7 +67,11 @@ def grid_figure(group, size, measure):
         pc = PolyCollection(squares(c.sort_values("accidents"), side) if False else squares(c, side), array=np.clip(values.to_numpy(), norm.vmin if measure != "severe" else 0, None), cmap=cmap, norm=norm, edgecolors="none", zorder=3)
         ax.add_collection(pc)
         t = top[(top["size"] == size) & (top["group"] == group) & (top["period"] == period)]
-        ax.add_collection(PolyCollection(squares(t, side), facecolors="none", edgecolors=INK, linewidths=1.0, zorder=4))
+        persist = charts.persistence(top, size, group)
+        for n in (1, 2, 3):  # draw the most persistent last, so that it is on top
+            part = t[[persist.get((r.cx, r.cy), 0) == n for r in t.itertuples()]]
+            if len(part):
+                ax.add_collection(PolyCollection(squares(part, side), facecolors="none", edgecolors=RING[n], linewidths=1.6, zorder=4 + n))
         cov = coverage[(coverage["group"] == group) & (coverage["period"] == period)].iloc[0]
         ax.set_title(f"{period}\n{int(cov['with coordinates']):,} accidents with coordinates ({100 - cov['left out %']:.0f}%)", fontsize=9.5, fontweight="bold", color=INK, loc="left")
     cbar = fig.colorbar(pc, ax=axes, orientation="horizontal", fraction=0.04, pad=0.03, aspect=45)
@@ -80,7 +85,10 @@ def grid_figure(group, size, measure):
         cbar.set_ticks(ticks); cbar.set_ticklabels([f"{t_:g}" for t_ in ticks])
         title = f"Where do accidents with {charts.GROUP_WORDS[group]} concentrate? {size}, accidents per year"
     fig.text(0.02, 0.975, title, fontsize=13, fontweight="bold", color=INK, ha="left", va="top")
-    fig.text(0.02, 0.93, "Black squares = the 20 busiest cells of the period. Only accidents with coordinates. Same grid and colour scale in the three maps. Outlines: Statbel, CC BY 4.0.", fontsize=8, color=INK_2, ha="left", va="top")
+    fig.text(0.02, 0.93, "Squares = the 20 busiest cells of the period; red = the same cell is in the top 20 of all 3 periods, orange = of 2 periods, black = of 1 period. Only accidents with coordinates. Same grid and colour scale. Outlines: Statbel, CC BY 4.0.", fontsize=8, color=INK_2, ha="left", va="top")
+    from matplotlib.patches import Patch
+    fig.legend(handles=[Patch(facecolor="none", edgecolor=RING[n], linewidth=1.6, label=label) for n, label in ((3, "in the top 20 of all 3 periods"), (2, "in the top 20 of 2 periods"), (1, "in the top 20 of 1 period"))],
+               loc="upper right", bbox_to_anchor=(0.99, 0.985), frameon=False, fontsize=8.5, labelcolor=INK_2, ncol=3)
     fig.subplots_adjust(left=0.01, right=0.99, top=0.86, bottom=0.12, wspace=0.03)
     fig.savefig(OUT / f"heat_{FILE[group]}_{FILE_SIZE[size]}_{measure if measure == 'severe' else 'accidents'}.png", facecolor=SURFACE)
     plt.close(fig)
