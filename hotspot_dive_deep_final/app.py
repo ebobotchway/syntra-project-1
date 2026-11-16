@@ -181,7 +181,7 @@ elif view == VIEWS[3]:
     lg = charts.load_logit()
     fit, adj, sel = lg["severity_fit"].iloc[0], lg["hotspot_adjusted"].iloc[0], lg["selection"]
     st.caption(f"One model for the four groups together (it does not follow the group or cell-size filters). Dependent variable: severe (fatal + serious injury) = 1, otherwise 0. Explanatory variables: hotspot (accident in one of the 20 busiest 5 x 5 km squares of its own group and period), period, group, built-up area and light condition. "
-               f"{int(fit['rows']):,} rows ({int(fit['different accidents']):,} accidents; an accident with two groups is a row in both), {int(fit['severe accidents']):,} severe ({fit['severe %']:.1f}%). Standard errors are cluster-robust by municipality ({int(fit['clusters (municipalities)'])} clusters).")
+               f"{int(fit['rows']):,} rows ({int(fit['different accidents']):,} accidents; an accident with two groups is a row in both), {int(fit['severe accidents']):,} severe ({fit['severe %']:.1f}%). Standard errors are cluster-robust by municipality ({int(fit['clusters (municipalities)'])} clusters)." + " Filled dots are significant at the 5% level (p below 0.05); a hollow gray dot is not significant (its interval includes 1).")
     plot(charts.fig_logit_forest(lg["severity_model"]))
     show_table(charts.odds_ratio_table(lg["severity_model"]), "logit_severity_odds_ratios", decimals=3)
     c1, c2, c3 = st.columns(3)

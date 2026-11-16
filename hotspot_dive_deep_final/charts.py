@@ -263,11 +263,12 @@ def odds_ratio_table(model):
 
 
 def fig_logit_forest(model):
-    """Odds ratios (dot) with 95% intervals (line) on a log axis; 1 = no difference from the reference category. The hotspot term is orange, the other terms blue."""
+    """Odds ratios (dot) with 95% intervals (line) on a log axis; 1 = no difference from the reference category. The hotspot term is orange, the other terms blue; terms that are not significant (p of 0.05 or more) get a hollow gray dot."""
     m = model[model["term"] != "Intercept"].iloc[::-1]  # reversed: the first term ends up at the top
-    colours = [ORANGE if v == "Hotspot" else BLUE for v in m["variable"]]
+    sig = (m["p value"] < 0.05).to_numpy()  # a point is coloured only when the term is significant at 5%; the others are hollow gray
+    colours = [(ORANGE if v == "Hotspot" else BLUE) if s else GRAY for v, s in zip(m["variable"], sig)]
     labels = [f"{l}" for l in m["label"]]
-    fig = go.Figure(go.Scatter(x=m["odds ratio"], y=labels, mode="markers", marker=dict(color=colours, size=11),
+    fig = go.Figure(go.Scatter(x=m["odds ratio"], y=labels, mode="markers", marker=dict(color=["rgba(0,0,0,0)" if not s else col for col, s in zip(colours, sig)], size=11, line=dict(color=colours, width=2)),
                                error_x=dict(type="data", symmetric=False, array=m["OR high"] - m["odds ratio"], arrayminus=m["odds ratio"] - m["OR low"], thickness=2, width=0, color=GRAY),
                                hovertext=[f"<b>{l}</b><br>odds ratio {o:.2f} (95% CI {lo:.2f} to {hi:.2f}), p {p:.3f}" if p >= 0.001 else f"<b>{l}</b><br>odds ratio {o:.2f} (95% CI {lo:.2f} to {hi:.2f}), p < 0.001"
                                           for l, o, lo, hi, p in zip(labels, m["odds ratio"], m["OR low"], m["OR high"], m["p value"])],
