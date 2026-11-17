@@ -1,6 +1,6 @@
-# Step-by-step procedure: how the hotspot deep dive with step 1 was made
+# Step-by-step procedure: how the analysis of accident hotspots for vulnerable road users with step 1 was made
 
-This file explains, in the order I did it, how the `hotspot_dive_deep_final/` folder was built (the hotspot deep dive plus step 1 of the focused dashboard), so you can repeat it, change it, or explain it in the no-AI conversation. Each step says **what**, **why**, **which file** and **how I checked it**. The calculations themselves are explained in `REPORT_how_the_output_was_calculated.md`. Decisions: `beslissingslogboek.md`, #169-#178.
+This file explains, in the order I did it, how the `hotspot_dive_deep_final/` folder was built (the analysis of accident hotspots for vulnerable road users plus step 1 of the focused dashboard), so you can repeat it, change it, or explain it in the no-AI conversation. Each step says **what**, **why**, **which file** and **how I checked it**. The calculations themselves are explained in `REPORT_how_the_output_was_calculated.md`. Decisions: `beslissingslogboek.md`, #169-#178.
 
 ## 0. What was asked and decided
 

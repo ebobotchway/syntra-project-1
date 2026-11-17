@@ -1,8 +1,12 @@
-# How the five steps of the final analysis were modeled: the technical underpinnings
+# Analysis of accident hotspots for vulnerable road users: how the five steps were modeled (technical underpinnings)
+
+**Topic.** Spatial and temporal patterns of road traffic accidents involving vulnerable road users in Belgium: A comparative analysis of accident hotspots, severity and municipalities
+
+**Research question (RQ).** Are accidents occurring in identified hotspots more or less likely to result in fatal or serious injuries compared with accidents occurring elsewhere, after accounting for relevant environmental and road conditions?
 
 Plain-language method report for the analysis in `hotspot_dive_deep_final/`: accident hotspots with vulnerable road users in Belgium, 2017-2024 (289,532 accidents), with step 1 of the focused dashboard in front. It explains, for each of the five steps, **what kind of model or calculation was used, what it assumes, how it works inside, how it was checked, and where it stops being reliable**. It does not repeat the findings or the numbers of every table (see `REPORT_how_the_output_was_calculated.md`); it explains the machinery behind them, so that every number can be defended without AI. `#n` points to an entry in `beslissingslogboek.md`, where the decision and its reason are written down; `scripts/NN` points to the code.
 
-**What "model" means here.** All five steps are *descriptive models*: carefully defined counts, grids, shares, rates and comparisons that turn accident rows into results, with uncertainty added where it matters. There is no regression in this analysis; the only inferential tool is the confidence interval of a share.
+**What "model" means here.** Steps 1 to 4a and step 5 are *descriptive models*: carefully defined counts, grids, shares, rates and comparisons that turn accident rows into results, with uncertainty added where it matters. Step 4b is the one inferential model, a logistic regression that answers the RQ by comparing hotspot and other accidents while accounting for period, road-user group, built-up area, light and road surface.
 
 | Step | Question | Kind of model | Where |
 |---|---|---|---|
