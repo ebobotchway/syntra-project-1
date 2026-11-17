@@ -109,16 +109,16 @@ footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line);
   <header>
     <div class="eyebrow">Belgian road accidents 2017-2024 · hotspot deep dive</div>
     <h1>Hotspots of accidents with vulnerable road users</h1>
-    <p class="lede">Before (2017-2019), during (2020-2021) and after (2022-2024) Covid-19: where accidents with pedestrians, cyclists, motorcycles and mopeds concentrate in 5 km2 cells and 5 x 5 km squares, how severe they are there, and how it looks per resident. An accident counts once for every group it involves. These are counts and rates, not causes.</p>
+    <p class="lede">Before (2017-2019), during (2020-2021) and after (2022-2024) Covid-19: where accidents with pedestrians, cyclists, motorcycles and mopeds concentrate in 5 x 5 km squares, how severe they are there, and how it looks per resident. An accident counts once for every group it involves. These are counts and rates, not causes.</p>
   </header>
   <nav class="jump" aria-label="Sections"><a href="#sec-step1">1 Burden</a><a href="#sec-1">2 Heat map</a><a href="#sec-2">3 Three periods</a><a href="#sec-3">4 Severity of the hotspots</a><a href="#sec-4">5 Residents</a><a href="#sec-about">About</a></nav>
 
   <div class="layout">
   <aside class="controls" id="controls" aria-label="Filters">
     <fieldset class="ctl"><legend>Road-user group</legend><div class="row" id="c-group"></div></fieldset>
-    <fieldset class="ctl"><legend>Cell size</legend><div class="row" id="c-size"></div></fieldset>
+    <fieldset class="ctl"><legend>Hotspots</legend><div class="row" id="c-top"></div></fieldset>
     <fieldset class="ctl"><legend>Measure</legend><div class="row" id="c-measure"></div></fieldset>
-    <p class="note" style="margin:0">Group applies to sections 2 to 5; cell size and measure apply to sections 2 and 3 (cell size also to 4). Section 1 has its own filters; periods have their own buttons in sections 2 and 5.</p>
+    <p class="note" style="margin:0">Group applies to sections 2 to 5; hotspots (top 20 or top 40) apply to sections 2, 3 and 4 including the regression; measure applies to sections 2 and 3. Section 1 has its own filters; periods have their own buttons in sections 2 and 5.</p>
   </aside>
   <div class="content">
   <p class="status num" id="status" aria-live="polite"></p>
@@ -189,14 +189,14 @@ footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line);
     <p class="sub" id="s1-sub"></p>
     <fieldset class="ctl inline-ctl"><legend>Period</legend><div class="row" id="c-period"></div></fieldset>
     <div class="card"><div class="scroll-x"><div class="inner" style="min-width:560px"><div id="chart-h1"></div></div></div></div>
-    <p class="note">The squares mark the 40 busiest cells of the period (hover for rank, municipality and severity). Colour = in how many of the three periods (pre, during, post Covid-19) the same cell is among the 40 busiest: red = all 3, orange = 2, black = 1, gray = none of the three (only possible in the all-years view). Accidents per year use a log colour scale: a few city cells have hundreds a year, most have less than one. Severe share: only cells with 30 or more accidents are coloured.</p>
+    <p class="note"><span class="topn">The squares mark the 40 busiest squares of the period</span> (hover for rank, municipality and severity). Colour = in how many of the three periods (pre, during, post Covid-19) the same square is among the <span class="topn">40</span> busiest: red = all 3, orange = 2, black = 1, gray = none of the three (only possible in the all-years view). Accidents per year use a log colour scale: a few city cells have hundreds a year, most have less than one. Severe share: only cells with 30 or more accidents are coloured.</p>
     <div class="card findings">
       <h3>Key findings</h3>
-      <p class="fixed">Fixed text for all four vulnerable groups together; it does not change with the filters.</p>
+      <p class="fixed">Text for all four vulnerable groups together; it follows the Hotspots filter (top 20 or top 40) but not the other filters.</p>
       <ul id="f-heat"></ul>
     </div>
     <p class="care" id="care-1"></p>
-    <details open><summary id="s1-summary">The 40 busiest cells</summary><div class="table-wrap"><div id="table-top"></div><p class="dl"><button type="button" class="download" id="dl-top" hidden>Download CSV</button></p></div></details>
+    <details open><summary id="s1-summary">The 40 busiest squares</summary><div class="table-wrap"><div id="table-top"></div><p class="dl"><button type="button" class="download" id="dl-top" hidden>Download CSV</button></p></div></details>
   </section>
 
   <section id="sec-2">
@@ -212,10 +212,10 @@ footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line);
     <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-h3"></div></div></div></div>
     <div class="card findings">
       <h3>Key findings</h3>
-      <p class="fixed">Fixed text for all years and groups as stated; it does not change with the filters.</p>
+      <p class="fixed">Text for all years and groups as stated; it follows the Hotspots filter (top 20 or top 40) but not the other filters.</p>
       <ul id="f-sev"></ul>
     </div>
-    <p class="care">Read with care: severity is the class of the whole accident, not the harm to one road user. Hotspot cells are cities with lower speeds and more stop-and-go traffic, but speed is not in the data: an association, not a cause.</p>
+    <p class="care">Read with care: severity is the class of the whole accident, not the harm to one road user. Hotspot squares are cities with lower speeds and more stop-and-go traffic, but speed is not in the data: an association, not a cause.</p>
     <details><summary>Table</summary><div class="table-wrap"><div id="table-sev"></div><p class="dl"><button type="button" class="download" id="dl-sev" hidden>Download CSV</button></p></div></details>
 
     <h3 style="margin-top:36px">4b&nbsp; Logistic regression: what goes with a severe accident?</h3>
@@ -228,7 +228,7 @@ footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line);
     <details><summary>Plain severe share per category (no model)</summary><div class="table-wrap"><div id="table-lgdesc"></div><p class="dl"><button type="button" class="download" id="dl-lgdesc" hidden>Download CSV</button></p></div></details>
     <div class="card findings">
       <h3>Key findings</h3>
-      <p class="fixed">Fixed text; it does not change with the filters.</p>
+      <p class="fixed">Text for the four groups together; it follows the Hotspots filter (top 20 or top 40).</p>
       <ul id="f-lg"></ul>
     </div>
     <p class="care" id="care-lg"></p>
@@ -259,7 +259,7 @@ footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line);
       <ul>
         <li><b>Data:</b> Belgian road-accident open data 2017-2024 (289,532 accidents); residents per municipality and year from Statbel (population on 1 January, CC BY 4.0). Municipality outlines: Statbel statistical sectors 2023, CC BY 4.0.</li>
         <li><b>Counting:</b> an accident counts for a group if the group is road user 1 or road user 2, once per accident; "all four" counts an accident with two of them once. Severe = fatal, fatally injured or seriously injured (classes 1-3).</li>
-        <li><b>Grid:</b> cells of 5 km2 (side 2.24 km) and squares of 5 km x 5 km, aligned to the Belgian Lambert 1972 grid. Only accidents with usable coordinates are in the cells (89% of all, 85% before Covid-19, 96% after it, fewer in Wallonia).</li>
+        <li><b>Grid:</b> squares of 5 km x 5 km, aligned to the Belgian Lambert 1972 grid. Only accidents with usable coordinates are in the squares (89% of all, 85% before Covid-19, 96% after it, fewer in Wallonia).</li>
         <li><b>Rates:</b> accidents divided by the residents of each year, per 100,000 per year. A rate is shown in full colour from 100 accidents of the group in the period; 30-99 accidents are faded and flagged; fewer stay gray.</li>
         <li><b>Periods:</b> pre (2017-2019), during (2020-2021) and post (2022-2024) Covid-19 are my own definition; the data states no cause. Accidents per year make the periods comparable (3, 2 and 3 years).</li>
         <li><b>Limits:</b> residents are not traffic or visitors; hotspots are where accidents are counted; associations, not causes.</li>
@@ -516,7 +516,7 @@ const D = /*__DATA__*/null;
   const css = name => getComputedStyle(document.documentElement).getPropertyValue(name).trim();
   const theme = () => ({ fg: css("--fg"), muted: css("--muted"), line: css("--line"), font: css("--font-body") });
   const fmtInt = n => Math.round(n).toLocaleString("en-US");
-  const state = { group: D.groups[0], size: D.sizes[0], measure: "per_year", period: D.periods[0], period4: D.periods[3], rank: "rate" };
+  const state = { group: D.groups[0], size: D.sizes[0], top: D.topDefault, measure: "per_year", period: D.periods[0], period4: D.periods[3], rank: "rate" };
   const csvStore = {}; let downloads = null;
   const BLUE = "#2a78d6", ORANGE = "#eb6834", GRAY = "#898781", RAMP = ["#86b6ef", "#5598e7", "#2a78d6", "#1c5cab", "#104281"];
   const WARM = [[0, "#fdeadf"], [0.25, "#f8c3a2"], [0.5, "#eb6834"], [0.75, "#b8431a"], [1, "#6e260c"]];
@@ -575,7 +575,7 @@ const D = /*__DATA__*/null;
 
   // ---------------------------------------------------------------- grid heat maps
   function cellsOf(size, group, period) { return D.cells[size + "|" + group + "|" + period]; }
-  function topOf(size, group, period) { return D.top[size + "|" + group + "|" + period]; }
+  function topOf(size, group, period) { return (D.top[size + "|" + group + "|" + period] || []).filter(r => r.rank <= state.top); }   // the hotspot filter: the 20 or 40 busiest
   function gridValues(c, size, period, measure) {                 // value, hover text per cell; null where nothing is shown
     const years = D.yearsIn[period], z = [], text = [];
     for (let i = 0; i < c.a.length; i++) {
@@ -604,12 +604,12 @@ const D = /*__DATA__*/null;
     }
     return tr;
   }
-  // Colours of the 40 marked cells: in how many of the three periods (pre, during, post) the cell is among the 40 busiest (#203)
+  // Colours of the marked squares: in how many of the three periods (pre, during, post) the square is among the 20 or 40 busiest (#203)
   const PERSIST_COLOURS = { 3: "#d62728", 2: "#ff9f1c", 1: "#0b0b0b", 0: "#898781" };
-  const PERSIST_LABELS = { 3: "in the top 40 of all 3 periods", 2: "in the top 40 of 2 periods", 1: "in the top 40 of 1 period", 0: "in no period's top 40 (all-years view only)" };
+  const persistLabels = () => ({ 3: "in the top " + state.top + " of all 3 periods", 2: "in the top " + state.top + " of 2 periods", 1: "in the top " + state.top + " of 1 period", 0: "in no period's top " + state.top + " (all-years view only)" });
   const persistMemo = {};
   function persistence(size, group) {                          // "x|y" of the cell centre -> 1, 2 or 3
-    const key = size + "|" + group;
+    const key = size + "|" + group + "|" + state.top;
     if (!persistMemo[key]) {
       const counts = {};
       D.periods.slice(0, 3).forEach(p => (topOf(size, group, p) || []).forEach(r => { const k = r.x + "|" + r.y; counts[k] = (counts[k] || 0) + 1; }));
@@ -618,7 +618,7 @@ const D = /*__DATA__*/null;
     return persistMemo[key];
   }
   function markerTraces(size, group, period, opts) {           // one trace per persistence class, so each colour has its own legend entry
-    const rows = topOf(size, group, period) || [], persist = persistence(size, group), out = [];
+    const rows = topOf(size, group, period) || [], persist = persistence(size, group), out = [], PERSIST_LABELS = persistLabels();
     [3, 2, 1, 0].forEach(n => {
       const sel = rows.filter(r => (persist[r.x + "|" + r.y] || 0) === n);
       if (!sel.length) return;
@@ -708,21 +708,22 @@ const D = /*__DATA__*/null;
   const fillList = (id, lines) => { const ul = $(id); ul.textContent = ""; lines.forEach(t => { const li = document.createElement("li"); li.textContent = t; ul.appendChild(li); }); };
   function text1() {
     const cov = D.cov[state.group + "|" + state.period], label = state.measure === "severe" ? "Severe share" : "Accidents per year";
-    $("s1-sub").textContent = label + " per " + state.size.replace(/s$/, "") + ", " + words() + ", " + state.period + ". " + fmtInt(cov[1]) + " of " + fmtInt(cov[0]) + " accidents involving " + words() + " have usable coordinates (" + (cov[1] / cov[0] * 100).toFixed(1) + "%); the others are not on the map.";
-    $("s1-summary").textContent = "The 40 busiest cells: " + words() + ", " + state.size + ", " + state.period;
+    $("s1-sub").textContent = label + " per 5 x 5 km square, " + words() + ", " + state.period + ". " + fmtInt(cov[1]) + " of " + fmtInt(cov[0]) + " accidents involving " + words() + " have usable coordinates (" + (cov[1] / cov[0] * 100).toFixed(1) + "%); the others are not on the map.";
+    $("s1-summary").textContent = "The " + state.top + " busiest squares: " + words() + ", " + state.period;
+    document.querySelectorAll(".topn").forEach(e => { e.textContent = e.textContent.replace(/\b(20|40)\b/, state.top); });
     const t = topOf(state.size, state.group, state.period) || [];
-    table("table-top", "dl-top", "hotspots_" + state.group.split(" ")[0].toLowerCase() + "_" + state.size.split(" ")[0] + "_" + state.period.split(" ")[0].toLowerCase() + ".csv",
+    table("table-top", "dl-top", "hotspots_top" + state.top + "_" + state.group.split(" ")[0].toLowerCase() + "_" + state.period.split(" ")[0].toLowerCase() + ".csv",
       { headers: ["rank", "municipality", "accidents", "per year", "severe", "severe %", "fatal", "fatal %", "share of located %"],
         rows: t.map(r => [r.rank, r.m, r.a, +r.py.toFixed(1), r.s, r.sev === null ? null : +r.sev.toFixed(2), r.f, r.fat === null ? null : +r.fat.toFixed(2), +r.share.toFixed(2)]) });
   }
   function text2() {
-    $("s2-sub").textContent = (state.measure === "severe" ? "Severe share" : "Accidents per year") + ", " + words() + ", " + state.size + ". Same grid and same colour scale in the three maps; the squares mark the 40 busiest cells of each period, in the same colour when the same cell is in the top 40 of all 3 periods (red), of 2 periods (orange) or of 1 period (black).";
+    $("s2-sub").textContent = (state.measure === "severe" ? "Severe share" : "Accidents per year") + ", " + words() + ". Same grid and same colour scale in the three maps; the squares mark the " + state.top + " busiest squares of each period, in the same colour when the same square is in the top " + state.top + " of all 3 periods (red), of 2 periods (orange) or of 1 period (black).";
     const parts = D.periods.slice(0, 3).map(p => { const cov = D.cov[state.group + "|" + p]; return p.split(" (")[0] + ": " + (100 - cov[1] / cov[0] * 100).toFixed(0) + "% of the accidents lack coordinates"; });
     $("s2-note").textContent = parts.join("; ") + ". Counts per year in the first two maps are therefore understated compared with the third; the severe share and the resident rates (section 4) are less affected.";
   }
   function text3() {
-    $("s3-sub").textContent = "Share of the accidents involving " + words() + " that are severe (fatal + serious injury), fatal, or serious, in the 40 hotspot cells against all other cells (" + state.size + "). Dot = share, line = 95% Wilson interval.";
-    table("table-sev", "dl-sev", "hotspot_severity_" + state.group.split(" ")[0].toLowerCase() + "_" + state.size.split(" ")[0] + ".csv", D.sevTables[state.size + "|" + state.group]);
+    $("s3-sub").textContent = "Share of the accidents involving " + words() + " that are severe (fatal + serious injury), fatal, or serious, in the " + state.top + " hotspot squares against all other squares. Dot = share, line = 95% Wilson interval.";
+    table("table-sev", "dl-sev", "hotspot_severity_top" + state.top + "_" + state.group.split(" ")[0].toLowerCase() + ".csv", D.sevTables[state.size + "|" + state.group + "|" + state.top]);
   }
   function text4() {
     const rows = muniRows(), a = rows.reduce((p, r) => p + r.a, 0), ry = rows.reduce((p, r) => p + r.ry, 0);
@@ -733,26 +734,29 @@ const D = /*__DATA__*/null;
       { headers: ["municipality", "region", "accidents", "per year", "average residents", "per 100,000 residents per year", "100+ accidents", "severe %", "fatal %"],
         rows: d.map(r => [r.name, REGION[r.region] || r.region, r.a, +r.py.toFixed(1), Math.round(r.avg), +r.rate.toFixed(1), r.reliable ? "yes" : "flagged", +(r.s / r.a * 100).toFixed(2), +(r.f / r.a * 100).toFixed(2)]) });
   }
-  function textAll() { text1(); text2(); text3(); text4(); $("status").textContent = "Showing " + words() + " · " + state.size + " · " + (state.measure === "severe" ? "severe share" : "accidents per year"); }
+  function textAll() { text1(); text2(); text3(); text4(); $("status").textContent = "Showing " + words() + " · top " + state.top + " hotspots · " + (state.measure === "severe" ? "severe share" : "accidents per year"); }
 
   register("chart-h1", heatSingle);
   register("chart-h2", heatPeriods);
-  register("chart-h3", () => D.figs[state.size + "|" + state.group]);
-  register("chart-lg", () => D.logit.fig);
+  register("chart-h3", () => D.figs[state.size + "|" + state.group + "|" + state.top]);
+  register("chart-lg", () => D.logit[state.top].fig);
   register("chart-h4map", rateMap);
   register("chart-h4rank", rateRank);
   const all = ["chart-h1", "chart-h2", "chart-h3", "chart-h4map", "chart-h4rank"];
   choice("c-group", "cgroup", D.groups.map(g => [g, D.labels[g]]), state.group, v => { state.group = v; textAll(); redraw(all); });
-  choice("c-size", "csize", D.sizes.map(s => [s, s]), state.size, v => { state.size = v; textAll(); redraw(["chart-h1", "chart-h2", "chart-h3"]); });
+  choice("c-top", "ctop", D.topNs.map(n => [n, "Top " + n]), state.top, v => { state.top = v; textAll(); showLogit(); redraw(["chart-h1", "chart-h2", "chart-h3", "chart-lg"]); });
   choice("c-measure", "cmeasure", [["per_year", "Accidents per year"], ["severe", "Severe share"]], state.measure, v => { state.measure = v; textAll(); redraw(["chart-h1", "chart-h2"]); });
   choice("c-period", "cperiod", D.periods.map(p => [p, p]), state.period, v => { state.period = v; text1(); redraw(["chart-h1"]); });
   choice("c-period4", "cperiod4", D.periods.map(p => [p, p]), state.period4, v => { state.period4 = v; text4(); redraw(["chart-h4map", "chart-h4rank"]); });
   choice("c-rank", "crank", [["rate", "Accidents per 100,000 residents"], ["count", "Number of accidents"]], state.rank, v => { state.rank = v; redraw(["chart-h4rank"]); });
-  const L = D.logit;
-  $("lg-sub").textContent = L.sub; $("lg-none").textContent = L.none; $("lg-all").textContent = L.all; $("lg-diff").textContent = L.diff; $("lg-fit").textContent = L.fit;
-  table("table-lg", "dl-lg", "logit_severity_odds_ratios.csv", L.table); table("table-lgsel", "dl-lgsel", "logit_severity_selection.csv", L.selection); table("table-lgdesc", "dl-lgdesc", "logit_severity_descriptives.csv", L.desc);
-  fillList("f-lg", D.findings.logit); $("care-lg").textContent = D.findings.logitCare;
-  fillList("f-heat", D.findings.heat); fillList("f-sev", D.findings.sev); fillList("f-rate", D.findings.rate);
+  function showLogit() {                                         // the regression texts, tables and findings for the chosen top 20 or top 40
+    const L = D.logit[state.top];
+    $("lg-sub").textContent = L.sub; $("lg-none").textContent = L.none; $("lg-all").textContent = L.all; $("lg-diff").textContent = L.diff; $("lg-fit").textContent = L.fit;
+    table("table-lg", "dl-lg", "logit_severity_odds_ratios_top" + state.top + ".csv", L.table); table("table-lgsel", "dl-lgsel", "logit_severity_selection.csv", L.selection); table("table-lgdesc", "dl-lgdesc", "logit_severity_descriptives_top" + state.top + ".csv", L.desc);
+    fillList("f-lg", D.findings.logit[state.top]); $("care-lg").textContent = D.findings.logitCare[state.top];
+    fillList("f-heat", D.findings.heat[state.top]); fillList("f-sev", D.findings.sev[state.top]);
+  }
+  showLogit(); fillList("f-rate", D.findings.rate);
   $("care-1").textContent = D.findings.care; $("care-4").textContent = D.findings.care;
   textAll();
   const redrawAll = () => redraw(Object.keys(registry));

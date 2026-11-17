@@ -92,6 +92,8 @@ python -I scripts/02_hotspot_analysis.py "../OPENDATA_MAP_2017-2024_en_flagged.c
 
 Results in `results/`: `grid_cells.csv`, `hotspots_top40.csv`, `hotspot_severity_summary.csv`, `coordinate_coverage.csv`, `municipality_rates.csv`.
 
+> **Change #213:** the app and the HTML page no longer have a cell-size filter (only the 5 x 5 km squares are shown) and have a new filter 'Hotspots: top 20 / top 40'. Scripts 02, 03 and 04 still calculate both cell sizes; script 02 and 05 write results for the top 20 and the top 40 (column `top_n`), the written findings are calculated from them (`findings.py`).
+
 ## 4b. Change made later: a logistic regression for severity in step 4 (`scripts/05_logistic_model.py`, #205-#209)
 
 You asked for a binary logistic regression in step 4: severity (fatal + serious injury) = 1, otherwise 0, explained by hotspot, period, group and two more variables. Choices (all asked first): extra variables **built-up area** (inside/outside) and **light condition** (daylight, dawn/dusk, night); hotspot = the accident is in one of the **40 busiest 5 x 5 km squares of its own group and period**; group = the four groups, an accident counts in a group if road user 1 or 2 is of that group, so an accident with two groups is a row in both.
@@ -99,7 +101,7 @@ You asked for a binary logistic regression in step 4: severity (fatal + serious 
 1. **Script:** `python -I scripts/05_logistic_model.py "../OPENDATA_MAP_2017-2024_en_flagged.csv.gz"` reads the accidents, links each accident to its 5 x 5 km square, marks the hotspot squares from `results/hotspots_top40.csv`, leaves out accidents without coordinates or with unknown built-up area or light, builds the design matrix (reference categories: pre Covid-19, cyclists, inside built-up area, daylight) and fits the model.
 2. **Standard errors:** cluster-robust by municipality (not by accident as first proposed: municipality clusters also cover the double rows and the resemblance of accidents in one municipality).
 3. **Results** in `results/`: `logit_severity_model.csv` (coefficients and odds ratios), `logit_severity_fit.csv`, `logit_hotspot_adjusted.csv` (hotspot effect in percentage points), `logit_severity_descriptives.csv`, `logit_selection.csv`.
-4. **Shown in:** block 4b of view 4 of the Streamlit app (forest plot, table, the percentage-point effect, the selection and the plain shares) and the same block in section 3 of the HTML page; the report (section 5b) and the technical underpinnings (section 4b) explain the calculation. The block does not follow the group and cell-size filters: it is one model. A term that is not significant at 5% (p of 0.05 or more) is drawn as a hollow gray dot (#210).
+4. **Shown in:** block 4b of view 4 of the Streamlit app (forest plot, table, the percentage-point effect, the selection and the plain shares) and the same block in section 3 of the HTML page; the report (section 5b) and the technical underpinnings (section 4b) explain the calculation. The block does not follow the group filter (it is one model for the four groups) but it does follow the hotspots filter: script 05 fits the model once with the top 20 and once with the top 40 as the definition of a hotspot (#213). A term that is not significant at 5% (p of 0.05 or more) is drawn as a hollow gray dot (#210).
 5. **Result:** the odds of a severe accident in a hotspot square are 0.59 times those elsewhere (95% interval 0.53 to 0.65) with the other variables held equal; 9.2% against 14.6% severe in percentage points. (Top 20 at first: 0.55; the hotspot lists were enlarged to 40 later, #211.)
 
 ## 5. What the first results showed, and what I did about it
@@ -130,9 +132,9 @@ Design: one sidebar with the choice of view and the filters of that view; the ma
 | View | Filters in the sidebar |
 |---|---|
 | 1 Burden and annual change (1a, 1b) (added, step 1 of the focused dashboard) | years, road-user groups, "also show Unknown and Other" |
-| 2 Hotspot heat map | group, cell size, measure, period |
-| 3 Compare the three periods | group, cell size, measure |
-| 4 How severe are the hotspots? | group, cell size |
+| 2 Hotspot heat map | group, hotspots (top 20 / top 40), measure, period |
+| 3 Compare the three periods | group, hotspots (top 20 / top 40), measure |
+| 4 How severe are the hotspots? | group, hotspots (top 20 / top 40; also steers the regression 4b) |
 | 5 Residents: rates per 100,000 | group, period, rank by |
 
 Every view has a table with a CSV download button, key findings (`findings.py`) and a "read with care" note. It reads the saved tables and needs no accident file.

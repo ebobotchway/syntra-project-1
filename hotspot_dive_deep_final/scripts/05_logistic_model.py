@@ -2,7 +2,7 @@
 Step 4b of the final analysis: a simple binary logistic regression for the severity of accidents with vulnerable road users.
 
   Dependent variable : severe = 1 when the accident class is 1, 2 or 3 (fatal + serious injury), 0 otherwise                       (#116)
-  Explanatory        : hotspot  (1 = the accident is in one of the 40 busiest 5 x 5 km squares of ITS OWN group and period)
+  Explanatory        : hotspot  (1 = the accident is in one of the 40 (or 20) busiest 5 x 5 km squares of ITS OWN group and period)
                        period   (pre 2017-2019 = reference, during 2020-2021, post 2022-2024)
                        group    (bicycle = reference, pedestrian, motorcycle, moped)
                        built-up area (inside = reference, outside)                                                                  extra variable 1
@@ -13,6 +13,7 @@ and only accidents where built-up area and light condition are known. Because on
 cluster-robust by municipality (581 clusters), the same choice as in the main project.
 
 Estimation: Newton-Raphson with step-halving (the same code as in logit_live.py of the main project), sandwich standard errors with the small-sample factor G/(G-1) * (N-1)/(N-k).
+The whole model is fitted twice, once with the top 40 and once with the top 20 as the definition of a hotspot (decision #213); every results file has a column top_n.
 Besides the odds ratios the script calculates the AVERAGE ADJUSTED PREDICTION of the hotspot effect: the severe share if every accident were in a hotspot against if none were, all other variables as observed.
 
 How to run (from the folder hotspot_dive_deep_final, with `conda activate syntra-ds`; the argument is the accident file of the main project):
@@ -36,6 +37,7 @@ PERIODS = {"Pre Covid-19 (2017-2019)": range(2017, 2020), "During Covid-19 (2020
 LIGHT = {"1": "Daylight", "2": "Dawn, dusk", "3": "Night", "4": "Night", "5": "Night"}  # the three kinds of night are one category; code 9 (unknown) is left out
 BUILT_UP = {"1": "Inside built-up area", "2": "Outside built-up area"}  # code 9 (unknown) is left out
 N_DRAWS, SEED = 1000, 2026
+TOP_NS = (40, 20)  # the hotspot definitions; the model is fitted for each
 
 
 # ---------------------------------------------------------------------------------------------------------- the estimator
@@ -99,8 +101,8 @@ df["cx"], df["cy"] = np.floor(df["x_coord"] / side).fillna(-1).astype(int), np.f
 
 top = pd.read_csv(RESULTS / "hotspots_top40.csv")
 top = top[top["size"] == SIZE]
-hot_cells = {(g, p): set(zip(t["cx"], t["cy"])) for (g, p), t in top.groupby(["group", "period"])}
-assert all(len(v) == 40 for v in hot_cells.values())
+hot_cells = {n: {(g, p): set(zip(t["cx"], t["cy"])) for (g, p), t in top[top["rank"] <= n].groupby(["group", "period"])} for n in TOP_NS}
+assert all(len(v) == n for n in TOP_NS for v in hot_cells[n].values())
 
 pieces, flow = [], []
 for group, codes in GROUPS.items():
@@ -110,7 +112,8 @@ for group, codes in GROUPS.items():
         n_all = len(sub)
         sub = sub[usable[sub.index]]
         n_located = len(sub)
-        sub["hotspot"] = [int((cx, cy) in hot_cells[(group, period)]) for cx, cy in zip(sub["cx"], sub["cy"])]
+        for n in TOP_NS:
+            sub[f"hotspot{n}"] = [int((cx, cy) in hot_cells[n][(group, period)]) for cx, cy in zip(sub["cx"], sub["cy"])]
         sub["group"], sub["period"] = group, period
         sub["built_up"], sub["light"] = sub["built_up_area_code"].map(BUILT_UP), sub["light_condition_code"].map(LIGHT)
         sub = sub.dropna(subset=["built_up", "light"])
@@ -121,70 +124,77 @@ flow = pd.DataFrame(flow)
 flow.to_csv(RESULTS / "logit_selection.csv", index=False)
 print(f"Rows in the model: {len(data):,} (from {flow['accidents'].sum():,} accident-group rows; {data['row'].nunique():,} different accidents), severe {data['severe'].mean() * 100:.2f}%")
 
-# ---------------------------------------------------------------------------------------------------------- the design matrix
-TERMS = [("Intercept", None, None)]
-columns = {"Intercept": np.ones(len(data))}
+# ---------------------------------------------------------------------------------------------------------- the model, for one definition of a hotspot
+def run(top_n):
+    data["hotspot"] = data[f"hotspot{top_n}"]
+    TERMS = [("Intercept", None, None)]
+    columns = {"Intercept": np.ones(len(data))}
 
 
-def add(name, label, mask, block):
-    columns[name] = mask.astype(float).to_numpy() if hasattr(mask, "astype") else mask
-    TERMS.append((name, label, block))
+    def add(name, label, mask, block):
+        columns[name] = mask.astype(float).to_numpy() if hasattr(mask, "astype") else mask
+        TERMS.append((name, label, block))
 
 
-add("hotspot", "In a hotspot square (top 40 of own group and period)", data["hotspot"] == 1, "Hotspot")
-for p in list(PERIODS)[1:]:
-    add(f"period={p}", f"{p} (against Pre Covid-19)", data["period"] == p, "Period")
-for g in list(GROUPS)[1:]:
-    add(f"group={g}", f"{g} (against Bicycle)", data["group"] == g, "Group")
-add("built_up=outside", "Outside built-up area (against inside)", data["built_up"] == "Outside built-up area", "Built-up area")
-for light in ("Dawn, dusk", "Night"):
-    add(f"light={light}", f"{light} (against daylight)", data["light"] == light, "Light condition")
+    add("hotspot", f"In a hotspot square (top {top_n} of own group and period)", data["hotspot"] == 1, "Hotspot")
+    for p in list(PERIODS)[1:]:
+        add(f"period={p}", f"{p} (against Pre Covid-19)", data["period"] == p, "Period")
+    for g in list(GROUPS)[1:]:
+        add(f"group={g}", f"{g} (against Bicycle)", data["group"] == g, "Group")
+    add("built_up=outside", "Outside built-up area (against inside)", data["built_up"] == "Outside built-up area", "Built-up area")
+    for light in ("Dawn, dusk", "Night"):
+        add(f"light={light}", f"{light} (against daylight)", data["light"] == light, "Light condition")
 
-X = np.column_stack([columns[name] for name, _, _ in TERMS])
-y = data["severe"].to_numpy(float)
-clusters = pd.factorize(data["municipality_nis_code"])[0]
-beta, bread, p, ll = fit_logit(X, y)
-cov = cluster_robust_cov(X, y, p, bread, clusters)
-se = np.sqrt(np.diag(cov))
-z = beta / se
-low, high = beta - 1.96 * se, beta + 1.96 * se
-table = pd.DataFrame({"term": [t[0] for t in TERMS], "variable": [t[2] or "" for t in TERMS], "label": [t[1] or "Intercept (baseline log-odds)" for t in TERMS],
-                      "coefficient": beta, "std error": se, "odds ratio": np.exp(beta), "OR low": np.exp(low), "OR high": np.exp(high), "p value": 2 * norm.sf(np.abs(z))})
-table.loc[0, ["odds ratio", "OR low", "OR high"]] = np.nan  # the intercept has no odds ratio worth reading
-table.to_csv(RESULTS / "logit_severity_model.csv", index=False, float_format="%.5f")
+    X = np.column_stack([columns[name] for name, _, _ in TERMS])
+    y = data["severe"].to_numpy(float)
+    clusters = pd.factorize(data["municipality_nis_code"])[0]
+    beta, bread, p, ll = fit_logit(X, y)
+    cov = cluster_robust_cov(X, y, p, bread, clusters)
+    se = np.sqrt(np.diag(cov))
+    z = beta / se
+    low, high = beta - 1.96 * se, beta + 1.96 * se
+    table = pd.DataFrame({"term": [t[0] for t in TERMS], "variable": [t[2] or "" for t in TERMS], "label": [t[1] or "Intercept (baseline log-odds)" for t in TERMS],
+                          "coefficient": beta, "std error": se, "odds ratio": np.exp(beta), "OR low": np.exp(low), "OR high": np.exp(high), "p value": 2 * norm.sf(np.abs(z))})
+    table.loc[0, ["odds ratio", "OR low", "OR high"]] = np.nan  # the intercept has no odds ratio worth reading
 
-# ---------------------------------------------------------------------------------------------------------- fit measures and the hotspot effect as percentage points
-null_ll = len(y) * (y.mean() * math.log(y.mean()) + (1 - y.mean()) * math.log(1 - y.mean()))
-vif = []
-for j, (name, _, _) in enumerate(TERMS[1:], start=1):  # variance inflation factors: how much of a column the other columns explain
-    others = np.delete(X, j, axis=1)
-    coef = np.linalg.lstsq(others, X[:, j], rcond=None)[0]
-    resid = X[:, j] - others @ coef
-    vif.append(1 / (resid @ resid / np.sum((X[:, j] - X[:, j].mean()) ** 2)))
-rng = np.random.default_rng(SEED)
-draws = rng.multivariate_normal(beta, cov, size=N_DRAWS)
-j_hot = 1
-X1, X0 = X.copy(), X.copy()
-X1[:, j_hot], X0[:, j_hot] = 1, 0
-share1, share0 = expit(X1 @ draws.T).mean(axis=0) * 100, expit(X0 @ draws.T).mean(axis=0) * 100  # one average per simulated coefficient set
-point1, point0 = expit(X1 @ beta).mean() * 100, expit(X0 @ beta).mean() * 100
-diff = share1 - share0
-adjusted = pd.DataFrame([{"severe % if all in a hotspot": point1, "severe % if none in a hotspot": point0, "difference (percentage points)": point1 - point0,
-                          "difference low": np.percentile(diff, 2.5), "difference high": np.percentile(diff, 97.5)}])
-adjusted.to_csv(RESULTS / "logit_hotspot_adjusted.csv", index=False, float_format="%.3f")
-fit = pd.DataFrame([{"rows": len(y), "different accidents": data["row"].nunique(), "severe accidents": int(y.sum()), "severe %": y.mean() * 100, "clusters (municipalities)": int(clusters.max() + 1),
-                     "log-likelihood": ll, "McFadden R2": 1 - ll / null_ll, "AUC": auc(y, p), "AIC": -2 * ll + 2 * X.shape[1], "highest VIF": max(vif)}])
-fit.to_csv(RESULTS / "logit_severity_fit.csv", index=False, float_format="%.5f")
+    # ---------------------------------------------------------------------------------------------------------- fit measures and the hotspot effect as percentage points
+    null_ll = len(y) * (y.mean() * math.log(y.mean()) + (1 - y.mean()) * math.log(1 - y.mean()))
+    vif = []
+    for j, (name, _, _) in enumerate(TERMS[1:], start=1):  # variance inflation factors: how much of a column the other columns explain
+        others = np.delete(X, j, axis=1)
+        coef = np.linalg.lstsq(others, X[:, j], rcond=None)[0]
+        resid = X[:, j] - others @ coef
+        vif.append(1 / (resid @ resid / np.sum((X[:, j] - X[:, j].mean()) ** 2)))
+    rng = np.random.default_rng(SEED)
+    draws = rng.multivariate_normal(beta, cov, size=N_DRAWS)
+    j_hot = 1
+    X1, X0 = X.copy(), X.copy()
+    X1[:, j_hot], X0[:, j_hot] = 1, 0
+    share1, share0 = expit(X1 @ draws.T).mean(axis=0) * 100, expit(X0 @ draws.T).mean(axis=0) * 100  # one average per simulated coefficient set
+    point1, point0 = expit(X1 @ beta).mean() * 100, expit(X0 @ beta).mean() * 100
+    diff = share1 - share0
+    adjusted = pd.DataFrame([{"severe % if all in a hotspot": point1, "severe % if none in a hotspot": point0, "difference (percentage points)": point1 - point0,
+                              "difference low": np.percentile(diff, 2.5), "difference high": np.percentile(diff, 97.5)}])
+    fit = pd.DataFrame([{"rows": len(y), "different accidents": data["row"].nunique(), "severe accidents": int(y.sum()), "severe %": y.mean() * 100, "clusters (municipalities)": int(clusters.max() + 1),
+                         "log-likelihood": ll, "McFadden R2": 1 - ll / null_ll, "AUC": auc(y, p), "AIC": -2 * ll + 2 * X.shape[1], "highest VIF": max(vif)}])
 
-# plain descriptive shares behind the model: severe % per category of every variable
-desc = []
-for variable, col in (("Hotspot", "hotspot"), ("Period", "period"), ("Group", "group"), ("Built-up area", "built_up"), ("Light condition", "light")):
-    for value, part in data.groupby(col):
-        desc.append({"variable": variable, "category": ("Hotspot square" if value == 1 else "Not a hotspot square") if col == "hotspot" else value, "rows": len(part), "severe": int(part["severe"].sum()), "severe %": part["severe"].mean() * 100})
-pd.DataFrame(desc).to_csv(RESULTS / "logit_severity_descriptives.csv", index=False, float_format="%.3f")
+    # plain descriptive shares behind the model: severe % per category of every variable
+    desc = []
+    for variable, col in (("Hotspot", "hotspot"), ("Period", "period"), ("Group", "group"), ("Built-up area", "built_up"), ("Light condition", "light")):
+        for value, part in data.groupby(col):
+            desc.append({"variable": variable, "category": ("Hotspot square" if value == 1 else "Not a hotspot square") if col == "hotspot" else value, "rows": len(part), "severe": int(part["severe"].sum()), "severe %": part["severe"].mean() * 100})
+    return table, fit, adjusted, pd.DataFrame(desc)
 
-print("\nOdds ratios (95% CI, cluster-robust by municipality):")
-print(table[["label", "odds ratio", "OR low", "OR high", "p value"]].round(3).to_string(index=False))
-print("\nFit:", fit.round(4).to_dict("records")[0])
-print("Hotspot adjusted prediction:", adjusted.round(2).to_dict("records")[0])
+
+results = {n: run(n) for n in TOP_NS}
+for name, number, fmt in (("severity_model", 0, "%.5f"), ("severity_fit", 1, "%.5f"), ("hotspot_adjusted", 2, "%.3f"), ("severity_descriptives", 3, "%.3f")):
+    out = pd.concat([r[number].assign(top_n=n) for n, r in sorted(results.items())], ignore_index=True)  # top 20 first, then top 40
+    out.to_csv(RESULTS / f"logit_{name}.csv", index=False, float_format=fmt)
+
+
+for n, (table, fit, adjusted, _) in sorted(results.items()):
+    print(f"\n=== Hotspot = top {n} ===\nOdds ratios (95% CI, cluster-robust by municipality):")
+    print(table[["label", "odds ratio", "OR low", "OR high", "p value"]].round(3).to_string(index=False))
+    print("\nFit:", fit.round(4).to_dict("records")[0])
+    print("Hotspot adjusted prediction:", adjusted.round(2).to_dict("records")[0])
 print("\nSelection:\n" + flow.to_string(index=False))

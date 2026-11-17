@@ -25,7 +25,8 @@ import pandas as pd
 HERE = Path(__file__).resolve().parent.parent
 DATA, RESULTS = HERE / "data", HERE / "results"
 
-N_HOT = 40  # number of hotspot cells per group, period and cell size (20 at first, 40 since decision #211)
+N_HOT = 40  # number of hotspot cells per group, period and cell size that are listed (20 at first, 40 since decision #211)
+TOP_NS = (20, 40)  # the severity comparison is made for the top 20 and for the top 40 (decision #213: the app and the page have a filter for it)
 CELL_SIZES = {"5 km2 cells": 5 ** 0.5 * 1000, "5 x 5 km squares": 5000.0}  # side in metres: sqrt(5 km2) = 2,236.07 m and 5,000 m
 GROUPS = {"Pedestrian": ["08"], "Bicycle": ["03"], "Motorcycle": ["07"], "Moped": ["06"], "Vulnerable (any of the four)": ["08", "03", "07", "06"]}
 PERIODS = {"Pre Covid-19 (2017-2019)": range(2017, 2020), "During Covid-19 (2020-2021)": range(2020, 2022), "Post Covid-19 (2022-2024)": range(2022, 2025), "All years (2017-2024)": range(2017, 2025)}
@@ -90,11 +91,12 @@ for size_name, side in CELL_SIZES.items():
             top["share_of_located_pct"] = top["accidents"] / len(sub) * 100
             top = severity_columns(top)
             top_all.append(top)
-            # the severity of the 40 hotspots against all other cells
-            is_hot = cells.index < N_HOT
-            for label, part in (("40 hotspot cells", cells[is_hot]), ("all other cells", cells[~is_hot]), ("all cells", cells)):
-                summary_all.append({"size": size_name, "group": group, "period": period, "cells": label, "number of cells": len(part), "accidents": int(part["accidents"].sum()),
-                                    "severe": int(part["severe"].sum()), "fatal": int(part["fatal"].sum()), "serious": int(part["serious"].sum())})
+            # the severity of the top 20 and of the top 40 hotspots against all other cells
+            for n_top in TOP_NS:
+                is_hot = cells.index < n_top
+                for label, part in ((f"{n_top} hotspot cells", cells[is_hot]), ("all other cells", cells[~is_hot]), ("all cells", cells)):
+                    summary_all.append({"top_n": n_top, "size": size_name, "group": group, "period": period, "cells": label, "number of cells": len(part), "accidents": int(part["accidents"].sum()),
+                                        "severe": int(part["severe"].sum()), "fatal": int(part["fatal"].sum()), "serious": int(part["serious"].sum())})
         print(f"  {group}: done")
 
 cells_table = pd.concat(cells_all, ignore_index=True)
@@ -147,7 +149,7 @@ for size_name in CELL_SIZES:
         t = top_table[(top_table["size"] == size_name) & (top_table["group"] == v) & (top_table["period"] == period)].head(3)
         print(f"  {period}: " + "; ".join(f"{r.municipality} {r.accidents:,} ({r.per_year:.0f} a year)" for r in t.itertuples()))
 print("\nSeverity, hotspot cells against other cells (severe %):")
-piv = summary[summary["group"] == v].pivot_table(index=["size", "period"], columns="cells", values="severe %")
+piv = summary[(summary["group"] == v) & (summary["top_n"] == N_HOT)].pivot_table(index=["size", "period"], columns="cells", values="severe %")
 print(piv.round(1).to_string())
 print("\nMunicipalities with 100+ accidents (rate shown):")
 print(municipalities.groupby(["group", "period"])["rate reliable"].sum().unstack().to_string())

@@ -35,8 +35,8 @@ def top():
 
 
 @st.cache_data
-def summary():
-    return charts.load_summary()
+def summary(top_n):
+    return charts.load_summary(top_n)
 
 
 @st.cache_data
@@ -52,6 +52,12 @@ def municipalities():
 @st.cache_data
 def outlines():
     return charts.load_outlines()
+
+
+def top_filter():
+    """The hotspot filter in the sidebar: the 20 or the 40 busiest cells (decision #213)."""
+    return st.sidebar.radio("Hotspots", charts.TOP_NS, index=charts.TOP_NS.index(charts.TOP_DEFAULT), format_func=lambda n: f"Top {n}", key="top_n",
+                            help="A hotspot is one of the 20 or 40 cells with the most accidents of a group in a period.")
 
 
 def findings(lines, note=fx.FIXED_NOTE):
@@ -124,32 +130,32 @@ if view == VIEWS[0]:
 
 # ================================================================ 2 hotspot heat map
 elif view == VIEWS[1]:
-    size = st.sidebar.radio("Cell size", list(charts.CELL_SIZES), key="size", help="5 km2 cells have a side of 2.24 km; the squares are 5 km x 5 km (25 km2).")
+    size, top_n = charts.SIZE, top_filter()
     measure_label = st.sidebar.radio("Measure", list(MEASURES), key="measure", help="Severe share: only cells with 30 or more accidents are coloured.")
     period = st.sidebar.radio("Period", charts.PERIODS, key="period")
     measure = MEASURES[measure_label]
     st.header("2  Hotspot heat map")
     cov = coverage()
     cov = cov[(cov["group"] == group) & (cov["period"] == period)].iloc[0]
-    st.caption(f"{measure_label} per {size[:-1] if size.endswith('s') else size}, {words}, {period}. {int(cov['with coordinates']):,} of {int(cov['accidents']):,} accidents involving {words} have usable coordinates "
-               f"({100 - cov['left out %']:.1f}%); the others are not on the map. The squares mark the 40 busiest cells (hover for rank, municipality and severity); colour = in how many of the three periods the same cell is among the 40 busiest: red = all 3, orange = 2, black = 1, gray = none of the three (only possible in the all-years view).")
-    plot(charts.fig_heatmap(cells(), top(), outlines(), size, measure, group, period))
+    st.caption(f"{measure_label} per 5 x 5 km square, {words}, {period}. {int(cov['with coordinates']):,} of {int(cov['accidents']):,} accidents involving {words} have usable coordinates "
+               f"({100 - cov['left out %']:.1f}%); the others are not on the map. The squares mark the {top_n} busiest squares (hover for rank, municipality and severity); colour = in how many of the three periods the same square is among the {top_n} busiest: red = all 3, orange = 2, black = 1, gray = none of the three (only possible in the all-years view).")
+    plot(charts.fig_heatmap(cells(), top(), outlines(), size, measure, group, period, top_n))
     t = top()
-    t = t[(t["size"] == size) & (t["group"] == group) & (t["period"] == period)]
-    with st.expander("The 40 busiest cells, with their severity", expanded=True):
+    t = t[(t["size"] == size) & (t["group"] == group) & (t["period"] == period) & (t["rank"] <= top_n)]
+    with st.expander(f"The {top_n} busiest squares, with their severity", expanded=True):
         show_table(t[["rank", "municipality", "accidents", "per_year", "severe", "severe %", "severe low", "severe high", "fatal", "fatal %", "serious", "serious %", "share_of_located_pct", "centre_x_m", "centre_y_m"]],
-                   f"hotspots_{group}_{size}_{period}".replace(" ", "_"))
-    findings(fx.HEATMAPS)
+                   f"hotspots_top{top_n}_{group}_{period}".replace(" ", "_"))
+    findings(fx.heatmaps(top(), top_n), fx.TOP_NOTE)
     st.caption(fx.CARE)
 
 # ================================================================ 3 compare the three periods
 elif view == VIEWS[2]:
-    size = st.sidebar.radio("Cell size", list(charts.CELL_SIZES), key="size")
+    size, top_n = charts.SIZE, top_filter()
     measure_label = st.sidebar.radio("Measure", list(MEASURES), key="measure")
     measure = MEASURES[measure_label]
     st.header("3  Compare the three periods")
-    st.caption(f"{measure_label}, {words}. The three maps use the same grid and the same colour scale. The squares mark the 40 busiest cells of each period, in the same colour when the same cell is in the top 40 of all 3 periods (red), of 2 periods (orange) or of 1 period (black).")
-    plot(charts.fig_heatmap_periods(cells(), top(), outlines(), size, measure, group))
+    st.caption(f"{measure_label}, {words}. The three maps use the same grid and the same colour scale. The squares mark the {top_n} busiest squares of each period, in the same colour when the same square is in the top {top_n} of all 3 periods (red), of 2 periods (orange) or of 1 period (black).")
+    plot(charts.fig_heatmap_periods(cells(), top(), outlines(), size, measure, group, top_n))
     c = cells()
     c = c[(c["size"] == size) & (c["group"] == group) & c["period"].isin(charts.THREE)]
     cov = coverage()
@@ -158,29 +164,29 @@ elif view == VIEWS[2]:
                           "located accidents per year": [c[c["period"] == p]["accidents"].sum() / charts.YEARS_IN[p] for p in charts.THREE],
                           "accidents without coordinates %": [cov.loc[p, "left out %"] for p in charts.THREE],
                           "cells with 30+ accidents": [int((c[c["period"] == p]["accidents"] >= 30).sum()) for p in charts.THREE]})
-    show_table(table, f"periods_{group}_{size}".replace(" ", "_"), decimals=1)
+    show_table(table, f"periods_{group}".replace(" ", "_"), decimals=1)
     st.caption("Many more accidents lack coordinates before Covid-19 than after it, so counts per year in the first two maps are understated compared with the third. The severe-share view and the resident rates (view 5) do not have this problem to the same degree.")
-    findings(fx.HEATMAPS)
+    findings(fx.heatmaps(top(), top_n), fx.TOP_NOTE)
 
 # ================================================================ 4 severity of the hotspots
 elif view == VIEWS[3]:
-    size = st.sidebar.radio("Cell size", list(charts.CELL_SIZES), key="size")
+    size, top_n = charts.SIZE, top_filter()
     st.header("4  How severe are the hotspots?")
-    st.caption(f"Share of the accidents involving {words} that are severe (fatal + serious injury), fatal, or serious, in the 40 hotspot cells against all other cells. Dot = share, line = 95% Wilson interval.")
-    plot(charts.fig_hotspot_severity(summary(), size, group))
-    s = summary()
+    st.caption(f"Share of the accidents involving {words} that are severe (fatal + serious injury), fatal, or serious, in the {top_n} hotspot squares against all other squares. Dot = share, line = 95% Wilson interval.")
+    plot(charts.fig_hotspot_severity(summary(top_n), size, group, top_n))
+    s = summary(top_n)
     s = s[(s["size"] == size) & (s["group"] == group)]
     with st.expander("Table", expanded=True):
-        show_table(s[["period", "cells", "number of cells", "accidents", "severe", "severe %", "severe low", "severe high", "fatal", "fatal %", "serious", "serious %"]], f"hotspot_severity_{group}_{size}".replace(" ", "_"))
-    findings(fx.SEVERITY)
+        show_table(s[["period", "cells", "number of cells", "accidents", "severe", "severe %", "severe low", "severe high", "fatal", "fatal %", "serious", "serious %"]], f"hotspot_severity_top{top_n}_{group}".replace(" ", "_"))
+    findings(fx.severity(summary(top_n), top_n), fx.TOP_NOTE)
     st.caption("Read with care: severity is the class of the whole accident, not the harm to one road user. Hotspot cells are cities with lower speeds and more stop-and-go traffic, but speed is not in the data: an association, not a cause.")
 
     # ---- 4b logistic regression (script 05): always the 5 x 5 km squares, all four groups in one model
     st.divider()
     st.subheader("4b  Logistic regression: what goes with a severe accident?")
-    lg = charts.load_logit()
+    lg = charts.load_logit(top_n)
     fit, adj, sel = lg["severity_fit"].iloc[0], lg["hotspot_adjusted"].iloc[0], lg["selection"]
-    st.caption(f"One model for the four groups together (it does not follow the group or cell-size filters). Dependent variable: severe (fatal + serious injury) = 1, otherwise 0. Explanatory variables: hotspot (accident in one of the 40 busiest 5 x 5 km squares of its own group and period), period, group, built-up area and light condition. "
+    st.caption(f"One model for the four groups together (it does not follow the group filter; it does follow the hotspot filter). Dependent variable: severe (fatal + serious injury) = 1, otherwise 0. Explanatory variables: hotspot (accident in one of the {top_n} busiest 5 x 5 km squares of its own group and period), period, group, built-up area and light condition. "
                f"{int(fit['rows']):,} rows ({int(fit['different accidents']):,} accidents; an accident with two groups is a row in both), {int(fit['severe accidents']):,} severe ({fit['severe %']:.1f}%). Standard errors are cluster-robust by municipality ({int(fit['clusters (municipalities)'])} clusters)." + " Filled dots are significant at the 5% level (p below 0.05); a hollow gray dot is not significant (its interval includes 1).")
     plot(charts.fig_logit_forest(lg["severity_model"]))
     show_table(charts.odds_ratio_table(lg["severity_model"]), "logit_severity_odds_ratios", decimals=3)
@@ -194,8 +200,8 @@ elif view == VIEWS[3]:
         st.caption("Accidents without usable coordinates (the square is unknown) and accidents with unknown built-up area or light condition are left out.")
     with st.expander("Plain severe share per category (no model)", expanded=False):
         show_table(lg["severity_descriptives"], "logit_severity_descriptives")
-    findings(fx.LOGIT)
-    st.caption(fx.LOGIT_CARE)
+    findings(fx.logit(lg), fx.TOP_NOTE)
+    st.caption(fx.logit_care(top_n))
 
 # ================================================================ 5 residents: rates per 100,000
 else:

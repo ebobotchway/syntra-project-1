@@ -21,6 +21,8 @@ BLUE, ORANGE, GRAY = "#2a78d6", "#eb6834", "#898781"
 RAMP = ["#86b6ef", "#5598e7", "#2a78d6", "#1c5cab", "#104281"]                         # blue: counts and rates (low to high)
 WARM = [[0, "#fdeadf"], [0.25, "#f8c3a2"], [0.5, "#eb6834"], [0.75, "#b8431a"], [1, "#6e260c"]]  # warm: severity
 CELL_SIZES = {"5 km2 cells": 5 ** 0.5 * 1000, "5 x 5 km squares": 5000.0}
+SIZE = "5 x 5 km squares"  # the app and the page show only the squares (decision #213); the scripts still calculate both sizes
+TOP_NS, TOP_DEFAULT = (20, 40), 40  # the hotspot filter: the 20 or the 40 busiest cells
 GROUPS = ["Vulnerable (any of the four)", "Pedestrian", "Bicycle", "Motorcycle", "Moped"]
 GROUP_LABELS = {"Vulnerable (any of the four)": "All four vulnerable groups", "Pedestrian": "Pedestrians", "Bicycle": "Cyclists", "Motorcycle": "Motorcycles", "Moped": "Mopeds"}
 GROUP_WORDS = {"Vulnerable (any of the four)": "vulnerable road users", "Pedestrian": "pedestrians", "Bicycle": "cyclists", "Motorcycle": "motorcycles", "Moped": "mopeds"}
@@ -41,8 +43,10 @@ def load_top():
     return pd.read_csv(RESULTS / "hotspots_top40.csv")
 
 
-def load_summary():
-    return pd.read_csv(RESULTS / "hotspot_severity_summary.csv")
+def load_summary(top_n=TOP_DEFAULT):
+    """The severity of the hotspots against the other cells, for the top 20 or the top 40."""
+    s = pd.read_csv(RESULTS / "hotspot_severity_summary.csv")
+    return s[s["top_n"] == top_n].drop(columns="top_n")
 
 
 def load_coverage():
@@ -53,9 +57,13 @@ def load_municipalities():
     return pd.read_csv(RESULTS / "municipality_rates.csv", dtype={"municipality_nis_code": str})
 
 
-def load_logit():
-    """The saved results of script 05: odds ratios, fit measures, the adjusted hotspot effect, the plain shares and the row selection."""
-    return {name: pd.read_csv(RESULTS / f"logit_{name}.csv") for name in ("severity_model", "severity_fit", "hotspot_adjusted", "severity_descriptives", "selection")}
+def load_logit(top_n=TOP_DEFAULT):
+    """The saved results of script 05 for the top 20 or the top 40: odds ratios, fit measures, the adjusted hotspot effect, the plain shares and the row selection."""
+    out = {name: pd.read_csv(RESULTS / f"logit_{name}.csv") for name in ("severity_model", "severity_fit", "hotspot_adjusted", "severity_descriptives", "selection")}
+    for name in out:
+        if "top_n" in out[name]:
+            out[name] = out[name][out[name]["top_n"] == top_n].drop(columns="top_n").reset_index(drop=True)
+    return out
 
 
 def load_outlines():
@@ -163,36 +171,40 @@ def heat_trace(c, side, extent, measure, zmax_count=None, showscale=True, xaxis=
 
 # Colours of the 40 marked cells: how many of the three periods (pre, during, post) the cell is among the 40 busiest (#203)
 PERSIST_COLOURS = {3: "#d62728", 2: "#ff9f1c", 1: "#0b0b0b", 0: "#898781"}
-PERSIST_LABELS = {3: "in the top 40 of all 3 periods", 2: "in the top 40 of 2 periods", 1: "in the top 40 of 1 period", 0: "in no period's top 40 (all-years view only)"}
+def persist_labels(top_n=TOP_DEFAULT):
+    return {3: f"in the top {top_n} of all 3 periods", 2: f"in the top {top_n} of 2 periods", 1: f"in the top {top_n} of 1 period", 0: f"in no period's top {top_n} (all-years view only)"}
 
 
-def persistence(top, size, group):
-    """For every cell that is in the top 40 of at least one of the three periods: in how many of the three periods it is. Returns {(cx, cy): 1, 2 or 3}."""
+def persistence(top, size, group, top_n=TOP_DEFAULT):
+    """For every cell that is in the top 40 (or top 20) of at least one of the three periods: in how many of the three periods it is. Returns {(cx, cy): 1, 2 or 3}."""
+    top = top[top["rank"] <= top_n]
     t = top[(top["size"] == size) & (top["group"] == group) & top["period"].isin(THREE)]
     return t.groupby(["cx", "cy"]).size().to_dict()
 
 
-def hotspot_markers(top, persist, xaxis=None, yaxis=None, seen=None):
+def hotspot_markers(top, persist, xaxis=None, yaxis=None, seen=None, top_n=TOP_DEFAULT):
     """The marked cells as hollow squares, one trace per persistence class (so each colour has its own legend entry); `seen` collects the classes already in the legend."""
     kw = dict(xaxis=xaxis, yaxis=yaxis) if xaxis else {}
     seen = seen if seen is not None else set()
+    labels = persist_labels(top_n)
     top = top.assign(_n=[persist.get((r.cx, r.cy), 0) for r in top.itertuples()])
     traces = []
     for n in (3, 2, 1, 0):
         d = top[top["_n"] == n]
         if d.empty:
             continue
-        traces.append(go.Scatter(x=d["centre_x_m"], y=d["centre_y_m"], mode="markers", name=PERSIST_LABELS[n], legendgroup=f"persist{n}", showlegend=n not in seen,
+        traces.append(go.Scatter(x=d["centre_x_m"], y=d["centre_y_m"], mode="markers", name=labels[n], legendgroup=f"persist{n}", showlegend=n not in seen,
                                  marker=dict(symbol="square-open", size=10, color=PERSIST_COLOURS[n], line=dict(width=2)),
-                                 hovertext=[f"<b>Rank {r['rank']}: {r['municipality']}</b><br>{r['accidents']:,} accidents ({r['per_year']:.1f} a year)<br>{PERSIST_LABELS[n]}"
+                                 hovertext=[f"<b>Rank {r['rank']}: {r['municipality']}</b><br>{r['accidents']:,} accidents ({r['per_year']:.1f} a year)<br>{labels[n]}"
                                             + (f"<br>{r['severe %']:.1f}% severe, {r['fatal %']:.1f}% fatal" if not pd.isna(r["severe %"]) else "") for _, r in d.iterrows()],
                                  hovertemplate="%{hovertext}<extra></extra>", **kw))
         seen.add(n)
     return traces
 
 
-def fig_heatmap(cells, top, outlines, size, measure, group, period):
-    """One heat map: accidents per year (or severe share) per grid cell for one group and period, with the 40 busiest cells marked."""
+def fig_heatmap(cells, top, outlines, size, measure, group, period, top_n=TOP_DEFAULT):
+    """One heat map: accidents per year (or severe share) per grid cell for one group and period, with the 40 (or 20) busiest cells marked."""
+    top = top[top["rank"] <= top_n]
     side = CELL_SIZES[size]
     c = cells[(cells["size"] == size) & (cells["group"] == group) & (cells["period"] == period)]
     if c.empty:
@@ -201,14 +213,15 @@ def fig_heatmap(cells, top, outlines, size, measure, group, period):
     if cv.empty:
         return empty_figure("No cell has 30 or more accidents in this selection, so no severe share can be shown.")
     t = top[(top["size"] == size) & (top["group"] == group) & (top["period"] == period)]
-    fig = go.Figure([outline_trace(outlines), heat_trace(cv, side, extent_of(c), measure), *hotspot_markers(t, persistence(top, size, group))])
+    fig = go.Figure([outline_trace(outlines), heat_trace(cv, side, extent_of(c), measure), *hotspot_markers(t, persistence(top, size, group, top_n), top_n=top_n)])
     fig.update_layout(legend=dict(orientation="h", y=-0.02))
     equal_axes(fig, 1, 1)
     return layout(fig, 640, margin=dict(l=0, r=0, t=10, b=0))
 
 
-def fig_heatmap_periods(cells, top, outlines, size, measure, group):
+def fig_heatmap_periods(cells, top, outlines, size, measure, group, top_n=TOP_DEFAULT):
     """The three periods side by side on the same grid and the same colour scale."""
+    top = top[top["rank"] <= top_n]
     side = CELL_SIZES[size]
     c_all = cells[(cells["size"] == size) & (cells["group"] == group)]
     if c_all.empty:
@@ -216,7 +229,7 @@ def fig_heatmap_periods(cells, top, outlines, size, measure, group):
     extent = extent_of(c_all)
     zmax = float(c_all[c_all["period"].isin(THREE)]["per_year"].max())
     fig = make_subplots(rows=1, cols=3, subplot_titles=[f"<b>{p}</b>" for p in THREE], horizontal_spacing=0.01)
-    persist, seen = persistence(top, size, group), set()
+    persist, seen = persistence(top, size, group, top_n), set()
     for col, period in enumerate(THREE, start=1):
         c = c_all[c_all["period"] == period]
         cv = heat_values(c, measure)
@@ -225,7 +238,7 @@ def fig_heatmap_periods(cells, top, outlines, size, measure, group):
         if not cv.empty:
             fig.add_trace(heat_trace(cv, side, extent, measure, zmax_count=zmax, showscale=(col == 3)), row=1, col=col)
         t = top[(top["size"] == size) & (top["group"] == group) & (top["period"] == period)]
-        for trace in hotspot_markers(t, persist, seen=seen):
+        for trace in hotspot_markers(t, persist, seen=seen, top_n=top_n):
             fig.add_trace(trace, row=1, col=col)
     equal_axes(fig, 1, 3)
     fig.update_layout(legend=dict(orientation="h", y=-0.02))
@@ -233,13 +246,13 @@ def fig_heatmap_periods(cells, top, outlines, size, measure, group):
 
 
 # ---------------------------------------------------------------- severity of the hotspots
-def fig_hotspot_severity(summary, size, group):
-    """Severe, fatal and serious share in the 40 hotspot cells against all other cells, per period (dots with 95% intervals)."""
+def fig_hotspot_severity(summary, size, group, top_n=TOP_DEFAULT):
+    """Severe, fatal and serious share in the 40 (or 20) hotspot cells against all other cells, per period (dots with 95% intervals); `summary` comes from load_summary(top_n)."""
     s = summary[(summary["size"] == size) & (summary["group"] == group) & (summary["period"].isin(THREE))]
     measures = [("severe", "Severe (fatal + serious)"), ("fatal", "Fatal (class 1 + 2)"), ("serious", "Seriously injured (class 3)")]
     fig = make_subplots(rows=1, cols=3, subplot_titles=[f"<b>{m[1]}</b>" for m in measures], horizontal_spacing=0.08)
     for i, (key, _) in enumerate(measures, start=1):
-        for label, colour, offset in (("40 hotspot cells", ORANGE, -0.1), ("all other cells", BLUE, 0.1)):
+        for label, colour, offset in ((f"{top_n} hotspot cells", ORANGE, -0.1), ("all other cells", BLUE, 0.1)):
             d = s[s["cells"] == label].set_index("period").reindex(THREE)
             x = [k + offset for k in range(3)]
             value = d[f"{key} %"].to_numpy(float)

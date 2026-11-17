@@ -18,7 +18,8 @@ import charts
 import findings as fx
 
 HERE = Path(__file__).parent
-cells, top, summary, coverage, mun, outlines = charts.load_cells(), charts.load_top(), charts.load_summary(), charts.load_coverage(), charts.load_municipalities(), charts.load_outlines()
+cells, top, coverage, mun, outlines = charts.load_cells(), charts.load_top(), charts.load_coverage(), charts.load_municipalities(), charts.load_outlines()
+SIZES = [charts.SIZE]  # the page shows only the 5 x 5 km squares (decision #213); the top 20 / top 40 filter is done in the page and in the files per top_n
 population_check = pd.read_csv(charts.DATA / "population_by_municipality.csv", dtype={"municipality_nis_code": str})
 
 
@@ -48,7 +49,7 @@ assert len(step1["rows"]) == 11 * 8 * 12, "unexpected number of rows in the step
 
 # 1. Grid cells, compact: per size, group and period the lists of cell columns, rows, accidents, severe and fatal accidents
 cell_data, top_data, extent = {}, {}, {}
-for size in charts.CELL_SIZES:
+for size in SIZES:
     for group in charts.GROUPS:
         c_all = cells[(cells["size"] == size) & (cells["group"] == group)]
         extent[f"{size}|{group}"] = [int(c_all["cx"].min()), int(c_all["cx"].max()), int(c_all["cy"].min()), int(c_all["cy"].max())]
@@ -64,23 +65,28 @@ zmax_periods = {k: float(cells[(cells["size"] == k.split("|")[0]) & (cells["grou
 
 # 2. The severity charts and tables
 figs, sev_tables = {}, {}
-for size in charts.CELL_SIZES:
-    for group in charts.GROUPS:
-        figs[f"{size}|{group}"] = plain(charts.fig_hotspot_severity(summary, size, group))
-        s = summary[(summary["size"] == size) & (summary["group"] == group)]
-        sev_tables[f"{size}|{group}"] = spec(s[["period", "cells", "number of cells", "accidents", "severe", "severe %", "severe low", "severe high", "fatal", "fatal %", "serious", "serious %"]])
+for n in charts.TOP_NS:
+    summary = charts.load_summary(n)
+    for size in SIZES:
+        for group in charts.GROUPS:
+            figs[f"{size}|{group}|{n}"] = plain(charts.fig_hotspot_severity(summary, size, group, n))
+            s = summary[(summary["size"] == size) & (summary["group"] == group)]
+            sev_tables[f"{size}|{group}|{n}"] = spec(s[["period", "cells", "number of cells", "accidents", "severe", "severe %", "severe low", "severe high", "fatal", "fatal %", "serious", "serious %"]])
 
-# 2b. The logistic regression (script 05): the odds-ratio chart, the tables and the numbers behind the text
-lg = charts.load_logit()
-fit, adj = lg["severity_fit"].iloc[0], lg["hotspot_adjusted"].iloc[0]
-logit = {"fig": plain(charts.fig_logit_forest(lg["severity_model"])),
-         "table": spec(charts.odds_ratio_table(lg["severity_model"]), 3),
-         "selection": spec(lg["selection"]), "desc": spec(lg["severity_descriptives"], 3),
-         "sub": f"One model for the four groups together (it does not follow the group or cell-size filters). Dependent variable: severe (fatal + serious injury) = 1, otherwise 0. Explanatory variables: hotspot (accident in one of the 40 busiest 5 x 5 km squares of its own group and period), period, group, built-up area and light condition. "
-                f"{int(fit['rows']):,} rows ({int(fit['different accidents']):,} accidents; an accident with two groups is a row in both), {int(fit['severe accidents']):,} severe ({fit['severe %']:.1f}%). Standard errors are cluster-robust by municipality ({int(fit['clusters (municipalities)'])} clusters). Filled dots are significant at the 5% level (p below 0.05); a hollow gray dot is not significant (its interval includes 1).",
-         "none": f"{adj['severe % if none in a hotspot']:.1f}%", "all": f"{adj['severe % if all in a hotspot']:.1f}%",
-         "diff": f"{adj['difference (percentage points)']:.1f} points ({adj['difference low']:.1f} to {adj['difference high']:.1f})",
-         "fit": f"Fit: AUC {fit['AUC']:.2f}, McFadden R2 {fit['McFadden R2']:.3f}, highest VIF {fit['highest VIF']:.2f}. The average adjusted prediction sets the hotspot term to 1 and to 0 for every row (other variables as observed) and averages the predicted probabilities; the interval uses 1,000 simulated coefficient sets."}
+# 2b. The logistic regression (script 05), for the top 20 and the top 40: the odds-ratio chart, the tables and the numbers behind the text
+logit, find_heat, find_sev, find_logit, find_care = {}, {}, {}, {}, {}
+for n in charts.TOP_NS:
+    lg = charts.load_logit(n)
+    fit, adj = lg["severity_fit"].iloc[0], lg["hotspot_adjusted"].iloc[0]
+    logit[n] = {"fig": plain(charts.fig_logit_forest(lg["severity_model"])),
+                "table": spec(charts.odds_ratio_table(lg["severity_model"]), 3),
+                "selection": spec(lg["selection"]), "desc": spec(lg["severity_descriptives"], 3),
+                "sub": f"One model for the four groups together (it does not follow the group filter; it does follow the hotspot filter). Dependent variable: severe (fatal + serious injury) = 1, otherwise 0. Explanatory variables: hotspot (accident in one of the {n} busiest 5 x 5 km squares of its own group and period), period, group, built-up area and light condition. "
+                       f"{int(fit['rows']):,} rows ({int(fit['different accidents']):,} accidents; an accident with two groups is a row in both), {int(fit['severe accidents']):,} severe ({fit['severe %']:.1f}%). Standard errors are cluster-robust by municipality ({int(fit['clusters (municipalities)'])} clusters). Filled dots are significant at the 5% level (p below 0.05); a hollow gray dot is not significant (its interval includes 1).",
+                "none": f"{adj['severe % if none in a hotspot']:.1f}%", "all": f"{adj['severe % if all in a hotspot']:.1f}%",
+                "diff": f"{adj['difference (percentage points)']:.1f} points ({adj['difference low']:.1f} to {adj['difference high']:.1f})",
+                "fit": f"Fit: AUC {fit['AUC']:.2f}, McFadden R2 {fit['McFadden R2']:.3f}, highest VIF {fit['highest VIF']:.2f}. The average adjusted prediction sets the hotspot term to 1 and to 0 for every row (other variables as observed) and averages the predicted probabilities; the interval uses 1,000 simulated coefficient sets."}
+    find_heat[n], find_sev[n], find_logit[n], find_care[n] = fx.heatmaps(top, n), fx.severity(charts.load_summary(n), n), fx.logit(lg), fx.logit_care(n)
 
 # 3. Municipalities: accidents, severe, fatal and resident-years per group and period, in the order of the outline features
 feature_order = [f["nis"] for f in outlines["features"]]
@@ -97,11 +103,11 @@ muni = {"nis": feature_order, "name": [base.loc[n, "municipality"] for n in feat
 assert sum(muni["g"]["Vulnerable (any of the four)"]["All years (2017-2024)"]["a"]) == 136627
 assert sum(muni["g"]["Vulnerable (any of the four)"]["All years (2017-2024)"]["ry"]) == int(population_check["residents"].sum())
 
-data = {"groups": charts.GROUPS, "labels": charts.GROUP_LABELS, "words": charts.GROUP_WORDS, "sizes": list(charts.CELL_SIZES), "side": charts.CELL_SIZES, "periods": charts.PERIODS, "yearsIn": charts.YEARS_IN,
+data = {"groups": charts.GROUPS, "labels": charts.GROUP_LABELS, "words": charts.GROUP_WORDS, "sizes": SIZES, "topNs": list(charts.TOP_NS), "topDefault": charts.TOP_DEFAULT, "side": {charts.SIZE: charts.CELL_SIZES[charts.SIZE]}, "periods": charts.PERIODS, "yearsIn": charts.YEARS_IN,
         "cells": cell_data, "top": top_data, "extent": extent, "zmaxPeriods": zmax_periods,
         "cov": {f"{r['group']}|{r['period']}": [int(r["accidents"]), int(r["with coordinates"])] for _, r in coverage.iterrows()},
         "figs": figs, "sevTables": sev_tables, "muni": muni, "outline": {"x": xs, "y": ys},
-        "logit": logit, "findings": {"heat": fx.HEATMAPS, "sev": fx.SEVERITY, "logit": fx.LOGIT, "logitCare": fx.LOGIT_CARE, "rate": fx.RATES, "care": fx.CARE}}
+        "logit": logit, "findings": {"heat": find_heat, "sev": find_sev, "logit": find_logit, "logitCare": find_care, "rate": fx.RATES, "care": fx.CARE}}
 
 template = (HERE / "template.html").read_text(encoding="utf-8")
 assert template.count("/*__DATA__*/null") == 1, "the data placeholder was not found exactly once"
