@@ -300,22 +300,26 @@ def municipality_table(m, group, period):
     return t
 
 
-def fig_rate_map(t, outlines, group):
+def fig_rate_map(t, outlines, group, by="rate"):
     """Municipalities coloured by accidents per 100,000 residents per year (5 quantile classes of the municipalities with 100+ accidents).
-    Municipalities with 30-99 accidents get the same colours but faded (flagged: few accidents); fewer than 30 accidents stay gray."""
+    Municipalities with 30-99 accidents get the same colours but faded (flagged: few accidents); fewer than 30 accidents stay gray.
+    With by="count" the colour is the number of accidents per year instead (5 quantile classes of the municipalities with at least one accident, no fading: a count needs no minimum)."""
     feats = outlines["features"]
     t = t.set_index("municipality_nis_code")
+    col = RATE if by == "rate" else "accidents per year"
+    if by != "rate":
+        t = t.assign(reliable=t["accidents"] > 0, flagged=False)  # for counts every municipality with an accident is in full colour
     rel = t[t["reliable"]]
     if rel.empty:
-        return empty_figure("No municipality has 100 or more accidents of this group in this period.", 300)
-    edges, _ = quantile_classes(rel[RATE].to_numpy())
+        return empty_figure("No municipality has 100 or more accidents of this group in this period." if by == "rate" else "No accidents of this group in this period.", 300)
+    edges, _ = quantile_classes(rel[col].to_numpy())
     cls = lambda v: int(np.clip(np.digitize(v, edges[1:-1], right=True), 0, len(edges) - 2))
     fig = go.Figure([outline_trace(outlines)])
     layers = []
     for k in range(len(edges) - 1):
-        layers.append((RAMP[k], 1.0, f"{edges[k]:.0f}-{edges[k + 1]:.0f}" if edges[1] > 10 else f"{edges[k]:.1f}-{edges[k + 1]:.1f}", lambda r, k=k: r["reliable"] and cls(r[RATE]) == k))
+        layers.append((RAMP[k], 1.0, f"{edges[k]:.0f}-{edges[k + 1]:.0f}" if edges[1] > 10 else f"{edges[k]:.1f}-{edges[k + 1]:.1f}", lambda r, k=k: r["reliable"] and cls(r[col]) == k))
     for k in range(len(edges) - 1):
-        layers.append((RAMP[k], 0.4, "faded: 30-99 accidents (flagged)" if k == 0 else None, lambda r, k=k: r["flagged"] and cls(r[RATE]) == k))
+        layers.append((RAMP[k], 0.4, "faded: 30-99 accidents (flagged)" if k == 0 else None, lambda r, k=k: r["flagged"] and cls(r[col]) == k))
     for colour, alpha, label, test in layers:
         xs, ys = [], []
         for f in feats:
@@ -331,6 +335,7 @@ def fig_rate_map(t, outlines, group):
     for f in feats:
         r = t.loc[f["nis"]]
         rate = f"{r[RATE]:.1f} per 100,000 residents per year" if r["accidents"] >= MIN_SHARE else "too few accidents for a rate"
+        rate = rate if by == "rate" else f"{r[RATE]:.1f} per 100,000 residents per year" if r["accidents"] >= MIN_SHARE else "fewer than 30 accidents: no rate"
         hover.append(f"<b>{r['municipality']}</b> ({REGION_SHORT.get(r['region'], r['region'])})<br>{int(r['accidents']):,} accidents involve {GROUP_WORDS[group]} ({r['accidents per year']:.1f} a year)<br>"
                      f"{int(r['average residents']):,} residents on average<br>{rate}" + ("<br><i>flagged: fewer than 100 accidents</i>" if r["flagged"] else ""))
     fig.add_trace(go.Scatter(x=[f["x"] for f in feats], y=[f["y"] for f in feats], mode="markers", marker=dict(size=9, opacity=0), showlegend=False, hovertext=hover, hovertemplate="%{hovertext}<extra></extra>"))

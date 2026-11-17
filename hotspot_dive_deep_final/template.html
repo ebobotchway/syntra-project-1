@@ -673,13 +673,13 @@ const D = /*__DATA__*/null;
   }
   const classOf = (edges, x) => { let c = 0; for (let k = 1; k < edges.length - 1; k++) if (edges[k] < x) c++; return Math.min(c, edges.length - 2); };
   function rateMap() {
-    const rows = muniRows(), rel = rows.filter(r => r.reliable);
-    if (!rel.length) return emptyFigure("No municipality has 100 or more accidents of this group in this period.", 300);
-    const edges = quantEdges(rel.map(r => r.rate)), fmt = v => edges[1] > 10 ? v.toFixed(0) : v.toFixed(1);
+    const rows = muniRows(), byRate = state.rank === "rate", val = r => byRate ? r.rate : r.py, full = r => byRate ? r.reliable : r.a > 0, faded = r => byRate && r.flagged, rel = rows.filter(full);   // by count: every municipality with an accident is in full colour
+    if (!rel.length) return emptyFigure(byRate ? "No municipality has 100 or more accidents of this group in this period." : "No accidents of this group in this period.", 300);
+    const edges = quantEdges(rel.map(val)), fmt = v => edges[1] > 10 ? v.toFixed(0) : v.toFixed(1);
     const data = [{ type: "scatter", mode: "lines", fill: "toself", fillcolor: "rgba(137,135,129,0.10)", line: { color: "rgba(137,135,129,0.55)", width: 0.5 }, hoverinfo: "skip", showlegend: false, name: "municipality borders", x: [], y: [] }];
     const layers = [];
-    for (let k = 0; k < edges.length - 1; k++) layers.push([RAMP[k], 1, fmt(edges[k]) + "-" + fmt(edges[k + 1]), r => r.reliable && classOf(edges, r.rate) === k]);
-    for (let k = 0; k < edges.length - 1; k++) layers.push([RAMP[k], 0.4, k === 0 ? "faded: 30-99 accidents (flagged)" : null, r => r.flagged && classOf(edges, r.rate) === k]);
+    for (let k = 0; k < edges.length - 1; k++) layers.push([RAMP[k], 1, fmt(edges[k]) + "-" + fmt(edges[k + 1]), r => full(r) && classOf(edges, val(r)) === k]);
+    for (let k = 0; k < edges.length - 1; k++) layers.push([RAMP[k], 0.4, k === 0 && byRate ? "faded: 30-99 accidents (flagged)" : null, r => faded(r) && classOf(edges, val(r)) === k]);
     layers.forEach(([colour, alpha, label, test]) => {
       const xs = [], ys = [];
       rows.filter(test).forEach(r => { for (let j = M.start[r.i]; j < M.end[r.i]; j++) { xs.push(OUT.x[j]); ys.push(OUT.y[j]); } });
@@ -727,8 +727,9 @@ const D = /*__DATA__*/null;
   }
   function text4() {
     const rows = muniRows(), a = rows.reduce((p, r) => p + r.a, 0), ry = rows.reduce((p, r) => p + r.ry, 0);
-    $("s4-note").textContent = words().charAt(0).toUpperCase() + words().slice(1) + ", " + state.period4 + ". Belgium: " + (a / ry * 1e5).toFixed(1) + " per 100,000 residents per year. " + rows.filter(r => r.reliable).length + " of " + rows.length + " municipalities have 100 or more accidents of the group (full colour); "
-      + rows.filter(r => r.flagged).length + " have 30-99 (faded: flagged as unreliable); the rest stay gray.";
+    $("s4-note").textContent = words().charAt(0).toUpperCase() + words().slice(1) + ", " + state.period4 + ". Belgium: " + (a / ry * 1e5).toFixed(1) + " per 100,000 residents per year. " + (state.rank === "rate"
+      ? rows.filter(r => r.reliable).length + " of " + rows.length + " municipalities have 100 or more accidents of the group (full colour); " + rows.filter(r => r.flagged).length + " have 30-99 (faded: flagged as unreliable); the rest stay gray. The map is coloured by the rate."
+      : "The map is coloured by the number of accidents per year (5 classes with equal numbers of municipalities); " + rows.filter(r => r.a > 0).length + " of " + rows.length + " municipalities have at least one accident, the rest stay gray.");
     const d = rows.filter(r => r.a >= MIN_SHARE).sort((p, q) => q.rate - p.rate);
     table("table-rate", "dl-rate", "rates_" + state.group.split(" ")[0].toLowerCase() + "_" + state.period4.split(" ")[0].toLowerCase() + ".csv",
       { headers: ["municipality", "region", "accidents", "per year", "average residents", "per 100,000 residents per year", "100+ accidents", "severe %", "fatal %"],
@@ -748,7 +749,7 @@ const D = /*__DATA__*/null;
   choice("c-measure", "cmeasure", [["per_year", "Accidents per year"], ["severe", "Severe share"]], state.measure, v => { state.measure = v; textAll(); redraw(["chart-h1", "chart-h2"]); });
   choice("c-period", "cperiod", D.periods.map(p => [p, p]), state.period, v => { state.period = v; text1(); redraw(["chart-h1"]); });
   choice("c-period4", "cperiod4", D.periods.map(p => [p, p]), state.period4, v => { state.period4 = v; text4(); redraw(["chart-h4map", "chart-h4rank"]); });
-  choice("c-rank", "crank", [["rate", "Accidents per 100,000 residents"], ["count", "Number of accidents"]], state.rank, v => { state.rank = v; redraw(["chart-h4rank"]); });
+  choice("c-rank", "crank", [["rate", "Accidents per 100,000 residents"], ["count", "Number of accidents"]], state.rank, v => { state.rank = v; text4(); redraw(["chart-h4map", "chart-h4rank"]); });
   function showLogit() {                                         // the regression texts, tables and findings for the chosen top 20 or top 40
     const L = D.logit[state.top];
     $("lg-sub").textContent = L.sub; $("lg-none").textContent = L.none; $("lg-all").textContent = L.all; $("lg-diff").textContent = L.diff; $("lg-fit").textContent = L.fit;
