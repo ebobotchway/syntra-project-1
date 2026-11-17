@@ -1,5 +1,5 @@
 """
-Step 4 of the hotspot deep dive: builds the report "how the output was calculated" (REPORT_how_the_output_was_calculated.md).
+Step 4 of the analysis of accident hotspots for vulnerable road users: builds the report "how the output was calculated" (REPORT_how_the_output_was_calculated.md).
 
 The text is written here; every TABLE and every number in the running text is read from the saved result tables in results/ and data/, so nothing is typed by hand.
 
@@ -105,7 +105,7 @@ t_lg = md([[r["variable"], r["label"], f"{r['odds ratio']:.2f}", f"{r['OR low']:
 t_lg_sel = md([[r.group, r.period, f"{r.accidents:,}", f"{r._4:,}", f"{r._5:,}"] for r in ls.itertuples()], ["Group", "Period", "Accidents", "With coordinates", "Used (built-up area and light known)"])
 text = f"""# How the output was calculated: hotspots of accidents with vulnerable road users, before, during and after Covid-19
 
-Report for the hotspot deep dive with step 1 of the focused dashboard added (`hotspot_dive_deep_final/`). It explains, in the order of the calculation, where every number in the Streamlit app, the HTML page and the pictures comes from, so that each number can be reproduced and explained. Scripts: `scripts/01` to `scripts/05`. Decisions and their reasons: `beslissingslogboek.md`, entries #169-#178 and #205-#209 (the regression). All numbers in this report are read from the saved tables in `results/` and `data/` by `scripts/04_build_report.py`.
+Report for the analysis of accident hotspots for vulnerable road users with step 1 of the focused dashboard added (`hotspot_dive_deep_final/`). It explains, in the order of the calculation, where every number in the Streamlit app, the HTML page and the pictures comes from, so that each number can be reproduced and explained. Scripts: `scripts/01` to `scripts/05`. Decisions and their reasons: `beslissingslogboek.md`, entries #169-#178 and #205-#209 (the regression). All numbers in this report are read from the saved tables in `results/` and `data/` by `scripts/04_build_report.py`.
 
 ## 1. The question and what was decided
 

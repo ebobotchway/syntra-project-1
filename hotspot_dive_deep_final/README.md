@@ -1,6 +1,6 @@
-# Hotspot deep dive with step 1: accidents with vulnerable road users before, during and after Covid-19
+# Analysis of accident hotspots for vulnerable road users with step 1: accidents with vulnerable road users before, during and after Covid-19
 
-This is the hotspot deep dive (original version, both grids) with **step 1 of the focused dashboard added in front** (1a who is involved, 1b annual change). Nothing else was changed.
+This is the analysis of accident hotspots for vulnerable road users (original version, both grids) with **step 1 of the focused dashboard added in front** (1a who is involved, 1b annual change). Nothing else was changed.
 
 Where accidents with pedestrians, cyclists, motorcycles and mopeds concentrate (5 km2 cells and 5 x 5 km squares), how severe they are at the hotspots, and what the picture looks like per resident. Heat maps for the periods 2017-2019, 2020-2021 and 2022-2024.
 
@@ -8,7 +8,7 @@ Where accidents with pedestrians, cyclists, motorcycles and mopeds concentrate (
 - How every number was calculated: [REPORT_how_the_output_was_calculated.md](REPORT_how_the_output_was_calculated.md) (also as Word)
 - The technical underpinnings of the five steps, in plain language: [TECHNICAL_UNDERPINNINGS.md](TECHNICAL_UNDERPINNINGS.md) (also as Word, and as a private claude.ai doc: https://claude.ai/artifact/2x8sbvyQGKZiB4L6bzAFMG)
 - Pictures: `images/`; saved results: `results/`
-- This page is not published; the page published earlier (https://claude.ai/artifact/CDg8GqzbHpEPuQE7U2E9Jx) is the hotspot deep dive without step 1.
+- This page is not published; the page published earlier (https://claude.ai/artifact/CDg8GqzbHpEPuQE7U2E9Jx) is the analysis of accident hotspots for vulnerable road users without step 1.
 
 ## Run the Streamlit app
 

@@ -1,5 +1,5 @@
 """
-The Plotly charts of the hotspot deep dive. Every chart is built from the SAVED result tables in results/ and data/ (nothing is recalculated here).
+The Plotly charts of the analysis of accident hotspots for vulnerable road users. Every chart is built from the SAVED result tables in results/ and data/ (nothing is recalculated here).
 Used by app.py (Streamlit) and build_html.py (the HTML page). Coordinates are Belgian Lambert 1972 (EPSG:31370, metres).
 
 Heat maps:  accidents per year per grid cell (log colour scale, because a few city cells have hundreds a year and most have less than one),

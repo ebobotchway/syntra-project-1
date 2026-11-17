@@ -1,5 +1,5 @@
 """
-Hotspot deep dive (Streamlit): step 1 (who is involved, annual change; from the focused dashboard), then hotspots of accidents with vulnerable road users before, during and after Covid-19, their severity, and rates per resident.
+Analysis of accident hotspots for vulnerable road users (Streamlit): step 1 (who is involved, annual change; from the focused dashboard), then hotspots of accidents with vulnerable road users before, during and after Covid-19, their severity, and rates per resident.
 
 It shows SAVED results (results/ and data/), made by scripts 01 and 02, so it needs no accident file. One sidebar holds the choice of view and the filters of that view.
 

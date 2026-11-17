@@ -1,5 +1,5 @@
 """
-The fixed 'Key findings' texts of the hotspot deep dive. The numbers come from the saved results (scripts 01 and 02); the build script of the HTML page and app.py use these same texts.
+The fixed 'Key findings' texts of the analysis of accident hotspots for vulnerable road users. The numbers come from the saved results (scripts 01 and 02); the build script of the HTML page and app.py use these same texts.
 """
 FIXED_NOTE = "Fixed text for all vulnerable groups together, calculated once by the scripts; it does not change with the filters."
 TOP_NOTE = "Text for all vulnerable groups together; it follows the Hotspots filter (top 20 or top 40) but not the other filters."

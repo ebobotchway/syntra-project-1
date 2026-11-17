@@ -107,7 +107,7 @@ footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line);
 </style>
 <main class="wrap">
   <header>
-    <div class="eyebrow">Belgian road accidents 2017-2024 · hotspot deep dive</div>
+    <div class="eyebrow">Belgian road accidents 2017-2024 · analysis of accident hotspots for vulnerable road users</div>
     <h1>Spatial and temporal patterns of road traffic accidents involving vulnerable road users in Belgium: A comparative analysis of accident hotspots, severity and municipalities</h1>
     <p class="lede">Before (2017-2019), during (2020-2021) and after (2022-2024) Covid-19: where accidents with pedestrians, cyclists, motorcycles and mopeds concentrate in 5 x 5 km squares, how severe they are there, and how it looks per resident. An accident counts once for every group it involves. These are counts and rates, not causes.</p>
   </header>
@@ -511,7 +511,7 @@ document.querySelectorAll("#sec-a .download, #sec-b .download").forEach(b => b.a
 if (window.claude && window.claude.use) window.claude.use("downloads").then(d => { downloads = d; render(); }).catch(() => {});
 </script>
 <script>
-/* The hotspot deep dive. The numbers are saved results (scripts 01 and 02); this script draws the heat maps from them in the browser, so the buttons can be combined freely.
+/* The analysis of accident hotspots for vulnerable road users. The numbers are saved results (scripts 01 and 02); this script draws the heat maps from them in the browser, so the buttons can be combined freely.
    The severity charts were built in Python (charts.py) and are embedded as Plotly figures. */
 const D = /*__DATA__*/null;
 (function () {

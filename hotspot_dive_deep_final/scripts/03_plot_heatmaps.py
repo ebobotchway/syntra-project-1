@@ -1,5 +1,5 @@
 """
-Step 3 of the hotspot deep dive: the heat maps as pictures (PNG) for the report.
+Step 3 of the analysis of accident hotspots for vulnerable road users: the heat maps as pictures (PNG) for the report.
 
 For each group (5) it draws, from the saved results of script 02 (no recalculation):
   heat_<group>_<size>_accidents.png   accidents per year per grid cell, the three periods side by side (same grid, same colour scale, log scale), the 40 busiest cells ringed

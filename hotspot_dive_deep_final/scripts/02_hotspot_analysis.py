@@ -1,5 +1,5 @@
 """
-Step 2 of the hotspot deep dive: hotspots of accidents with vulnerable road users before, during and after Covid-19, their severity, and rates per resident.
+Step 2 of the analysis of accident hotspots for vulnerable road users: hotspots of accidents with vulnerable road users before, during and after Covid-19, their severity, and rates per resident.
 
 For the groups  pedestrians, cyclists, motorcycles, mopeds and "vulnerable (any of the four)"  and the periods  pre 2017-2019, during 2020-2021, post 2022-2024  (and all years), it calculates:
 

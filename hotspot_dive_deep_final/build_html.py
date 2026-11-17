@@ -1,5 +1,5 @@
 """
-Builds the hotspot deep dive as ONE self-contained HTML file (hotspot_deep_dive.html).
+Builds the analysis of accident hotspots for vulnerable road users as ONE self-contained HTML file (hotspot_deep_dive.html).
 
 It combines template.html (the page: design, step 1 (1a and 1b) from the focused dashboard, buttons and the scripts that draw the charts in the browser) with the SAVED results of scripts 01 and 02
 (results/*.csv, data/*), packed as compact lists. The severity charts are built here with charts.py and embedded as Plotly figures.

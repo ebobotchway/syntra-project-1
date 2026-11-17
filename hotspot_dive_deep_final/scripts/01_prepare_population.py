@@ -1,5 +1,5 @@
 """
-Step 1 of the hotspot deep dive: the number of residents per municipality and year (2017-2024), from Statbel open data.
+Step 1 of the analysis of accident hotspots for vulnerable road users: the number of residents per municipality and year (2017-2024), from Statbel open data.
 
 Source: Statbel, "Population by place of residence, nationality, marital status, age and sex" (one file per year, the population on 1 January),
 CC BY 4.0, https://statbel.fgov.be/en/open-data/population-place-residence-nationality-marital-status-age-and-sex-13
