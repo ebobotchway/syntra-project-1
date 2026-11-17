@@ -242,7 +242,7 @@ footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line);
 
   <section id="sec-4">
     <div class="sec-head"><span class="tag">5</span><h2>Residents: accidents per 100,000 residents per year</h2></div>
-    <p class="sub">Counts favour big places. This section divides the accidents of the chosen group in each municipality by its residents (Statbel, 1 January of each year), so a small place with many accidents per resident stands out. It uses all accidents of the municipality, with or without coordinates.</p>
+    <p class="sub">Counts favour big places. This section divides the accidents of the chosen group in each municipality by its residents (Statbel, 1 January of each year), so a small place with many accidents per resident stands out. It uses all accidents of the municipality, with or without coordinates. In the ranking by rate, the dark bar inside each bar is the number of <b>severe</b> accidents (fatal + serious injury) per 100,000 residents per year, so the chart shows both how many accidents and how many severe ones per resident.</p>
     <div class="row" style="gap:18px">
       <fieldset class="ctl inline-ctl"><legend>Period</legend><div class="row" id="c-period4"></div></fieldset>
       <fieldset class="ctl inline-ctl"><legend>Rank by</legend><div class="row" id="c-rank"></div></fieldset>
@@ -744,12 +744,15 @@ const D = /*__DATA__*/null;
     const rows = muniRows(), byRate = state.rank === "rate";
     const d = (byRate ? rows.filter(r => r.reliable) : rows.filter(r => r.a > 0)).sort((p, q) => byRate ? q.rate - p.rate : q.a - p.a).slice(0, 20).reverse();
     if (!d.length) return emptyFigure("No municipality has 100 or more accidents of this group in this period.", 300);
-    const x = d.map(r => byRate ? r.rate : r.py);
-    return { data: [{ type: "bar", orientation: "h", y: d.map(r => r.name), x, marker: { color: byRate ? BLUE : GRAY },
-      text: d.map(r => byRate ? r.rate.toFixed(0) + " per 100,000  (" + r.py.toFixed(0) + " a year)" : r.py.toFixed(0) + " a year  (" + r.rate.toFixed(0) + " per 100,000)"), textposition: "outside", cliponaxis: false,
-      hovertext: d.map(r => "<b>" + r.name + "</b> (" + (REGION[r.region] || r.region) + ")<br>" + fmtInt(r.a) + " accidents (" + r.py.toFixed(1) + " a year)<br>" + fmtInt(r.avg) + " residents on average<br>" + r.rate.toFixed(1) + " per 100,000 residents per year"), hovertemplate: "%{hovertext}<extra></extra>" }],
-      layout: { height: 110 + 26 * d.length, margin: { l: 10, r: 10, t: 50, b: 10 }, showlegend: false, xaxis: { range: [0, Math.max(...x) * 1.75] }, yaxis: { tickfont: { size: 11 } },
-                title: { text: "<b>Top " + d.length + " by " + (byRate ? "accidents per 100,000 residents per year (100+ accidents)" : "accidents per year") + "</b>", x: 0.01, xanchor: "left" } } };
+    const x = d.map(r => byRate ? r.rate : r.py), sev = d.map(r => r.s / r.ry * 1e5);          // severe accidents per 100,000 residents per year: same denominator as the rate
+    const hover = d.map((r, i) => "<b>" + r.name + "</b> (" + (REGION[r.region] || r.region) + ")<br>" + fmtInt(r.a) + " accidents (" + r.py.toFixed(1) + " a year)<br>" + fmtInt(r.avg) + " residents on average<br>" + r.rate.toFixed(1) + " per 100,000 residents per year"
+      + "<br>" + fmtInt(r.s) + " severe (" + (r.s / r.a * 100).toFixed(1) + "% of the accidents), " + fmtInt(r.f) + " fatal<br>" + sev[i].toFixed(1) + " severe per 100,000 residents per year");
+    const text = d.map((r, i) => byRate ? r.rate.toFixed(0) + " per 100,000, severe " + sev[i].toFixed(0) + "  (" + r.py.toFixed(0) + " a year)" : r.py.toFixed(0) + " a year  (" + r.rate.toFixed(0) + " per 100,000)");
+    const bars = [{ type: "bar", orientation: "h", y: d.map(r => r.name), x, name: "All accidents per 100,000 residents per year", marker: { color: byRate ? RAMP[0] : GRAY }, text, textposition: "outside", cliponaxis: false, hovertext: hover, hovertemplate: "%{hovertext}<extra></extra>" }];
+    if (byRate) bars.push({ type: "bar", orientation: "h", y: d.map(r => r.name), x: sev, name: "Severe accidents (fatal + serious) per 100,000 residents per year", marker: { color: ORANGE }, width: 0.4, hovertext: hover, hovertemplate: "%{hovertext}<extra></extra>" });   // the severe part, inside the bar
+    return { data: bars,
+      layout: { height: 110 + 26 * d.length + (byRate ? 30 : 0), margin: { l: 10, r: 10, t: byRate ? 80 : 50, b: 10 }, showlegend: byRate, barmode: "overlay", legend: { orientation: "h", y: 1, yanchor: "bottom" }, xaxis: { range: [0, Math.max(...x) * 1.9] }, yaxis: { tickfont: { size: 11 } },
+                title: { text: "<b>Top " + d.length + " by " + (byRate ? "accidents per 100,000 residents per year (100+ accidents), with the severe ones inside" : "accidents per year") + "</b>", x: 0.01, xanchor: "left" } } };
   }
 
   // ---------------------------------------------------------------- texts and tables

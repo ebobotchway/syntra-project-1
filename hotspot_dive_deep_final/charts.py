@@ -410,18 +410,26 @@ def fig_rate_map(t, outlines, group, by="rate"):
 
 
 def fig_rate_ranking(t, group, by="rate", n=20):
-    """Top municipalities by accidents per 100,000 residents (100+ accidents) or by number of accidents; the bars are labelled with the other measure."""
+    """Top municipalities by accidents per 100,000 residents (100+ accidents) or by number of accidents; the bars are labelled with the other measure.
+    By rate, the severe accidents per 100,000 residents per year (fatal + serious injury) are drawn as a narrower, darker bar INSIDE each bar, so one chart shows how many accidents and how many severe ones per resident."""
     d = t[t["reliable"]] if by == "rate" else t[t["accidents"] > 0]
     d = d.sort_values(RATE if by == "rate" else "accidents", ascending=False).head(n).iloc[::-1]
     if d.empty:
         return empty_figure("No municipality has 100 or more accidents of this group in this period.", 300)
     x = d[RATE] if by == "rate" else d["accidents per year"]
-    text = [f"{r[RATE]:.0f} per 100,000  ({r['accidents per year']:.0f} a year)" if by == "rate" else f"{r['accidents per year']:.0f} a year  ({r[RATE]:.0f} per 100,000)" for _, r in d.iterrows()]
+    sev_rate = d["severe"] / d["resident_years"] * 100_000  # severe accidents per 100,000 residents per year, the same denominator as the rate
+    text = [f"{r[RATE]:.0f} per 100,000, severe {s:.0f}  ({r['accidents per year']:.0f} a year)" if by == "rate" else f"{r['accidents per year']:.0f} a year  ({r[RATE]:.0f} per 100,000)" for (_, r), s in zip(d.iterrows(), sev_rate)]
     hover = [f"<b>{r['municipality']}</b> ({REGION_SHORT.get(r['region'], r['region'])})<br>{int(r['accidents']):,} accidents ({r['accidents per year']:.1f} a year)<br>{int(r['average residents']):,} residents on average<br>{r[RATE]:.1f} per 100,000 residents per year"
-             for _, r in d.iterrows()]
-    fig = go.Figure(go.Bar(y=d["municipality"], x=x, orientation="h", marker_color=BLUE if by == "rate" else GRAY, text=text, textposition="outside", cliponaxis=False, hovertext=hover, hovertemplate="%{hovertext}<extra></extra>"))
-    fig.update_xaxes(range=[0, float(x.max()) * 1.75])
+             f"<br>{int(r['severe']):,} severe ({r['severe'] / r['accidents'] * 100:.1f}% of the accidents), {int(r['fatal']):,} fatal<br>{s:.1f} severe per 100,000 residents per year"
+             for (_, r), s in zip(d.iterrows(), sev_rate)]
+    if by == "rate":
+        fig = go.Figure([go.Bar(y=d["municipality"], x=x, orientation="h", name="All accidents per 100,000 residents per year", marker_color=RAMP[0], text=text, textposition="outside", cliponaxis=False, hovertext=hover, hovertemplate="%{hovertext}<extra></extra>"),
+                         go.Bar(y=d["municipality"], x=sev_rate, orientation="h", name="Severe accidents (fatal + serious) per 100,000 residents per year", marker_color=ORANGE, width=0.4, hovertext=hover, hovertemplate="%{hovertext}<extra></extra>")])
+        fig.update_layout(barmode="overlay", legend=dict(orientation="h", y=1.0, yanchor="bottom"))
+    else:
+        fig = go.Figure(go.Bar(y=d["municipality"], x=x, orientation="h", marker_color=GRAY, text=text, textposition="outside", cliponaxis=False, hovertext=hover, hovertemplate="%{hovertext}<extra></extra>"))
+    fig.update_xaxes(range=[0, float(x.max()) * 1.9])
     fig.update_yaxes(tickfont=dict(size=11))
-    title = "per 100,000 residents per year (100+ accidents)" if by == "rate" else "accidents per year"
+    title = "per 100,000 residents per year (100+ accidents), with the severe ones inside" if by == "rate" else "accidents per year"
     fig.update_layout(title=dict(text=f"<b>Top {len(d)} by {title}</b>", x=0.01, xanchor="left"))
-    return layout(fig, 110 + 26 * len(d), margin=dict(l=10, r=10, t=50, b=10))
+    return layout(fig, 110 + 26 * len(d) + (30 if by == "rate" else 0), margin=dict(l=10, r=10, t=80 if by == "rate" else 50, b=10))

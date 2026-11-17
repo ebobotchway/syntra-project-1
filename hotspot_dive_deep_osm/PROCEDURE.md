@@ -14,6 +14,15 @@ This file explains, in the order I did it, how the `hotspot_dive_deep_osm/` fold
 6. **Checked:** the Streamlit app was run for steps 2 and 3, for all groups, top 20 and top 40, without errors; the page was opened in headless Chrome with software WebGL (maps need WebGL) and the screenshots of step 2 (counts and severe share) and step 3 were looked at; the browser console showed no errors.
 7. **Limits.** The maps need internet for the tiles. The pictures in `images/` (script 03, used in the report) are still the plain grid maps without OpenStreetMap, because a printed picture cannot load map tiles from the internet. The pictures in the report and the older description of the maps in sections below still talk about the plain grid.
 
+## 0c. Severity inside the step 5 ranking bars (#226)
+
+**Request (#226):** "combine the severity with the analysis in step 5 so the result will not be only top accident per 100,000 residents per year but also the severity with the graph for the severity per 100,000 residents per year embeded in the top accident per 100,000 residents per year bars". I asked three questions first: which folder (answer: both, `hotspot_dive_deep_final` and `hotspot_dive_deep_osm`), what the severity part shows (severe per 100,000 residents per year) and whether the ranking changes (no: same ranking by all accidents).
+
+1. **Calculation.** Severe accidents per 100,000 residents per year = severe (fatal + serious) / resident-years x 100,000, from `results/municipality_rates.csv` (columns `severe` and `resident_years`); the same denominator as the rate.
+2. **Chart.** In `charts.py` (`fig_rate_ranking`) and `template.html` (`rateRank`) the bars are drawn with `barmode="overlay"`: a wide light-blue bar for all accidents per 100,000 and a narrower orange bar (the severity colour of the app) inside it for the severe ones. The label next to the bar reads "384 per 100,000, severe 24 (715 a year)". Ranking by the count is unchanged.
+3. **Texts.** Two new key findings (severe rate for Belgium; Brussel versus Eeklo, Heuvelland, Kaprijke) and a care note on small severe counts; the captions of step 5 explain the dark bar. The numbers in the findings were calculated from the saved table (Belgium 18.0; Brussel 24, 111th of 302; Eeklo 54).
+4. **Checked.** The Streamlit step 5 was run for all groups, all periods and both ranking options without errors; the page was opened in headless Chrome and the new chart was looked at.
+
 ## 0. What was asked and decided
 
 **Request for this folder (#193):** take the hotspot deep dive and add step 1 of the focused dashboard as its step 1, change nothing else, in a new folder, with the procedure and the report on how the output was calculated.

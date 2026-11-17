@@ -219,7 +219,7 @@ else:
     t = charts.municipality_table(municipalities(), group, period)
     belgium = t["accidents"].sum() / t["resident_years"].sum() * 100_000
     st.caption(f"{words.capitalize()}, {period}. Rate = accidents of the group in the municipality divided by its residents, using the residents of each year (Statbel, 1 January), per 100,000. Belgium: {belgium:.1f}. "
-               + (f"{int(t['reliable'].sum())} of {len(t)} municipalities have 100 or more accidents of the group (full colour); {int(t['flagged'].sum())} have 30-99 (faded: flagged as unreliable); the rest stay gray. The map is coloured by the rate."
+               + (f"{int(t['reliable'].sum())} of {len(t)} municipalities have 100 or more accidents of the group (full colour); {int(t['flagged'].sum())} have 30-99 (faded: flagged as unreliable); the rest stay gray. The map is coloured by the rate. In the ranking, the dark bar inside each bar is the number of severe accidents (fatal + serious injury) per 100,000 residents per year."
                if by == "rate" else f"The map is coloured by the number of accidents per year (5 classes with equal numbers of municipalities); {int((t['accidents'] > 0).sum())} of {len(t)} municipalities have at least one accident, the rest stay gray."))
     plot(charts.fig_rate_map(t, outlines(), group, by))
     plot(charts.fig_rate_ranking(t, group, by))

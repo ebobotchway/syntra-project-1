@@ -220,6 +220,8 @@ The comparison above looks at one factor at a time. A **binary logistic regressi
 
 Antwerpen has by far the most accidents (first by number) but a rate below Brussel and Knokke-Heist: it has more residents.
 
+**The severity inside the ranking bars (#226).** In the ranking by rate (step 5), the narrower dark bar inside each bar is the number of severe accidents (fatal + serious injury) of the group in the municipality per 100,000 residents per year, calculated like the rate (severe accidents / resident-years x 100,000) from the saved table `results/municipality_rates.csv`. For all four groups in 2017-2024, Belgium has 18.0 severe accidents per 100,000 residents per year (12.2% of the accidents); only 5 of the 20 municipalities with the highest accident rate are also among the 20 with the highest severe rate (pedestrians 9, cyclists 6, motorcycles 19, mopeds 15). Severe counts per municipality are small, so a severe rate moves a lot with a few accidents.
+
 ## 7. How the pictures, the app and the page are built
 
 - `scripts/03_plot_heatmaps.py` draws `images/*.png` from the saved tables (no recalculation).
