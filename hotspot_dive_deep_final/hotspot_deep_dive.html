@@ -189,6 +189,9 @@ footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line);
     <p class="sub" id="s1-sub"></p>
     <fieldset class="ctl inline-ctl"><legend>Period</legend><div class="row" id="c-period"></div></fieldset>
     <div class="card"><div class="scroll-x"><div class="inner" style="min-width:560px"><div id="chart-h1"></div></div></div></div>
+    <h3 style="margin-top:28px" id="rk1-title"></h3>
+    <p class="note">The squares of the map as bars of accidents per year, rank 1 at the top. The bar colour is the persistence colour of the map: red = in the top of all 3 periods, orange = 2, black = 1, gray = none of the three (only possible in the all-years view).</p>
+    <div class="card"><div class="scroll-x"><div class="inner" style="min-width:560px"><div id="chart-h1b"></div></div></div></div>
     <p class="note"><span class="topn">The squares mark the 40 busiest squares of the period</span> (hover for rank, municipality and severity). Colour = in how many of the three periods (pre, during, post Covid-19) the same square is among the <span class="topn">40</span> busiest: red = all 3, orange = 2, black = 1, gray = none of the three (only possible in the all-years view). Accidents per year use a log colour scale: a few city cells have hundreds a year, most have less than one. Severe share: only cells with 30 or more accidents are coloured.</p>
     <div class="card findings">
       <h3>Key findings</h3>
@@ -204,6 +207,9 @@ footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line);
     <p class="sub" id="s2-sub"></p>
     <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-h2"></div></div></div></div>
     <p class="note" id="s2-note"></p>
+    <h3 style="margin-top:28px" id="rk2-title"></h3>
+    <p class="note">The squares of the three maps as bars of accidents per year, rank 1 at the top. Same colours as the markers: red = the square is in the top of all 3 periods, orange = 2, black = 1.</p>
+    <div class="card"><div class="scroll-x"><div class="inner wide"><div id="chart-h2b"></div></div></div></div>
   </section>
 
   <section id="sec-3">
@@ -655,6 +661,43 @@ const D = {"groups":["Vulnerable (any of the four)","Pedestrian","Bicycle","Moto
     return { data, layout };
   }
 
+  // ---------------------------------------------------------------- ranking of the hotspots (bar charts)
+  function rankBars(rows, persist, seen, axis) {                // bars of accidents per year, one trace per persistence class, rank 1 at the top
+    const labels = persistLabels(), names = rows.slice().sort((a, b) => a.rank - b.rank).map(r => r.rank + ". " + r.m), out = [];
+    [3, 2, 1, 0].forEach(n => {
+      const sel = rows.filter(r => (persist[r.x + "|" + r.y] || 0) === n).sort((a, b) => a.rank - b.rank);
+      if (!sel.length) return;
+      const tr = { type: "bar", orientation: "h", y: sel.map(r => r.rank + ". " + r.m), x: sel.map(r => r.py), name: labels[n], legendgroup: "persist" + n, showlegend: !seen.has(n), marker: { color: PERSIST_COLOURS[n] },
+                   hovertext: sel.map(r => "<b>Rank " + r.rank + ": " + r.m + "</b><br>" + fmtInt(r.a) + " accidents (" + r.py.toFixed(1) + " a year)<br>" + labels[n] + (r.sev === null ? "" : "<br>" + r.sev.toFixed(1) + "% severe, " + r.fat.toFixed(1) + "% fatal")), hovertemplate: "%{hovertext}<extra></extra>" };
+      if (axis) { tr.xaxis = "x" + axis; tr.yaxis = "y" + axis; }
+      seen.add(n); out.push(tr);
+    });
+    return { traces: out, names };
+  }
+  function rankSingle() {
+    const { size, group, period } = state, rows = topOf(size, group, period);
+    if (!rows.length) return emptyFigure("No accidents with coordinates in this selection.", 300);
+    const { traces, names } = rankBars(rows, persistence(size, group), new Set());
+    return { data: traces, layout: { height: 180 + 19 * rows.length, margin: { l: 10, r: 10, t: 20, b: 70 }, bargap: 0.25, legend: { orientation: "h", y: -0.2, yanchor: "top" },
+             yaxis: { categoryorder: "array", categoryarray: names, autorange: "reversed", tickfont: { size: 11 } }, xaxis: { title: { text: "accidents per year (located accidents)" } } } };
+  }
+  function rankPeriods() {
+    const { size, group } = state, persist = persistence(size, group), seen = new Set(), data = [], layout = { margin: { l: 10, r: 10, t: 50, b: 70 }, bargap: 0.25, legend: { orientation: "h", y: -0.2, yanchor: "top" }, annotations: [] };
+    let most = 0;
+    D.periods.slice(0, 3).forEach((p, i) => {
+      const n = i + 1, ax = n === 1 ? "" : String(n), d0 = i * 0.36, rows = topOf(size, group, p);
+      if (!rows.length) return;
+      const { traces, names } = rankBars(rows, persist, seen, n);
+      traces.forEach(t => data.push(t));
+      layout["xaxis" + ax] = { domain: [d0 + 0.1, d0 + 0.3], anchor: "y" + ax, title: { text: "accidents per year" } };
+      layout["yaxis" + ax] = { anchor: "x" + ax, categoryorder: "array", categoryarray: names, autorange: "reversed", tickfont: { size: 10 } };
+      layout.annotations.push({ text: "<b>" + p + "</b>", showarrow: false, xref: "paper", yref: "paper", x: d0 + 0.14, y: 1.06, xanchor: "center" });
+      most = Math.max(most, rows.length);
+    });
+    layout.height = 200 + 19 * most;
+    return { data, layout };
+  }
+
   // ---------------------------------------------------------------- municipalities: rates
   const M = D.muni;
   function muniRows() {
@@ -709,6 +752,7 @@ const D = {"groups":["Vulnerable (any of the four)","Pedestrian","Bicycle","Moto
   function text1() {
     const cov = D.cov[state.group + "|" + state.period], label = state.measure === "severe" ? "Severe share" : "Accidents per year";
     $("s1-sub").textContent = label + " per 5 x 5 km square, " + words() + ", " + state.period + ". " + fmtInt(cov[1]) + " of " + fmtInt(cov[0]) + " accidents involving " + words() + " have usable coordinates (" + (cov[1] / cov[0] * 100).toFixed(1) + "%); the others are not on the map.";
+    $("rk1-title").textContent = "Ranking of the " + state.top + " busiest squares"; $("rk2-title").textContent = "Ranking of the " + state.top + " busiest squares per period";
     $("s1-summary").textContent = "The " + state.top + " busiest squares: " + words() + ", " + state.period;
     document.querySelectorAll(".topn").forEach(e => { e.textContent = e.textContent.replace(/\b(20|40)\b/, state.top); });
     const t = topOf(state.size, state.group, state.period) || [];
@@ -738,16 +782,18 @@ const D = {"groups":["Vulnerable (any of the four)","Pedestrian","Bicycle","Moto
   function textAll() { text1(); text2(); text3(); text4(); $("status").textContent = "Showing " + words() + " · top " + state.top + " hotspots · " + (state.measure === "severe" ? "severe share" : "accidents per year"); }
 
   register("chart-h1", heatSingle);
+  register("chart-h1b", rankSingle);
+  register("chart-h2b", rankPeriods);
   register("chart-h2", heatPeriods);
   register("chart-h3", () => D.figs[state.size + "|" + state.group + "|" + state.top]);
   register("chart-lg", () => D.logit[state.top].fig);
   register("chart-h4map", rateMap);
   register("chart-h4rank", rateRank);
-  const all = ["chart-h1", "chart-h2", "chart-h3", "chart-h4map", "chart-h4rank"];
+  const all = ["chart-h1", "chart-h1b", "chart-h2", "chart-h2b", "chart-h3", "chart-h4map", "chart-h4rank"];
   choice("c-group", "cgroup", D.groups.map(g => [g, D.labels[g]]), state.group, v => { state.group = v; textAll(); redraw(all); });
-  choice("c-top", "ctop", D.topNs.map(n => [n, "Top " + n]), state.top, v => { state.top = v; textAll(); showLogit(); redraw(["chart-h1", "chart-h2", "chart-h3", "chart-lg"]); });
+  choice("c-top", "ctop", D.topNs.map(n => [n, "Top " + n]), state.top, v => { state.top = v; textAll(); showLogit(); redraw(["chart-h1", "chart-h1b", "chart-h2", "chart-h2b", "chart-h3", "chart-lg"]); });
   choice("c-measure", "cmeasure", [["per_year", "Accidents per year"], ["severe", "Severe share"]], state.measure, v => { state.measure = v; textAll(); redraw(["chart-h1", "chart-h2"]); });
-  choice("c-period", "cperiod", D.periods.map(p => [p, p]), state.period, v => { state.period = v; text1(); redraw(["chart-h1"]); });
+  choice("c-period", "cperiod", D.periods.map(p => [p, p]), state.period, v => { state.period = v; text1(); redraw(["chart-h1", "chart-h1b"]); });
   choice("c-period4", "cperiod4", D.periods.map(p => [p, p]), state.period4, v => { state.period4 = v; text4(); redraw(["chart-h4map", "chart-h4rank"]); });
   choice("c-rank", "crank", [["rate", "Accidents per 100,000 residents"], ["count", "Number of accidents"]], state.rank, v => { state.rank = v; text4(); redraw(["chart-h4map", "chart-h4rank"]); });
   function showLogit() {                                         // the regression texts, tables and findings for the chosen top 20 or top 40

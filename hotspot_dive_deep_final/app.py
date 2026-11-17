@@ -140,6 +140,9 @@ elif view == VIEWS[1]:
     st.caption(f"{measure_label} per 5 x 5 km square, {words}, {period}. {int(cov['with coordinates']):,} of {int(cov['accidents']):,} accidents involving {words} have usable coordinates "
                f"({100 - cov['left out %']:.1f}%); the others are not on the map. The squares mark the {top_n} busiest squares (hover for rank, municipality and severity); colour = in how many of the three periods the same square is among the {top_n} busiest: red = all 3, orange = 2, black = 1, gray = none of the three (only possible in the all-years view).")
     plot(charts.fig_heatmap(cells(), top(), outlines(), size, measure, group, period, top_n))
+    st.subheader(f"Ranking of the {top_n} busiest squares")
+    st.caption("The same squares as the markers on the map, as bars of accidents per year. The bar colour is the persistence colour of the map: red = in the top of all 3 periods, orange = 2, black = 1, gray = none of the three (only possible in the all-years view).")
+    plot(charts.fig_hotspot_ranking(top(), size, group, period, top_n))
     t = top()
     t = t[(t["size"] == size) & (t["group"] == group) & (t["period"] == period) & (t["rank"] <= top_n)]
     with st.expander(f"The {top_n} busiest squares, with their severity", expanded=True):
@@ -156,6 +159,9 @@ elif view == VIEWS[2]:
     st.header("3  Compare the three periods")
     st.caption(f"{measure_label}, {words}. The three maps use the same grid and the same colour scale. The squares mark the {top_n} busiest squares of each period, in the same colour when the same square is in the top {top_n} of all 3 periods (red), of 2 periods (orange) or of 1 period (black).")
     plot(charts.fig_heatmap_periods(cells(), top(), outlines(), size, measure, group, top_n))
+    st.subheader(f"Ranking of the {top_n} busiest squares per period")
+    st.caption("The squares of the three maps as bars of accidents per year, rank 1 at the top. Same colours as the markers: red = the square is in the top of all 3 periods, orange = 2, black = 1.")
+    plot(charts.fig_hotspot_ranking_periods(top(), size, group, top_n))
     c = cells()
     c = c[(c["size"] == size) & (c["group"] == group) & c["period"].isin(charts.THREE)]
     cov = coverage()

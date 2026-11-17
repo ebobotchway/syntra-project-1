@@ -245,6 +245,62 @@ def fig_heatmap_periods(cells, top, outlines, size, measure, group, top_n=TOP_DE
     return layout(fig, 520, margin=dict(l=0, r=0, t=50, b=0))
 
 
+# ---------------------------------------------------------------- ranking of the hotspots (bar charts)
+def ranking_bars(t, persist, top_n, seen=None):
+    """Horizontal bars of accidents per year for the busiest squares of one period, rank 1 at the top; the bar colour is the persistence class of the square (as on the map).
+    Returns (traces, category labels); `seen` collects the classes that already have a legend entry."""
+    labels = persist_labels(top_n)
+    seen = seen if seen is not None else set()
+    t = t.sort_values("rank")
+    names = [f"{r['rank']}. {r['municipality']}" for _, r in t.iterrows()]
+    t = t.assign(_n=[persist.get((r.cx, r.cy), 0) for r in t.itertuples()], _name=names)
+    traces = []
+    for n in (3, 2, 1, 0):
+        d = t[t["_n"] == n]
+        if d.empty:
+            continue
+        traces.append(go.Bar(y=d["_name"], x=d["per_year"], orientation="h", name=labels[n], legendgroup=f"persist{n}", showlegend=n not in seen, marker_color=PERSIST_COLOURS[n],
+                             hovertext=[f"<b>Rank {r['rank']}: {r['municipality']}</b><br>{r['accidents']:,} accidents ({r['per_year']:.1f} a year)<br>{labels[n]}"
+                                        + (f"<br>{r['severe %']:.1f}% severe, {r['fatal %']:.1f}% fatal" if not pd.isna(r["severe %"]) else "") for _, r in d.iterrows()],
+                             hovertemplate="%{hovertext}<extra></extra>"))
+        seen.add(n)
+    return traces, names
+
+
+def fig_hotspot_ranking(top, size, group, period, top_n=TOP_DEFAULT):
+    """Bar chart of the 20 or 40 busiest squares of one group and period (accidents per year)."""
+    top = top[top["rank"] <= top_n]
+    t = top[(top["size"] == size) & (top["group"] == group) & (top["period"] == period)]
+    if t.empty:
+        return empty_figure("No accidents with coordinates in this selection.")
+    traces, names = ranking_bars(t, persistence(top, size, group, top_n), top_n)
+    fig = go.Figure(traces)
+    fig.update_yaxes(categoryorder="array", categoryarray=names, autorange="reversed", tickfont=dict(size=11))
+    fig.update_xaxes(title="accidents per year (located accidents)")
+    fig.update_layout(legend=dict(orientation="h", y=-0.2, yanchor="top"), bargap=0.25, title=dict(text=f"<b>The {len(t)} busiest squares: {period}</b>", x=0.01, xanchor="left"))
+    return layout(fig, 180 + 19 * len(t), margin=dict(l=10, r=10, t=50, b=70))
+
+
+def fig_hotspot_ranking_periods(top, size, group, top_n=TOP_DEFAULT):
+    """The three periods side by side as bar charts of the 20 or 40 busiest squares."""
+    top = top[top["rank"] <= top_n]
+    persist, seen = persistence(top, size, group, top_n), set()
+    fig = make_subplots(rows=1, cols=3, subplot_titles=[f"<b>{p}</b>" for p in THREE], horizontal_spacing=0.14)
+    rows = 0
+    for col, period in enumerate(THREE, start=1):
+        t = top[(top["size"] == size) & (top["group"] == group) & (top["period"] == period)]
+        if t.empty:
+            continue
+        traces, names = ranking_bars(t, persist, top_n, seen)
+        for tr in traces:
+            fig.add_trace(tr, row=1, col=col)
+        fig.update_yaxes(categoryorder="array", categoryarray=names, autorange="reversed", tickfont=dict(size=10), row=1, col=col)
+        fig.update_xaxes(title="accidents per year", row=1, col=col)
+        rows = max(rows, len(t))
+    fig.update_layout(legend=dict(orientation="h", y=-0.2, yanchor="top"), bargap=0.25)
+    return layout(fig, 200 + 19 * rows, margin=dict(l=10, r=10, t=50, b=70))
+
+
 # ---------------------------------------------------------------- severity of the hotspots
 def fig_hotspot_severity(summary, size, group, top_n=TOP_DEFAULT):
     """Severe, fatal and serious share in the 40 (or 20) hotspot cells against all other cells, per period (dots with 95% intervals); `summary` comes from load_summary(top_n)."""
