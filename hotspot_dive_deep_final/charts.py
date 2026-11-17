@@ -171,6 +171,7 @@ def heat_trace(c, side, extent, measure, zmax_count=None, showscale=True, xaxis=
 
 # Colours of the 40 marked cells: how many of the three periods (pre, during, post) the cell is among the 40 busiest (#203)
 PERSIST_COLOURS = {3: "#d62728", 2: "#ff9f1c", 1: "#0b0b0b", 0: "#898781"}
+TOP_GREEN = "#00a651"  # step 2, severe share map: yellow would not stand out on the orange scale, so these markers are green
 TOP_YELLOW = "#ffd400"  # step 2: one colour for all marked squares of the chosen period (the persistence colours are in step 3)
 def persist_labels(top_n=TOP_DEFAULT):
     return {3: f"in the top {top_n} of all 3 periods", 2: f"in the top {top_n} of 2 periods", 1: f"in the top {top_n} of 1 period", 0: f"in no period's top {top_n} (all-years view only)"}
@@ -183,18 +184,18 @@ def persistence(top, size, group, top_n=TOP_DEFAULT):
     return t.groupby(["cx", "cy"]).size().to_dict()
 
 
-def class_style(top_n, single):
+def class_style(top_n, single, colour=TOP_YELLOW):
     """Labels and colours per class: the persistence classes (step 3), or one yellow class for 'one of the busiest squares of this period' (step 2)."""
     if single:
-        return {1: f"one of the {top_n} busiest squares of this period"}, {1: TOP_YELLOW}
+        return {1: f"one of the {top_n} busiest squares of this period"}, {1: colour}
     return persist_labels(top_n), PERSIST_COLOURS
 
 
-def hotspot_markers(top, persist, xaxis=None, yaxis=None, seen=None, top_n=TOP_DEFAULT, single=False):
+def hotspot_markers(top, persist, xaxis=None, yaxis=None, seen=None, top_n=TOP_DEFAULT, single=False, colour=TOP_YELLOW):
     """The marked cells as hollow squares, one trace per persistence class (so each colour has its own legend entry); `seen` collects the classes already in the legend."""
     kw = dict(xaxis=xaxis, yaxis=yaxis) if xaxis else {}
     seen = seen if seen is not None else set()
-    labels, colours = class_style(top_n, single)
+    labels, colours = class_style(top_n, single, colour)
     top = top.assign(_n=[1 if single else persist.get((r.cx, r.cy), 0) for r in top.itertuples()])
     traces = []
     for n in (3, 2, 1, 0):
@@ -221,7 +222,7 @@ def fig_heatmap(cells, top, outlines, size, measure, group, period, top_n=TOP_DE
     if cv.empty:
         return empty_figure("No cell has 30 or more accidents in this selection, so no severe share can be shown.")
     t = top[(top["size"] == size) & (top["group"] == group) & (top["period"] == period)]
-    fig = go.Figure([outline_trace(outlines), heat_trace(cv, side, extent_of(c), measure), *hotspot_markers(t, {}, top_n=top_n, single=True)])
+    fig = go.Figure([outline_trace(outlines), heat_trace(cv, side, extent_of(c), measure), *hotspot_markers(t, {}, top_n=top_n, single=True, colour=TOP_GREEN if measure == "severe" else TOP_YELLOW)])
     fig.update_layout(legend=dict(orientation="h", y=-0.02))
     equal_axes(fig, 1, 1)
     return layout(fig, 640, margin=dict(l=0, r=0, t=10, b=0))

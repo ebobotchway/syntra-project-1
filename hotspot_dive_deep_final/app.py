@@ -138,7 +138,7 @@ elif view == VIEWS[1]:
     cov = coverage()
     cov = cov[(cov["group"] == group) & (cov["period"] == period)].iloc[0]
     st.caption(f"{measure_label} per 5 x 5 km square, {words}, {period}. {int(cov['with coordinates']):,} of {int(cov['accidents']):,} accidents involving {words} have usable coordinates "
-               f"({100 - cov['left out %']:.1f}%); the others are not on the map. The squares mark the {top_n} busiest squares (hover for rank, municipality and severity); they are yellow. Step 3 shows whether the same squares stay busy in all three periods.")
+               f"({100 - cov['left out %']:.1f}%); the others are not on the map. The squares mark the {top_n} busiest squares (hover for rank, municipality and severity); they are yellow (green on the severe-share map). Step 3 shows whether the same squares stay busy in all three periods.")
     plot(charts.fig_heatmap(cells(), top(), outlines(), size, measure, group, period, top_n))
     st.subheader(f"Ranking of the {top_n} busiest squares")
     st.caption("The same squares as the markers on the map, as bars of accidents per year. The bars are yellow, like the markers.")

@@ -192,7 +192,7 @@ footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line);
     <h3 style="margin-top:28px" id="rk1-title"></h3>
     <p class="note">The squares of the map as bars of accidents per year, rank 1 at the top. The bars are yellow, like the markers.</p>
     <div class="card"><div class="scroll-x"><div class="inner" style="min-width:560px"><div id="chart-h1b"></div></div></div></div>
-    <p class="note"><span class="topn">The squares mark the 40 busiest squares of the period</span> (hover for rank, municipality and severity). The markers are yellow; step 3 shows whether the same squares stay busy in all three periods. Accidents per year use a log colour scale: a few city cells have hundreds a year, most have less than one. Severe share: only cells with 30 or more accidents are coloured.</p>
+    <p class="note"><span class="topn">The squares mark the 40 busiest squares of the period</span> (hover for rank, municipality and severity). The markers are yellow (green on the severe-share map); step 3 shows whether the same squares stay busy in all three periods. Accidents per year use a log colour scale: a few city cells have hundreds a year, most have less than one. Severe share: only cells with 30 or more accidents are coloured.</p>
     <div class="card findings">
       <h3>Key findings</h3>
       <p class="fixed">Text for all four vulnerable groups together; it follows the Hotspots filter (top 20 or top 40) but not the other filters.</p>
@@ -611,8 +611,8 @@ const D = {"groups":["Vulnerable (any of the four)","Pedestrian","Bicycle","Moto
     return tr;
   }
   // Colours of the marked squares: in how many of the three periods (pre, during, post) the square is among the 20 or 40 busiest (#203)
-  const PERSIST_COLOURS = { 3: "#d62728", 2: "#ff9f1c", 1: "#0b0b0b", 0: "#898781" }, TOP_YELLOW = "#ffd400";
-  const classStyle = single => single ? { labels: { 1: "one of the " + state.top + " busiest squares of this period" }, colours: { 1: TOP_YELLOW } } : { labels: persistLabels(), colours: PERSIST_COLOURS };   // step 2: one yellow class; step 3: the persistence classes
+  const PERSIST_COLOURS = { 3: "#d62728", 2: "#ff9f1c", 1: "#0b0b0b", 0: "#898781" }, TOP_YELLOW = "#ffd400", TOP_GREEN = "#00a651";
+  const classStyle = (single, colour) => single ? { labels: { 1: "one of the " + state.top + " busiest squares of this period" }, colours: { 1: colour || TOP_YELLOW } } : { labels: persistLabels(), colours: PERSIST_COLOURS };   // step 2: one yellow class; step 3: the persistence classes
   const persistLabels = () => ({ 3: "in the top " + state.top + " of all 3 periods", 2: "in the top " + state.top + " of 2 periods", 1: "in the top " + state.top + " of 1 period", 0: "in no period's top " + state.top + " (all-years view only)" });
   const persistMemo = {};
   function persistence(size, group) {                          // "x|y" of the cell centre -> 1, 2 or 3
@@ -625,7 +625,7 @@ const D = {"groups":["Vulnerable (any of the four)","Pedestrian","Bicycle","Moto
     return persistMemo[key];
   }
   function markerTraces(size, group, period, opts) {           // one trace per persistence class, so each colour has its own legend entry
-    const rows = topOf(size, group, period) || [], persist = persistence(size, group), out = [], { labels: PERSIST_LABELS, colours } = classStyle(opts.single);
+    const rows = topOf(size, group, period) || [], persist = persistence(size, group), out = [], { labels: PERSIST_LABELS, colours } = classStyle(opts.single, opts.colour);
     [3, 2, 1, 0].forEach(n => {
       const sel = rows.filter(r => (opts.single ? 1 : (persist[r.x + "|" + r.y] || 0)) === n);
       if (!sel.length) return;
@@ -644,7 +644,7 @@ const D = {"groups":["Vulnerable (any of the four)","Pedestrian","Bicycle","Moto
   function heatSingle() {
     const { size, group, period, measure } = state;
     if (!hasData(size, group, period, measure)) return emptyFigure(measure === "severe" ? "No cell has 30 or more accidents in this selection, so no severe share can be shown." : "No accidents with coordinates in this selection.", 300);
-    return { data: [borderTrace(), heatTrace(size, group, period, measure, {}), ...markerTraces(size, group, period, { single: true })],
+    return { data: [borderTrace(), heatTrace(size, group, period, measure, {}), ...markerTraces(size, group, period, { single: true, colour: measure === "severe" ? TOP_GREEN : TOP_YELLOW })],
              layout: { height: 640, margin: { l: 0, r: 0, t: 10, b: 0 }, xaxis: { visible: false }, yaxis: { visible: false, scaleanchor: "x", scaleratio: 1 }, legend: { orientation: "h", y: -0.02 } } };
   }
   function heatPeriods() {
