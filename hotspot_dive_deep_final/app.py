@@ -14,7 +14,7 @@ import findings as fx
 import step1_charts
 import step1_logic as dl
 
-st.set_page_config(page_title="Hotspot deep dive", layout="wide")
+st.set_page_config(page_title="Analysis of accident hotspots for vulnerable road users", layout="wide")
 VIEWS = ["1  Burden and annual change (1a, 1b)", "2  Hotspot heat map", "3  Compare the three periods", "4  How severe are the hotspots?", "5  Residents: rates per 100,000"]
 MEASURES = {"Accidents per year": "per_year", "Severe share (fatal + serious)": "severe"}
 
@@ -77,7 +77,7 @@ def plot(fig):
     st.plotly_chart(fig, width="stretch")
 
 
-st.sidebar.title("Hotspot deep dive")
+st.sidebar.title("Analysis of accident hotspots for vulnerable road users")
 view = st.sidebar.radio("View", VIEWS, key="view")
 st.sidebar.divider()
 st.sidebar.subheader("Filters")
@@ -86,7 +86,7 @@ if view != VIEWS[0]:
                              help="An accident counts for a group if the group is road user 1 or 2, once per accident. 'All four' counts an accident with two of them once.")
     words = charts.GROUP_WORDS[group]
 
-st.title("Hotspots of accidents with vulnerable road users")
+st.title("Spatial and temporal patterns of road traffic accidents involving vulnerable road users in Belgium: A comparative analysis of accident hotspots, severity and municipalities")
 st.caption("Before (2017-2019), during (2020-2021) and after (2022-2024) Covid-19: where accidents concentrate, how severe they are there, and how that looks per resident. "
            "Counts and rates, not causes. The period names are my own definition; the data states no cause.")
 
