@@ -1,29 +1,41 @@
 variable,category,rows,severe,severe %,top_n
-Hotspot,Not a hotspot square,82518,12059,14.614,20
-Hotspot,Hotspot square,42098,3275,7.779,20
-Period,During Covid-19 (2020-2021),26733,3303,12.356,20
-Period,Post Covid-19 (2022-2024),52631,6175,11.733,20
-Period,Pre Covid-19 (2017-2019),45252,5856,12.941,20
-Group,Bicycle,61653,6838,11.091,20
-Group,Moped,20415,1788,8.758,20
-Group,Motorcycle,17063,3314,19.422,20
-Group,Pedestrian,25485,3394,13.318,20
-Built-up area,Inside built-up area,94395,9631,10.203,20
-Built-up area,Outside built-up area,30221,5703,18.871,20
-Light condition,"Dawn, dusk",6531,720,11.024,20
-Light condition,Daylight,96782,11407,11.786,20
-Light condition,Night,21303,3207,15.054,20
-Hotspot,Not a hotspot square,69543,10629,15.284,40
-Hotspot,Hotspot square,55073,4705,8.543,40
-Period,During Covid-19 (2020-2021),26733,3303,12.356,40
-Period,Post Covid-19 (2022-2024),52631,6175,11.733,40
-Period,Pre Covid-19 (2017-2019),45252,5856,12.941,40
-Group,Bicycle,61653,6838,11.091,40
-Group,Moped,20415,1788,8.758,40
-Group,Motorcycle,17063,3314,19.422,40
-Group,Pedestrian,25485,3394,13.318,40
-Built-up area,Inside built-up area,94395,9631,10.203,40
-Built-up area,Outside built-up area,30221,5703,18.871,40
-Light condition,"Dawn, dusk",6531,720,11.024,40
-Light condition,Daylight,96782,11407,11.786,40
-Light condition,Night,21303,3207,15.054,40
+Hotspot,Not a hotspot square,79413,11878,14.957,20
+Hotspot,Hotspot square,40084,3190,7.958,20
+Period,During Covid-19 (2020-2021),25714,3245,12.620,20
+Period,Post Covid-19 (2022-2024),50248,6063,12.066,20
+Period,Pre Covid-19 (2017-2019),43535,5760,13.231,20
+Group,Bicycle,58903,6684,11.347,20
+Group,Moped,19799,1767,8.925,20
+Group,Motorcycle,16737,3292,19.669,20
+Group,Pedestrian,24058,3325,13.821,20
+Built-up area,Inside built-up area,90183,9446,10.474,20
+Built-up area,Outside built-up area,29314,5622,19.179,20
+Light condition,"Dawn, dusk",6190,705,11.389,20
+Light condition,Daylight,92759,11209,12.084,20
+Light condition,"Night, lighting present but not lit",707,141,19.943,20
+Light condition,"Night, no public lighting",1337,276,20.643,20
+Light condition,"Night, public lighting lit",18504,2737,14.791,20
+Road surface,Dirty,948,111,11.709,20
+Road surface,Dry or clean,97632,12538,12.842,20
+Road surface,Ice or snow,847,108,12.751,20
+Road surface,Wet,20070,2311,11.515,20
+Hotspot,Not a hotspot square,67039,10467,15.613,40
+Hotspot,Hotspot square,52458,4601,8.771,40
+Period,During Covid-19 (2020-2021),25714,3245,12.620,40
+Period,Post Covid-19 (2022-2024),50248,6063,12.066,40
+Period,Pre Covid-19 (2017-2019),43535,5760,13.231,40
+Group,Bicycle,58903,6684,11.347,40
+Group,Moped,19799,1767,8.925,40
+Group,Motorcycle,16737,3292,19.669,40
+Group,Pedestrian,24058,3325,13.821,40
+Built-up area,Inside built-up area,90183,9446,10.474,40
+Built-up area,Outside built-up area,29314,5622,19.179,40
+Light condition,"Dawn, dusk",6190,705,11.389,40
+Light condition,Daylight,92759,11209,12.084,40
+Light condition,"Night, lighting present but not lit",707,141,19.943,40
+Light condition,"Night, no public lighting",1337,276,20.643,40
+Light condition,"Night, public lighting lit",18504,2737,14.791,40
+Road surface,Dirty,948,111,11.709,40
+Road surface,Dry or clean,97632,12538,12.842,40
+Road surface,Ice or snow,847,108,12.751,40
+Road surface,Wet,20070,2311,11.515,40

@@ -6,10 +6,11 @@ Step 4b of the final analysis: a simple binary logistic regression for the sever
                        period   (pre 2017-2019 = reference, during 2020-2021, post 2022-2024)
                        group    (bicycle = reference, pedestrian, motorcycle, moped)
                        built-up area (inside = reference, outside)                                                                  extra variable 1
-                       light    (daylight = reference, dawn/dusk, night)                                                            extra variable 2
+                       light    (daylight = reference, dawn/dusk, night with public lighting lit, night with public lighting present but not lit, night without public lighting)   extra variable 2 (#218)
+                       road surface (dry or clean = reference, wet, dirty, ice or snow)                                                   extra variable 3 (#218)
 
 Rows: one row per accident AND group (an accident with a cyclist and a pedestrian is a row in both groups: counting rule #33), only accidents with usable coordinates (#90, needed to know the square),
-and only accidents where built-up area and light condition are known. Because one accident can be two rows, and accidents in the same municipality resemble each other, the standard errors are
+and only accidents where built-up area, light condition and road surface are known. Because one accident can be two rows, and accidents in the same municipality resemble each other, the standard errors are
 cluster-robust by municipality (581 clusters), the same choice as in the main project.
 
 Estimation: Newton-Raphson with step-halving (the same code as in logit_live.py of the main project), sandwich standard errors with the small-sample factor G/(G-1) * (N-1)/(N-k).
@@ -34,8 +35,21 @@ RESULTS = HERE / "results"
 SIZE = "5 x 5 km squares"
 GROUPS = {"Bicycle": ["03"], "Pedestrian": ["08"], "Motorcycle": ["07"], "Moped": ["06"]}  # the first is the reference group
 PERIODS = {"Pre Covid-19 (2017-2019)": range(2017, 2020), "During Covid-19 (2020-2021)": range(2020, 2022), "Post Covid-19 (2022-2024)": range(2022, 2025)}
-LIGHT = {"1": "Daylight", "2": "Dawn, dusk", "3": "Night", "4": "Night", "5": "Night"}  # the three kinds of night are one category; code 9 (unknown) is left out
+LIGHT = {"1": "Daylight", "2": "Dawn, dusk", "3": "Night, public lighting lit", "5": "Night, lighting present but not lit", "4": "Night, no public lighting"}  # the three kinds of night are kept apart (#218); code 9 (unknown) is left out
+NIGHT = [v for v in LIGHT.values() if v.startswith("Night")]
 BUILT_UP = {"1": "Inside built-up area", "2": "Outside built-up area"}  # code 9 (unknown) is left out
+
+
+def surface(code):
+    """Road surface from road_condition_code (1 dry, 2 wet, 3 ice or snow, 4 clean, 5 dirty, 9 unknown; combinations like '2/4' = wet + clean). A combination takes its worst part: ice or snow > wet > dirty > dry or clean (#218)."""
+    parts = str(code).split("/")
+    if "9" in parts or not set(parts) <= set("12345"):
+        return np.nan  # unknown: left out
+    for part, name in (("3", "Ice or snow"), ("2", "Wet"), ("5", "Dirty")):
+        if part in parts:
+            return name
+    return "Dry or clean"
+SURFACES = ["Wet", "Dirty", "Ice or snow"]  # the reference is "Dry or clean"
 N_DRAWS, SEED = 1000, 2026
 TOP_NS = (40, 20)  # the hotspot definitions; the model is fitted for each
 
@@ -116,8 +130,9 @@ for group, codes in GROUPS.items():
             sub[f"hotspot{n}"] = [int((cx, cy) in hot_cells[n][(group, period)]) for cx, cy in zip(sub["cx"], sub["cy"])]
         sub["group"], sub["period"] = group, period
         sub["built_up"], sub["light"] = sub["built_up_area_code"].map(BUILT_UP), sub["light_condition_code"].map(LIGHT)
-        sub = sub.dropna(subset=["built_up", "light"])
-        flow.append({"group": group, "period": period, "accidents": n_all, "with coordinates": n_located, "with built-up area and light known (used)": len(sub)})
+        sub["surface"] = sub["road_condition_code"].map(surface)
+        sub = sub.dropna(subset=["built_up", "light", "surface"])
+        flow.append({"group": group, "period": period, "accidents": n_all, "with coordinates": n_located, "with built-up area, light and road surface known (used)": len(sub)})
         pieces.append(sub)
 data = pd.concat(pieces, ignore_index=True)
 flow = pd.DataFrame(flow)
@@ -142,8 +157,10 @@ def run(top_n):
     for g in list(GROUPS)[1:]:
         add(f"group={g}", f"{g} (against Bicycle)", data["group"] == g, "Group")
     add("built_up=outside", "Outside built-up area (against inside)", data["built_up"] == "Outside built-up area", "Built-up area")
-    for light in ("Dawn, dusk", "Night"):
+    for light in ["Dawn, dusk"] + NIGHT:
         add(f"light={light}", f"{light} (against daylight)", data["light"] == light, "Light condition")
+    for surf in SURFACES:
+        add(f"surface={surf}", f"{surf} road surface (against dry or clean)", data["surface"] == surf, "Road surface")
 
     X = np.column_stack([columns[name] for name, _, _ in TERMS])
     y = data["severe"].to_numpy(float)
@@ -180,7 +197,7 @@ def run(top_n):
 
     # plain descriptive shares behind the model: severe % per category of every variable
     desc = []
-    for variable, col in (("Hotspot", "hotspot"), ("Period", "period"), ("Group", "group"), ("Built-up area", "built_up"), ("Light condition", "light")):
+    for variable, col in (("Hotspot", "hotspot"), ("Period", "period"), ("Group", "group"), ("Built-up area", "built_up"), ("Light condition", "light"), ("Road surface", "surface")):
         for value, part in data.groupby(col):
             desc.append({"variable": variable, "category": ("Hotspot square" if value == 1 else "Not a hotspot square") if col == "hotspot" else value, "rows": len(part), "severe": int(part["severe"].sum()), "severe %": part["severe"].mean() * 100})
     return table, fit, adjusted, pd.DataFrame(desc)

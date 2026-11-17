@@ -354,7 +354,7 @@ def fig_logit_forest(model):
     fig.add_vline(x=1, line_dash="dash", line_color=GRAY)
     fig.update_xaxes(type="log", tickvals=[0.5, 0.7, 1, 1.5, 2], ticktext=["0.5", "0.7", "1", "1.5", "2"], title="Odds ratio of a severe accident (log scale); 1 = same as the reference")
     fig.update_yaxes(automargin=True)
-    return layout(fig, 430, margin=dict(l=10, r=10, t=20, b=10))
+    return layout(fig, 560, margin=dict(l=10, r=10, t=20, b=10))
 
 
 # ---------------------------------------------------------------- municipalities: rates per 100,000 residents

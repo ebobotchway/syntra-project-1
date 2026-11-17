@@ -94,6 +94,8 @@ Results in `results/`: `grid_cells.csv`, `hotspots_top40.csv`, `hotspot_severity
 
 > **Change #213:** the app and the HTML page no longer have a cell-size filter (only the 5 x 5 km squares are shown) and have a new filter 'Hotspots: top 20 / top 40'. Scripts 02, 03 and 04 still calculate both cell sizes; script 02 and 05 write results for the top 20 and the top 40 (column `top_n`), the written findings are calculated from them (`findings.py`).
 
+> **Change #218:** the regression (script 05, step 4b) now separates three kinds of night (public lighting lit / present but not lit / none, reference daylight) and has a road-surface term (reference dry or clean; wet, dirty, ice or snow; a combination takes its worst part, unknown surface left out). Rows with an unknown surface drop out of the model, so it uses fewer rows than before.
+
 > **Change #216:** in step 2 (single-period map and its ranking bars) all marked squares and bars are yellow; the persistence colours (red/orange/black) are only used in step 3 (`single=True` in `hotspot_markers` and `ranking_bars`).
 
 ## 4b. Change made later: a logistic regression for severity in step 4 (`scripts/05_logistic_model.py`, #205-#209)

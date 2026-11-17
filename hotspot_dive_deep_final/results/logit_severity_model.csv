@@ -1,21 +1,31 @@
 term,variable,label,coefficient,std error,odds ratio,OR low,OR high,p value,top_n
-Intercept,,Intercept (baseline log-odds),-2.07572,0.03308,,,,0.00000,20
-hotspot,Hotspot,In a hotspot square (top 20 of own group and period),-0.59174,0.06362,0.55336,0.48849,0.62685,0.00000,20
-period=During Covid-19 (2020-2021),Period,During Covid-19 (2020-2021) (against Pre Covid-19),-0.03719,0.02496,0.96349,0.91749,1.01180,0.13623,20
-period=Post Covid-19 (2022-2024),Period,Post Covid-19 (2022-2024) (against Pre Covid-19),-0.11136,0.02779,0.89462,0.84720,0.94470,0.00006,20
-group=Pedestrian,Group,Pedestrian (against Bicycle),0.32094,0.03722,1.37842,1.28145,1.48273,0.00000,20
-group=Motorcycle,Group,Motorcycle (against Bicycle),0.52348,0.03167,1.68790,1.58630,1.79600,0.00000,20
-group=Moped,Group,Moped (against Bicycle),-0.33007,0.03368,0.71887,0.67295,0.76793,0.00000,20
-built_up=outside,Built-up area,Outside built-up area (against inside),0.55221,0.02965,1.73709,1.63902,1.84102,0.00000,20
-"light=Dawn, dusk",Light condition,"Dawn, dusk (against daylight)",-0.05807,0.04314,0.94358,0.86709,1.02683,0.17823,20
-light=Night,Light condition,Night (against daylight),0.34037,0.02226,1.40546,1.34545,1.46815,0.00000,20
-Intercept,,Intercept (baseline log-odds),-2.03233,0.03280,,,,0.00000,40
-hotspot,Hotspot,In a hotspot square (top 40 of own group and period),-0.53504,0.05248,0.58564,0.52840,0.64909,0.00000,40
-period=During Covid-19 (2020-2021),Period,During Covid-19 (2020-2021) (against Pre Covid-19),-0.04082,0.02560,0.96000,0.91302,1.00939,0.11074,40
-period=Post Covid-19 (2022-2024),Period,Post Covid-19 (2022-2024) (against Pre Covid-19),-0.11365,0.02780,0.89257,0.84524,0.94255,0.00004,40
-group=Pedestrian,Group,Pedestrian (against Bicycle),0.31622,0.03775,1.37193,1.27408,1.47729,0.00000,40
-group=Motorcycle,Group,Motorcycle (against Bicycle),0.50662,0.03313,1.65967,1.55533,1.77101,0.00000,40
-group=Moped,Group,Moped (against Bicycle),-0.32782,0.03281,0.72049,0.67562,0.76834,0.00000,40
-built_up=outside,Built-up area,Outside built-up area (against inside),0.55262,0.03142,1.73781,1.63401,1.84820,0.00000,40
-"light=Dawn, dusk",Light condition,"Dawn, dusk (against daylight)",-0.05248,0.04345,0.94887,0.87141,1.03321,0.22705,40
-light=Night,Light condition,Night (against daylight),0.33888,0.02258,1.40337,1.34262,1.46688,0.00000,40
+Intercept,,Intercept (baseline log-odds),-2.03471,0.03189,,,,0.00000,20
+hotspot,Hotspot,In a hotspot square (top 20 of own group and period),-0.59071,0.06412,0.55393,0.48851,0.62811,0.00000,20
+period=During Covid-19 (2020-2021),Period,During Covid-19 (2020-2021) (against Pre Covid-19),-0.03671,0.02522,0.96395,0.91745,1.01281,0.14552,20
+period=Post Covid-19 (2022-2024),Period,Post Covid-19 (2022-2024) (against Pre Covid-19),-0.10442,0.02819,0.90084,0.85243,0.95201,0.00021,20
+group=Pedestrian,Group,Pedestrian (against Bicycle),0.34146,0.03724,1.40700,1.30795,1.51355,0.00000,20
+group=Motorcycle,Group,Motorcycle (against Bicycle),0.51527,0.03194,1.67408,1.57248,1.78225,0.00000,20
+group=Moped,Group,Moped (against Bicycle),-0.32850,0.03339,0.72000,0.67439,0.76870,0.00000,20
+built_up=outside,Built-up area,Outside built-up area (against inside),0.54328,0.02880,1.72164,1.62714,1.82162,0.00000,20
+"light=Dawn, dusk",Light condition,"Dawn, dusk (against daylight)",-0.01981,0.04337,0.98038,0.90049,1.06736,0.64776,20
+"light=Night, public lighting lit",Light condition,"Night, public lighting lit (against daylight)",0.34633,0.02276,1.41387,1.35217,1.47838,0.00000,20
+"light=Night, lighting present but not lit",Light condition,"Night, lighting present but not lit (against daylight)",0.55843,0.09227,1.74792,1.45874,2.09443,0.00000,20
+"light=Night, no public lighting",Light condition,"Night, no public lighting (against daylight)",0.49688,0.06837,1.64359,1.43745,1.87930,0.00000,20
+surface=Wet,Road surface,Wet road surface (against dry or clean),-0.14413,0.02577,0.86578,0.82313,0.91064,0.00000,20
+surface=Dirty,Road surface,Dirty road surface (against dry or clean),-0.35458,0.11003,0.70147,0.56538,0.87030,0.00127,20
+surface=Ice or snow,Road surface,Ice or snow road surface (against dry or clean),-0.04134,0.11626,0.95950,0.76399,1.20505,0.72212,20
+Intercept,,Intercept (baseline log-odds),-1.99426,0.03165,,,,0.00000,40
+hotspot,Hotspot,In a hotspot square (top 40 of own group and period),-0.52796,0.05379,0.58981,0.53079,0.65538,0.00000,40
+period=During Covid-19 (2020-2021),Period,During Covid-19 (2020-2021) (against Pre Covid-19),-0.04004,0.02586,0.96075,0.91326,1.01071,0.12163,40
+period=Post Covid-19 (2022-2024),Period,Post Covid-19 (2022-2024) (against Pre Covid-19),-0.10630,0.02821,0.89915,0.85079,0.95027,0.00016,40
+group=Pedestrian,Group,Pedestrian (against Bicycle),0.33645,0.03761,1.39997,1.30049,1.50706,0.00000,40
+group=Motorcycle,Group,Motorcycle (against Bicycle),0.49894,0.03341,1.64697,1.54257,1.75844,0.00000,40
+group=Moped,Group,Moped (against Bicycle),-0.32663,0.03270,0.72135,0.67658,0.76910,0.00000,40
+built_up=outside,Built-up area,Outside built-up area (against inside),0.54511,0.03058,1.72481,1.62446,1.83134,0.00000,40
+"light=Dawn, dusk",Light condition,"Dawn, dusk (against daylight)",-0.01548,0.04372,0.98464,0.90378,1.07274,0.72334,40
+"light=Night, public lighting lit",Light condition,"Night, public lighting lit (against daylight)",0.34351,0.02294,1.40989,1.34791,1.47472,0.00000,40
+"light=Night, lighting present but not lit",Light condition,"Night, lighting present but not lit (against daylight)",0.57676,0.09247,1.78026,1.48514,2.13403,0.00000,40
+"light=Night, no public lighting",Light condition,"Night, no public lighting (against daylight)",0.48805,0.06878,1.62914,1.42367,1.86427,0.00000,40
+surface=Wet,Road surface,Wet road surface (against dry or clean),-0.14309,0.02616,0.86668,0.82336,0.91227,0.00000,40
+surface=Dirty,Road surface,Dirty road surface (against dry or clean),-0.35656,0.11029,0.70008,0.56398,0.86902,0.00123,40
+surface=Ice or snow,Road surface,Ice or snow road surface (against dry or clean),-0.02935,0.11698,0.97107,0.77211,1.22130,0.80186,40

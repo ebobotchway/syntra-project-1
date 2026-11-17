@@ -79,14 +79,20 @@ def logit(lg):
 
     raw = desc[desc["variable"] == "Hotspot"].set_index("category")["severe %"]
     post, during, dawn = "period=" + POST, "period=" + DURING, "light=Dawn, dusk"
+    NIGHT_LIT, NIGHT_UNLIT, NIGHT_NONE = "light=Night, public lighting lit", "light=Night, lighting present but not lit", "light=Night, no public lighting"
+    WET, DIRTY, ICE = "surface=Wet", "surface=Dirty", "surface=Ice or snow"
+
+    def ci(term):  # "1.41 (1.35 to 1.48)"
+        return odds(term)
     return [
-        f"Being in a hotspot square {'lowers' if m.loc['hotspot', 'odds ratio'] < 1 else 'raises'} the odds of a severe accident: odds ratio {m.loc['hotspot', 'odds ratio']:.2f} (95% interval {m.loc['hotspot', 'OR low']:.2f} to {m.loc['hotspot', 'OR high']:.2f}), with period, group, built-up area and light condition held equal. "
+        f"Being in a hotspot square {'lowers' if m.loc['hotspot', 'odds ratio'] < 1 else 'raises'} the odds of a severe accident: odds ratio {m.loc['hotspot', 'odds ratio']:.2f} (95% interval {m.loc['hotspot', 'OR low']:.2f} to {m.loc['hotspot', 'OR high']:.2f}), with period, group, built-up area, light condition and road surface held equal. "
         f"Raw: {raw['Hotspot square']:.1f}% severe in hotspot squares against {raw['Not a hotspot square']:.1f}% elsewhere.",
         f"As percentage points: if every accident were in a hotspot square the model gives {adj['severe % if all in a hotspot']:.1f}% severe, if none were {adj['severe % if none in a hotspot']:.1f}%: "
         f"{abs(adj['difference (percentage points)']):.1f} points lower (95% interval {abs(adj['difference high']):.1f} to {abs(adj['difference low']):.1f}).",
         f"Outside built-up areas the odds of a severe accident are {odds('built_up=outside', False)} times those inside ({m.loc['built_up=outside', 'OR low']:.2f} to {m.loc['built_up=outside', 'OR high']:.2f}); "
-        f"at night (public lighting or not) they are {odds('light=Night', False)} times those in daylight ({m.loc['light=Night', 'OR low']:.2f} to {m.loc['light=Night', 'OR high']:.2f}); "
+        f"compared with daylight, the odds at night are {ci(NIGHT_LIT)} times as high where public lighting is present and lit, {ci(NIGHT_UNLIT)} where it is present but not lit and {ci(NIGHT_NONE)} where there is none; "
         f"dawn and dusk {'differ from' if clear(dawn) else 'do not differ from'} daylight ({m.loc[dawn, 'odds ratio']:.2f}, {m.loc[dawn, 'OR low']:.2f} to {m.loc[dawn, 'OR high']:.2f}).",
+        f"Against a dry or clean road, a wet road has {ci(WET)} times the odds, a dirty road {ci(DIRTY)} and ice or snow {ci(ICE)} ({'ice or snow differs' if clear(ICE) else 'ice or snow does not differ clearly'} from a dry or clean road).",
         f"Against cyclists, motorcycles have {odds('group=Motorcycle', False)} times the odds ({m.loc['group=Motorcycle', 'OR low']:.2f} to {m.loc['group=Motorcycle', 'OR high']:.2f}), pedestrians {odds('group=Pedestrian')} and mopeds {odds('group=Moped')}. "
         f"After Covid-19 the odds are {odds(post, False)} times those before it ({m.loc[post, 'OR low']:.2f} to {m.loc[post, 'OR high']:.2f}); during Covid-19 they "
         f"{'differ' if clear(during) else 'do not differ clearly'} ({m.loc[during, 'odds ratio']:.2f}, {m.loc[during, 'OR low']:.2f} to {m.loc[during, 'OR high']:.2f}).",
