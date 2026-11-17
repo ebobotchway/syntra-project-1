@@ -190,9 +190,9 @@ footer { margin-top: 36px; padding-top: 14px; border-top: 1px solid var(--line);
     <fieldset class="ctl inline-ctl"><legend>Period</legend><div class="row" id="c-period"></div></fieldset>
     <div class="card"><div class="scroll-x"><div class="inner" style="min-width:560px"><div id="chart-h1"></div></div></div></div>
     <h3 style="margin-top:28px" id="rk1-title"></h3>
-    <p class="note">The squares of the map as bars of accidents per year, rank 1 at the top. The bar colour is the persistence colour of the map: red = in the top of all 3 periods, orange = 2, black = 1, gray = none of the three (only possible in the all-years view).</p>
+    <p class="note">The squares of the map as bars of accidents per year, rank 1 at the top. The bars are yellow, like the markers.</p>
     <div class="card"><div class="scroll-x"><div class="inner" style="min-width:560px"><div id="chart-h1b"></div></div></div></div>
-    <p class="note"><span class="topn">The squares mark the 40 busiest squares of the period</span> (hover for rank, municipality and severity). Colour = in how many of the three periods (pre, during, post Covid-19) the same square is among the <span class="topn">40</span> busiest: red = all 3, orange = 2, black = 1, gray = none of the three (only possible in the all-years view). Accidents per year use a log colour scale: a few city cells have hundreds a year, most have less than one. Severe share: only cells with 30 or more accidents are coloured.</p>
+    <p class="note"><span class="topn">The squares mark the 40 busiest squares of the period</span> (hover for rank, municipality and severity). The markers are yellow; step 3 shows whether the same squares stay busy in all three periods. Accidents per year use a log colour scale: a few city cells have hundreds a year, most have less than one. Severe share: only cells with 30 or more accidents are coloured.</p>
     <div class="card findings">
       <h3>Key findings</h3>
       <p class="fixed">Text for all four vulnerable groups together; it follows the Hotspots filter (top 20 or top 40) but not the other filters.</p>
@@ -611,7 +611,8 @@ const D = {"groups":["Vulnerable (any of the four)","Pedestrian","Bicycle","Moto
     return tr;
   }
   // Colours of the marked squares: in how many of the three periods (pre, during, post) the square is among the 20 or 40 busiest (#203)
-  const PERSIST_COLOURS = { 3: "#d62728", 2: "#ff9f1c", 1: "#0b0b0b", 0: "#898781" };
+  const PERSIST_COLOURS = { 3: "#d62728", 2: "#ff9f1c", 1: "#0b0b0b", 0: "#898781" }, TOP_YELLOW = "#ffd400";
+  const classStyle = single => single ? { labels: { 1: "one of the " + state.top + " busiest squares of this period" }, colours: { 1: TOP_YELLOW } } : { labels: persistLabels(), colours: PERSIST_COLOURS };   // step 2: one yellow class; step 3: the persistence classes
   const persistLabels = () => ({ 3: "in the top " + state.top + " of all 3 periods", 2: "in the top " + state.top + " of 2 periods", 1: "in the top " + state.top + " of 1 period", 0: "in no period's top " + state.top + " (all-years view only)" });
   const persistMemo = {};
   function persistence(size, group) {                          // "x|y" of the cell centre -> 1, 2 or 3
@@ -624,12 +625,12 @@ const D = {"groups":["Vulnerable (any of the four)","Pedestrian","Bicycle","Moto
     return persistMemo[key];
   }
   function markerTraces(size, group, period, opts) {           // one trace per persistence class, so each colour has its own legend entry
-    const rows = topOf(size, group, period) || [], persist = persistence(size, group), out = [], PERSIST_LABELS = persistLabels();
+    const rows = topOf(size, group, period) || [], persist = persistence(size, group), out = [], { labels: PERSIST_LABELS, colours } = classStyle(opts.single);
     [3, 2, 1, 0].forEach(n => {
-      const sel = rows.filter(r => (persist[r.x + "|" + r.y] || 0) === n);
+      const sel = rows.filter(r => (opts.single ? 1 : (persist[r.x + "|" + r.y] || 0)) === n);
       if (!sel.length) return;
       const tr = { type: "scatter", mode: "markers", name: PERSIST_LABELS[n], legendgroup: "persist" + n, showlegend: !(opts.seen && opts.seen.has(n)), x: sel.map(r => r.x), y: sel.map(r => r.y),
-                   marker: { symbol: "square-open", size: 10, color: PERSIST_COLOURS[n], line: { width: 2 } },
+                   marker: { symbol: "square-open", size: 10, color: colours[n], line: { width: 2 } },
                    hovertext: sel.map(r => "<b>Rank " + r.rank + ": " + r.m + "</b><br>" + fmtInt(r.a) + " accidents (" + r.py.toFixed(1) + " a year)<br>" + PERSIST_LABELS[n] + (r.sev === null ? "" : "<br>" + r.sev.toFixed(1) + "% severe, " + r.fat.toFixed(1) + "% fatal")), hovertemplate: "%{hovertext}<extra></extra>" };
       if (opts.axis) { tr.xaxis = "x" + opts.axis; tr.yaxis = "y" + opts.axis; }
       if (opts.seen) opts.seen.add(n);
@@ -643,7 +644,7 @@ const D = {"groups":["Vulnerable (any of the four)","Pedestrian","Bicycle","Moto
   function heatSingle() {
     const { size, group, period, measure } = state;
     if (!hasData(size, group, period, measure)) return emptyFigure(measure === "severe" ? "No cell has 30 or more accidents in this selection, so no severe share can be shown." : "No accidents with coordinates in this selection.", 300);
-    return { data: [borderTrace(), heatTrace(size, group, period, measure, {}), ...markerTraces(size, group, period, {})],
+    return { data: [borderTrace(), heatTrace(size, group, period, measure, {}), ...markerTraces(size, group, period, { single: true })],
              layout: { height: 640, margin: { l: 0, r: 0, t: 10, b: 0 }, xaxis: { visible: false }, yaxis: { visible: false, scaleanchor: "x", scaleratio: 1 }, legend: { orientation: "h", y: -0.02 } } };
   }
   function heatPeriods() {
@@ -662,12 +663,12 @@ const D = {"groups":["Vulnerable (any of the four)","Pedestrian","Bicycle","Moto
   }
 
   // ---------------------------------------------------------------- ranking of the hotspots (bar charts)
-  function rankBars(rows, persist, seen, axis) {                // bars of accidents per year, one trace per persistence class, rank 1 at the top
-    const labels = persistLabels(), names = rows.slice().sort((a, b) => a.rank - b.rank).map(r => r.rank + ". " + r.m), out = [];
+  function rankBars(rows, persist, seen, axis, single) {                // bars of accidents per year, one trace per persistence class, rank 1 at the top
+    const { labels, colours } = classStyle(single), names = rows.slice().sort((a, b) => a.rank - b.rank).map(r => r.rank + ". " + r.m), out = [];
     [3, 2, 1, 0].forEach(n => {
-      const sel = rows.filter(r => (persist[r.x + "|" + r.y] || 0) === n).sort((a, b) => a.rank - b.rank);
+      const sel = rows.filter(r => (single ? 1 : (persist[r.x + "|" + r.y] || 0)) === n).sort((a, b) => a.rank - b.rank);
       if (!sel.length) return;
-      const tr = { type: "bar", orientation: "h", y: sel.map(r => r.rank + ". " + r.m), x: sel.map(r => r.py), name: labels[n], legendgroup: "persist" + n, showlegend: !seen.has(n), marker: { color: PERSIST_COLOURS[n] },
+      const tr = { type: "bar", orientation: "h", y: sel.map(r => r.rank + ". " + r.m), x: sel.map(r => r.py), name: labels[n], legendgroup: "persist" + n, showlegend: !seen.has(n), marker: { color: colours[n], line: single ? { color: "#8a7000", width: 1 } : { width: 0 } },
                    hovertext: sel.map(r => "<b>Rank " + r.rank + ": " + r.m + "</b><br>" + fmtInt(r.a) + " accidents (" + r.py.toFixed(1) + " a year)<br>" + labels[n] + (r.sev === null ? "" : "<br>" + r.sev.toFixed(1) + "% severe, " + r.fat.toFixed(1) + "% fatal")), hovertemplate: "%{hovertext}<extra></extra>" };
       if (axis) { tr.xaxis = "x" + axis; tr.yaxis = "y" + axis; }
       seen.add(n); out.push(tr);
@@ -677,7 +678,7 @@ const D = {"groups":["Vulnerable (any of the four)","Pedestrian","Bicycle","Moto
   function rankSingle() {
     const { size, group, period } = state, rows = topOf(size, group, period);
     if (!rows.length) return emptyFigure("No accidents with coordinates in this selection.", 300);
-    const { traces, names } = rankBars(rows, persistence(size, group), new Set());
+    const { traces, names } = rankBars(rows, {}, new Set(), undefined, true);
     return { data: traces, layout: { height: 180 + 19 * rows.length, margin: { l: 10, r: 10, t: 20, b: 70 }, bargap: 0.25, legend: { orientation: "h", y: -0.2, yanchor: "top" },
              yaxis: { categoryorder: "array", categoryarray: names, autorange: "reversed", tickfont: { size: 11 } }, xaxis: { title: { text: "accidents per year (located accidents)" } } } };
   }

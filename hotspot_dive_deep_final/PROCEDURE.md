@@ -94,6 +94,8 @@ Results in `results/`: `grid_cells.csv`, `hotspots_top40.csv`, `hotspot_severity
 
 > **Change #213:** the app and the HTML page no longer have a cell-size filter (only the 5 x 5 km squares are shown) and have a new filter 'Hotspots: top 20 / top 40'. Scripts 02, 03 and 04 still calculate both cell sizes; script 02 and 05 write results for the top 20 and the top 40 (column `top_n`), the written findings are calculated from them (`findings.py`).
 
+> **Change #216:** in step 2 (single-period map and its ranking bars) all marked squares and bars are yellow; the persistence colours (red/orange/black) are only used in step 3 (`single=True` in `hotspot_markers` and `ranking_bars`).
+
 ## 4b. Change made later: a logistic regression for severity in step 4 (`scripts/05_logistic_model.py`, #205-#209)
 
 You asked for a binary logistic regression in step 4: severity (fatal + serious injury) = 1, otherwise 0, explained by hotspot, period, group and two more variables. Choices (all asked first): extra variables **built-up area** (inside/outside) and **light condition** (daylight, dawn/dusk, night); hotspot = the accident is in one of the **40 busiest 5 x 5 km squares of its own group and period**; group = the four groups, an accident counts in a group if road user 1 or 2 is of that group, so an accident with two groups is a row in both.

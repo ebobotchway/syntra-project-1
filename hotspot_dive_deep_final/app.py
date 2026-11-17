@@ -138,10 +138,10 @@ elif view == VIEWS[1]:
     cov = coverage()
     cov = cov[(cov["group"] == group) & (cov["period"] == period)].iloc[0]
     st.caption(f"{measure_label} per 5 x 5 km square, {words}, {period}. {int(cov['with coordinates']):,} of {int(cov['accidents']):,} accidents involving {words} have usable coordinates "
-               f"({100 - cov['left out %']:.1f}%); the others are not on the map. The squares mark the {top_n} busiest squares (hover for rank, municipality and severity); colour = in how many of the three periods the same square is among the {top_n} busiest: red = all 3, orange = 2, black = 1, gray = none of the three (only possible in the all-years view).")
+               f"({100 - cov['left out %']:.1f}%); the others are not on the map. The squares mark the {top_n} busiest squares (hover for rank, municipality and severity); they are yellow. Step 3 shows whether the same squares stay busy in all three periods.")
     plot(charts.fig_heatmap(cells(), top(), outlines(), size, measure, group, period, top_n))
     st.subheader(f"Ranking of the {top_n} busiest squares")
-    st.caption("The same squares as the markers on the map, as bars of accidents per year. The bar colour is the persistence colour of the map: red = in the top of all 3 periods, orange = 2, black = 1, gray = none of the three (only possible in the all-years view).")
+    st.caption("The same squares as the markers on the map, as bars of accidents per year. The bars are yellow, like the markers.")
     plot(charts.fig_hotspot_ranking(top(), size, group, period, top_n))
     t = top()
     t = t[(t["size"] == size) & (t["group"] == group) & (t["period"] == period) & (t["rank"] <= top_n)]
