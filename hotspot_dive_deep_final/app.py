@@ -87,8 +87,7 @@ if view != VIEWS[0]:
     words = charts.GROUP_WORDS[group]
 
 st.title("Spatial and temporal patterns of road traffic accidents involving vulnerable road users in Belgium: A comparative analysis of accident hotspots, severity and municipalities")
-st.caption("Before (2017-2019), during (2020-2021) and after (2022-2024) Covid-19: where accidents concentrate, how severe they are there, and how that looks per resident. "
-           "Counts and rates, not causes. The period names are my own definition; the data states no cause.")
+st.caption("RQ: Are accidents occurring in identified hotspots more or less likely to result in fatal or serious injuries compared with accidents occurring elsewhere, after accounting for relevant environmental and road conditions?")
 
 # ================================================================ 1 burden and annual change (1a, 1b)
 if view == VIEWS[0]:
