@@ -10,6 +10,7 @@ Report for the hotspot deep dive with step 1 of the focused dashboard added (`ho
 |---|---|---|
 | Step 1 | 1a (accidents per road-user group) and 1b (annual change) of the focused dashboard come first, with their own filters; the rest of the analysis is unchanged | #193-#195 |
 | Grid | Two sizes, to compare: cells of 5 km2 in area (side 2,236 m) and squares of 5 km x 5 km (25 km2), instead of the 500 m squares of the earlier analysis | #170 |
+| App and page (later changes) | Only the 5 x 5 km squares are shown (the scripts and this report keep both sizes); a Hotspots filter top 20 / top 40 in steps 2 to 4 and the regression; bar charts of the rankings in steps 2 and 3; yellow markers in step 2 (green on the severe-share map), persistence colours only in step 3; the step 5 map follows the Rank by filter; the regression separates three kinds of night and has a road-surface term | #213-#218 |
 | Residents | Rates per municipality: accidents per 100,000 residents per year, with the residents of each year | #171, #178 |
 | Severity | Severe share (classes 1-3) per cell, with fatal and serious shares and 95% intervals in tables | #172 |
 | Groups | Pedestrians, cyclists, motorcycles, mopeds, and all four together | #173 |
@@ -114,50 +115,56 @@ Accidents in the hotspots are much less often severe than elsewhere, in every pe
 
 The comparison above looks at one factor at a time. A **binary logistic regression** looks at several at once: it models the chance that an accident is severe (fatal + serious injury = 1, otherwise 0) and gives, for each explanatory variable, an **odds ratio**: the odds of a severe accident in that category divided by the odds in the reference category, with the other variables held equal. An odds ratio of 1 means no difference; below 1 means less often severe, above 1 more often.
 
-**The model** (one model for the four groups together, 5 x 5 km squares):
+**The model** (one model for the four groups together, 5 x 5 km squares; fitted once with the top 40 and once with the top 20 as the definition of a hotspot, #213):
 
-- **Hotspot:** 1 when the accident is in one of the 40 busiest squares of its own group and period (the lists of `results/hotspots_top40.csv`), otherwise 0.
+- **Hotspot:** 1 when the accident is in one of the 40 (or 20) busiest squares of its own group and period (the lists of `results/hotspots_top40.csv`), otherwise 0.
 - **Period:** pre Covid-19 (reference), during, post.
 - **Group:** cyclists (reference), pedestrians, motorcycles, mopeds. An accident counts in a group when road user 1 or 2 is of that group (#33), so an accident with two groups is a row in both.
 - **Built-up area** (extra variable 1): inside (reference) or outside.
-- **Light condition** (extra variable 2): daylight (reference), dawn/dusk, night (with or without public lighting).
+- **Light condition** (extra variable 2, changed in #218): daylight (reference), dawn/dusk, and **three kinds of night kept apart**: night with public lighting present and lit (code 3), present but not lit (code 5) and no public lighting (code 4).
+- **Road surface** (extra variable 3, added in #218): dry or clean (reference), wet, dirty (sand, gravel, leaves), ice or snow. The raw data also has combinations such as "Wet + Clean"; a combination takes its **worst part** (ice or snow, then wet, then dirty, then dry or clean). Unknown surface is left out.
 
-**The rows.** 124,616 rows (117,750 different accidents), 15,334 severe (12.3%). Only accidents with usable coordinates are used (the square must be known), and accidents with unknown built-up area or light condition are left out:
+**The rows.** 119,497 rows (112,994 different accidents), 15,068 severe (12.6%); before road surface was added the model had 124,616 rows. Only accidents with usable coordinates are used (the square must be known), and accidents with unknown built-up area, light condition or road surface are left out:
 
-| Group | Period | Accidents | With coordinates | Used (built-up area and light known) |
+| Group | Period | Accidents | With coordinates | Used (built-up area, light and road surface known) |
 |---|---|---|---|---|
-| Bicycle | Pre Covid-19 (2017-2019) | 25,446 | 21,590 | 20,927 |
-| Bicycle | During Covid-19 (2020-2021) | 17,265 | 14,219 | 13,802 |
-| Bicycle | Post Covid-19 (2022-2024) | 29,170 | 28,129 | 26,924 |
-| Pedestrian | Pre Covid-19 (2017-2019) | 12,409 | 10,484 | 10,137 |
-| Pedestrian | During Covid-19 (2020-2021) | 6,364 | 5,312 | 5,134 |
-| Pedestrian | Post Covid-19 (2022-2024) | 11,124 | 10,667 | 10,214 |
-| Motorcycle | Pre Covid-19 (2017-2019) | 8,241 | 6,938 | 6,864 |
-| Motorcycle | During Covid-19 (2020-2021) | 4,375 | 3,507 | 3,478 |
-| Motorcycle | Post Covid-19 (2022-2024) | 7,176 | 6,820 | 6,721 |
-| Moped | Pre Covid-19 (2017-2019) | 8,689 | 7,477 | 7,324 |
-| Moped | During Covid-19 (2020-2021) | 5,242 | 4,405 | 4,319 |
-| Moped | Post Covid-19 (2022-2024) | 9,327 | 9,032 | 8,772 |
+| Bicycle | Pre Covid-19 (2017-2019) | 25,446 | 21,590 | 20,025 |
+| Bicycle | During Covid-19 (2020-2021) | 17,265 | 14,219 | 13,242 |
+| Bicycle | Post Covid-19 (2022-2024) | 29,170 | 28,129 | 25,636 |
+| Pedestrian | Pre Covid-19 (2017-2019) | 12,409 | 10,484 | 9,636 |
+| Pedestrian | During Covid-19 (2020-2021) | 6,364 | 5,312 | 4,852 |
+| Pedestrian | Post Covid-19 (2022-2024) | 11,124 | 10,667 | 9,570 |
+| Motorcycle | Pre Covid-19 (2017-2019) | 8,241 | 6,938 | 6,744 |
+| Motorcycle | During Covid-19 (2020-2021) | 4,375 | 3,507 | 3,426 |
+| Motorcycle | Post Covid-19 (2022-2024) | 7,176 | 6,820 | 6,567 |
+| Moped | Pre Covid-19 (2017-2019) | 8,689 | 7,477 | 7,130 |
+| Moped | During Covid-19 (2020-2021) | 5,242 | 4,405 | 4,194 |
+| Moped | Post Covid-19 (2022-2024) | 9,327 | 9,032 | 8,475 |
 
 **Estimation.** Maximum likelihood by Newton-Raphson with step-halving (the same code as the main project's `logit_live.py`). Because one accident can be two rows and accidents in one municipality resemble each other, the standard errors are **cluster-robust by municipality** (581 clusters); intervals are coefficient plus or minus 1.96 standard errors, then exponentiated.
 
-| Variable | Term (against the reference) | Odds ratio | 95% interval | p value |
-|---|---|---|---|---|
-| Hotspot | In a hotspot square (top 40 of own group and period) | 0.59 | 0.53 to 0.65 | <0.001 |
-| Period | During Covid-19 (2020-2021) (against Pre Covid-19) | 0.96 | 0.91 to 1.01 | 0.111 |
-| Period | Post Covid-19 (2022-2024) (against Pre Covid-19) | 0.89 | 0.85 to 0.94 | <0.001 |
-| Group | Pedestrian (against Bicycle) | 1.37 | 1.27 to 1.48 | <0.001 |
-| Group | Motorcycle (against Bicycle) | 1.66 | 1.56 to 1.77 | <0.001 |
-| Group | Moped (against Bicycle) | 0.72 | 0.68 to 0.77 | <0.001 |
-| Built-up area | Outside built-up area (against inside) | 1.74 | 1.63 to 1.85 | <0.001 |
-| Light condition | Dawn, dusk (against daylight) | 0.95 | 0.87 to 1.03 | 0.227 |
-| Light condition | Night (against daylight) | 1.40 | 1.34 to 1.47 | <0.001 |
+| Variable | Term (against the reference) | Odds ratio (top 40) | 95% interval | p value | Odds ratio (top 20) | 95% interval | p value |
+|---|---|---|---|---|---|---|---|
+| Hotspot | In a hotspot square (top 40 / top 20 of own group and period) | 0.59 | 0.53 to 0.66 | <0.001 | 0.55 | 0.49 to 0.63 | <0.001 |
+| Period | During Covid-19 (2020-2021) (against Pre Covid-19) | 0.96 | 0.91 to 1.01 | 0.122 | 0.96 | 0.92 to 1.01 | 0.146 |
+| Period | Post Covid-19 (2022-2024) (against Pre Covid-19) | 0.90 | 0.85 to 0.95 | <0.001 | 0.90 | 0.85 to 0.95 | <0.001 |
+| Group | Pedestrian (against Bicycle) | 1.40 | 1.30 to 1.51 | <0.001 | 1.41 | 1.31 to 1.51 | <0.001 |
+| Group | Motorcycle (against Bicycle) | 1.65 | 1.54 to 1.76 | <0.001 | 1.67 | 1.57 to 1.78 | <0.001 |
+| Group | Moped (against Bicycle) | 0.72 | 0.68 to 0.77 | <0.001 | 0.72 | 0.67 to 0.77 | <0.001 |
+| Built-up area | Outside built-up area (against inside) | 1.72 | 1.62 to 1.83 | <0.001 | 1.72 | 1.63 to 1.82 | <0.001 |
+| Light condition | Dawn, dusk (against daylight) | 0.98 | 0.90 to 1.07 | 0.723 | 0.98 | 0.90 to 1.07 | 0.648 |
+| Light condition | Night, public lighting lit (against daylight) | 1.41 | 1.35 to 1.47 | <0.001 | 1.41 | 1.35 to 1.48 | <0.001 |
+| Light condition | Night, lighting present but not lit (against daylight) | 1.78 | 1.49 to 2.13 | <0.001 | 1.75 | 1.46 to 2.09 | <0.001 |
+| Light condition | Night, no public lighting (against daylight) | 1.63 | 1.42 to 1.86 | <0.001 | 1.64 | 1.44 to 1.88 | <0.001 |
+| Road surface | Wet road surface (against dry or clean) | 0.87 | 0.82 to 0.91 | <0.001 | 0.87 | 0.82 to 0.91 | <0.001 |
+| Road surface | Dirty road surface (against dry or clean) | 0.70 | 0.56 to 0.87 | 0.001 | 0.70 | 0.57 to 0.87 | 0.001 |
+| Road surface | Ice or snow road surface (against dry or clean) | 0.97 | 0.77 to 1.22 | 0.802 | 0.96 | 0.76 to 1.21 | 0.722 |
 
-**The hotspot effect in percentage points.** Setting the hotspot term to 1 and to 0 for every row (all other variables as observed) and averaging the predicted probabilities gives **9.2%** severe if every accident were in a hotspot square against **14.6%** if none were: **-5.4 points** (95% interval -6.3 to -4.5, from 1,000 simulated coefficient sets).
+**The hotspot effect in percentage points.** Setting the hotspot term to 1 and to 0 for every row (all other variables as observed) and averaging the predicted probabilities gives, for the top 40, **9.4%** severe if every accident were in a hotspot square against **14.9%** if none were: **-5.5 points** (95% interval -6.4 to -4.5, from 1,000 simulated coefficient sets). For the top 20: 8.6% against 14.4%, -5.8 points (-6.9 to -4.7).
 
-**Fit.** AUC 0.64, McFadden R2 0.036, highest variance inflation factor 1.25 (no problem with overlap between variables). The model is simple on purpose and only moderately predictive: it describes differences between groups of accidents; it cannot say which single accident will be severe.
+**Fit.** AUC 0.64, McFadden R2 0.037, highest variance inflation factor 1.25 (no problem with overlap between variables). The model is simple on purpose and only moderately predictive: it describes differences between groups of accidents; it cannot say which single accident will be severe.
 
-**Reading it.** After holding period, group, built-up area and light equal, accidents in hotspot squares still have clearly lower odds of being severe, so the lower severity in the hotspots is not just that hotspots have more cyclists or more daylight accidents. Outside built-up areas and at night the odds are higher. An odds ratio is not a risk ratio (12% of the rows are severe), and speed, traffic volume and road layout are not in the data, so this remains an association.
+**Reading it.** After holding period, group, built-up area, light and road surface equal, accidents in hotspot squares still have clearly lower odds of being severe, so the lower severity in the hotspots is not just that hotspots have more cyclists, more daylight accidents or different road surfaces. Outside built-up areas and at night the odds are higher; compared with daylight the odds are highest where public lighting is present but not lit (that group has only 2,912 accidents, so its interval is wide and it is not shown to differ from "no public lighting"). Wet and dirty roads have lower odds of a severe accident than dry or clean roads, and ice or snow does not differ clearly: these are associations, not proof that those roads are safer (behaviour, speed and exposure are not in the data). An odds ratio is not a risk ratio (13% of the rows are severe), and speed, traffic volume and road layout are not in the data, so this remains an association.
 
 ## 6. The residents and the rates per municipality (scripts `01` and `02`, part C)
 
